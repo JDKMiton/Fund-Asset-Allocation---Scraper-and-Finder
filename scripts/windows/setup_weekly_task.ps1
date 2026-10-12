@@ -1,4 +1,4 @@
-# One-time setup: installs the scraper's Python packages and a headless browser, then
+# One-time setup (safe to rerun): installs the scraper's Python packages and a headless browser, then
 # registers a weekly Windows scheduled task that downloads the latest MDDs into OneDrive.
 #
 # Run from PowerShell inside the repository folder:
@@ -28,15 +28,43 @@ if (-not $OutFolder) {
 New-Item -ItemType Directory -Force -Path $OutFolder | Out-Null
 Write-Host "MDDs will be saved to: $OutFolder"
 
-# 2. Python environment.
-$py = Get-Command py -ErrorAction SilentlyContinue
-if (-not $py) { $py = Get-Command python -ErrorAction SilentlyContinue }
-if (-not $py) { throw "Python 3.11+ is needed - install it from https://www.python.org/downloads/ (tick 'Add to PATH') and rerun." }
-if (-not (Test-Path ".venv\Scripts\python.exe")) { & $py.Source -m venv .venv }
+# 2. Python environment. Needs Python 3.11-3.14: brand-new versions (e.g. 3.15) don't have
+#    ready-built packages yet and would need a C++ compiler.
+function Test-Step($what) { if ($LASTEXITCODE -ne 0) { throw "$what failed (exit code $LASTEXITCODE) - see the messages above." } }
+
+$base = $null
+$ErrorActionPreference = "Continue"   # probing missing versions writes to stderr; don't treat as fatal
+foreach ($v in "3.13", "3.12", "3.14", "3.11") {
+    if (Get-Command py -ErrorAction SilentlyContinue) {
+        try { & py "-$v" -c "import sys" 2>&1 | Out-Null } catch { }
+        if ($LASTEXITCODE -eq 0) { $base = @("py", "-$v"); break }
+    }
+}
+if (-not $base -and (Get-Command python -ErrorAction SilentlyContinue)) {
+    $ver = & python -c "import sys; print('%d.%d' % sys.version_info[:2])"
+    if ([version]$ver -ge [version]"3.11" -and [version]$ver -lt [version]"3.15") { $base = @("python") }
+}
+$ErrorActionPreference = "Stop"
+if (-not $base) {
+    throw "Python 3.11-3.14 is needed (3.13 recommended). Install Python 3.13 from https://www.python.org/downloads/ and rerun this script."
+}
+Write-Host "Using Python: $($base -join ' ')"
+
 $python = Join-Path $repo ".venv\Scripts\python.exe"
+if (Test-Path $python) {
+    $venvVer = & $python -c "import sys; print('%d.%d' % sys.version_info[:2])"
+    if ([version]$venvVer -ge [version]"3.15") { Write-Host "Removing old environment built with Python $venvVer"; Remove-Item -Recurse -Force ".venv" }
+}
+if (-not (Test-Path $python)) {
+    if ($base.Count -gt 1) { & $base[0] $base[1] -m venv .venv } else { & $base[0] -m venv .venv }
+    Test-Step "Creating the Python environment"
+}
 & $python -m pip install --upgrade pip
+Test-Step "Upgrading pip"
 & $python -m pip install -r requirements.txt
+Test-Step "Installing the Python packages"
 & $python -m playwright install chromium
+Test-Step "Installing the headless browser"
 
 # 3. Weekly scheduled task (runs as you, when you're logged on, so OneDrive syncs the files).
 $runArgs = "-NoProfile -ExecutionPolicy Bypass -File `"$repo\scripts\windows\run_weekly.ps1`" -OutFolder `"$OutFolder`""
