@@ -52,7 +52,8 @@ python -m unittest discover -s tests -t .
 
 ```bash
 python -m fund_allocator collect --funds AUM_By_Holding_Fund_Model_Portfolio.xlsx \
-    --sheet "Holding Fund Totals" --out "C:/Users/<you>/OneDrive/Webscaper MDDs"
+    --sheet "Holding Fund Totals" --exclude "^MitonOptimal FR" \
+    --out "C:/Users/<you>/OneDrive/#Webscraper MDDs"
 ```
 
 Reads the fund names in column A (AUM in column B), downloads each fund's MDD using

@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import logging
+import re
 import sys
 
 from .allocation import look_through
@@ -95,6 +96,9 @@ def cmd_extract(args: argparse.Namespace) -> int:
 
 def cmd_collect(args: argparse.Namespace) -> int:
     funds = load_fund_list(args.funds, args.sheet)
+    if args.exclude:
+        pattern = re.compile(args.exclude, re.IGNORECASE)
+        funds = [f for f in funds if not pattern.search(f.name)]
     sources = {s.name: s for s in load_sources(args.sources)}
     scraper = Scraper(args.download_dir, delay=args.delay, respect_robots=not args.ignore_robots)
     results = collect(funds, sources, scraper, args.out, months=args.month)
@@ -137,6 +141,7 @@ def main(argv: list[str] | None = None) -> int:
     col.add_argument("--out", default="output/MDDs", help="folder to create the month folders in")
     col.add_argument("--month", action="append", metavar="'YYYY - MM'",
                      help="always create this month's folder and tracker, even if no MDDs are found for it")
+    col.add_argument("--exclude", metavar="REGEX", help="skip funds whose name matches, e.g. '^MitonOptimal FR'")
     col.add_argument("--download-dir", default="data/downloads")
     col.add_argument("--delay", type=float, default=1.0)
     col.add_argument("--ignore-robots", action="store_true")
