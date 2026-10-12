@@ -125,5 +125,31 @@ class EndToEndTest(unittest.TestCase):
             self.assertAlmostEqual(values["SA Cash"], 8.625)
 
 
+class CollectorTest(unittest.TestCase):
+    def test_document_month_picks_latest_past_date(self):
+        from datetime import date
+        from fund_allocator.collector import document_month
+        text = "Inception date 1 March 2004\nDate of issue: 30 September 2026\nNext review 2027/01/31"
+        self.assertEqual(document_month(text, today=date(2026, 10, 12)), "2026 - 09")
+        self.assertIsNone(document_month("no dates", today=date(2026, 10, 12)))
+
+    def test_collect_files_by_month_and_tracks_outstanding(self):
+        from fund_allocator.collector import Fund, collect
+        from fund_allocator.config import FundSource
+        from fund_allocator.scraper import Scraper
+        with tempfile.TemporaryDirectory() as tmp:
+            balanced, feeder = make_all(Path(tmp) / "pdfs")
+            funds = [Fund("Balanced", 100.0), Fund("Feeder", 50.0), Fund("No Source", 10.0)]
+            sources = {"Balanced": FundSource("Balanced", file=str(balanced)),
+                       "Feeder": FundSource("Feeder", file=str(feeder))}
+            out = Path(tmp) / "MDDs"
+            results = collect(funds, sources, Scraper(Path(tmp) / "dl"), out)
+            self.assertTrue((out / "2026 - 09" / "Balanced.pdf").exists())
+            ws = load_workbook(out / "2026 - 09" / "MDD Tracker 2026 - 09.xlsx")["Tracker"]
+            status = {ws.cell(row=i, column=1).value: ws.cell(row=i, column=3).value for i in range(2, 5)}
+            self.assertEqual(status, {"Balanced": "Collected", "Feeder": "Collected", "No Source": "Outstanding"})
+            self.assertEqual(sum(1 for r in results if r.month), 2)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -48,6 +48,21 @@ python -m unittest discover -s tests -t .
 
 4. Run it: `python -m fund_allocator run [--portfolio "Name"] [--out file.xlsx]`
 
+## Collecting MDDs for a fund list
+
+```bash
+python -m fund_allocator collect --funds AUM_By_Holding_Fund_Model_Portfolio.xlsx \
+    --sheet "Holding Fund Totals" --out "C:/Users/<you>/OneDrive/Webscaper MDDs"
+```
+
+Reads the fund names in column A (AUM in column B), downloads each fund's MDD using
+`config/sources.yaml` (the `name` there must match the fund name in the workbook), reads the
+reporting date from the PDF and files it as `<out>/YYYY - MM/<Fund name>.pdf`. Each month folder
+gets an `MDD Tracker YYYY - MM.xlsx` listing every fund as **Collected** or **Outstanding**
+(with the reason: no source configured, download failed, or only an older month found).
+Add `--month "2026 - 09"` to always create that month's folder and tracker.
+Pointing `--out` at your OneDrive-synced folder puts everything straight into OneDrive.
+
 ## The workbook
 
 | Sheet | What it shows |

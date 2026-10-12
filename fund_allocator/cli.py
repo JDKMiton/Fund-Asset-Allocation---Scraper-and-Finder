@@ -2,6 +2,7 @@
 
     python -m fund_allocator run      --sources config/sources.yaml --template config/template.yaml
     python -m fund_allocator extract  path/to/mdd.pdf --template config/template.yaml
+    python -m fund_allocator collect  --funds holdings.xlsx --out "Webscaper MDDs"
 """
 
 from __future__ import annotations
@@ -11,6 +12,7 @@ import logging
 import sys
 
 from .allocation import look_through
+from .collector import collect, load_fund_list
 from .config import FundSource, Template, load_sources, load_template
 from .extractor import Extraction, extract_from_pdf, match_category
 from .report import write_workbook
@@ -91,6 +93,19 @@ def cmd_extract(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_collect(args: argparse.Namespace) -> int:
+    funds = load_fund_list(args.funds, args.sheet)
+    sources = {s.name: s for s in load_sources(args.sources)}
+    scraper = Scraper(args.download_dir, delay=args.delay, respect_robots=not args.ignore_robots)
+    results = collect(funds, sources, scraper, args.out, months=args.month)
+    got = sum(1 for r in results if r.month)
+    print(f"{len(funds)} funds: {got} MDDs collected, {len(funds) - got} outstanding")
+    for month in sorted({r.month for r in results if r.month} | set(args.month or [])):
+        n = sum(1 for r in results if r.month == month)
+        print(f"  {args.out}/{month}: {n} MDD(s) + tracker")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="fund_allocator", description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -113,6 +128,19 @@ def main(argv: list[str] | None = None) -> int:
     ext.add_argument("pdfs", nargs="+")
     ext.add_argument("--template", default="config/template.yaml")
     ext.set_defaults(func=cmd_extract)
+
+    col = sub.add_parser("collect", help="download MDDs for every fund in a holdings workbook into "
+                                         "'YYYY - MM' folders with a tracker spreadsheet")
+    col.add_argument("--funds", required=True, help="workbook with fund names in column A (AUM in column B)")
+    col.add_argument("--sheet", help="worksheet to read (default: first sheet)")
+    col.add_argument("--sources", default="config/sources.yaml")
+    col.add_argument("--out", default="output/MDDs", help="folder to create the month folders in")
+    col.add_argument("--month", action="append", metavar="'YYYY - MM'",
+                     help="always create this month's folder and tracker, even if no MDDs are found for it")
+    col.add_argument("--download-dir", default="data/downloads")
+    col.add_argument("--delay", type=float, default=1.0)
+    col.add_argument("--ignore-robots", action="store_true")
+    col.set_defaults(func=cmd_collect)
 
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.DEBUG if args.verbose else logging.INFO, format="%(levelname)s %(message)s")
