@@ -48,6 +48,10 @@ class FundSource:
     file: str | None = None         # local PDF (manual download)
     allocation: dict[str, float] | None = None  # manual override, skips extraction
     render: bool = False            # render page with Playwright (JS-heavy sites)
+    urls: list[str] | None = None   # extra URLs / URL templates ({yyyy}, {mm}, {yyyymm}, {month}, {mon})
+    referer: str | None = None      # some document servers only answer requests sent from their site
+    isin: str | None = None         # ISIN to report when the MDD doesn't print it
+    note: str | None = None         # shown in the tracker (renamed fund, quarterly MDD, ...)
 
 
 def normalise_label(text: str) -> str:
@@ -85,7 +89,7 @@ def load_sources(path: str | Path) -> list[FundSource]:
     sources = []
     for f in data.get("funds", []):
         src = FundSource(**f)
-        if not any([src.url, src.page, src.file, src.allocation]):
-            raise ValueError(f"{path}: fund '{src.name}' needs one of url, page, file or allocation")
+        if not any([src.url, src.urls, src.page, src.file, src.allocation, src.note]):
+            raise ValueError(f"{path}: fund '{src.name}' needs one of url, urls, page, file, allocation or note")
         sources.append(src)
     return sources

@@ -5,7 +5,7 @@ from __future__ import annotations
 import logging
 import re
 import shutil
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import date
 from pathlib import Path
 
@@ -15,7 +15,7 @@ from openpyxl.styles import PatternFill
 from .config import FundSource
 from .extractor import pdf_text
 from .report import PCT, _autosize, _header
-from .scraper import Scraper, ScrapeError, slugify
+from .scraper import Scraper, slugify
 
 log = logging.getLogger(__name__)
 
@@ -38,6 +38,7 @@ class Collected:
     path: Path | None = None
     source: str = ""
     note: str = ""
+    isin: str | None = None
 
 
 def load_fund_list(path: str | Path, sheet: str | None = None) -> list[Fund]:
@@ -58,78 +59,178 @@ def load_fund_list(path: str | Path, sheet: str | None = None) -> list[Fund]:
     return funds
 
 
-def document_month(text: str, today: date | None = None) -> str | None:
+_MON = r"(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?"
+_AS_AT = [  # explicit reporting-date phrases, most reliable first
+    rf"as\s*(?:at|of)\s*(?:end\s*)?(?:\d{{1,2}}\s*)?{_MON}\s*(\d{{4}})",
+    rf"as\s*(?:at|of)\s*(\d{{4}})[/-](\d{{1,2}})[/-]\d{{1,2}}",
+    rf"as\s*(?:at|of)\s*\d{{1,2}}[/-](\d{{1,2}})[/-](\d{{4}})",
+]
+
+
+def _dates(text: str) -> list[tuple[int, int]]:
+    """All (year, month) pairs in the order they appear in ``text``."""
+    pattern = re.compile(rf"\b(?:\d{{1,2}}\s*)?{_MON}\s*(\d{{4}})\b|\b(\d{{4}})[/-](\d{{1,2}})[/-]\d{{1,2}}\b"
+                         rf"|\b\d{{1,2}}[/-](\d{{1,2}})[/-](\d{{4}})\b", re.IGNORECASE)
+    out = []
+    for m in pattern.finditer(text):
+        if m.group(1):
+            out.append((int(m.group(2)), MONTHS[m.group(1).lower()[:3]]))
+        elif m.group(3):
+            out.append((int(m.group(3)), int(m.group(4))))
+        else:
+            out.append((int(m.group(6)), int(m.group(5))))
+    return out
+
+
+def document_month(text: str, today: date | None = None, filename: str = "") -> str | None:
     """Month an MDD reports on, as "YYYY - MM".
 
-    MDDs carry several dates (inception, issue, as-at); the latest one that is not in
-    the future is taken as the reporting date.
+    MDDs carry several dates (inception, TER period, issue, as-at). The reporting
+    date is almost always the first recent date in the document, so in order of
+    preference: the first date within the last six months, an explicit "as at/as of"
+    date, a YYYY-MM (or YYYYMM) in the file name, then the latest date in the document.
+    Dates in the current or a future month are ignored: an MDD reports on a past month-end.
     """
     today = today or date.today()
-    found: list[tuple[int, int]] = []
-    for d, mon, y in re.findall(r"\b(\d{1,2})?\s*(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s+(\d{4})\b",
-                                text, re.IGNORECASE):
-        found.append((int(y), MONTHS[mon.lower()[:3]]))
-    for y, m in re.findall(r"\b(\d{4})[/-](\d{1,2})[/-]\d{1,2}\b", text):
-        found.append((int(y), int(m)))
-    for m, y in re.findall(r"\b\d{1,2}[/-](\d{1,2})[/-](\d{4})\b", text):
-        found.append((int(y), int(m)))
-    valid = [(y, m) for y, m in found if 1 <= m <= 12 and 2000 <= y and (y, m) <= (today.year, today.month)]
-    if not valid:
-        return None
-    y, m = max(valid)
-    return f"{y} - {m:02d}"
+
+    def ok(y: int, m: int) -> bool:
+        return 1 <= m <= 12 and 2000 <= y and (y, m) < (today.year, today.month)
+
+    def fmt(y: int, m: int) -> str:
+        return f"{y} - {m:02d}"
+
+    for pat in (rf"as\s*at\s*end\s*(?:of\s*)?{_MON}\s*(\d{{4}})", rf"as\s*of\s*\d{{1,2}}\s*{_MON}\s*(\d{{4}})"):
+        m = re.search(pat, text, re.IGNORECASE)
+        if m and ok(int(m.group(2)), MONTHS[m.group(1).lower()[:3]]):
+            return fmt(int(m.group(2)), MONTHS[m.group(1).lower()[:3]])
+    oldest = (today.year * 12 + today.month - 1) - 6
+    recent = [(y, m) for y, m in _dates(text) if ok(y, m) and y * 12 + m - 1 >= oldest]
+    if recent:
+        return fmt(*recent[0])
+    for pat in _AS_AT:
+        for m in re.finditer(pat, text, re.IGNORECASE):
+            a, b = m.groups()
+            y, mo = (int(b), MONTHS[a.lower()[:3]]) if not a.isdigit() else \
+                (int(a), int(b)) if len(a) == 4 else (int(b), int(a))
+            if ok(y, mo):
+                return fmt(y, mo)
+    fm =re.search(r"(20\d\d)[-_ ]?(0[1-9]|1[0-2])(?:[-_ ]?\d\d)?(?!\d)", filename)
+    if fm and ok(int(fm.group(1)), int(fm.group(2))):
+        return fmt(int(fm.group(1)), int(fm.group(2)))
+    valid = [d for d in _dates(text) if ok(*d)]
+    return fmt(*max(valid)) if valid else None
+
+
+ISIN_RE = re.compile(r"\b(?:ZA|IE|LU|GB|GG|JE|KY|BM)[A-Z0-9]{9}\d\b")
+
+
+def find_isins(text: str) -> list[str]:
+    """ISINs in the order they appear (South African ones look like ZAE000123456)."""
+    return list(dict.fromkeys(ISIN_RE.findall(text)))
+
+
+MONTH_NAMES = ["january", "february", "march", "april", "may", "june", "july", "august",
+               "september", "october", "november", "december"]
+
+
+def expand_url(template: str, month: str) -> str:
+    """Fill {yyyy}, {mm}, {yyyymm}, {month}/{Month} ("august"), {mon}/{Mon}/{MON} ("aug") for "YYYY - MM"."""
+    y, m = month.split(" - ")
+    name = MONTH_NAMES[int(m) - 1]
+    return template.format(yyyy=y, mm=m, yyyymm=f"{y}{m}", month=name, Month=name.title(), mon=name[:3],
+                           Mon=name[:3].title(), MON=name[:3].upper())
+
+
+def candidate_urls(src: FundSource, months: list[str]) -> list[str]:
+    urls = [u for u in [src.url, *(src.urls or [])] if u]
+    out = []
+    for u in urls:
+        out.extend(dict.fromkeys(expand_url(u, m) for m in months) if "{" in u else [u])
+    return list(dict.fromkeys(out))
 
 
 def collect(funds: list[Fund], sources: dict[str, FundSource], scraper: Scraper, out_dir: str | Path,
             months: list[str] | None = None) -> list[Collected]:
-    """Fetch each fund's MDD, file it under out_dir/"YYYY - MM"/ and write a tracker per month."""
+    """Fetch each fund's MDD(s), file them under out_dir/"YYYY - MM"/ and write a tracker per month.
+
+    A source may list several URLs and URL templates ({yyyy}, {mm}, {month}, ...), which are
+    expanded for each month in ``months`` so earlier months can be back-filled.
+    """
     out_dir = Path(out_dir)
-    results = []
+    months = months or []
+    results: list[Collected] = []
     for fund in funds:
         src = sources.get(fund.name)
-        if src is None or not any([src.url, src.page, src.file]):
+        if src is None or not any([src.url, src.urls, src.page, src.file]):
             results.append(Collected(fund.name, note="no MDD source configured"))
             continue
-        try:
-            pdf = scraper.fetch(src)
-            month = document_month(pdf_text(pdf))
-            if month is None:
-                results.append(Collected(fund.name, source=str(pdf), note="could not read the MDD date"))
-                continue
-            dest = out_dir / month / f"{_safe_name(fund.name)}.pdf"
-            dest.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(pdf, dest)
-            results.append(Collected(fund.name, month, dest, src.url or src.page or src.file or ""))
-            log.info("%s -> %s", fund.name, dest)
-        except (ScrapeError, Exception) as exc:  # one bad fund shouldn't stop the run
-            results.append(Collected(fund.name, source=src.url or src.page or src.file or "", note=str(exc)))
-            log.warning("%s: %s", fund.name, exc)
+        got: list[Collected] = []
+        errors = []
+        fetches = [replace(src, url=u, urls=None, page=None) for u in candidate_urls(src, months)]
+        if src.page:
+            pages = dict.fromkeys(expand_url(src.page, m) for m in months) if "{" in src.page else [src.page]
+            fetches += [replace(src, url=None, urls=None, page=p) for p in pages]
+        fetches = fetches or [src]
+        for one in fetches:
+            try:
+                pdf = scraper.fetch(one)
+                text = pdf_text(pdf)
+                month = document_month(text, filename=Path(one.url or one.file or pdf).name)
+                isins = find_isins(text)
+                where = one.url or one.page or one.file or ""
+                if month is None:
+                    errors.append(f"could not read the MDD date ({where})")
+                    continue
+                if any(g.month == month for g in got):
+                    continue
+                dest = out_dir / month / f"{_safe_name(fund.name)}.pdf"
+                dest.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(pdf, dest)
+                got.append(Collected(fund.name, month, dest, where, src.note or "", src.isin or (isins[0] if isins else None)))
+                log.info("%s -> %s", fund.name, dest)
+            except Exception as exc:  # one bad fund or URL shouldn't stop the run
+                errors.append(str(exc))
+        if got:
+            results.extend(got)
+        else:
+            results.append(Collected(fund.name, source=src.url or src.page or src.file or "",
+                                     note="; ".join(filter(None, [src.note, *errors[:2]])), isin=src.isin))
+            log.warning("%s: %s", fund.name, errors[:1])
 
-    all_months = sorted({r.month for r in results if r.month} | set(months or []))
+    all_months = sorted({r.month for r in results if r.month} | set(months))
     for month in all_months:
         write_tracker(out_dir / month / f"MDD Tracker {month}.xlsx", month, funds, results)
     return results
 
 
 def write_tracker(path: Path, month: str, funds: list[Fund], results: list[Collected]) -> Path:
-    by_fund = {r.fund: r for r in results}
+    by_fund: dict[str, list[Collected]] = {}
+    for r in results:
+        by_fund.setdefault(r.fund, []).append(r)
     wb = Workbook()
     ws = wb.active
     ws.title = "Tracker"
-    _header(ws, 1, ["Fund", "AUM", "Status", "MDD month found", "File", "Source", "Notes"])
+    _header(ws, 1, ["Fund", "AUM", "ISIN", "Status", "MDD month", "Other months collected", "File", "Source", "Notes"])
     collected = 0
     for i, fund in enumerate(funds, start=2):
-        r = by_fund.get(fund.name, Collected(fund.name))
-        if r.month == month:
+        rs = by_fund.get(fund.name) or [Collected(fund.name, note="no MDD source configured")]
+        this = next((r for r in rs if r.month == month), None)
+        dated = sorted((r for r in rs if r.month), key=lambda r: r.month)
+        shown = this or (dated[-1] if dated else rs[0])
+        isin = next((r.isin for r in rs if r.isin), None)
+        if this:
             status, fill = "Collected", COLLECTED_FILL
             collected += 1
         else:
             status, fill = "Outstanding", OUTSTANDING_FILL
-        row = [fund.name, fund.aum, status, r.month, r.path.name if r.month == month and r.path else None,
-               r.source, r.note or (f"latest MDD found is for {r.month}" if r.month and r.month != month else None)]
+        others = ", ".join(r.month for r in dated if r.month != month) or None
+        note = shown.note
+        if not this and dated:
+            note = "; ".join(filter(None, [f"latest MDD found is for {dated[-1].month}", note]))
+        row = [fund.name, fund.aum, isin, status, shown.month if this else None, others,
+               shown.path.name if this and shown.path else None, shown.source or None, note or None]
         for j, v in enumerate(row, start=1):
-            c = ws.cell(row=i, column=j, value=v)
-            c.fill = fill
+            ws.cell(row=i, column=j, value=v).fill = fill
         ws.cell(row=i, column=2).number_format = "#,##0"
     ws.freeze_panes = "A2"
     ws.auto_filter.ref = ws.dimensions

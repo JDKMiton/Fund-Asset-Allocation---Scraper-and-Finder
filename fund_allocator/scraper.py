@@ -49,11 +49,12 @@ class Scraper:
             if not path.exists():
                 raise ScrapeError(f"local file not found: {path}")
             return path
+        headers = {"Referer": source.referer} if source.referer else None
         if source.url:
-            return self.download(source.url, source.name)
+            return self.download(source.url, source.name, headers)
         if source.page:
             pdf_url = self.find_pdf_link(source.page, source.link_match, source.render)
-            return self.download(pdf_url, source.name)
+            return self.download(pdf_url, source.name, headers)
         raise ScrapeError(f"{source.name}: nothing to fetch")
 
     def find_pdf_link(self, page_url: str, pattern: str, render: bool = False) -> str:
@@ -64,8 +65,8 @@ class Scraper:
         log.info("found %d candidate link(s) on %s, using %s", len(links), page_url, links[0])
         return links[0]
 
-    def download(self, url: str, name: str) -> Path:
-        resp = self._get(url)
+    def download(self, url: str, name: str, headers: dict | None = None) -> Path:
+        resp = self._get(url, headers)
         content = resp.content
         if not content.startswith(b"%PDF"):
             raise ScrapeError(f"{url} did not return a PDF (content-type {resp.headers.get('content-type')})")
@@ -92,14 +93,14 @@ class Scraper:
             self._robots[root] = rp
         return self._robots[root].can_fetch(USER_AGENT, url)
 
-    def _get(self, url: str) -> requests.Response:
+    def _get(self, url: str, headers: dict | None = None) -> requests.Response:
         if not self._allowed(url):
             raise ScrapeError(f"robots.txt disallows {url} (use --ignore-robots only if you have permission)")
         wait = self.delay - (time.monotonic() - self._last_request)
         if wait > 0:
             time.sleep(wait)
         try:
-            resp = self.session.get(url, timeout=self.timeout)
+            resp = self.session.get(url, timeout=self.timeout, headers=headers)
         except requests.RequestException as exc:
             raise ScrapeError(f"request failed for {url}: {exc}") from exc
         finally:

@@ -133,6 +133,32 @@ class CollectorTest(unittest.TestCase):
         self.assertEqual(document_month(text, today=date(2026, 10, 12)), "2026 - 09")
         self.assertIsNone(document_month("no dates", today=date(2026, 10, 12)))
 
+    def test_document_month_ignores_older_period_and_issue_dates(self):
+        from datetime import date
+        from fund_allocator.collector import document_month
+        today = date(2026, 10, 12)
+        # TER period end (Dec 2025) before the reporting month
+        self.assertEqual(document_month("31 December 2025 August 2026 FUND INFORMATION", today), "2026 - 08")
+        # an earlier holdings date in the text, but an explicit "as at end" header
+        self.assertEqual(document_month("Top holdings 30 April 2026\nAs at end August 2026", today), "2026 - 08")
+        # issue date in the current month is never the reporting month
+        self.assertEqual(document_month("Issued 2 October 2026. Fund information on 30 September 2026", today),
+                         "2026 - 09")
+        # file name is used when the text has no recent date
+        self.assertEqual(document_month("Launched 1 May 2001", today, "AGBF - 2026-07.pdf"), "2026 - 07")
+
+    def test_expand_url_templates(self):
+        from fund_allocator.collector import candidate_urls
+        from fund_allocator.config import FundSource
+        src = FundSource("X", urls=["https://x/{yyyymm}/f.pdf", "https://x/{yyyy}/{month}/f-{mm}.pdf"])
+        self.assertEqual(candidate_urls(src, ["2026 - 08"]),
+                         ["https://x/202608/f.pdf", "https://x/2026/august/f-08.pdf"])
+
+    def test_find_isins(self):
+        from fund_allocator.collector import find_isins
+        self.assertEqual(find_isins("ISIN Code ZAE000019808 and IE00B2RGGV79, again ZAE000019808"),
+                         ["ZAE000019808", "IE00B2RGGV79"])
+
     def test_collect_files_by_month_and_tracks_outstanding(self):
         from fund_allocator.collector import Fund, collect
         from fund_allocator.config import FundSource
@@ -146,7 +172,7 @@ class CollectorTest(unittest.TestCase):
             results = collect(funds, sources, Scraper(Path(tmp) / "dl"), out)
             self.assertTrue((out / "2026 - 09" / "Balanced.pdf").exists())
             ws = load_workbook(out / "2026 - 09" / "MDD Tracker 2026 - 09.xlsx")["Tracker"]
-            status = {ws.cell(row=i, column=1).value: ws.cell(row=i, column=3).value for i in range(2, 5)}
+            status = {ws.cell(row=i, column=1).value: ws.cell(row=i, column=4).value for i in range(2, 5)}
             self.assertEqual(status, {"Balanced": "Collected", "Feeder": "Collected", "No Source": "Outstanding"})
             self.assertEqual(sum(1 for r in results if r.month), 2)
 

@@ -1,0 +1,470 @@
+# Where each fund's MDD / fact sheet is published (used by: python -m fund_allocator collect).
+# Generated from the October 2026 collection run - see README "Collecting MDDs".
+#   url:   a link that always serves the latest MDD
+#   urls:  link templates - {yyyy} {mm} {yyyymm} {month} {Mon} ... are filled in for each month requested
+#   page:  a page that links to the PDF (render: true = needs a real browser), link_match picks the link
+#   isin:  ISIN to show in the tracker when the MDD doesn't print one
+#   note:  shown in the tracker (renamed fund, quarterly MDD, not found, ...)
+funds:
+- name: Coronation Balanced Defensive
+  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/COBA
+- name: Coronation Balanced Plus Fund
+  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CORB
+- name: Coronation Strategic Income
+  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CSIF
+- name: Coronation Global Optimum Growth Feeder Fund
+  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CNOG
+- name: Coronation Capital Plus
+  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CCPF
+- name: Coronation Property Equity Fund
+  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CPEF
+- name: Coronation Top 20 Fund
+  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CNTF
+- name: Coronation Global Managed Feeder Fund
+  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/COGM
+- name: Coronation Global Emerging Markets Flexible Feeder Fund
+  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CGEM
+- name: Coronation Global Capital Plus Feeder Fund
+  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/COLA
+- name: Coronation Global Opportunities Equity Fund
+  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CUWEA
+- name: Coronation Global Emerging Markets Fund
+  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CUGEB
+- name: Coronation Global Strategic Income Fund
+  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CUGSI
+- name: Coronation Equity Fund
+  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CORA
+- name: Coronation Market Plus
+  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CMPF
+- name: Coronation Global Strategic USD Income ZAR Feeder Fund
+  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CGSUI
+- name: Coronation Resources Fund
+  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CCGF
+- name: Allan Gray Balanced
+  urls:
+  - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20Balanced%20Fund/Files/AGBF%20-%20{yyyy}-{mm}.pdf
+- name: Allan Gray Stable Fund
+  urls:
+  - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20Stable%20Fund/Files/AGSF%20-%20{yyyy}-{mm}.pdf
+- name: Allan Gray Equity Fund
+  urls:
+  - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20Equity%20Fund/Files/AGEF%20-%20{yyyy}-{mm}.pdf
+- name: Allan Gray Money Market
+  urls:
+  - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20Money%20Market%20Fund/Files/AGMF%20-%20{yyyy}-{mm}.pdf
+- name: Allan Gray Bond
+  urls:
+  - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20Bond%20Fund/Files/AGBD%20-%20{yyyy}-{mm}.pdf
+- name: Allan Gray Optimal Fund
+  urls:
+  - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20Optimal%20Fund/Files/AGOF%20-%20{yyyy}-{mm}.pdf
+- name: Allan Gray Tax-Free Balanced Fund
+  urls:
+  - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20Unit%20Trust%20Management%20Limited%20-%20Tax%20Free%20funds/Files/AGTF00%20-%20{yyyy}-{mm}.pdf
+- name: Allan Gray Orbis Global Equity Feeder
+  urls:
+  - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20-%20Orbis%20Global%20Equity%20Feeder%20Fund/Files/AGOE%20-%20{yyyy}-{mm}.pdf
+- name: Allan Gray Orbis Global Balanced Feeder Fund
+  urls:
+  - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20-%20Orbis%20Global%20Balanced%20Feeder%20Fund/Files/AGGF%20-%20{yyyy}-{mm}.pdf
+- name: Ninety One Opportunity
+  url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-opportunity-fund-h-zar-factsheet.pdf
+  note: ninetyone.com blocks scripts; open https://ninetyone.com/en/south-africa/funds-strategies/funds in a browser first (render).
+- name: Ninety One Global Franchise Feeder
+  url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-global-franchise-feeder-fund-h-zar-factsheet.pdf
+  note: ninetyone.com blocks scripts; open https://ninetyone.com/en/south-africa/funds-strategies/funds in a browser first (render).
+- name: Ninety One Managed Fund
+  url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-managed-fund-h-zar-factsheet.pdf
+  note: ninetyone.com blocks scripts; open https://ninetyone.com/en/south-africa/funds-strategies/funds in a browser first (render).
+- name: Ninety One Cautious Managed
+  url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-cautious-managed-fund-h-zar-factsheet.pdf
+  note: ninetyone.com blocks scripts; open https://ninetyone.com/en/south-africa/funds-strategies/funds in a browser first (render).
+- name: Ninety One Equity
+  url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-equity-fund-h-zar-factsheet.pdf
+  note: ninetyone.com blocks scripts; open https://ninetyone.com/en/south-africa/funds-strategies/funds in a browser first (render).
+- name: Ninety One Diversified Income
+  url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-diversified-income-fund-h-zar-factsheet.pdf
+  note: ninetyone.com blocks scripts; open https://ninetyone.com/en/south-africa/funds-strategies/funds in a browser first (render).
+- name: Ninety One Global Strategic Managed Feeder Fund
+  url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-global-strategic-managed-feeder-fund-h-zar-factsheet.pdf
+  note: ninetyone.com blocks scripts; open https://ninetyone.com/en/south-africa/funds-strategies/funds in a browser first (render).
+- name: Ninety One Global Multi Asset Income Feeder Fund
+  url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-global-managed-income-feeder-fund-h-zar-factsheet.pdf
+  note: ninetyone.com blocks scripts; open https://ninetyone.com/en/south-africa/funds-strategies/funds in a browser first (render).
+- name: Ninety One Money Market Expense Account
+  url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-money-market-fund-a-zar-factsheet.pdf
+  note: ninetyone.com blocks scripts; open https://ninetyone.com/en/south-africa/funds-strategies/funds in a browser first (render).
+- name: Ninety One Commodity Fund
+  url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-commodity-fund-h-zar-factsheet.pdf
+  note: ninetyone.com blocks scripts; open https://ninetyone.com/en/south-africa/funds-strategies/funds in a browser first (render).
+- name: Ninety One STeFI Plus Fund
+  url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-stefi-plus-fund-h-zar-factsheet.pdf
+  note: ninetyone.com blocks scripts; open https://ninetyone.com/en/south-africa/funds-strategies/funds in a browser first (render).
+- name: Ninety One Value
+  url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-value-fund-h-zar-factsheet.pdf
+  note: ninetyone.com blocks scripts; open https://ninetyone.com/en/south-africa/funds-strategies/funds in a browser first (render).
+- name: Ninety One Property Equity
+  url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-property-equity-fund-h-zar-factsheet.pdf
+  note: ninetyone.com blocks scripts; open https://ninetyone.com/en/south-africa/funds-strategies/funds in a browser first (render).
+- name: Ninety One Global Diversified Income Fund
+  url: https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-ut-global-diversified-income-feeder-fund-h-zar-mdd.pdf
+  note: ninetyone.com blocks scripts; open https://ninetyone.com/en/south-africa/funds-strategies/funds in a browser first (render).
+- name: Nedgroup Investments Core Guarded [Taquanta]
+  urls:
+  - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Core%20Guarded%20Fund%20C.pdf
+- name: Nedgroup Investments Flexible Income [ABAX]
+  urls:
+  - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Flexible%20Income%20Fund%20A.pdf
+- name: Nedgroup Investments Core Diversified [Taquanta]
+  urls:
+  - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Core%20Diversified%20Fund%20B.pdf
+- name: Nedgroup Investments Balanced [Truffle]
+  urls:
+  - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Balanced%20Fund%20B.pdf
+- name: Nedgroup Investments Global Equity Fund
+  urls:
+  - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Global%20Equity%20Feeder%20Fund%20A.pdf
+  note: Matched to the SA-domiciled Nedgroup Investments Global Equity Feeder Fund.
+- name: Nedgroup Investments Core Global Feeder Fund
+  urls:
+  - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Core%20Global%20Feeder%20Fund%20A.pdf
+- name: Nedgroup Investments Global Cautious Fund
+  urls:
+  - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Global%20Cautious%20Feeder%20Fund%20B2.pdf
+  note: Matched to the SA-domiciled Nedgroup Investments Global Cautious Feeder Fund.
+- name: Nedgroup Investments Entrepreneur Fund
+  urls:
+  - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Entrepreneur%20Fund%20A.pdf
+- name: Nedgroup Investments Stable Fund [Foord]
+  urls:
+  - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Stable%20Fund%20A.pdf
+- name: Nedgroup Investments SA Equity Fund
+  urls:
+  - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20SA%20Equity%20Fund%20B.pdf
+- name: Nedgroup Investments Opportunity [ABAX]
+  urls:
+  - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Opportunity%20Fund%20B2.pdf
+- name: Nedgroup Investments Global Flexible Feeder Fund
+  urls:
+  - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Global%20Flexible%20Feeder%20Fund%20A.pdf
+- name: Discovery Balanced Fund
+  url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/DBFD
+- name: Discovery Equity Fund
+  url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/DIEF
+- name: Discovery Diversified Income Fund
+  url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/DDIF
+- name: Discovery Cautious Balanced Fund
+  url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/DCBF
+- name: Discovery Flexible Property Fund
+  url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/DFPF
+- name: Discovery Global Multi Asset Fund
+  url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/DWWBI
+- name: Discovery Global Equity Feeder Fund
+  url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/DGEF
+- name: Discovery Money Market Fund
+  url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/DMMF
+- name: Discovery Aggressive Dynamic Asset Optimiser Fund of Funds
+  url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/DADAOF
+  note: Fund now named Cogence Discovery Balanced Dynamic Asset Optimiser Fund of Funds (same fund code DADAOF).
+- name: PSG Diversified Income
+  url: https://download.psg.co.za/files/asset-management/fund-fact-sheets/PSG-Diversified-Income-Fund-Class-A.pdf
+- name: PSG Balanced
+  url: https://download.psg.co.za/files/asset-management/fund-fact-sheets/PSG-Balanced-Fund-Class-A.pdf
+- name: PSG Flexible
+  url: https://download.psg.co.za/files/asset-management/fund-fact-sheets/PSG-Flexible-Fund-Class-A.pdf
+- name: PSG Equity
+  url: https://download.psg.co.za/files/asset-management/fund-fact-sheets/PSG-Equity-Fund-Class-A.pdf
+- name: PSG Stable Fund
+  url: https://download.psg.co.za/files/asset-management/fund-fact-sheets/PSG-Stable-Fund-Class-A.pdf
+- name: PSG Wealth Moderate Fund of Funds
+  url: https://download.psg.co.za/files/wealth/fund-fact-sheets/PSG-Wealth-Moderate-FoFs-Class-A.pdf
+- name: PSG Wealth Global Moderate Feeder Fund
+  url: https://download.psg.co.za/files/wealth/fund-fact-sheets/consolidated-minimum-disclosure-documents.pdf
+  note: Pages 36-37 of PSG Wealth's consolidated MDD pack.
+- name: Satrix Balanced Index
+  url: https://satrix.co.za/fund/mdd/SATBI
+- name: Satrix MSCI World Equity Index Feeder Fund
+  url: https://satrix.co.za/fund/mdd/SAWEF
+  note: Fund now named Satrix MSCI World Index Fund.
+- name: Satrix Smartcore Index Fund
+  url: https://satrix.co.za/fund/mdd/STRTA1
+- name: Satrix Bond Index
+  url: https://satrix.co.za/fund/mdd/SABIF
+- name: Satrix Capped SWIX All Share Index Fund
+  url: https://satrix.co.za/fund/mdd/STCSA1
+  note: Fund now named Satrix Capped All Share Index Fund.
+- name: Satrix ALSI Index Fund
+  url: https://satrix.co.za/fund/mdd/SAAIF
+- name: Satrix Property Fund
+  url: https://satrix.co.za/fund/mdd/SAPIF
+- name: Satrix Rafi 40 Index Fund
+  url: https://satrix.co.za/fund/mdd/SARIF
+- name: Amplify Defensive Balanced [Matrix]
+  page: https://www.sanlaminvestments.com/fund-fact-sheets/
+  note: 'Sanlam Collective Investments: MDD link comes from Sanlam''s fund API (api.sanlam.co.za/sig/invest/v2/sanlam/funds/factsheets); download with Referer https://www.sanlaminvestments.com/.'
+  isin: ZAE000186326
+- name: Amplify SCI Strategic Income [Terebinth]
+  page: https://www.sanlaminvestments.com/fund-fact-sheets/
+  note: 'Sanlam Collective Investments: MDD link comes from Sanlam''s fund API (api.sanlam.co.za/sig/invest/v2/sanlam/funds/factsheets); download with Referer https://www.sanlaminvestments.com/.'
+  isin: ZAE000186243
+- name: Amplify Wealth Protector [Truffle]
+  page: https://www.sanlaminvestments.com/fund-fact-sheets/
+  note: 'Sanlam Collective Investments: MDD link comes from Sanlam''s fund API (api.sanlam.co.za/sig/invest/v2/sanlam/funds/factsheets); download with Referer https://www.sanlaminvestments.com/.'
+  isin: ZAE000222147
+- name: Amplify SCI Managed Equity RIHF (Oyster Catcher)
+  page: https://www.sanlaminvestments.com/fund-fact-sheets/
+  note: 'Sanlam Collective Investments: MDD link comes from Sanlam''s fund API (api.sanlam.co.za/sig/invest/v2/sanlam/funds/factsheets); download with Referer https://www.sanlaminvestments.com/.'
+  isin: ZAE000292199
+- name: Amplify SCI Income Plus RIHF (Matrix)
+  page: https://www.sanlaminvestments.com/fund-fact-sheets/
+  note: 'Sanlam Collective Investments: MDD link comes from Sanlam''s fund API (api.sanlam.co.za/sig/invest/v2/sanlam/funds/factsheets); download with Referer https://www.sanlaminvestments.com/.'
+  isin: ZAE000282877
+- name: Amplify SCI Real Income RIHF (Marble Rock)
+  page: https://www.sanlaminvestments.com/fund-fact-sheets/
+  note: 'Sanlam Collective Investments: MDD link comes from Sanlam''s fund API (api.sanlam.co.za/sig/invest/v2/sanlam/funds/factsheets); download with Referer https://www.sanlaminvestments.com/.'
+  isin: ZAE000282828
+- name: Amplify SCI Absolute Income RIHF (Acumen)
+  page: https://www.sanlaminvestments.com/fund-fact-sheets/
+  note: 'Sanlam Collective Investments: MDD link comes from Sanlam''s fund API (api.sanlam.co.za/sig/invest/v2/sanlam/funds/factsheets); download with Referer https://www.sanlaminvestments.com/.'
+  isin: ZAE000282851
+- name: Amplify SCI Absolute
+  page: https://www.sanlaminvestments.com/fund-fact-sheets/
+  note: 'Sanlam Collective Investments: MDD link comes from Sanlam''s fund API (api.sanlam.co.za/sig/invest/v2/sanlam/funds/factsheets); download with Referer https://www.sanlaminvestments.com/.'
+  isin: ZAE000186367
+- name: Amplify SCI Enhanced Equity RIHF (All Weather)
+  page: https://www.sanlaminvestments.com/fund-fact-sheets/
+  note: 'Sanlam Collective Investments: MDD link comes from Sanlam''s fund API (api.sanlam.co.za/sig/invest/v2/sanlam/funds/factsheets); download with Referer https://www.sanlaminvestments.com/.'
+  isin: ZAE000292991
+- name: Catalyst SCI Global Real Estate Feeder Fund
+  page: https://www.sanlaminvestments.com/fund-fact-sheets/
+  note: 'Sanlam Collective Investments: MDD link comes from Sanlam''s fund API (api.sanlam.co.za/sig/invest/v2/sanlam/funds/factsheets); download with Referer https://www.sanlaminvestments.com/.'
+  isin: ZAE000164752
+- name: Matrix SCI SA Equity Fund
+  page: https://www.sanlaminvestments.com/fund-fact-sheets/
+  note: 'Sanlam Collective Investments: MDD link comes from Sanlam''s fund API (api.sanlam.co.za/sig/invest/v2/sanlam/funds/factsheets); download with Referer https://www.sanlaminvestments.com/.'
+  isin: ZAE000263364
+- name: Obsidian Long Short Retail Hedge Fund
+  page: https://www.sanlaminvestments.com/fund-fact-sheets/
+  note: 'Sanlam Collective Investments: MDD link comes from Sanlam''s fund API (api.sanlam.co.za/sig/invest/v2/sanlam/funds/factsheets); download with Referer https://www.sanlaminvestments.com/.'
+  isin: ZAE000239505
+- name: PR Truffle SCI Flexible Fund
+  page: https://www.sanlaminvestments.com/fund-fact-sheets/
+  note: 'Sanlam Collective Investments: MDD link comes from Sanlam''s fund API (api.sanlam.co.za/sig/invest/v2/sanlam/funds/factsheets); download with Referer https://www.sanlaminvestments.com/.'
+  isin: ZAE000152039
+- name: 36ONE BCI Equity
+  url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/36ONE%20Asset%20Management/36ONE%20FR%20Equity%20Fund%20(A)%20MNTR.pdf
+- name: 36ONE BCI Flexible Opportunity
+  url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/36ONE%20Asset%20Management/36ONE%20FR%20Flexible%20Opportunity%20Fund%20(A)%20MNFO.pdf
+- name: 4D BCI Moderate FoF
+  url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/4D%20Wealth%20Management/4D%20FR%20Moderate%20Fund%20of%20Funds%20(A)%20MDMF.pdf
+- name: Centaur BCI Flexible
+  url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Centaur%20Asset%20Management/Centaur%20FR%20Flexible%20Fund%20(A)%20MCFM.pdf
+- name: BCI Ginsglobal Global Equity Index Feeder Fund
+  url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/GinsGlobal/FR%20GinsGlobal%20Global%20Equity%20Index%20Feeder%20Fund%20(A)%20BGGGFA.pdf
+- name: Granate BCI Balanced
+  url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Granate%20Asset%20Management/Granate%20FR%20Balanced%20Fund%20(B)%20GSBFB.pdf
+- name: Granate BCI Flexible
+  url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Granate%20Asset%20Management/Granate%20FR%20Flexible%20Fund%20(B)%20GSFFB.pdf
+- name: Granate BCI Multi Income
+  url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Granate%20Asset%20Management/Granate%20FR%20Multi%20Income%20Fund%20(B)%20RSMIB.pdf
+- name: Northstar BCI Income Fund
+  url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Northstar%20Asset%20Management/Northstar%20FR%20Income%20Fund%20(A)%20NMIF.pdf
+- name: Northstar BCI Managed Fund
+  url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Northstar%20Asset%20Management/Northstar%20FR%20Managed%20Fund%20(A1)%20METP.pdf
+- name: BCI Ranmore Global Value Equity Feeder Fund
+  url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Ranmore/FR%20Ranmore%20Global%20Value%20Equity%20Feeder%20Fund%20(B)%20RANFFB.pdf
+- name: Reitway BCI Global Property Fund
+  url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Reitway%20Global/Reitway%20FR%20Global%20Property%20Feeder%20Fund%20(A)%20MGPI.pdf
+- name: Sesfikile BCI Global Property Fund
+  url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Sesfikile%20Capital/Sesfikile%20FR%20Global%20Property%20Fund%20(A2)%20SPFA2.pdf
+- name: Sesfikile Property Fund
+  url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Sesfikile%20Capital/Sesfikile%20FR%20Property%20Fund%20(B1)%20SSPF2.pdf
+- name: Visio BCI Unconstrained Fixed Interest
+  url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Visio%20Fund%20Management/Visio%20FR%20Unconstrained%20Fixed%20Interest%20Fund%20(B)%20RSVIB.pdf
+- name: Prescient Balanced
+  url: https://www.prescient.co.za/media/kive0pc5/prescient-balanced-fund-a1-august-2026-pimbala1.pdf
+- name: Prescient Income Provider Fund
+  url: https://www.prescient.co.za/media/dfqpsndv/prescient-income-provider-fund-a2-august-2026-pipfa2.pdf
+- name: Prescient Defensive Fund
+  url: https://www.prescient.co.za/media/fnrjy5t5/prescient-defensive-fund-a1-august-2026-pabsa1.pdf
+- name: Prescient China Balanced Fund
+  url: https://www.prescient.co.za/media/itwclciy/prescient-china-balanced-class-d-august-2026-pgcbfd.pdf
+- name: Prescient Global Income Provider Fund
+  url: https://www.prescient.co.za/media/pcyljsu2/prescient-global-income-provider-fund-b-august-2026-pgpgifb.pdf
+- name: Fairtree Equity Prescient Fund
+  url: https://www.prescient.co.za/media/dpcdwwre/factsheet-fairtree-equity-prescient-fund-2026-08-31_-fcbepfa1.pdf
+- name: Laurium Market Neutral Prescient RIHF
+  url: https://www.prescient.co.za/media/ttbjkhsg/laurium-market-neutral-prescient-ri-hedge-fund-202608.pdf
+- name: Laurium Flexible Prescient
+  url: https://www.prescient.co.za/media/bgmfe2om/laurium-flexible-prescient-fund-202608.pdf
+- name: Laurium Long Short Prescient RIHF
+  url: https://www.prescient.co.za/media/uv5jmazd/laurium-long-short-prescient-ri-hedge-202608.pdf
+- name: Bateleur Long Short Prescient RI Hedge Fund
+  url: https://www.prescient.co.za/media/1vzmo1ib/bateleur-long-short-prescient-ri-hedge-fund_20260831.pdf
+- name: Bateleur Special Opportunities Prescient RI Hedge Fund
+  url: https://www.prescient.co.za/media/vyndetzn/bateleur-special-opportunities-prescient-ri-hedge-fund_20260831.pdf
+- name: Aylett Equity Prescient Fund
+  url: https://www.prescient.co.za/media/fv1dhhk1/aylett-equity-prescient-fund-june-2026-mdd.pdf
+  note: Aylett publishes MDDs quarterly; latest is 30 June 2026.
+- name: 36One Prescient Retail Hedge Fund / SNN Retail Hedge Fund
+  url: https://www.prescient.co.za/media/yo4hmimz/36one-prescient-retail-hedge-fund-1-august-2026_361rf1.pdf
+- name: Foord Flexible Fund of Funds
+  page: https://foord.co.za/investments/forms-and-documents
+  render: true
+  link_match: Foord(%20| )Flexible(%20| )Fund(%20| )of(%20| )Funds(%20| )Class(%20| )A(%20| )at
+- name: Foord Balanced Fund
+  page: https://foord.co.za/investments/forms-and-documents
+  render: true
+  link_match: Foord(%20| )Balanced(%20| )Fund(%20| )Class(%20| )A(%20| )at
+- name: Foord Equity Fund
+  page: https://foord.co.za/investments/forms-and-documents
+  render: true
+  link_match: Foord(%20| )Equity(%20| )Fund(%20| )Class(%20| )A(%20| )at
+- name: Foord International Fund
+  page: https://foord.co.za/investments/forms-and-documents
+  render: true
+  link_match: Foord(%20| )International(%20| )Fund(%20| )Class(%20| )R(%20| )at
+- name: Marriott Core Income
+  url: https://www.marriott.co.za/downloads/factsheets/Marriott_Core_Income_Fund_Fact_Sheet.pdf
+  note: Marriott publishes MDDs quarterly; latest on its website is 30 June 2026.
+- name: Marriott Dividend Growth Fund
+  url: https://www.marriott.co.za/downloads/factsheets/Marriott_Dividend_Growth_Fund_Fact_Sheet.pdf
+  note: Marriott publishes MDDs quarterly; latest is 30 June 2026.
+- name: Marriott Essential Income Fund
+  url: https://www.marriott.co.za/downloads/factsheets/Marriott_Essential_Income_Fund_Factsheet.pdf
+  note: Marriott publishes MDDs quarterly; latest is 30 June 2026.
+- name: Marriot Property Income Fund
+  url: https://www.marriott.co.za/downloads/factsheets/Marriott_Property_Income_Fund_Fact_Sheet.pdf
+  note: Marriott publishes MDDs quarterly; latest is 30 June 2026.
+- name: Camissa Equity Alpha
+  page: https://www.camissa-am.com/funds/equity-alpha-fund
+  render: true
+  link_match: _\d{4}\.pdf
+- name: Camissa Stable
+  page: https://www.camissa-am.com/funds/stable-fund
+  render: true
+  link_match: _\d{4}\.pdf
+- name: Rezco Managed Plus Fund
+  page: https://rezco.com/fund-fact-sheets/rezco-managed-plus-fund-class-a-{yyyy}-{mm}
+  render: true
+  link_match: _assets/
+  note: Rezco fact sheet pages are per month; the PDF link is on the page.
+- name: Rezco Value Trend Fund
+  page: https://rezco.com/fund-fact-sheets/rezco-value-trend-fund-class-a-{yyyy}-{mm}
+  render: true
+  link_match: _assets/
+  note: Rezco fact sheet pages are per month; the PDF link is on the page.
+- name: Rezco Stable Fund
+  page: https://rezco.com/fund-fact-sheets/rezco-stable-fund-class-c-{yyyy}-{mm}
+  render: true
+  link_match: _assets/
+  note: Rezco fact sheet pages are per month; the PDF link is on the page.
+- name: Orbis SICAV Global Balanced
+  urls:
+  - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Orbis%20SICAV%20Global%20Balanced%20Fund%20%28USD%29%20%28Class%20RRFA%29/Files/GBSRA%20-%20{yyyy}-{mm}.pdf
+- name: Orbis Global Equity Fund
+  urls:
+  - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Orbis%20Global%20Equity%20Fund%20%28USD%29%20%28Class%20RRFA%29/Files/OGSRA%20-%20{yyyy}-{mm}.pdf
+- name: Orbis Optimal Fund
+  urls:
+  - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Orbis%20Optimal%20SA%20Fund%20%28USD%29%20%28Class%20A%29/Files/OSDHWA%20-%20{yyyy}-{mm}.pdf
+- name: Mi-Plan IP Global Macro Fund
+  url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Miplan/Mi-Plan%20FR%20Global%20Macro%20Fund%20(B5)%20MGMF.pdf
+- name: Multi Asset IP Balanced Defensive
+  url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Multi%20Asset%20Investment%20Management/Multi%20Asset%20FR%20Balanced%20Defensive%20Fund%20(A)%20MAICA.pdf
+- name: Mi-Plan IP Enhanced Income
+  url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Vunani%20Fund%20Managers/Vunani%20FR%20Enhanced%20Income%20Fund%20(A1)%20MIPEI.pdf
+  note: Matched to Vunani FR Enhanced Income Fund (fund code MIPEI) - appears to be the renamed fund; please confirm.
+- name: Steyn Capital SNN Daily Liquidity RIHF
+  urls:
+  - https://steyncapitalmanagement.com/wp-content/uploads/Steyn-Capital-Daily-Liquidity-FR-Retail-Hedge-Fund-{Mon}-{yyyy}-MDD.pdf
+- name: Fairtree Silver Oak Equity LS SNN Retail Hedge Fund
+  url: https://www.fairtree.com/wp-content/uploads/mdd/fairtree-silver-oak-equity-long-short-fr-retail-hedge-fund-mdd.pdf
+- name: Gryphon All Share Tracker Fund
+  url: https://gryphon.com/documents/gryphon-all-share-tracker-fund.pdf
+- name: Sygnia 4th Industrial Revolution Global Equity Fund
+  page: https://www.sygnia.co.za/blog/fund/sygnia-4th-industrial-revolution-global-equity-fund-class-a/
+  render: true
+  link_match: SIRGA.*FFS
+- name: PPS Managed Fund
+  url: https://www.pps.co.za/sites/default/files/invest-documents/fund-fact-sheets/PPS%20Monthly%20FactSheets/PPS%20Managed%20Fund_%20A%20&%20A2.pdf
+- name: PPS Equity Fund
+  url: https://www.pps.co.za/sites/default/files/invest-documents/fund-fact-sheets/PPS%20Monthly%20FactSheets/PPS%20Equity%20Fund_%20A-A2.pdf
+- name: PPS Flexible Income Fund
+  url: https://www.pps.co.za/sites/default/files/invest-documents/fund-fact-sheets/PPS%20Monthly%20FactSheets/PPS%20Flexible%20Income%20Fund_%20A%20-%20A2.pdf
+- name: Denker Global Financial Fund
+  page: https://www.sanlaminvestments.com/fund-fact-sheets/
+  note: 'Sanlam Collective Investments: MDD link comes from Sanlam''s fund API (api.sanlam.co.za/sig/invest/v2/sanlam/funds/factsheets); download with Referer https://www.sanlaminvestments.com/.'
+  isin: ZAE000154688
+- name: Stanlib Absolute Plus
+  url: https://ppsisecure.co.za/SecureDocuments/FundFactSheets/STANLIB%20Absolute%20Plus%20Fund%20-%20B1.pdf
+- name: STANLIB Income Fund
+  url: https://ppsisecure.co.za/SecureDocuments/FundFactSheets/STANLIB%20Income%20Fund%20-%20B2.pdf
+- name: Old Mutual Global Equity [Jupiter Merlin]
+  url: https://ppsisecure.co.za/SecureDocuments/FundFactSheets/Old%20Mutual%20Global%20Equity%20Fund%20-%20B1.pdf
+- name: SIM Inflation Plus Fund
+  url: https://ppsisecure.co.za/SecureDocuments/FundFactSheets/SIM%20Inflation%20Plus%20Fund%20-%20B4.pdf
+- name: Momentum Capped SWIX Index Fund
+  url: https://wealth.momentum.co.za/investments/factsheets/momentum-capped-all-share-index-fund-(a).pdf
+  note: Fund now named Momentum Capped All Share Index Fund (benchmark changed after the JSE retired the SWIX indices).
+- name: Ninety One Sterling Money Fund
+  url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/LU0898847727
+- name: Ninety One US Dollar Money Fund
+  url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/LU0439319624
+- name: Ninety One UK Alpha Fund
+  url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/LU0345775018
+- name: Baille Gifford Worldwide Long Term Global Growth Fund
+  url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/IE00BYQG5606
+- name: Jupiter Merian World Equity Fund
+  url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/IE00B42HMS87
+- name: Baillie Gifford Managed Fund
+  url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/GB0006010168
+- name: Amplify SCI Diversified Income RIHF (Terebinth)
+  note: Sanlam's MDD link for this fund returns the Amplify SCI Active Equity RHF document instead; MDD needs to be requested from Amplify/Sanlam.
+  isin: ZAE000284147
+- name: Amplify SCI Multi Strategy RIHF (Obsidian)
+  note: Not listed in Sanlam Collective Investments' fund fact sheet list; may have been closed or renamed.
+- name: Discovery Life Property Escalator fund
+  note: Only a March 2025 document found on Discovery's site.
+- name: M&G Balanced Fund
+  note: M&G's site serves MDDs from https://mandg.co.za:8082/media/ssvebf0b/mandg-balanced-fund.pdf (port 8082, not reachable from the scraper's network) - download manually.
+- name: M&G Inflation Plus
+  note: 'MDD: https://mandg.co.za:8082/media/nxrnijcf/mandg-inflation-plus-fund.pdf (port 8082, not reachable) - download manually.'
+- name: M&G Global Balanced Fund
+  note: 'MDD: https://mandg.co.za:8082/media/4v5j51eq/mandg-global-balanced-fund.pdf (port 8082, not reachable) - download manually.'
+- name: M&G Dividend Maximiser Fund
+  note: 'MDD: https://mandg.co.za:8082/media/virclx2t/mandg-dividend-maximiser-fund.pdf (port 8082, not reachable) - download manually.'
+- name: M&G Property Fund D
+  note: 'MDD: https://mandg.co.za:8082/media/3nop0vpg/mandg-property-fund.pdf (port 8082, not reachable) - download manually.'
+- name: PPS Balanced Passive Fund
+  note: Latest fact sheet on PPS website is dated 31 October 2025.
+- name: Old Mutual RAFI 40 Index Fund
+  note: Old Mutual's published MDD link (oldmutualinvest.com/om-docs/blt787134780f7b89c5/OldMutualRAFI40TrackerFund.pdf) now returns a different fund's document; latest confirmed edition is February 2026.
+- name: Schroder ISF Global Sustainable Growth Fund
+  note: Offshore (Luxembourg) fund - factsheet not found on a reachable SA platform; download from schroders.com.
+- name: Baillie Gifford Worldwide Emerging Markets Leading Companies Fund
+  note: Offshore (Ireland) fund - factsheet not found; download from bailliegifford.com.
+- name: iShares World Equity Index Fund
+  note: Offshore fund - share class/ISIN needed to locate factsheet on blackrock.com.
+- name: iShares Emerging Markets Equity Index Fund
+  note: Offshore fund - share class/ISIN needed to locate factsheet on blackrock.com.
+- name: Ranmore Global Equity Fund
+  note: Offshore (Ireland) fund - ranmorefunds.com only lists historic factsheets behind a form.
+- name: Janus Henderson Horizon Fund
+  note: Janus Henderson Horizon is an umbrella SICAV - please confirm which sub-fund is held.
+- name: Counterpoint SCI Global Equity Feeder Fund
+  note: Not listed by Sanlam Collective Investments or found on Counterpoint's site; may have been renamed/closed.
+- name: Counterpoint SCI Worldwide Flexible Fund
+  note: Not listed by Sanlam Collective Investments or found on Counterpoint's site; may have been renamed/closed.
+- name: Vulcan Value Equity Fund
+  note: vulcanim.co.za not reachable; MDD not found on platforms.
+- name: CoreShares S&P SA Top 50 Tracker Fund
+  note: coreshares.co.za not reachable; newest copy found elsewhere is from 2023.
+- name: Curate Momentum Enhanced Yield Fund
+  note: MDD not found on Momentum or platform sites.
+- name: Sasfin BCI Flexible Income
+  note: Not in the Fundrock (ex-BCI) fund list; may have moved management company or been renamed.
+- name: Glacier Money Market
+  note: glacier.co.za not reachable; please confirm the exact fund name (e.g. a Sanlam money market fund on the Glacier platform).
+- name: MitonOptimal International Managed Flexible Fund
+  note: MitonOptimal fund - not scraped (assumed to be sourced in-house like the FR funds).
