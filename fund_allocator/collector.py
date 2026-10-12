@@ -161,7 +161,7 @@ def collect(funds: list[Fund], sources: dict[str, FundSource], scraper: Scraper,
     results: list[Collected] = []
     for fund in funds:
         src = sources.get(fund.name)
-        if src is None or not any([src.url, src.urls, src.page, src.file]):
+        if src is None or not any([src.url, src.urls, src.page, src.file, src.sanlam_fund]):
             results.append(Collected(fund.name, note="no MDD source configured"))
             continue
         got: list[Collected] = []
@@ -197,10 +197,39 @@ def collect(funds: list[Fund], sources: dict[str, FundSource], scraper: Scraper,
                                      note="; ".join(filter(None, [src.note, *errors[:2]])), isin=src.isin))
             log.warning("%s: %s", fund.name, errors[:1])
 
-    all_months = sorted({r.month for r in results if r.month} | set(months))
+    all_months = sorted({r.month for r in results if r.month} | set(months)
+                        | {d.name for d in out_dir.glob("20?? - ??") if d.is_dir()})
+    results = _with_earlier_runs(funds, results, out_dir, all_months)
     for month in all_months:
         write_tracker(out_dir / month / f"MDD Tracker {month}.xlsx", month, funds, results)
     return results
+
+
+def _with_earlier_runs(funds: list[Fund], results: list[Collected], out_dir: Path,
+                       months: list[str]) -> list[Collected]:
+    """Count MDDs already in the month folders from earlier runs, so a site being down this
+    week doesn't turn a collected fund back into an outstanding one."""
+    have = {(r.fund, r.month) for r in results if r.month}
+    extra = []
+    for fund in funds:
+        prev = next((r for r in results if r.fund == fund.name and r.isin), None)
+        for month in months:
+            path = out_dir / month / f"{_safe_name(fund.name)}.pdf"
+            if (fund.name, month) not in have and path.exists():
+                extra.append(Collected(fund.name, month, path, "downloaded in an earlier run", "",
+                                       prev.isin if prev else None))
+    if not extra:
+        return results
+    got = {r.fund for r in results if r.month} | {e.fund for e in extra}
+    # drop "not found" placeholders for funds that do have an earlier MDD
+    return [r for r in results if r.month or r.fund not in got] + extra
+
+
+def recent_months(n: int, today: date | None = None) -> list[str]:
+    """The last ``n`` completed months as "YYYY - MM" (MDDs are published after month-end)."""
+    today = today or date.today()
+    idx = today.year * 12 + today.month - 1
+    return [f"{(i) // 12} - {(i) % 12 + 1:02d}" for i in range(idx - n, idx)]
 
 
 def write_tracker(path: Path, month: str, funds: list[Fund], results: list[Collected]) -> Path:

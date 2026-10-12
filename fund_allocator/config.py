@@ -52,6 +52,8 @@ class FundSource:
     referer: str | None = None      # some document servers only answer requests sent from their site
     isin: str | None = None         # ISIN to report when the MDD doesn't print it
     note: str | None = None         # shown in the tracker (renamed fund, quarterly MDD, ...)
+    browser: bool = False           # always download through the headless browser (bot-protected sites)
+    sanlam_fund: str | None = None  # fund name in Sanlam Collective Investments' fact sheet API
 
 
 def normalise_label(text: str) -> str:
@@ -89,7 +91,7 @@ def load_sources(path: str | Path) -> list[FundSource]:
     sources = []
     for f in data.get("funds", []):
         src = FundSource(**f)
-        if not any([src.url, src.urls, src.page, src.file, src.allocation, src.note]):
+        if not any([src.url, src.urls, src.page, src.file, src.allocation, src.note, src.sanlam_fund]):
             raise ValueError(f"{path}: fund '{src.name}' needs one of url, urls, page, file, allocation or note")
         sources.append(src)
     return sources

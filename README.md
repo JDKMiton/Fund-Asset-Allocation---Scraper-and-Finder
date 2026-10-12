@@ -87,6 +87,41 @@ Notes from the first run:
 - Allan Gray, Satrix and a few others don't print an ISIN on the MDD - add `isin:` in the
   sources file to fill the tracker column.
 
+## Weekly automatic download to OneDrive (Windows)
+
+A Windows scheduled task runs the collector every week and saves the newest MDDs straight into
+your OneDrive-synced `#Webscraper MDDs` folder, so they appear in OneDrive automatically.
+
+**One-time setup** (needs Python 3.11+ from python.org with "Add to PATH" ticked):
+
+1. Get this repository onto your PC (GitHub Desktop, or *Code -> Download ZIP* on GitHub and unzip it).
+2. Open PowerShell in the repository folder and run:
+
+   ```powershell
+   powershell -ExecutionPolicy Bypass -File scripts\windows\setup_weekly_task.ps1 `
+       -FundsWorkbook "C:\path\to\AUM_By_Holding_Fund_Model_Portfolio.xlsx"
+   ```
+
+   This installs the Python packages and a headless Chromium, finds your OneDrive folder, and
+   registers the task **"Fund MDD weekly download"** for Mondays at 07:00. Change it with
+   `-Day Friday -Time 06:30`, or point at another folder with `-OutFolder "..."`.
+   `-FundsWorkbook` is optional; without it every fund in `config/mdd_sources.yaml` is collected
+   and the AUM column is left blank.
+3. Test it straight away: `Start-ScheduledTask -TaskName "Fund MDD weekly download"`.
+
+**What each weekly run does**
+- Looks for the MDDs of the last two completed months (e.g. a run in mid-October collects
+  August and September) and saves each one as `#Webscraper MDDs\YYYY - MM\<Fund>.pdf`,
+  replacing last week's copy with the newest version.
+- Rewrites every month's `MDD Tracker YYYY - MM.xlsx` (ISIN, Collected/Outstanding, notes). MDDs
+  saved in earlier weeks stay counted even if a site is down this week.
+- Pulls the latest `config/mdd_sources.yaml` from GitHub first (if git is installed), so source
+  fixes reach the scheduled job automatically.
+- Logs to `logs\weekly-YYYY-MM-DD.log` (last 12 kept).
+
+The task runs as you while you're logged on (OneDrive must be running to sync). If the PC is
+off at the scheduled time it runs as soon as it's back on.
+
 ## The workbook
 
 | Sheet | What it shows |

@@ -2,8 +2,11 @@
 
 from __future__ import annotations
 
+import base64
 import hashlib
+import json
 import logging
+import os
 import re
 import time
 from pathlib import Path
@@ -39,6 +42,8 @@ class Scraper:
         self.session.headers["User-Agent"] = USER_AGENT
         self._robots: dict[str, RobotFileParser] = {}
         self._last_request = 0.0
+        self._browser: Browser | None = None
+        self._sanlam: dict | None = None
 
     # -- public API ---------------------------------------------------------
 
@@ -50,11 +55,14 @@ class Scraper:
                 raise ScrapeError(f"local file not found: {path}")
             return path
         headers = {"Referer": source.referer} if source.referer else None
+        if source.sanlam_fund:
+            url = self.sanlam_mdd_url(source.sanlam_fund)
+            return self.download(url, source.name, {"Referer": "https://www.sanlaminvestments.com/"})
         if source.url:
-            return self.download(source.url, source.name, headers)
+            return self.download(source.url, source.name, headers, source.browser)
         if source.page:
             pdf_url = self.find_pdf_link(source.page, source.link_match, source.render)
-            return self.download(pdf_url, source.name, headers)
+            return self.download(pdf_url, source.name, headers, source.browser, source.page)
         raise ScrapeError(f"{source.name}: nothing to fetch")
 
     def find_pdf_link(self, page_url: str, pattern: str, render: bool = False) -> str:
@@ -65,11 +73,23 @@ class Scraper:
         log.info("found %d candidate link(s) on %s, using %s", len(links), page_url, links[0])
         return links[0]
 
-    def download(self, url: str, name: str, headers: dict | None = None) -> Path:
-        resp = self._get(url, headers)
-        content = resp.content
+    def download(self, url: str, name: str, headers: dict | None = None, browser: bool = False,
+                 page: str | None = None) -> Path:
+        """Download a PDF; falls back to the headless browser when the site refuses plain requests."""
+        content = b""
+        if not browser:
+            try:
+                content = self._get(url, headers).content
+            except ScrapeError as exc:
+                if "HTTP 403" not in str(exc) and "HTTP 401" not in str(exc):
+                    raise
+                log.info("%s refused a plain request, retrying in a browser", url)
         if not content.startswith(b"%PDF"):
-            raise ScrapeError(f"{url} did not return a PDF (content-type {resp.headers.get('content-type')})")
+            if not self._allowed(url):
+                raise ScrapeError(f"robots.txt disallows {url}")
+            content = self.browser.fetch(url, page)
+        if not content.startswith(b"%PDF"):
+            raise ScrapeError(f"{url} did not return a PDF")
         digest = hashlib.sha1(content).hexdigest()[:8]
         path = self.download_dir / f"{slugify(name)}-{digest}.pdf"
         path.write_bytes(content)
@@ -99,28 +119,111 @@ class Scraper:
         wait = self.delay - (time.monotonic() - self._last_request)
         if wait > 0:
             time.sleep(wait)
-        try:
-            resp = self.session.get(url, timeout=self.timeout, headers=headers)
-        except requests.RequestException as exc:
-            raise ScrapeError(f"request failed for {url}: {exc}") from exc
-        finally:
-            self._last_request = time.monotonic()
+        for attempt in range(3):  # sites occasionally drop connections - retry before giving up
+            try:
+                resp = self.session.get(url, timeout=self.timeout, headers=headers)
+                break
+            except requests.RequestException as exc:
+                if attempt == 2:
+                    raise ScrapeError(f"request failed for {url}: {exc}") from exc
+                time.sleep(3 * (attempt + 1))
+            finally:
+                self._last_request = time.monotonic()
         if not resp.ok:
             raise ScrapeError(f"HTTP {resp.status_code} for {url}")
         return resp
 
     def _render(self, url: str) -> str:
+        return self.browser.html(url)
+
+    @property
+    def browser(self) -> "Browser":
+        if self._browser is None:
+            self._browser = Browser(self.timeout)
+        return self._browser
+
+    def close(self) -> None:
+        if self._browser is not None:
+            self._browser.close()
+            self._browser = None
+
+    def sanlam_mdd_url(self, fund_name: str) -> str:
+        """MDD link for a Sanlam Collective Investments fund, from the API behind sanlaminvestments.com."""
+        if self._sanlam is None:
+            body = self.browser.capture("https://www.sanlaminvestments.com/fund-fact-sheets/", "funds/factsheets")
+            self._sanlam = {f["fund_name"].lower(): f for f in json.loads(body)["data"]}
+        fund = self._sanlam.get(fund_name.lower())
+        if not fund or not fund.get("mdd_urls"):
+            raise ScrapeError(f"'{fund_name}' is not in Sanlam's fund fact sheet list")
+        urls = fund["mdd_urls"]
+        return next((u["url"] for u in urls if u.get("product_code") == "UT"), urls[0]["url"])
+
+
+class Browser:
+    """Headless Chromium for sites that need JavaScript or block plain HTTP clients.
+
+    Uses PLAYWRIGHT_CHROMIUM (path to a Chromium binary) if set, and the HTTPS_PROXY
+    environment variable if present.
+    """
+
+    def __init__(self, timeout: float = 30.0):
         try:
             from playwright.sync_api import sync_playwright
         except ImportError as exc:
-            raise ScrapeError("render: true needs Playwright (pip install playwright)") from exc
-        with sync_playwright() as p:
-            browser = p.chromium.launch()
-            page = browser.new_page(user_agent=USER_AGENT)
-            page.goto(url, wait_until="networkidle", timeout=int(self.timeout * 1000))
-            html = page.content()
-            browser.close()
-        return html
+            raise ScrapeError("this source needs Playwright: pip install playwright && "
+                              "python -m playwright install chromium") from exc
+        self.timeout_ms = int(timeout * 2000)
+        self._pw = sync_playwright().start()
+        kwargs = {}
+        if os.environ.get("PLAYWRIGHT_CHROMIUM"):
+            kwargs["executable_path"] = os.environ["PLAYWRIGHT_CHROMIUM"]
+        if os.environ.get("HTTPS_PROXY"):
+            kwargs["proxy"] = {"server": os.environ["HTTPS_PROXY"]}
+        self._browser = self._pw.chromium.launch(**kwargs)
+        self._ctx = self._browser.new_context(user_agent=USER_AGENT.replace(" FundAllocator/0.1", ""),
+                                              ignore_https_errors=True)
+        self._page = self._ctx.new_page()
+
+    def _goto(self, url: str, settle_ms: int = 4000) -> None:
+        self._page.goto(url, wait_until="domcontentloaded", timeout=self.timeout_ms)
+        self._page.wait_for_timeout(settle_ms)
+
+    def html(self, url: str) -> str:
+        self._goto(url)
+        return self._page.content()
+
+    def fetch(self, url: str, referer_page: str | None = None) -> bytes:
+        """Download ``url`` from inside a page of the same site, so its cookies/challenge apply."""
+        origin = referer_page or "{0.scheme}://{0.netloc}/".format(urlparse(url))
+        if not self._page.url.startswith(origin.rstrip("/")):
+            self._goto(origin)
+        data = self._fetch_in_page(url)
+        if data.startswith("ERR"):  # bot checks sometimes need a second page load
+            self._goto(origin, settle_ms=8000)
+            data = self._fetch_in_page(url)
+        if data.startswith("ERR"):
+            raise ScrapeError(f"HTTP {data[3:]} for {url} (browser)")
+        return base64.b64decode(data)
+
+    def _fetch_in_page(self, url: str) -> str:
+        return self._page.evaluate("""async (u) => {
+            const r = await fetch(u, {credentials: 'include'});
+            if (!r.ok) return 'ERR' + r.status;
+            const b = new Uint8Array(await r.arrayBuffer()); let s = '';
+            for (let i = 0; i < b.length; i += 0x8000) s += String.fromCharCode(...b.subarray(i, i + 0x8000));
+            return btoa(s);
+        }""", url)
+
+    def capture(self, page_url: str, url_part: str) -> bytes:
+        """Load ``page_url`` and return the body of the first response whose URL contains ``url_part``."""
+        with self._page.expect_response(lambda r: url_part in r.url and r.status == 200,
+                                        timeout=self.timeout_ms) as info:
+            self._page.goto(page_url, wait_until="domcontentloaded", timeout=self.timeout_ms)
+        return info.value.body()
+
+    def close(self) -> None:
+        self._browser.close()
+        self._pw.stop()
 
 
 def find_matching_links(html: str, base_url: str, pattern: str) -> list[str]:

@@ -13,7 +13,7 @@ import re
 import sys
 
 from .allocation import look_through
-from .collector import collect, load_fund_list
+from .collector import Fund, collect, load_fund_list, recent_months
 from .config import FundSource, Template, load_sources, load_template
 from .extractor import Extraction, extract_from_pdf, match_category
 from .report import write_workbook
@@ -95,16 +95,24 @@ def cmd_extract(args: argparse.Namespace) -> int:
 
 
 def cmd_collect(args: argparse.Namespace) -> int:
-    funds = load_fund_list(args.funds, args.sheet)
+    sources_list = load_sources(args.sources)
+    if args.funds:
+        funds = load_fund_list(args.funds, args.sheet)
+    else:  # every fund in the sources file
+        funds = [Fund(s.name) for s in sources_list]
     if args.exclude:
         pattern = re.compile(args.exclude, re.IGNORECASE)
         funds = [f for f in funds if not pattern.search(f.name)]
-    sources = {s.name: s for s in load_sources(args.sources)}
+    sources = {s.name: s for s in sources_list}
+    months = args.month or recent_months(args.recent)
     scraper = Scraper(args.download_dir, delay=args.delay, respect_robots=not args.ignore_robots)
-    results = collect(funds, sources, scraper, args.out, months=args.month)
-    got = sum(1 for r in results if r.month)
-    print(f"{len(funds)} funds: {got} MDDs collected, {len(funds) - got} outstanding")
-    for month in sorted({r.month for r in results if r.month} | set(args.month or [])):
+    try:
+        results = collect(funds, sources, scraper, args.out, months=months)
+    finally:
+        scraper.close()
+    got = len({r.fund for r in results if r.month})
+    print(f"{len(funds)} funds: MDDs for {got}, none for {len(funds) - got}")
+    for month in sorted({r.month for r in results if r.month} | set(months)):
         n = sum(1 for r in results if r.month == month)
         print(f"  {args.out}/{month}: {n} MDD(s) + tracker")
     return 0
@@ -135,9 +143,12 @@ def main(argv: list[str] | None = None) -> int:
 
     col = sub.add_parser("collect", help="download MDDs for every fund in a holdings workbook into "
                                          "'YYYY - MM' folders with a tracker spreadsheet")
-    col.add_argument("--funds", required=True, help="workbook with fund names in column A (AUM in column B)")
+    col.add_argument("--funds", help="workbook with fund names in column A (AUM in column B); "
+                                     "default: every fund in --sources")
+    col.add_argument("--recent", type=int, default=2,
+                     help="when no --month is given, look for the last N completed months (default 2)")
     col.add_argument("--sheet", help="worksheet to read (default: first sheet)")
-    col.add_argument("--sources", default="config/sources.yaml")
+    col.add_argument("--sources", default="config/mdd_sources.yaml")
     col.add_argument("--out", default="output/MDDs", help="folder to create the month folders in")
     col.add_argument("--month", action="append", metavar="'YYYY - MM'",
                      help="always create this month's folder and tracker, even if no MDDs are found for it")

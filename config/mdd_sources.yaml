@@ -69,46 +69,46 @@ funds:
   - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20-%20Orbis%20Global%20Balanced%20Feeder%20Fund/Files/AGGF%20-%20{yyyy}-{mm}.pdf
 - name: Ninety One Opportunity
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-opportunity-fund-h-zar-factsheet.pdf
-  note: ninetyone.com blocks scripts; open https://ninetyone.com/en/south-africa/funds-strategies/funds in a browser first (render).
+  browser: true
 - name: Ninety One Global Franchise Feeder
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-global-franchise-feeder-fund-h-zar-factsheet.pdf
-  note: ninetyone.com blocks scripts; open https://ninetyone.com/en/south-africa/funds-strategies/funds in a browser first (render).
+  browser: true
 - name: Ninety One Managed Fund
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-managed-fund-h-zar-factsheet.pdf
-  note: ninetyone.com blocks scripts; open https://ninetyone.com/en/south-africa/funds-strategies/funds in a browser first (render).
+  browser: true
 - name: Ninety One Cautious Managed
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-cautious-managed-fund-h-zar-factsheet.pdf
-  note: ninetyone.com blocks scripts; open https://ninetyone.com/en/south-africa/funds-strategies/funds in a browser first (render).
+  browser: true
 - name: Ninety One Equity
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-equity-fund-h-zar-factsheet.pdf
-  note: ninetyone.com blocks scripts; open https://ninetyone.com/en/south-africa/funds-strategies/funds in a browser first (render).
+  browser: true
 - name: Ninety One Diversified Income
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-diversified-income-fund-h-zar-factsheet.pdf
-  note: ninetyone.com blocks scripts; open https://ninetyone.com/en/south-africa/funds-strategies/funds in a browser first (render).
+  browser: true
 - name: Ninety One Global Strategic Managed Feeder Fund
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-global-strategic-managed-feeder-fund-h-zar-factsheet.pdf
-  note: ninetyone.com blocks scripts; open https://ninetyone.com/en/south-africa/funds-strategies/funds in a browser first (render).
+  browser: true
 - name: Ninety One Global Multi Asset Income Feeder Fund
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-global-managed-income-feeder-fund-h-zar-factsheet.pdf
-  note: ninetyone.com blocks scripts; open https://ninetyone.com/en/south-africa/funds-strategies/funds in a browser first (render).
+  browser: true
 - name: Ninety One Money Market Expense Account
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-money-market-fund-a-zar-factsheet.pdf
-  note: ninetyone.com blocks scripts; open https://ninetyone.com/en/south-africa/funds-strategies/funds in a browser first (render).
+  browser: true
 - name: Ninety One Commodity Fund
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-commodity-fund-h-zar-factsheet.pdf
-  note: ninetyone.com blocks scripts; open https://ninetyone.com/en/south-africa/funds-strategies/funds in a browser first (render).
+  browser: true
 - name: Ninety One STeFI Plus Fund
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-stefi-plus-fund-h-zar-factsheet.pdf
-  note: ninetyone.com blocks scripts; open https://ninetyone.com/en/south-africa/funds-strategies/funds in a browser first (render).
+  browser: true
 - name: Ninety One Value
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-value-fund-h-zar-factsheet.pdf
-  note: ninetyone.com blocks scripts; open https://ninetyone.com/en/south-africa/funds-strategies/funds in a browser first (render).
+  browser: true
 - name: Ninety One Property Equity
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-property-equity-fund-h-zar-factsheet.pdf
-  note: ninetyone.com blocks scripts; open https://ninetyone.com/en/south-africa/funds-strategies/funds in a browser first (render).
+  browser: true
 - name: Ninety One Global Diversified Income Fund
   url: https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-ut-global-diversified-income-feeder-fund-h-zar-mdd.pdf
-  note: ninetyone.com blocks scripts; open https://ninetyone.com/en/south-africa/funds-strategies/funds in a browser first (render).
+  browser: true
 - name: Nedgroup Investments Core Guarded [Taquanta]
   urls:
   - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Core%20Guarded%20Fund%20C.pdf
@@ -200,57 +200,44 @@ funds:
 - name: Satrix Rafi 40 Index Fund
   url: https://satrix.co.za/fund/mdd/SARIF
 - name: Amplify Defensive Balanced [Matrix]
-  page: https://www.sanlaminvestments.com/fund-fact-sheets/
-  note: 'Sanlam Collective Investments: MDD link comes from Sanlam''s fund API (api.sanlam.co.za/sig/invest/v2/sanlam/funds/factsheets); download with Referer https://www.sanlaminvestments.com/.'
   isin: ZAE000186326
+  sanlam_fund: Amplify SCI Defensive Balanced Fund A1
 - name: Amplify SCI Strategic Income [Terebinth]
-  page: https://www.sanlaminvestments.com/fund-fact-sheets/
-  note: 'Sanlam Collective Investments: MDD link comes from Sanlam''s fund API (api.sanlam.co.za/sig/invest/v2/sanlam/funds/factsheets); download with Referer https://www.sanlaminvestments.com/.'
   isin: ZAE000186243
+  sanlam_fund: Amplify SCI Strategic Income Fund A1
 - name: Amplify Wealth Protector [Truffle]
-  page: https://www.sanlaminvestments.com/fund-fact-sheets/
-  note: 'Sanlam Collective Investments: MDD link comes from Sanlam''s fund API (api.sanlam.co.za/sig/invest/v2/sanlam/funds/factsheets); download with Referer https://www.sanlaminvestments.com/.'
   isin: ZAE000222147
+  sanlam_fund: Amplify SCI Wealth Protector Fund B5
 - name: Amplify SCI Managed Equity RIHF (Oyster Catcher)
-  page: https://www.sanlaminvestments.com/fund-fact-sheets/
-  note: 'Sanlam Collective Investments: MDD link comes from Sanlam''s fund API (api.sanlam.co.za/sig/invest/v2/sanlam/funds/factsheets); download with Referer https://www.sanlaminvestments.com/.'
   isin: ZAE000292199
+  sanlam_fund: Amplify SCI Managed Equity Retail Hedge Fund A1
 - name: Amplify SCI Income Plus RIHF (Matrix)
-  page: https://www.sanlaminvestments.com/fund-fact-sheets/
-  note: 'Sanlam Collective Investments: MDD link comes from Sanlam''s fund API (api.sanlam.co.za/sig/invest/v2/sanlam/funds/factsheets); download with Referer https://www.sanlaminvestments.com/.'
   isin: ZAE000282877
+  sanlam_fund: Amplify SCI Income Plus Retail Hedge Fund A1
 - name: Amplify SCI Real Income RIHF (Marble Rock)
-  page: https://www.sanlaminvestments.com/fund-fact-sheets/
-  note: 'Sanlam Collective Investments: MDD link comes from Sanlam''s fund API (api.sanlam.co.za/sig/invest/v2/sanlam/funds/factsheets); download with Referer https://www.sanlaminvestments.com/.'
   isin: ZAE000282828
+  sanlam_fund: Amplify SCI Real Income Retail Hedge Fund A1
 - name: Amplify SCI Absolute Income RIHF (Acumen)
-  page: https://www.sanlaminvestments.com/fund-fact-sheets/
-  note: 'Sanlam Collective Investments: MDD link comes from Sanlam''s fund API (api.sanlam.co.za/sig/invest/v2/sanlam/funds/factsheets); download with Referer https://www.sanlaminvestments.com/.'
   isin: ZAE000282851
+  sanlam_fund: Amplify SCI Absolute Income Retail Hedge Fund A1
 - name: Amplify SCI Absolute
-  page: https://www.sanlaminvestments.com/fund-fact-sheets/
-  note: 'Sanlam Collective Investments: MDD link comes from Sanlam''s fund API (api.sanlam.co.za/sig/invest/v2/sanlam/funds/factsheets); download with Referer https://www.sanlaminvestments.com/.'
   isin: ZAE000186367
+  sanlam_fund: Amplify SCI Absolute Fund A1
 - name: Amplify SCI Enhanced Equity RIHF (All Weather)
-  page: https://www.sanlaminvestments.com/fund-fact-sheets/
-  note: 'Sanlam Collective Investments: MDD link comes from Sanlam''s fund API (api.sanlam.co.za/sig/invest/v2/sanlam/funds/factsheets); download with Referer https://www.sanlaminvestments.com/.'
   isin: ZAE000292991
+  sanlam_fund: Amplify SCI Enhanced Equity Retail Hedge Fund A1
 - name: Catalyst SCI Global Real Estate Feeder Fund
-  page: https://www.sanlaminvestments.com/fund-fact-sheets/
-  note: 'Sanlam Collective Investments: MDD link comes from Sanlam''s fund API (api.sanlam.co.za/sig/invest/v2/sanlam/funds/factsheets); download with Referer https://www.sanlaminvestments.com/.'
   isin: ZAE000164752
+  sanlam_fund: Catalyst SCI Global Real Estate Feeder Fund B
 - name: Matrix SCI SA Equity Fund
-  page: https://www.sanlaminvestments.com/fund-fact-sheets/
-  note: 'Sanlam Collective Investments: MDD link comes from Sanlam''s fund API (api.sanlam.co.za/sig/invest/v2/sanlam/funds/factsheets); download with Referer https://www.sanlaminvestments.com/.'
   isin: ZAE000263364
+  sanlam_fund: Matrix SCI SA Equity Fund B1
 - name: Obsidian Long Short Retail Hedge Fund
-  page: https://www.sanlaminvestments.com/fund-fact-sheets/
-  note: 'Sanlam Collective Investments: MDD link comes from Sanlam''s fund API (api.sanlam.co.za/sig/invest/v2/sanlam/funds/factsheets); download with Referer https://www.sanlaminvestments.com/.'
   isin: ZAE000239505
+  sanlam_fund: Obsidian SCI Long Short Retail Hedge Fund A2
 - name: PR Truffle SCI Flexible Fund
-  page: https://www.sanlaminvestments.com/fund-fact-sheets/
-  note: 'Sanlam Collective Investments: MDD link comes from Sanlam''s fund API (api.sanlam.co.za/sig/invest/v2/sanlam/funds/factsheets); download with Referer https://www.sanlaminvestments.com/.'
   isin: ZAE000152039
+  sanlam_fund: Truffle SCI Flexible Fund A
 - name: 36ONE BCI Equity
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/36ONE%20Asset%20Management/36ONE%20FR%20Equity%20Fund%20(A)%20MNTR.pdf
 - name: 36ONE BCI Flexible Opportunity
@@ -282,32 +269,58 @@ funds:
 - name: Visio BCI Unconstrained Fixed Interest
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Visio%20Fund%20Management/Visio%20FR%20Unconstrained%20Fixed%20Interest%20Fund%20(B)%20RSVIB.pdf
 - name: Prescient Balanced
-  url: https://www.prescient.co.za/media/kive0pc5/prescient-balanced-fund-a1-august-2026-pimbala1.pdf
+  page: https://www.prescient.co.za/news-and-resources/minimum-disclosure-documents/
+  link_match: prescient-balanced-fund-a1-[a-z]+-\d{4}-pimbala1
+  render: true
 - name: Prescient Income Provider Fund
-  url: https://www.prescient.co.za/media/dfqpsndv/prescient-income-provider-fund-a2-august-2026-pipfa2.pdf
+  page: https://www.prescient.co.za/news-and-resources/minimum-disclosure-documents/
+  link_match: prescient-income-provider-fund-a2-[a-z]+-\d{4}-pipfa2
+  render: true
 - name: Prescient Defensive Fund
-  url: https://www.prescient.co.za/media/fnrjy5t5/prescient-defensive-fund-a1-august-2026-pabsa1.pdf
+  page: https://www.prescient.co.za/news-and-resources/minimum-disclosure-documents/
+  link_match: prescient-defensive-fund-a1-[a-z]+-\d{4}-pabsa1
+  render: true
 - name: Prescient China Balanced Fund
-  url: https://www.prescient.co.za/media/itwclciy/prescient-china-balanced-class-d-august-2026-pgcbfd.pdf
+  page: https://www.prescient.co.za/news-and-resources/minimum-disclosure-documents/
+  link_match: prescient-china-balanced-class-d-[a-z]+-\d{4}-pgcbfd
+  render: true
 - name: Prescient Global Income Provider Fund
-  url: https://www.prescient.co.za/media/pcyljsu2/prescient-global-income-provider-fund-b-august-2026-pgpgifb.pdf
+  page: https://www.prescient.co.za/news-and-resources/minimum-disclosure-documents/
+  link_match: prescient-global-income-provider-fund-b-[a-z]+-\d{4}-pgpgifb
+  render: true
 - name: Fairtree Equity Prescient Fund
-  url: https://www.prescient.co.za/media/dpcdwwre/factsheet-fairtree-equity-prescient-fund-2026-08-31_-fcbepfa1.pdf
+  page: https://www.prescient.co.za/funds/other-funds/
+  link_match: fairtree-equity-prescient-fund-[0-9-]+_-fcbepfa1
+  render: true
 - name: Laurium Market Neutral Prescient RIHF
-  url: https://www.prescient.co.za/media/ttbjkhsg/laurium-market-neutral-prescient-ri-hedge-fund-202608.pdf
+  page: https://www.prescient.co.za/funds/other-funds/
+  link_match: laurium-market-neutral-prescient-ri-hedge-fund-\d{6}
+  render: true
 - name: Laurium Flexible Prescient
-  url: https://www.prescient.co.za/media/bgmfe2om/laurium-flexible-prescient-fund-202608.pdf
+  page: https://www.prescient.co.za/funds/other-funds/
+  link_match: /laurium-flexible-prescient-fund-\d{6}
+  render: true
 - name: Laurium Long Short Prescient RIHF
-  url: https://www.prescient.co.za/media/uv5jmazd/laurium-long-short-prescient-ri-hedge-202608.pdf
+  page: https://www.prescient.co.za/funds/other-funds/
+  link_match: laurium-long-short-prescient-ri-hedge-\d{6}
+  render: true
 - name: Bateleur Long Short Prescient RI Hedge Fund
-  url: https://www.prescient.co.za/media/1vzmo1ib/bateleur-long-short-prescient-ri-hedge-fund_20260831.pdf
+  page: https://www.prescient.co.za/funds/other-funds/
+  link_match: bateleur-long-short-prescient-ri-hedge-fund_\d{8}
+  render: true
 - name: Bateleur Special Opportunities Prescient RI Hedge Fund
-  url: https://www.prescient.co.za/media/vyndetzn/bateleur-special-opportunities-prescient-ri-hedge-fund_20260831.pdf
+  page: https://www.prescient.co.za/funds/other-funds/
+  link_match: bateleur-special-opportunities-prescient-ri-hedge-fund_\d{8}
+  render: true
 - name: Aylett Equity Prescient Fund
-  url: https://www.prescient.co.za/media/fv1dhhk1/aylett-equity-prescient-fund-june-2026-mdd.pdf
   note: Aylett publishes MDDs quarterly; latest is 30 June 2026.
+  page: https://www.prescient.co.za/funds/other-funds/
+  link_match: aylett-equity-prescient-fund-[a-z]+-\d{4}-mdd
+  render: true
 - name: 36One Prescient Retail Hedge Fund / SNN Retail Hedge Fund
-  url: https://www.prescient.co.za/media/yo4hmimz/36one-prescient-retail-hedge-fund-1-august-2026_361rf1.pdf
+  page: https://www.prescient.co.za/funds/other-funds/
+  link_match: 36one-prescient-retail-hedge-fund-1-[a-z]+-\d{4}_361rf1
+  render: true
 - name: Foord Flexible Fund of Funds
   page: https://foord.co.za/investments/forms-and-documents
   render: true
@@ -326,16 +339,16 @@ funds:
   link_match: Foord(%20| )International(%20| )Fund(%20| )Class(%20| )R(%20| )at
 - name: Marriott Core Income
   url: https://www.marriott.co.za/downloads/factsheets/Marriott_Core_Income_Fund_Fact_Sheet.pdf
-  note: Marriott publishes MDDs quarterly; latest on its website is 30 June 2026.
+  note: Marriott publishes MDDs quarterly; latest on its website is 30 June 2026. The manager's robots.txt blocks automated downloads - download manually.
 - name: Marriott Dividend Growth Fund
   url: https://www.marriott.co.za/downloads/factsheets/Marriott_Dividend_Growth_Fund_Fact_Sheet.pdf
-  note: Marriott publishes MDDs quarterly; latest is 30 June 2026.
+  note: Marriott publishes MDDs quarterly; latest is 30 June 2026. The manager's robots.txt blocks automated downloads - download manually.
 - name: Marriott Essential Income Fund
   url: https://www.marriott.co.za/downloads/factsheets/Marriott_Essential_Income_Fund_Factsheet.pdf
-  note: Marriott publishes MDDs quarterly; latest is 30 June 2026.
+  note: Marriott publishes MDDs quarterly; latest is 30 June 2026. The manager's robots.txt blocks automated downloads - download manually.
 - name: Marriot Property Income Fund
   url: https://www.marriott.co.za/downloads/factsheets/Marriott_Property_Income_Fund_Fact_Sheet.pdf
-  note: Marriott publishes MDDs quarterly; latest is 30 June 2026.
+  note: Marriott publishes MDDs quarterly; latest is 30 June 2026. The manager's robots.txt blocks automated downloads - download manually.
 - name: Camissa Equity Alpha
   page: https://www.camissa-am.com/funds/equity-alpha-fund
   render: true
@@ -393,9 +406,8 @@ funds:
 - name: PPS Flexible Income Fund
   url: https://www.pps.co.za/sites/default/files/invest-documents/fund-fact-sheets/PPS%20Monthly%20FactSheets/PPS%20Flexible%20Income%20Fund_%20A%20-%20A2.pdf
 - name: Denker Global Financial Fund
-  page: https://www.sanlaminvestments.com/fund-fact-sheets/
-  note: 'Sanlam Collective Investments: MDD link comes from Sanlam''s fund API (api.sanlam.co.za/sig/invest/v2/sanlam/funds/factsheets); download with Referer https://www.sanlaminvestments.com/.'
   isin: ZAE000154688
+  sanlam_fund: Denker SCI Global Financial Feeder Fund A1
 - name: Stanlib Absolute Plus
   url: https://ppsisecure.co.za/SecureDocuments/FundFactSheets/STANLIB%20Absolute%20Plus%20Fund%20-%20B1.pdf
 - name: STANLIB Income Fund
