@@ -1,0 +1,57 @@
+# Asset allocation template
+# --------------------------
+# categories: the asset classes you report on, in the order they appear in the output.
+#   synonyms: every way a fund manager might label that asset class in an MDD / fact sheet.
+#             Matching ignores case and punctuation. If `python -m fund_allocator extract file.pdf`
+#             shows "(not mapped)" for a label you care about, add it here.
+# portfolios: the funds you want the look-through ("actual") allocation for.
+#   weight: % of the portfolio in each fund. Fund names must match `name` in sources.yaml.
+
+tolerance: 2.0          # flag funds whose allocation doesn't add to 100% +/- this
+section_headers:        # headings that introduce the allocation table in an MDD
+  - asset allocation
+  - asset class allocation
+  - portfolio allocation
+  - asset mix
+
+categories:
+  - name: SA Equity
+    synonyms: [local equity, domestic equity, south african equity, sa equities, local equities,
+               domestic equities, equity local, equities local, sa shares, jse equity]
+  - name: SA Property
+    synonyms: [local property, domestic property, sa listed property, listed property,
+               south african property, property local, sa real estate]
+  - name: SA Bonds
+    synonyms: [local bonds, domestic bonds, sa bond, south african bonds, bonds local,
+               local fixed income, domestic fixed income, sa fixed income, inflation linked bonds,
+               sa inflation linked bonds, local ilbs]
+  - name: SA Cash
+    synonyms: [local cash, domestic cash, cash local, sa money market, money market,
+               local money market, cash and money market, sa cash and money market, cash]
+  - name: Foreign Equity
+    synonyms: [offshore equity, international equity, global equity, foreign equities,
+               offshore equities, global equities, international equities, equity foreign]
+  - name: Foreign Property
+    synonyms: [offshore property, international property, global property, global listed property,
+               global real estate, foreign real estate]
+  - name: Foreign Bonds
+    synonyms: [offshore bonds, international bonds, global bonds, foreign fixed income,
+               global fixed income, offshore fixed income]
+  - name: Foreign Cash
+    synonyms: [offshore cash, international cash, global cash, foreign money market]
+  - name: Africa (ex-SA)
+    synonyms: [africa equity, african equity, africa ex sa, rest of africa, africa]
+  - name: Commodities
+    synonyms: [commodity, gold, precious metals]
+  - name: Other
+    synonyms: [other, alternatives, hedge funds, private equity, other assets]
+
+portfolios:
+  - name: Example Balanced Model
+    holdings:
+      - fund: Sample Balanced Fund
+        weight: 60
+      - fund: Sample Global Equity Feeder
+        weight: 25
+      - fund: Sample Income Fund
+        weight: 15

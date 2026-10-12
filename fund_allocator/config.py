@@ -1,0 +1,91 @@
+"""Loading and validating the YAML configuration files."""
+
+from __future__ import annotations
+
+import re
+from dataclasses import dataclass, field
+from pathlib import Path
+
+import yaml
+
+
+@dataclass
+class Category:
+    name: str
+    synonyms: list[str]
+
+
+@dataclass
+class Holding:
+    fund: str
+    weight: float
+
+
+@dataclass
+class Portfolio:
+    name: str
+    holdings: list[Holding]
+
+
+@dataclass
+class Template:
+    categories: list[Category]
+    portfolios: list[Portfolio] = field(default_factory=list)
+    section_headers: list[str] = field(default_factory=lambda: ["asset allocation"])
+    tolerance: float = 2.0  # how far from 100% a fund total may be before it is flagged
+
+    @property
+    def category_names(self) -> list[str]:
+        return [c.name for c in self.categories]
+
+
+@dataclass
+class FundSource:
+    name: str
+    url: str | None = None          # direct link to a PDF
+    page: str | None = None         # web page that links to the PDF
+    link_match: str = r"mdd|minimum.?disclosure|fact.?sheet"
+    file: str | None = None         # local PDF (manual download)
+    allocation: dict[str, float] | None = None  # manual override, skips extraction
+    render: bool = False            # render page with Playwright (JS-heavy sites)
+
+
+def normalise_label(text: str) -> str:
+    """Lower-case and strip punctuation / extra whitespace so labels compare cleanly."""
+    text = text.lower().replace("&", " and ")
+    text = re.sub(r"[^a-z0-9 ]+", " ", text)
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def load_template(path: str | Path) -> Template:
+    data = yaml.safe_load(Path(path).read_text()) or {}
+    categories = []
+    for c in data.get("categories", []):
+        synonyms = [normalise_label(s) for s in c.get("synonyms", [])]
+        synonyms.append(normalise_label(c["name"]))
+        categories.append(Category(name=c["name"], synonyms=sorted(set(synonyms), key=len, reverse=True)))
+    if not categories:
+        raise ValueError(f"{path}: template must define at least one category")
+
+    portfolios = []
+    for p in data.get("portfolios", []):
+        holdings = [Holding(fund=h["fund"], weight=float(h["weight"])) for h in p.get("holdings", [])]
+        portfolios.append(Portfolio(name=p["name"], holdings=holdings))
+
+    return Template(
+        categories=categories,
+        portfolios=portfolios,
+        section_headers=[normalise_label(h) for h in data.get("section_headers", ["asset allocation"])],
+        tolerance=float(data.get("tolerance", 2.0)),
+    )
+
+
+def load_sources(path: str | Path) -> list[FundSource]:
+    data = yaml.safe_load(Path(path).read_text()) or {}
+    sources = []
+    for f in data.get("funds", []):
+        src = FundSource(**f)
+        if not any([src.url, src.page, src.file, src.allocation]):
+            raise ValueError(f"{path}: fund '{src.name}' needs one of url, page, file or allocation")
+        sources.append(src)
+    return sources

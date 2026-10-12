@@ -1,0 +1,7 @@
+requests>=2.31
+beautifulsoup4>=4.12
+pdfplumber>=0.11
+openpyxl>=3.1
+PyYAML>=6.0
+reportlab>=4.0      # only for generating the sample PDFs / tests
+# playwright>=1.45  # optional: for `render: true` on JavaScript-heavy sites

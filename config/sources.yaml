@@ -1,0 +1,32 @@
+# Where to get each fund's MDD / fact sheet.
+# Each fund needs ONE of:
+#   url:        direct link to the PDF
+#   page:       a web page that links to the PDF; the first link whose URL or text matches
+#               `link_match` (a regex, default: mdd|minimum disclosure|fact sheet) is downloaded
+#   file:       a PDF you downloaded yourself (use this for sites that block scraping / need a login)
+#   allocation: type the allocation in by hand (skips the PDF entirely)
+# Optional:
+#   render: true   load `page` in a headless browser first (for JavaScript-heavy sites; needs Playwright)
+#
+# `name` is what portfolios in template.yaml refer to.
+
+funds:
+  - name: Sample Balanced Fund
+    file: examples/sample_balanced_mdd.pdf
+
+  - name: Sample Global Equity Feeder
+    file: examples/sample_global_equity_mdd.pdf
+
+  - name: Sample Income Fund
+    allocation:
+      SA Bonds: 55
+      Money market: 35
+      Foreign bonds: 10
+
+  # --- Web examples (replace with your funds) -----------------------------------
+  # - name: Some Manager Balanced Fund
+  #   page: https://www.example-manager.co.za/funds/balanced-fund
+  #   link_match: "minimum disclosure|mdd"
+  #
+  # - name: Another Fund
+  #   url: https://www.example-manager.co.za/documents/another-fund-mdd.pdf
