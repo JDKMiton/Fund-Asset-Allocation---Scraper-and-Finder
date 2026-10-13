@@ -203,7 +203,7 @@ class CollectorTest(unittest.TestCase):
             out = Path(tmp) / "MDDs"
             results = collect(funds, sources, Scraper(Path(tmp) / "dl"), out)
             self.assertTrue((out / "2026 - 09" / "Balanced.pdf").exists())
-            ws = load_workbook(out / "2026 - 09" / "MDD Tracker 2026 - 09.xlsx")["Tracker"]
+            ws = load_workbook(out / "2026 - 09" / "!MDD Tracker 2026 - 09.xlsx")["Tracker"]
             status = {ws.cell(row=i, column=1).value: ws.cell(row=i, column=4).value for i in range(2, 5)}
             self.assertEqual(status, {"Balanced": "Collected", "Feeder": "Collected", "No Source": "Outstanding"})
             self.assertEqual(sum(1 for r in results if r.month), 2)
@@ -217,17 +217,19 @@ class CollectorTest(unittest.TestCase):
             out = Path(tmp) / "MDDs"
             (out / "2026 - 08").mkdir(parents=True)
             (out / "2026 - 08" / "Balanced.pdf").write_bytes(balanced.read_bytes())
+            (out / "2026 - 08" / "MDD Tracker 2026 - 08.xlsx").write_bytes(b"old")  # replaced by the "!" name
             src = {"Balanced": FundSource("Balanced", file=str(balanced))}
             # September is missing, so the fund is searched and September is filed
             collect([Fund("Balanced")], src, Scraper(Path(tmp) / "dl"), out, months=["2026 - 08", "2026 - 09"])
             self.assertTrue((out / "2026 - 09" / "Balanced.pdf").exists())
+            self.assertEqual(sorted(p.name for p in (out / "2026 - 08").glob("*.xlsx")), ["!MDD Tracker 2026 - 08.xlsx"])
             # both months saved: the source isn't touched (a missing file would otherwise be an error)
             src = {"Balanced": FundSource("Balanced", file=str(Path(tmp) / "gone.pdf"), isin="ZAE000000001")}
             results = collect([Fund("Balanced")], src, Scraper(Path(tmp) / "dl"), out,
                               months=["2026 - 08", "2026 - 09"])
             self.assertEqual(sorted(r.month for r in results), ["2026 - 08", "2026 - 09"])
             self.assertTrue(all(r.source.startswith("already saved") for r in results))
-            ws = load_workbook(out / "2026 - 09" / "MDD Tracker 2026 - 09.xlsx")["Tracker"]
+            ws = load_workbook(out / "2026 - 09" / "!MDD Tracker 2026 - 09.xlsx")["Tracker"]
             self.assertEqual([c.value for c in ws[2]][2:4], ["ZAE000000001", "Collected"])
 
     def test_collect_tracks_sources_and_takes_aum_from_workbook(self):
@@ -247,7 +249,7 @@ class CollectorTest(unittest.TestCase):
             out = Path(tmp) / "MDDs"
             main(["collect", "--funds", str(holdings), "--sources", str(sources), "--out", str(out),
                   "--download-dir", tmp, "--month", "2026 - 09"])
-            ws = load_workbook(out / "2026 - 09" / "MDD Tracker 2026 - 09.xlsx")["Tracker"]
+            ws = load_workbook(out / "2026 - 09" / "!MDD Tracker 2026 - 09.xlsx")["Tracker"]
             rows = [(r[0], r[1]) for r in ws.iter_rows(min_row=2, values_only=True) if r[0]]
             self.assertEqual(rows, [("alpha fund", None), ("Balanced", 100.0), ("Feeder", 7.0)])
 

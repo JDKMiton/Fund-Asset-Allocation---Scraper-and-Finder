@@ -62,7 +62,7 @@ Tracks every fund listed in `config/mdd_sources.yaml` (add or remove a fund ther
 tracker; funds are listed alphabetically). The `--funds` workbook is optional: its AUM (column B)
 fills the tracker's AUM column, matched on fund name. Each fund's MDD is downloaded, the
 reporting month is read from the PDF and it is filed as `<out>/YYYY - MM/<Fund name>.pdf`. Each month folder
-gets an `MDD Tracker YYYY - MM.xlsx` listing every fund with its **ISIN**, **Collected** or
+gets an `!MDD Tracker YYYY - MM.xlsx` listing every fund with its **ISIN**, **Collected** or
 **Outstanding** status, other months collected, the source link and notes (renamed fund,
 quarterly MDD, not found, ...). Pointing `--out` at your OneDrive-synced folder puts everything
 straight into OneDrive.
@@ -115,7 +115,7 @@ your OneDrive-synced `#Webscraper MDDs` folder, so they appear in OneDrive autom
   A fund whose MDD is already saved in both month folders is not searched again (its Source
   column reads "already saved - not searched again"); add `--refetch` to the collect command
   to search for every fund anyway.
-- Rewrites every month's `MDD Tracker YYYY - MM.xlsx` (ISIN, Collected/Outstanding, notes). MDDs
+- Rewrites every month's `!MDD Tracker YYYY - MM.xlsx` (ISIN, Collected/Outstanding, notes). MDDs
   saved in earlier weeks stay counted even if a site is down this week.
 - Pulls the latest `config/mdd_sources.yaml` from GitHub first (if git is installed), so source
   fixes reach the scheduled job automatically.

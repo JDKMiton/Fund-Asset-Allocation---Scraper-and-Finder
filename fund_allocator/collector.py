@@ -247,7 +247,8 @@ def collect(funds: list[Fund], sources: dict[str, FundSource], scraper: Scraper,
                         | {d.name for d in out_dir.glob("20?? - ??") if d.is_dir()})
     results = _with_earlier_runs(funds, results, out_dir, all_months)
     for month in all_months:
-        write_tracker(out_dir / month / f"MDD Tracker {month}.xlsx", month, funds, results)
+        write_tracker(out_dir / month / f"!MDD Tracker {month}.xlsx", month, funds, results)
+        (out_dir / month / f"MDD Tracker {month}.xlsx").unlink(missing_ok=True)  # name used before the "!"
     return results
 
 
