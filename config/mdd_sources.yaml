@@ -393,17 +393,21 @@ funds:
   urls:
   - https://foord.co.za/sites/default/files/{next_yyyy}-{next_mm}/Foord%20International%20Fund%20Class%20R%20at%20{yyyy}-{mm}-{dd}.pdf
 - name: Marriott Core Income
+  isin: ZAE000027991
   url: https://www.marriott.co.za/downloads/factsheets/Marriott_Core_Income_Fund_Fact_Sheet.pdf
   ignore_robots: true
 - name: Marriott Dividend Growth Fund
+  isin: ZAE000020186
   url: https://www.marriott.co.za/downloads/factsheets/Marriott_Dividend_Growth_Fund_Fact_Sheet.pdf
   note: Marriott publishes MDDs quarterly; latest is 30 June 2026.
   ignore_robots: true
 - name: Marriott Essential Income Fund
+  isin: ZAE000266896
   url: https://www.marriott.co.za/downloads/factsheets/Marriott_Essential_Income_Fund_Factsheet.pdf
   note: Marriott publishes MDDs quarterly; latest is 30 June 2026.
   ignore_robots: true
 - name: Marriot Property Income Fund
+  isin: ZAE000023156
   url: https://www.marriott.co.za/downloads/factsheets/Marriott_Property_Income_Fund_Fact_Sheet.pdf
   note: Marriott publishes MDDs quarterly; latest is 30 June 2026.
   ignore_robots: true
