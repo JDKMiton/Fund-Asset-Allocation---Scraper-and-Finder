@@ -485,7 +485,11 @@ funds:
   - https://www.ishares.com/gls-download/literature/fact-sheet/ishares-world-equity-index-fund-lu-class-f2-usd-factsheet-lu0836515477-gb-en-individual.pdf
   - https://www.blackrock.com/gls-download/literature/fact-sheet/ishares-world-equity-index-fund-lu-class-f2-usd-factsheet-lu0836515477-za-en-individual.pdf
 - name: iShares Emerging Markets Equity Index Fund
-  note: Offshore fund - share class/ISIN needed to locate factsheet on blackrock.com.
+  isin: LU0836515980
+  note: iShares Emerging Markets Equity Index Fund (LU) Class F2 USD - monthly BlackRock fact sheet.
+  urls:
+  - https://www.ishares.com/gls-download/literature/fact-sheet/ishares-emerging-markets-equity-index-fund-lu-class-f2-usd-factsheet-lu0836515980-gb-en-individual.pdf
+  - https://www.blackrock.com/gls-download/literature/fact-sheet/ishares-emerging-markets-equity-index-fund-lu-class-f2-usd-factsheet-lu0836515980-za-en-individual.pdf
 - name: Ranmore Global Equity Fund
   note: Offshore (Ireland) fund - ranmorefunds.com only lists historic factsheets behind a form.
 - name: Janus Henderson Horizon Fund
