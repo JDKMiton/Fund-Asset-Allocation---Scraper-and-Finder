@@ -478,7 +478,11 @@ funds:
 - name: Ranmore Global Equity Fund
   note: Offshore (Ireland) fund - ranmorefunds.com only lists historic factsheets behind a form.
 - name: Janus Henderson Horizon Fund
-  note: Janus Henderson Horizon is an umbrella SICAV - please confirm which sub-fund is held.
+  isin: LU0572952280
+  note: Global Technology Leaders Fund A2 EUR. Janus Henderson only keeps the latest month's fact sheet online.
+  urls:
+  - https://cdn.janushenderson.com/webdocs/HGLZTI_LU0572952280_MAR191_M_{dd}{mm}{yyyy}_XX(EN-GB).pdf
+  - https://cdn.janushenderson.com/webdocs/HGLZTI_LU0572952280_MAR191_M_{bdd}{mm}{yyyy}_XX(EN-GB).pdf
 - name: Counterpoint SCI Global Equity Feeder Fund
   note: Not listed by Sanlam Collective Investments or found on Counterpoint's site; may have been renamed/closed.
 - name: Counterpoint SCI Worldwide Flexible Fund

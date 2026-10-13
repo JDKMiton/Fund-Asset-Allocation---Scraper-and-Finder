@@ -155,14 +155,16 @@ MONTH_NAMES = ["january", "february", "march", "april", "may", "june", "july", "
 
 def expand_url(template: str, month: str) -> str:
     """Fill {yyyy}, {mm}, {yyyymm}, {month}/{Month} ("august"), {mon}/{Mon}/{MON} ("aug"), {dd} (last day
-    of the month) and {next_yyyy}/{next_mm} (the following month) for a "YYYY - MM" month."""
+    of the month), {bdd} (last weekday of the month) and {next_yyyy}/{next_mm} (the following month)
+    for a "YYYY - MM" month."""
     y, m = month.split(" - ")
     name = MONTH_NAMES[int(m) - 1]
     ny, nm = (int(y) + 1, 1) if m == "12" else (int(y), int(m) + 1)
     last_day = calendar.monthrange(int(y), int(m))[1]
+    last_weekday = last_day - max(0, calendar.weekday(int(y), int(m), last_day) - 4)
     return template.format(yyyy=y, mm=m, yyyymm=f"{y}{m}", month=name, Month=name.title(), mon=name[:3],
                            Mon=name[:3].title(), MON=name[:3].upper(), dd=f"{last_day:02d}",
-                           next_yyyy=ny, next_mm=f"{nm:02d}")
+                           bdd=f"{last_weekday:02d}", next_yyyy=ny, next_mm=f"{nm:02d}")
 
 
 def candidate_urls(src: FundSource, months: list[str]) -> list[str]:

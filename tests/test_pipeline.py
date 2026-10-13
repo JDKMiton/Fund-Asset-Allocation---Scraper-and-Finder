@@ -170,6 +170,12 @@ class CollectorTest(unittest.TestCase):
                 r'{\"fileType\":\"Commentary\",\"path\":\"https://x/c.pdf\"}]}')
         self.assertEqual(mandg_fact_sheets(html)["m&g balanced fund"], "https://x/mandg-balanced-fund.pdf")
 
+    def test_expand_url_last_weekday(self):
+        from fund_allocator.collector import expand_url
+        # 31 October 2026 is a Saturday, 31 August 2026 a Monday
+        self.assertEqual(expand_url("{dd}{bdd}", "2026 - 10"), "3130")
+        self.assertEqual(expand_url("{dd}{bdd}", "2026 - 08"), "3131")
+
     def test_find_isins(self):
         from fund_allocator.collector import find_isins
         self.assertEqual(find_isins("ISIN Code ZAE000019808 and IE00B2RGGV79, again ZAE000019808"),
