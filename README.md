@@ -58,16 +58,16 @@ python -m fund_allocator collect --funds AUM_By_Holding_Fund_Model_Portfolio.xls
     --out "C:/Users/<you>/OneDrive - MitonOptimal/#Webscraper MDDs"
 ```
 
-Reads the fund names in column A (AUM in column B), downloads each fund's MDD using
-`config/mdd_sources.yaml` (the `name` there must match the fund name in the workbook), reads the
-reporting month from the PDF and files it as `<out>/YYYY - MM/<Fund name>.pdf`. Each month folder
+Tracks every fund listed in `config/mdd_sources.yaml` (add or remove a fund there to change the
+tracker). The `--funds` workbook is optional: its AUM (column B) fills the tracker's AUM column
+and its order sets the row order, matched on fund name. Each fund's MDD is downloaded, the
+reporting month is read from the PDF and it is filed as `<out>/YYYY - MM/<Fund name>.pdf`. Each month folder
 gets an `MDD Tracker YYYY - MM.xlsx` listing every fund with its **ISIN**, **Collected** or
 **Outstanding** status, other months collected, the source link and notes (renamed fund,
 quarterly MDD, not found, ...). Pointing `--out` at your OneDrive-synced folder puts everything
 straight into OneDrive.
 
-`config/mdd_sources.yaml` was built from the October 2026 run and records, for each of the 179
-funds, where its MDD is published:
+`config/mdd_sources.yaml` records, for each tracked fund, where its MDD is published:
 
 | Source type | Example | How it is used |
 |---|---|---|
@@ -105,8 +105,8 @@ your OneDrive-synced `#Webscraper MDDs` folder, so they appear in OneDrive autom
    This installs the Python packages and a headless Chromium, finds your OneDrive folder, and
    registers the task **"Fund MDD weekly download"** for Mondays at 07:00. Change it with
    `-Day Friday -Time 06:30`, or point at another folder with `-OutFolder "..."`.
-   `-FundsWorkbook` is optional; without it every fund in `config/mdd_sources.yaml` is collected
-   and the AUM column is left blank.
+   Every fund in `config/mdd_sources.yaml` is collected; `-FundsWorkbook` is optional and only
+   fills in the AUM column (left blank without it).
 3. Test it straight away: `Start-ScheduledTask -TaskName "Fund MDD weekly download"`.
 
 **What each weekly run does**

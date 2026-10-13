@@ -68,7 +68,7 @@ class Scraper:
         if source.mandg_fund:
             return self.download(self.mandg_mdd_url(source.mandg_fund), source.name, headers)
         if source.url:
-            return self.download(source.url, source.name, headers, source.browser)
+            return self.download(source.url, source.name, headers, source.browser, source.page)
         if source.page:
             pdf_url = self.find_pdf_link(source.page, source.link_match, source.render)
             return self.download(pdf_url, source.name, headers, source.browser, source.page)

@@ -209,6 +209,8 @@ def collect(funds: list[Fund], sources: dict[str, FundSource], scraper: Scraper,
         fetches = fetches or [src]
         for one in fetches:
             try:
+                if one.page and not one.url:  # resolve the link first so its file name can date the MDD
+                    one = replace(one, url=scraper.find_pdf_link(one.page, one.link_match, one.render))
                 pdf = scraper.fetch(one)
                 text = pdf_text(pdf)
                 month = document_month(text, filename=Path(one.url or one.file or pdf).name)

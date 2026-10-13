@@ -208,6 +208,26 @@ class CollectorTest(unittest.TestCase):
             self.assertEqual(status, {"Balanced": "Collected", "Feeder": "Collected", "No Source": "Outstanding"})
             self.assertEqual(sum(1 for r in results if r.month), 2)
 
+    def test_collect_tracks_sources_and_takes_aum_from_workbook(self):
+        from openpyxl import Workbook
+        make_all()
+        with tempfile.TemporaryDirectory() as tmp:
+            holdings = Path(tmp) / "aum.xlsx"
+            wb = Workbook()
+            ws = wb.active
+            for row in [("Fund", "AUM"), ("Removed Fund", 5.0), ("Balanced", 100.0)]:
+                ws.append(row)
+            wb.save(holdings)
+            sources = Path(tmp) / "sources.yaml"
+            sources.write_text(f"funds:\n- name: Feeder\n  file: {ROOT / 'examples/sample_global_equity_mdd.pdf'}\n"
+                               f"- name: Balanced\n  file: {ROOT / 'examples/sample_balanced_mdd.pdf'}\n")
+            out = Path(tmp) / "MDDs"
+            main(["collect", "--funds", str(holdings), "--sources", str(sources), "--out", str(out),
+                  "--download-dir", tmp, "--month", "2026 - 09"])
+            ws = load_workbook(out / "2026 - 09" / "MDD Tracker 2026 - 09.xlsx")["Tracker"]
+            rows = [(r[0], r[1]) for r in ws.iter_rows(min_row=2, values_only=True) if r[0]]
+            self.assertEqual(rows, [("Balanced", 100.0), ("Feeder", None)])
+
 
 if __name__ == "__main__":
     unittest.main()

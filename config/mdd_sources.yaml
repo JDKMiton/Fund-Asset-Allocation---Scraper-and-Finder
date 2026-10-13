@@ -571,3 +571,84 @@ funds:
   isin: ZAE000206397
   note: Renamed Otto1890 FR Flexible Income Fund (Sasfin Wealth became Otto1890).
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Otto1890%20Asset%20Management/Otto1890%20FR%20Flexible%20Income%20Fund%20(A)%20SMFIA.pdf
+# Added from the MitonOptimal local buy list (Funds.xlsx), October 2026
+- name: Abax Absolute Prescient Fund
+  isin: ZAE000144275
+  page: https://www.prescient.co.za/funds/other-funds/
+  link_match: '{yyyy}-{mm}-abax-absolute-fund-mdd'
+  render: true
+- name: Abax Balanced Prescient Fund
+  isin: ZAE000163556
+  page: https://www.prescient.co.za/funds/other-funds/
+  link_match: '{yyyy}-{mm}-abax-balanced-fund-mdd'
+  render: true
+- name: Allan Gray Income Fund
+  isin: ZAE000334355
+  urls:
+  - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20Income%20Fund/Files/AGINA%20-%20{yyyy}-{mm}.pdf
+- name: Allan Gray SA Equity Fund
+  isin: ZAE000202396
+  urls:
+  - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20SA%20Equity%20Fund/Files/AGDA%20-%20{yyyy}-{mm}.pdf
+- name: Amplify SCI Equity Fund
+  isin: ZAE000291415
+  sanlam_fund: Amplify SCI Equity Fund A1
+- name: Camissa Balanced Fund
+  isin: ZAE000177655
+  page: https://www.camissa-am.com/funds/balanced-fund
+  render: true
+  link_match: _\d{4}\.pdf
+- name: Centaur FR Balanced Fund
+  isin: ZAE000203428
+  url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Centaur%20Asset%20Management/Centaur%20FR%20Balanced%20Fund%20(A)%20CMBFA.pdf
+- name: Coronation Bond Fund
+  isin: ZAE000202453
+  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CNSB
+- name: Curate Momentum Flexible Property Fund
+  isin: ZAE000337291
+  url: https://wealth.momentum.co.za/investments/factsheets/curate-momentum-flexible-property-fund-(a)-zaf.pdf
+- name: Fairtree SA Equity Prescient Fund
+  isin: ZAE000203576
+  page: https://www.prescient.co.za/funds/other-funds/
+  link_match: 'fairtree-sa-equity-prescient-fund-{yyyy}-{mm}-'
+  render: true
+- name: Gryphon Core Managed Fund
+  isin: ZAE000339305
+  url: https://gryphon.com/documents/gryphon-core-managed-fund.pdf
+- name: M&G Global Balanced Feeder Fund
+  isin: ZAE000259396
+  mandg_fund: M&G Global Balanced Feeder Fund
+- name: M&G Global Inflation Plus Feeder Fund
+  isin: ZAE000179412
+  mandg_fund: M&G Global Inflation Plus Feeder Fund
+- name: Methodical FR Equity Fund
+  isin: ZAE000273967
+  url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Methodical%20Investment%20Management/Methodical%20FR%20Equity%20Fund%20(B1)%20ACPB2.pdf
+- name: Nedgroup Investments Core Accelerated Fund
+  isin: ZAE000240537
+  urls:
+  - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Core%20Accelerated%20Fund%20B.pdf
+- name: Satrix Low Equity Balanced Index Fund
+  isin: ZAE000189379
+  url: https://satrix.co.za/fund/mdd/SLEA1
+- name: Steyn Capital Equity Prescient Fund
+  isin: ZAE000222352
+  page: https://www.prescient.co.za/funds/other-funds/
+  link_match: 'steyn-capital-equity-prescient-fund-{mon}-{yyyy}-mdd'
+  render: true
+- name: STANLIB Enhanced Multi Style Equity Fund
+  isin: ZAE000214946
+  url: https://ppsisecure.co.za/SecureDocuments/FundFactSheets/STANLIB%20Enhanced%20Multi%20Style%20Equity%20Fund%20-%20B1.pdf
+  note: STANLIB's own site blocks automated access; the PPS platform copy is usually a month behind.
+- name: STANLIB Global Balanced Feeder Fund
+  isin: ZAE000213021
+  url: https://wealth.momentum.co.za/investments/factsheets/stanlib-global-balanced-feeder-fund-(b3).pdf
+  note: STANLIB's own site blocks automated access; Momentum's copy is usually a month behind.
+- name: STANLIB Multi-Asset Cautious Fund
+  isin: ZAE000288486
+  url: https://wealth.momentum.co.za/investments/factsheets/stanlib-multi-asset-cautious-fund-(c3).pdf
+  note: STANLIB's own site blocks automated access; Momentum's copy is usually a month behind.
+- name: STANLIB Multi-Asset Growth Fund
+  isin: ZAE000314555
+  url: https://wealth.momentum.co.za/investments/factsheets/stanlib-multi-asset-growth-fund-(b1).pdf
+  note: B1 class MDD (Momentum's C3 copy is out of date); STANLIB's own site blocks automated access.
