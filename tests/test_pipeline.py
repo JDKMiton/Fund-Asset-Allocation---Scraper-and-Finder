@@ -170,6 +170,13 @@ class CollectorTest(unittest.TestCase):
         f = _from_text("Fund size: ZAR 19.1bn\nFund inception date: 02.11.87\nBenchmark: CPI + 3% p.a.\n"
                        "Benchmark 8.11 7.07 7.41\n")
         self.assertEqual((f["Fund AUM"], f["Inception Date"], f["Benchmark"]), ("ZAR 19.1bn", "02.11.1987", "CPI + 3% p.a."))
+        # long composite benchmarks wrap onto the next line and are kept in full
+        f = _from_text("Benchmark: 60% MSCI AC World Net Return, 40%\nFTSE WGBI (60% MSCI Net Return 40% FTSE WGBI\n"
+                       "pre 01/01/2011)\nReturns (%) 1yr 3yrs\n")
+        self.assertEqual(f["Benchmark"],
+                         "60% MSCI AC World Net Return, 40% FTSE WGBI (60% MSCI Net Return 40% FTSE WGBI pre 01/01/2011)")
+        long = "From 01/11/2024: " + "; ".join(f"Index {i} ({i}%)" for i in range(1, 30)) + "."
+        self.assertEqual(_from_text(f"Benchmark: {long}\n")["Benchmark"], long)
         # fee lines and performance rows are not benchmarks
         self.assertIsNone(_from_text("Benchmark: 1.00% p.a. excl. VAT\nBenchmark 18.15 16.70 14.33")["Benchmark"])
 

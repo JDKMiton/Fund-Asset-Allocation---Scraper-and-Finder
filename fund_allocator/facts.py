@@ -75,7 +75,35 @@ def _benchmark_ok(v: str | None, lowercase_ok: bool = False) -> str | None:
             or not _BENCH_WORDS.search(v) or re.match(r"(?i)(the|is|and|or|to|of|in|over|for|with|by)\b", v) \
             or re.search(r"(?i)\bfees?\b|\bVAT\b|\bwe\b|board|gender|fluctuation|exchange rate", v):
         return None
-    return v[:160]
+    return v
+
+
+_UNFINISHED = re.compile(r"(?:[,;(&+–-]|\b(?:and|or|of|in|the|to|plus|from|with|excluding|including|previously)|%"
+                         r"|\b[A-Z&]+/[A-Z&]+|\b(?:Developed|Country|All|Global|World|Capped|Emerging|Aggregate))\s*$")
+_NEXT_STOP = re.compile(r"(?:returns?\b|class\b|performance|what\b|how\b|low risk|regulation|the fund\b|fund\b|"
+                        r"annual|highest|since|benchmark|source|minimum|risk|\d+\s*(?:yr|year))", re.I)
+_PROSE = re.compile(r"\b(?:may|portfolios?|schemes?|manager|invest\w*|participation|derivatives?|securities|swaps|"
+                    r"aims?|objective|policy|will|should|returns? over)\b", re.I)
+_TAIL_STOP = re.compile(r"\s+(?:Annual management fee|management fee|PERFORMANCE|Low risk|Medium|High risk|"
+                        r"\(?Net of Fees\)?|\d{6,})", re.I)
+
+
+def _continued(value: str, text: str, end: int, max_lines: int = 3) -> str:
+    """Join the following lines while the benchmark is clearly unfinished (long composites wrap)."""
+    value = _TAIL_STOP.split(value)[0].rstrip()
+    if re.search(r"\.\s*$", value):
+        return value
+    for line in text[end:].split("\n")[1:max_lines + 1]:
+        line = line.strip()
+        starts_inside = bool(re.match(r"\(|Net\b|TR\b", line)) or value.count("(") > value.count(")")
+        if not line or not (_UNFINISHED.search(value) or starts_inside) or (_NEXT_STOP.match(line) and not starts_inside) \
+                or _PROSE.search(line):
+            break
+        line = _TAIL_STOP.split(line)[0].rstrip()
+        value = f"{value} {line}"
+        if re.search(r"\.\s*$", value):
+            break
+    return value
 
 
 # --- plain text --------------------------------------------------------------------------
@@ -90,12 +118,12 @@ def _from_text(text: str) -> dict[str, str | None]:
     m = re.search(rf"\b(?:{INCEPTION_LABEL})\s*(?:\([^)]{{0,20}}\))?\s*[:\-–]?\s*({DATE})", text, re.I)
     if m:
         out["Inception Date"] = _two_digit_year(_norm(m.group(1)))
-    for p in (r"(?:the\s+)?fund[’'`]?s?\s+benchmark\s+(?:index\s+)?is\s+(?:the\s+)?([^\n]{3,200}?)(?:\.\s|\.$|\n)",
-              rf"{BENCHMARK_LABEL}\s*[¹1*]?\s*:\s*([^\n]{{3,200}})",
-              rf"(?:^|\n){BENCHMARK_LABEL}\s+(?![\d\-.(])([A-Za-z][^\n]{{2,200}})",
-              rf"\b{BENCHMARK_LABEL}\s+(?=[A-Z])([A-Z][^\n]{{2,200}})"):
+    for p in (r"(?:the\s+)?fund[’'`]?s?\s+benchmark\s+(?:index\s+)?is\s+(?:the\s+)?([^\n]{3,}?)(?:\.\s|\.$|\n)",
+              rf"{BENCHMARK_LABEL}\s*[¹1*]?\s*:\s*([^\n]{{3,}})",
+              rf"(?:^|\n){BENCHMARK_LABEL}\s+(?![\d\-.(])([A-Za-z][^\n]{{2,}})",
+              rf"\b{BENCHMARK_LABEL}\s+(?=[A-Z])([A-Z][^\n]{{2,}})"):
         for m in re.finditer(p, text, re.I):
-            v = _benchmark_ok(m.group(1), lowercase_ok=p.startswith("(?:the"))
+            v = _benchmark_ok(_continued(m.group(1), text, m.end(1)), lowercase_ok=p.startswith("(?:the"))
             if v:
                 out["Benchmark"] = v
                 break
