@@ -394,7 +394,6 @@ funds:
   - https://foord.co.za/sites/default/files/{next_yyyy}-{next_mm}/Foord%20International%20Fund%20Class%20R%20at%20{yyyy}-{mm}-{dd}.pdf
 - name: Marriott Core Income
   url: https://www.marriott.co.za/downloads/factsheets/Marriott_Core_Income_Fund_Fact_Sheet.pdf
-  note: Marriott publishes MDDs quarterly; latest on its website is 30 June 2026.
   ignore_robots: true
 - name: Marriott Dividend Growth Fund
   url: https://www.marriott.co.za/downloads/factsheets/Marriott_Dividend_Growth_Fund_Fact_Sheet.pdf
