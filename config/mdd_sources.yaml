@@ -478,8 +478,6 @@ funds:
   isin: LU0557290698
   note: Schroder ISF Global Sustainable Growth A Acc USD - monthly fund report from Schroders' document store.
   url: https://api.schroders.com/document-store/SISF-Global-Sustainable-Growth-A-Acc-FMR-LUEN.pdf
-- name: Baillie Gifford Worldwide Emerging Markets Leading Companies Fund
-  note: Offshore (Ireland) fund - factsheet not found; download from bailliegifford.com.
 - name: iShares World Equity Index Fund
   isin: LU0836515477
   note: iShares World Equity Index Fund (LU) Class F2 USD - monthly BlackRock fact sheet (the SA MDD is only quarterly).
