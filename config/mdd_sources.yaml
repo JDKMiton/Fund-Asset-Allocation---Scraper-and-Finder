@@ -59,12 +59,15 @@ funds:
   urls:
   - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20Equity%20Fund/Files/AGEF%20-%20{yyyy}-{mm}.pdf
 - name: Allan Gray Money Market
+  isin: ZAE000030946
   urls:
   - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20Money%20Market%20Fund/Files/AGMF%20-%20{yyyy}-{mm}.pdf
 - name: Allan Gray Bond
+  isin: ZAE000058079
   urls:
   - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20Bond%20Fund/Files/AGBD%20-%20{yyyy}-{mm}.pdf
 - name: Allan Gray Optimal Fund
+  isin: ZAE000177374
   urls:
   - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20Optimal%20Fund/Files/AGOF%20-%20{yyyy}-{mm}.pdf
 - name: Allan Gray Tax-Free Balanced Fund
