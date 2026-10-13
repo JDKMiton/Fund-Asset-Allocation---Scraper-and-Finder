@@ -497,5 +497,3 @@ funds:
   note: Not in the Fundrock (ex-BCI) fund list; may have moved management company or been renamed.
 - name: Glacier Money Market
   note: glacier.co.za not reachable; please confirm the exact fund name (e.g. a Sanlam money market fund on the Glacier platform).
-- name: MitonOptimal International Managed Flexible Fund
-  note: MitonOptimal fund - not scraped (assumed to be sourced in-house like the FR funds).
