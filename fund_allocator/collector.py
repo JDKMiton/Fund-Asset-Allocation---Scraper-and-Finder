@@ -15,6 +15,7 @@ from openpyxl.styles import PatternFill
 
 from .config import FundSource
 from .extractor import pdf_text
+from .facts import mdd_facts
 from .report import PCT, _autosize, _header
 from .scraper import Scraper, slugify
 
@@ -40,6 +41,7 @@ class Collected:
     source: str = ""
     note: str = ""
     isin: str | None = None
+    facts: dict | None = None  # Fund AUM, Inception Date, Benchmark read from the MDD
 
 
 def load_fund_list(path: str | Path, sheet: str | None = None) -> list[Fund]:
@@ -202,7 +204,7 @@ def collect(funds: list[Fund], sources: dict[str, FundSource], scraper: Scraper,
         if skip_saved and saved and all(p.exists() for p in saved):
             for month, path in zip(months, saved):
                 results.append(Collected(fund.name, month, path, "already saved - not searched again",
-                                         src.note or "", src.isin or _isin_of(path)))
+                                         src.note or "", src.isin or _isin_of(path), _facts_of(path)))
             log.info("%s: MDDs for %s already saved, not searched again", fund.name, ", ".join(months))
             continue
         got: list[Collected] = []
@@ -232,7 +234,8 @@ def collect(funds: list[Fund], sources: dict[str, FundSource], scraper: Scraper,
                 dest = out_dir / month / f"{_safe_name(fund.name)}.pdf"
                 dest.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copyfile(pdf, dest)
-                got.append(Collected(fund.name, month, dest, where, src.note or "", src.isin or (isins[0] if isins else None)))
+                got.append(Collected(fund.name, month, dest, where, src.note or "",
+                                     src.isin or (isins[0] if isins else None), _facts_of(dest, text)))
                 log.info("%s -> %s", fund.name, dest)
             except Exception as exc:  # one bad fund or URL shouldn't stop the run
                 errors.append(str(exc))
@@ -250,6 +253,13 @@ def collect(funds: list[Fund], sources: dict[str, FundSource], scraper: Scraper,
         write_tracker(out_dir / month / f"!MDD Tracker {month}.xlsx", month, funds, results)
         (out_dir / month / f"MDD Tracker {month}.xlsx").unlink(missing_ok=True)  # name used before the "!"
     return results
+
+
+def _facts_of(pdf: Path, text: str | None = None) -> dict:
+    try:
+        return mdd_facts(pdf, text)
+    except Exception:  # facts are a nice-to-have; never fail a run over them
+        return {}
 
 
 def _isin_of(pdf: Path) -> str | None:
@@ -272,7 +282,7 @@ def _with_earlier_runs(funds: list[Fund], results: list[Collected], out_dir: Pat
             path = out_dir / month / f"{_safe_name(fund.name)}.pdf"
             if (fund.name, month) not in have and path.exists():
                 extra.append(Collected(fund.name, month, path, "downloaded in an earlier run", "",
-                                       prev.isin if prev else None))
+                                       prev.isin if prev else None, _facts_of(path)))
     if not extra:
         return results
     got = {r.fund for r in results if r.month} | {e.fund for e in extra}
@@ -287,6 +297,9 @@ def recent_months(n: int, today: date | None = None) -> list[str]:
     return [f"{(i) // 12} - {(i) % 12 + 1:02d}" for i in range(idx - n, idx)]
 
 
+FACT_COLUMNS = ["Fund AUM", "Inception Date", "Benchmark"]
+
+
 def write_tracker(path: Path, month: str, funds: list[Fund], results: list[Collected]) -> Path:
     by_fund: dict[str, list[Collected]] = {}
     for r in results:
@@ -294,7 +307,8 @@ def write_tracker(path: Path, month: str, funds: list[Fund], results: list[Colle
     wb = Workbook()
     ws = wb.active
     ws.title = "Tracker"
-    _header(ws, 1, ["Fund", "AUM", "ISIN", "Status", "MDD month", "Other months collected", "File", "Source", "Notes"])
+    _header(ws, 1, ["Fund", "MitonOptimal AUM", "ISIN", *FACT_COLUMNS, "Status", "MDD month",
+                    "Other months collected", "File", "Source", "Notes"])
     collected = 0
     for i, fund in enumerate(sorted(funds, key=lambda f: f.name.casefold()), start=2):  # A-Z
         rs = by_fund.get(fund.name) or [Collected(fund.name, note="no MDD source configured")]
@@ -311,7 +325,9 @@ def write_tracker(path: Path, month: str, funds: list[Fund], results: list[Colle
         note = shown.note
         if not this and dated:
             note = "; ".join(filter(None, [f"latest MDD found is for {dated[-1].month}", note]))
-        row = [fund.name, fund.aum, isin, status, shown.month if this else None, others,
+        facts = next((r.facts for r in [shown, *reversed(dated)] if r.facts), None) or {}
+        row = [fund.name, fund.aum, isin, *(facts.get(c) for c in FACT_COLUMNS),
+               status, shown.month if this else None, others,
                shown.path.name if this and shown.path else None, shown.source or None, note or None]
         for j, v in enumerate(row, start=1):
             ws.cell(row=i, column=j, value=v).fill = fill

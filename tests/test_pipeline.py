@@ -161,6 +161,29 @@ class CollectorTest(unittest.TestCase):
         text = f"Marriott Core Income Fund\n{enc}\nmore text ... September 2026 fee change"
         self.assertEqual(document_month(text, date(2026, 10, 13)), "2026 - 08")
 
+    def test_mdd_facts_from_text(self):
+        from fund_allocator.facts import _from_text
+        f = _from_text("Inception date: 1 October 2004\nFund size R11.2bn\n"
+                       "without taking on undue risk. The Fund's benchmark is the FTSE/JSE All Bond Index.\n")
+        self.assertEqual((f["Fund AUM"], f["Inception Date"], f["Benchmark"]),
+                         ("R11.2bn", "1 October 2004", "FTSE/JSE All Bond Index"))
+        f = _from_text("Fund size: ZAR 19.1bn\nFund inception date: 02.11.87\nBenchmark: CPI + 3% p.a.\n"
+                       "Benchmark 8.11 7.07 7.41\n")
+        self.assertEqual((f["Fund AUM"], f["Inception Date"], f["Benchmark"]), ("ZAR 19.1bn", "02.11.1987", "CPI + 3% p.a."))
+        # fee lines and performance rows are not benchmarks
+        self.assertIsNone(_from_text("Benchmark: 1.00% p.a. excl. VAT\nBenchmark 18.15 16.70 14.33")["Benchmark"])
+
+    def test_tracker_has_mdd_fact_columns(self):
+        from fund_allocator.collector import Collected, Fund, write_tracker
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "t.xlsx"
+            facts = {"Fund AUM": "R1.2bn", "Inception Date": "1 May 2001", "Benchmark": "CPI + 3%"}
+            write_tracker(path, "2026 - 08", [Fund("A", 5.0)], [Collected("A", "2026 - 08", Path("A.pdf"), facts=facts)])
+            ws = load_workbook(path)["Tracker"]
+            self.assertEqual([c.value for c in ws[1]][:7], ["Fund", "MitonOptimal AUM", "ISIN", "Fund AUM",
+                                                           "Inception Date", "Benchmark", "Status"])
+            self.assertEqual([c.value for c in ws[2]][3:7], ["R1.2bn", "1 May 2001", "CPI + 3%", "Collected"])
+
     def test_expand_url_templates(self):
         from fund_allocator.collector import candidate_urls
         from fund_allocator.config import FundSource
@@ -204,7 +227,7 @@ class CollectorTest(unittest.TestCase):
             results = collect(funds, sources, Scraper(Path(tmp) / "dl"), out)
             self.assertTrue((out / "2026 - 09" / "Balanced.pdf").exists())
             ws = load_workbook(out / "2026 - 09" / "!MDD Tracker 2026 - 09.xlsx")["Tracker"]
-            status = {ws.cell(row=i, column=1).value: ws.cell(row=i, column=4).value for i in range(2, 5)}
+            status = {ws.cell(row=i, column=1).value: ws.cell(row=i, column=7).value for i in range(2, 5)}
             self.assertEqual(status, {"Balanced": "Collected", "Feeder": "Collected", "No Source": "Outstanding"})
             self.assertEqual(sum(1 for r in results if r.month), 2)
 
@@ -230,7 +253,8 @@ class CollectorTest(unittest.TestCase):
             self.assertEqual(sorted(r.month for r in results), ["2026 - 08", "2026 - 09"])
             self.assertTrue(all(r.source.startswith("already saved") for r in results))
             ws = load_workbook(out / "2026 - 09" / "!MDD Tracker 2026 - 09.xlsx")["Tracker"]
-            self.assertEqual([c.value for c in ws[2]][2:4], ["ZAE000000001", "Collected"])
+            row = [c.value for c in ws[2]]
+            self.assertEqual((row[2], row[6]), ("ZAE000000001", "Collected"))
 
     def test_collect_tracks_sources_and_takes_aum_from_workbook(self):
         from openpyxl import Workbook
