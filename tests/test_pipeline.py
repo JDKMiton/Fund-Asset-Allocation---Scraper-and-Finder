@@ -170,6 +170,10 @@ class CollectorTest(unittest.TestCase):
                 r'{\"fileType\":\"Commentary\",\"path\":\"https://x/c.pdf\"}]}')
         self.assertEqual(mandg_fact_sheets(html)["m&g balanced fund"], "https://x/mandg-balanced-fund.pdf")
 
+    def test_expand_url_keeps_regex_braces(self):
+        from fund_allocator.collector import expand_url
+        self.assertEqual(expand_url(r"/{Month}-{yyyy}-\d{4}", "2026 - 08"), r"/August-2026-\d{4}")
+
     def test_expand_url_last_weekday(self):
         from fund_allocator.collector import expand_url
         # 31 October 2026 is a Saturday, 31 August 2026 a Monday

@@ -162,16 +162,22 @@ def expand_url(template: str, month: str) -> str:
     ny, nm = (int(y) + 1, 1) if m == "12" else (int(y), int(m) + 1)
     last_day = calendar.monthrange(int(y), int(m))[1]
     last_weekday = last_day - max(0, calendar.weekday(int(y), int(m), last_day) - 4)
-    return template.format(yyyy=y, mm=m, yyyymm=f"{y}{m}", month=name, Month=name.title(), mon=name[:3],
-                           Mon=name[:3].title(), MON=name[:3].upper(), dd=f"{last_day:02d}",
-                           bdd=f"{last_weekday:02d}", next_yyyy=ny, next_mm=f"{nm:02d}")
+    values = dict(yyyy=y, mm=m, yyyymm=f"{y}{m}", month=name, Month=name.title(), mon=name[:3],
+                  Mon=name[:3].title(), MON=name[:3].upper(), dd=f"{last_day:02d}",
+                  bdd=f"{last_weekday:02d}", next_yyyy=str(ny), next_mm=f"{nm:02d}")
+    # only known placeholders are replaced, so regex braces such as \d{4} in a link_match survive
+    return re.sub(r"\{(\w+)\}", lambda x: values.get(x.group(1), x.group(0)), template)
+
+
+def _has_placeholder(template: str) -> bool:
+    return expand_url(template, "2000 - 01") != template
 
 
 def candidate_urls(src: FundSource, months: list[str]) -> list[str]:
     urls = [u for u in [src.url, *(src.urls or [])] if u]
     out = []
     for u in urls:
-        out.extend(dict.fromkeys(expand_url(u, m) for m in months) if "{" in u else [u])
+        out.extend(dict.fromkeys(expand_url(u, m) for m in months) if _has_placeholder(u) else [u])
     return list(dict.fromkeys(out))
 
 
@@ -195,8 +201,11 @@ def collect(funds: list[Fund], sources: dict[str, FundSource], scraper: Scraper,
         errors = []
         fetches = [replace(src, url=u, urls=None, page=None) for u in candidate_urls(src, months)]
         if src.page:
-            pages = dict.fromkeys(expand_url(src.page, m) for m in months) if "{" in src.page else [src.page]
-            fetches += [replace(src, url=None, urls=None, page=p) for p in pages]
+            pages = (dict.fromkeys(expand_url(src.page, m) for m in months)
+                     if _has_placeholder(src.page) else [src.page])
+            matches = (dict.fromkeys(expand_url(src.link_match, m) for m in months)
+                       if _has_placeholder(src.link_match) else [src.link_match])
+            fetches += [replace(src, url=None, urls=None, page=p, link_match=lm) for p in pages for lm in matches]
         fetches = fetches or [src]
         for one in fetches:
             try:
