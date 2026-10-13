@@ -501,7 +501,11 @@ funds:
   page: https://merchantwest.co.za/investments/our-funds/
   link_match: SI_Merchant-West-SCI-Worldwide-Flexible-Fund
 - name: Vulcan Value Equity Fund
-  note: vulcanim.co.za not reachable; MDD not found on platforms.
+  isin: IE00B8FGBZ03
+  note: Irish UCITS fund (Vulcan Value Partners) - fact sheet from Prescient's fund page; ISIN is the USD Acc class.
+  page: https://www.prescient.co.za/funds/other-funds/
+  link_match: vulcan-value-equity-ucits-fund-fact-sheet
+  render: true
 - name: CoreShares S&P SA Top 50 Tracker Fund
   note: coreshares.co.za not reachable; newest copy found elsewhere is from 2023.
 - name: Curate Momentum Enhanced Yield Fund
