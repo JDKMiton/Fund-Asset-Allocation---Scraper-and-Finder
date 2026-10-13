@@ -147,6 +147,14 @@ class CollectorTest(unittest.TestCase):
         # file name is used when the text has no recent date
         self.assertEqual(document_month("Launched 1 May 2001", today, "AGBF - 2026-07.pdf"), "2026 - 07")
 
+    def test_document_month_decodes_cid_font_text(self):
+        from datetime import date
+        from fund_allocator.collector import document_month
+        # "31 August 2026" encoded as glyph ids offset by 30, as in Marriott's MDDs
+        enc = "".join(f"(cid:{ord(c) - 30})" for c in "31 August 2026")
+        text = f"Marriott Core Income Fund\n{enc}\nmore text ... September 2026 fee change"
+        self.assertEqual(document_month(text, date(2026, 10, 13)), "2026 - 08")
+
     def test_expand_url_templates(self):
         from fund_allocator.collector import candidate_urls
         from fund_allocator.config import FundSource

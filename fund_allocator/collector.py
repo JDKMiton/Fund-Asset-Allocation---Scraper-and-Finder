@@ -83,6 +83,24 @@ def _dates(text: str) -> list[tuple[int, int]]:
     return out
 
 
+_CID = re.compile(r"\(cid:(\d+)\)")
+
+
+def decode_cid(text: str) -> str:
+    """Some MDDs use fonts whose text comes out as "(cid:21)(cid:19)..." - glyph numbers that are a
+    fixed offset away from the real characters. Find the offset that turns them into month names
+    and decode, so dates in those headers can be read."""
+    if "(cid:" not in text:
+        return text
+    best, best_hits = None, 0
+    for offset in range(20, 40):
+        decoded = _CID.sub(lambda m: chr(int(m.group(1)) + offset) if 0 < int(m.group(1)) + offset < 0x10FFFF else "", text)
+        hits = len(re.findall(rf"\b{_MON}\s*20\d\d", decoded, re.IGNORECASE))
+        if hits > best_hits:
+            best, best_hits = decoded, hits
+    return best or text
+
+
 def document_month(text: str, today: date | None = None, filename: str = "") -> str | None:
     """Month an MDD reports on, as "YYYY - MM".
 
@@ -93,6 +111,7 @@ def document_month(text: str, today: date | None = None, filename: str = "") -> 
     Dates in the current or a future month are ignored: an MDD reports on a past month-end.
     """
     today = today or date.today()
+    text = decode_cid(text)
 
     def ok(y: int, m: int) -> bool:
         return 1 <= m <= 12 and 2000 <= y and (y, m) < (today.year, today.month)

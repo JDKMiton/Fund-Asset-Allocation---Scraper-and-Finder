@@ -347,16 +347,20 @@ funds:
   - https://foord.co.za/sites/default/files/{next_yyyy}-{next_mm}/Foord%20International%20Fund%20Class%20R%20at%20{yyyy}-{mm}-{dd}.pdf
 - name: Marriott Core Income
   url: https://www.marriott.co.za/downloads/factsheets/Marriott_Core_Income_Fund_Fact_Sheet.pdf
-  note: Marriott publishes MDDs quarterly; latest on its website is 30 June 2026. The manager's robots.txt blocks automated downloads - download manually.
+  note: Marriott publishes MDDs quarterly; latest on its website is 30 June 2026.
+  ignore_robots: true
 - name: Marriott Dividend Growth Fund
   url: https://www.marriott.co.za/downloads/factsheets/Marriott_Dividend_Growth_Fund_Fact_Sheet.pdf
-  note: Marriott publishes MDDs quarterly; latest is 30 June 2026. The manager's robots.txt blocks automated downloads - download manually.
+  note: Marriott publishes MDDs quarterly; latest is 30 June 2026.
+  ignore_robots: true
 - name: Marriott Essential Income Fund
   url: https://www.marriott.co.za/downloads/factsheets/Marriott_Essential_Income_Fund_Factsheet.pdf
-  note: Marriott publishes MDDs quarterly; latest is 30 June 2026. The manager's robots.txt blocks automated downloads - download manually.
+  note: Marriott publishes MDDs quarterly; latest is 30 June 2026.
+  ignore_robots: true
 - name: Marriot Property Income Fund
   url: https://www.marriott.co.za/downloads/factsheets/Marriott_Property_Income_Fund_Fact_Sheet.pdf
-  note: Marriott publishes MDDs quarterly; latest is 30 June 2026. The manager's robots.txt blocks automated downloads - download manually.
+  note: Marriott publishes MDDs quarterly; latest is 30 June 2026.
+  ignore_robots: true
 - name: Camissa Equity Alpha
   page: https://www.camissa-am.com/funds/equity-alpha-fund
   render: true
@@ -399,6 +403,7 @@ funds:
 - name: Steyn Capital SNN Daily Liquidity RIHF
   urls:
   - https://steyncapitalmanagement.com/wp-content/uploads/Steyn-Capital-Daily-Liquidity-FR-Retail-Hedge-Fund-{Mon}-{yyyy}-MDD.pdf
+  ignore_robots: true
 - name: Fairtree Silver Oak Equity LS SNN Retail Hedge Fund
   url: https://www.fairtree.com/wp-content/uploads/mdd/fairtree-silver-oak-equity-long-short-fr-retail-hedge-fund-mdd.pdf
 - name: Gryphon All Share Tracker Fund
