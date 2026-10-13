@@ -365,6 +365,7 @@ funds:
   link_match: aylett-equity-prescient-fund-[a-z]+-\d{4}-mdd
   render: true
 - name: 36One Prescient Retail Hedge Fund / SNN Retail Hedge Fund
+  isin: ZAE000257648
   page: https://www.prescient.co.za/funds/other-funds/
   link_match: 36one-prescient-retail-hedge-fund-1-[a-z]+-\d{4}_361rf1
   render: true
@@ -459,16 +460,20 @@ funds:
 - name: Fairtree Silver Oak Equity LS SNN Retail Hedge Fund
   url: https://www.fairtree.com/wp-content/uploads/mdd/fairtree-silver-oak-equity-long-short-fr-retail-hedge-fund-mdd.pdf
 - name: Gryphon All Share Tracker Fund
+  isin: ZAE000020947
   url: https://gryphon.com/documents/gryphon-all-share-tracker-fund.pdf
 - name: Sygnia 4th Industrial Revolution Global Equity Fund
+  isin: ZAE000227856
   page: https://www.sygnia.co.za/blog/fund/sygnia-4th-industrial-revolution-global-equity-fund-class-a/
   render: true
   link_match: SIRGA.*FFS
 - name: PPS Managed Fund
   url: https://www.pps.co.za/sites/default/files/invest-documents/fund-fact-sheets/PPS%20Monthly%20FactSheets/PPS%20Managed%20Fund_%20A%20&%20A2.pdf
 - name: PPS Equity Fund
+  isin: ZAE000140638
   url: https://www.pps.co.za/sites/default/files/invest-documents/fund-fact-sheets/PPS%20Monthly%20FactSheets/PPS%20Equity%20Fund_%20A-A2.pdf
 - name: PPS Flexible Income Fund
+  isin: ZAE000173175
   url: https://www.pps.co.za/sites/default/files/invest-documents/fund-fact-sheets/PPS%20Monthly%20FactSheets/PPS%20Flexible%20Income%20Fund_%20A%20-%20A2.pdf
 - name: Denker Global Financial Fund
   isin: ZAE000154688
@@ -483,6 +488,7 @@ funds:
   isin: ZAE000171153
   url: https://ppsisecure.co.za/SecureDocuments/FundFactSheets/Old%20Mutual%20Global%20Equity%20Fund%20-%20B1.pdf
 - name: SIM Inflation Plus Fund
+  isin: ZAE000021283
   url: https://ppsisecure.co.za/SecureDocuments/FundFactSheets/SIM%20Inflation%20Plus%20Fund%20-%20B4.pdf
   note: Renamed SCI Ninety One Cautious Managed Fund from 9 October 2026 (absorbing SIM Inflation Beater and SIM Managed Cautious FoF); the PPS platform copy is updated late.
 - name: Momentum Capped SWIX Index Fund
@@ -511,10 +517,13 @@ funds:
   note: Renamed Amplify SCI Active Equity Retail Hedge Fund; AG Capital replaced Obsidian as manager.
   sanlam_fund: Amplify SCI Active Equity Retail Hedge Fund A1
 - name: M&G Balanced Fund
+  isin: ZAE000020863
   mandg_fund: M&G Balanced Fund
 - name: M&G Inflation Plus
+  isin: ZAE000041026
   mandg_fund: M&G Inflation Plus Fund
 - name: M&G Global Balanced Fund
+  isin: IE00BYQDDD48
   mandg_fund: M&G Global Balanced Fund
 - name: M&G Dividend Maximiser Fund
   isin: ZAE000090932
@@ -572,10 +581,12 @@ funds:
   link_match: vulcan-value-equity-ucits-fund-fact-sheet
   render: true
 - name: CoreShares S&P SA Top 50 Tracker Fund
+  isin: ZAE000204327
   note: Renamed 10X S&P SA Top50 Tracker Fund (10X bought CoreShares); 10X publishes MDDs about 6 weeks after month-end.
   page: https://assetmanagement.10x.co.za/fund/10x-sp-south-africa-top50-index-etf/
   link_match: Top50-Tracker-Fund-.*MDD-Class-B
 - name: Curate Momentum Enhanced Yield Fund
+  isin: ZAE000160479
   note: A class MDD hosted by Momentum (linked from curateinvestments.com).
   url: https://wealth.momentum.co.za/investments/factsheets/curate-momentum-enhanced-yield-fund-(a)-zaf.pdf
 - name: Sasfin BCI Flexible Income
