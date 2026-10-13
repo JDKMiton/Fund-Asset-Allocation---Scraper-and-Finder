@@ -475,7 +475,9 @@ funds:
   note: MDD link from Old Mutual's local equity fund table; fund is balloting a rename to Old Mutual RAFI SA Index Fund.
   url: https://www.oldmutualinvest.com/om-docs/blt534f03c64ce9c4b6/OldMutualRAFI40TrackerFund.pdf
 - name: Schroder ISF Global Sustainable Growth Fund
-  note: Offshore (Luxembourg) fund - factsheet not found on a reachable SA platform; download from schroders.com.
+  isin: LU0557290698
+  note: Schroder ISF Global Sustainable Growth A Acc USD - monthly fund report from Schroders' document store.
+  url: https://api.schroders.com/document-store/SISF-Global-Sustainable-Growth-A-Acc-FMR-LUEN.pdf
 - name: Baillie Gifford Worldwide Emerging Markets Leading Companies Fund
   note: Offshore (Ireland) fund - factsheet not found; download from bailliegifford.com.
 - name: iShares World Equity Index Fund

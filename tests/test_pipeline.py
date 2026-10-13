@@ -147,6 +147,12 @@ class CollectorTest(unittest.TestCase):
         # file name is used when the text has no recent date
         self.assertEqual(document_month("Launched 1 May 2001", today, "AGBF - 2026-07.pdf"), "2026 - 07")
 
+    def test_document_month_reads_dotted_dates(self):
+        from datetime import date
+        from fund_allocator.collector import document_month
+        text = "Launch date 23.11.2010\nBenchmark changed 01.08.2022\nAs at 31.08.2026 benchmark is MSCI"
+        self.assertEqual(document_month(text, date(2026, 10, 13)), "2026 - 08")
+
     def test_document_month_decodes_cid_font_text(self):
         from datetime import date
         from fund_allocator.collector import document_month

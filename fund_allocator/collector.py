@@ -64,14 +64,14 @@ _MON = r"(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?"
 _AS_AT = [  # explicit reporting-date phrases, most reliable first
     rf"as\s*(?:at|of)\s*(?:end\s*)?(?:\d{{1,2}}\s*)?{_MON}\s*(\d{{4}})",
     rf"as\s*(?:at|of)\s*(\d{{4}})[/-](\d{{1,2}})[/-]\d{{1,2}}",
-    rf"as\s*(?:at|of)\s*\d{{1,2}}[/-](\d{{1,2}})[/-](\d{{4}})",
+    rf"as\s*(?:at|of)\s*\d{{1,2}}[/.-](\d{{1,2}})[/.-](\d{{4}})",
 ]
 
 
 def _dates(text: str) -> list[tuple[int, int]]:
     """All (year, month) pairs in the order they appear in ``text``."""
     pattern = re.compile(rf"\b(?:\d{{1,2}}\s*)?{_MON}\s*(\d{{4}})\b|\b(\d{{4}})[/-](\d{{1,2}})[/-]\d{{1,2}}\b"
-                         rf"|\b\d{{1,2}}[/-](\d{{1,2}})[/-](\d{{4}})\b", re.IGNORECASE)
+                         rf"|\b\d{{1,2}}[/.-](\d{{1,2}})[/.-](\d{{4}})\b", re.IGNORECASE)
     out = []
     for m in pattern.finditer(text):
         if m.group(1):
