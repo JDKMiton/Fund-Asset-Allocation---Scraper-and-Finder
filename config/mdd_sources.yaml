@@ -447,10 +447,15 @@ funds:
 - name: Baillie Gifford Managed Fund
   url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/GB0006010168
 - name: Amplify SCI Diversified Income RIHF (Terebinth)
-  note: Sanlam's MDD link for this fund returns the Amplify SCI Active Equity RHF document instead; MDD needs to be requested from Amplify/Sanlam.
   isin: ZAE000284147
+  note: MDD linked from Amplify's fund page (Sanlam's list links the wrong fund).
+  page: https://www.amplify.co.za/funds/amplify-sci-diversified-income-retail-hedge-fund/
+  link_match: retrieveDocument
+  referer: https://www.amplify.co.za/
 - name: Amplify SCI Multi Strategy RIHF (Obsidian)
-  note: Not listed in Sanlam Collective Investments' fund fact sheet list; may have been closed or renamed.
+  isin: ZAE000282844
+  note: Renamed Amplify SCI Active Equity Retail Hedge Fund; AG Capital replaced Obsidian as manager.
+  sanlam_fund: Amplify SCI Active Equity Retail Hedge Fund A1
 - name: Discovery Life Property Escalator fund
   note: Only a March 2025 document found on Discovery's site.
 - name: M&G Balanced Fund
