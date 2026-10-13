@@ -479,7 +479,11 @@ funds:
 - name: Baillie Gifford Worldwide Emerging Markets Leading Companies Fund
   note: Offshore (Ireland) fund - factsheet not found; download from bailliegifford.com.
 - name: iShares World Equity Index Fund
-  note: Offshore fund - share class/ISIN needed to locate factsheet on blackrock.com.
+  isin: LU0836515477
+  note: iShares World Equity Index Fund (LU) Class F2 USD - monthly BlackRock fact sheet (the SA MDD is only quarterly).
+  urls:
+  - https://www.ishares.com/gls-download/literature/fact-sheet/ishares-world-equity-index-fund-lu-class-f2-usd-factsheet-lu0836515477-gb-en-individual.pdf
+  - https://www.blackrock.com/gls-download/literature/fact-sheet/ishares-world-equity-index-fund-lu-class-f2-usd-factsheet-lu0836515477-za-en-individual.pdf
 - name: iShares Emerging Markets Equity Index Fund
   note: Offshore fund - share class/ISIN needed to locate factsheet on blackrock.com.
 - name: Ranmore Global Equity Fund
