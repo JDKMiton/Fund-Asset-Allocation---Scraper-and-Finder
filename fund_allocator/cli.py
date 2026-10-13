@@ -160,6 +160,7 @@ def main(argv: list[str] | None = None) -> int:
 
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.DEBUG if args.verbose else logging.INFO, format="%(levelname)s %(message)s")
+    logging.getLogger("pdfminer").setLevel(logging.ERROR)  # font warnings from some MDDs are harmless
     return args.func(args)
 
 

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import calendar
 import logging
 import re
 import shutil
@@ -134,11 +135,15 @@ MONTH_NAMES = ["january", "february", "march", "april", "may", "june", "july", "
 
 
 def expand_url(template: str, month: str) -> str:
-    """Fill {yyyy}, {mm}, {yyyymm}, {month}/{Month} ("august"), {mon}/{Mon}/{MON} ("aug") for "YYYY - MM"."""
+    """Fill {yyyy}, {mm}, {yyyymm}, {month}/{Month} ("august"), {mon}/{Mon}/{MON} ("aug"), {dd} (last day
+    of the month) and {next_yyyy}/{next_mm} (the following month) for a "YYYY - MM" month."""
     y, m = month.split(" - ")
     name = MONTH_NAMES[int(m) - 1]
+    ny, nm = (int(y) + 1, 1) if m == "12" else (int(y), int(m) + 1)
+    last_day = calendar.monthrange(int(y), int(m))[1]
     return template.format(yyyy=y, mm=m, yyyymm=f"{y}{m}", month=name, Month=name.title(), mon=name[:3],
-                           Mon=name[:3].title(), MON=name[:3].upper())
+                           Mon=name[:3].title(), MON=name[:3].upper(), dd=f"{last_day:02d}",
+                           next_yyyy=ny, next_mm=f"{nm:02d}")
 
 
 def candidate_urls(src: FundSource, months: list[str]) -> list[str]:
@@ -162,7 +167,8 @@ def collect(funds: list[Fund], sources: dict[str, FundSource], scraper: Scraper,
     for fund in funds:
         src = sources.get(fund.name)
         if src is None or not any([src.url, src.urls, src.page, src.file, src.sanlam_fund]):
-            results.append(Collected(fund.name, note="no MDD source configured"))
+            note = (src.note if src and src.note else None) or "no MDD source configured"
+            results.append(Collected(fund.name, note=note, isin=src.isin if src else None))
             continue
         got: list[Collected] = []
         errors = []

@@ -49,6 +49,12 @@ class Scraper:
 
     def fetch(self, source: FundSource) -> Path:
         """Return a local path to the PDF for ``source``, downloading it if needed."""
+        if source.ignore_robots and self.respect_robots:
+            self.respect_robots = False
+            try:
+                return self.fetch(source)
+            finally:
+                self.respect_robots = True
         if source.file:
             path = Path(source.file)
             if not path.exists():

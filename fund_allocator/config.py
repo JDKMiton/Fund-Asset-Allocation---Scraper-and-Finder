@@ -54,6 +54,7 @@ class FundSource:
     note: str | None = None         # shown in the tracker (renamed fund, quarterly MDD, ...)
     browser: bool = False           # always download through the headless browser (bot-protected sites)
     sanlam_fund: str | None = None  # fund name in Sanlam Collective Investments' fact sheet API
+    ignore_robots: bool = False     # download even though the site's robots.txt asks bots not to
 
 
 def normalise_label(text: str) -> str:
