@@ -494,6 +494,7 @@ funds:
 - name: Curate Momentum Enhanced Yield Fund
   note: MDD not found on Momentum or platform sites.
 - name: Sasfin BCI Flexible Income
-  note: Not in the Fundrock (ex-BCI) fund list; may have moved management company or been renamed.
+  note: Renamed Otto1890 FR Flexible Income Fund (Sasfin Wealth became Otto1890).
+  url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Otto1890%20Asset%20Management/Otto1890%20FR%20Flexible%20Income%20Fund%20(A)%20SMFIA.pdf
 - name: Glacier Money Market
   note: glacier.co.za not reachable; please confirm the exact fund name (e.g. a Sanlam money market fund on the Glacier platform).
