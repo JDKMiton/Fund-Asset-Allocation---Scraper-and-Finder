@@ -474,7 +474,8 @@ funds:
   - https://www.pps.co.za/sites/default/files/invest-documents/fund-fact-sheets/PPS%20Monthly%20FactSheets/PPS%20Balanced%20Index%20Tracker%20Fund_%20A%20&%20A2.pdf
   - https://wealth.momentum.co.za/investments/factsheets/pps-balanced-passive-fund-(a2).pdf
 - name: Old Mutual RAFI 40 Index Fund
-  note: Old Mutual's published MDD link (oldmutualinvest.com/om-docs/blt787134780f7b89c5/OldMutualRAFI40TrackerFund.pdf) now returns a different fund's document; latest confirmed edition is February 2026.
+  note: MDD link from Old Mutual's local equity fund table; fund is balloting a rename to Old Mutual RAFI SA Index Fund.
+  url: https://www.oldmutualinvest.com/om-docs/blt534f03c64ce9c4b6/OldMutualRAFI40TrackerFund.pdf
 - name: Schroder ISF Global Sustainable Growth Fund
   note: Offshore (Luxembourg) fund - factsheet not found on a reachable SA platform; download from schroders.com.
 - name: Baillie Gifford Worldwide Emerging Markets Leading Companies Fund
