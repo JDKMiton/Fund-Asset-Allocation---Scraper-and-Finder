@@ -71,6 +71,7 @@ funds:
   urls:
   - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20Optimal%20Fund/Files/AGOF%20-%20{yyyy}-{mm}.pdf
 - name: Allan Gray Tax-Free Balanced Fund
+  isin: ZAE000214433
   urls:
   - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20Unit%20Trust%20Management%20Limited%20-%20Tax%20Free%20funds/Files/AGTF00%20-%20{yyyy}-{mm}.pdf
 - name: Allan Gray Orbis Global Equity Feeder
