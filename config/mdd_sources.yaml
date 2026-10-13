@@ -507,7 +507,9 @@ funds:
   link_match: vulcan-value-equity-ucits-fund-fact-sheet
   render: true
 - name: CoreShares S&P SA Top 50 Tracker Fund
-  note: coreshares.co.za not reachable; newest copy found elsewhere is from 2023.
+  note: Renamed 10X S&P SA Top50 Tracker Fund (10X bought CoreShares); 10X publishes MDDs about 6 weeks after month-end.
+  page: https://assetmanagement.10x.co.za/fund/10x-sp-south-africa-top50-index-etf/
+  link_match: Top50-Tracker-Fund-.*MDD-Class-B
 - name: Curate Momentum Enhanced Yield Fund
   note: MDD not found on Momentum or platform sites.
 - name: Sasfin BCI Flexible Income
