@@ -219,6 +219,7 @@ funds:
   url: https://satrix.co.za/fund/mdd/SAWEF
   note: Fund now named Satrix MSCI World Index Fund.
 - name: Satrix Smartcore Index Fund
+  isin: ZAE000271151
   url: https://satrix.co.za/fund/mdd/STRTA1
 - name: Satrix Bond Index
   isin: ZAE000181749
