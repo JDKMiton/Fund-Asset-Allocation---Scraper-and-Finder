@@ -215,6 +215,7 @@ funds:
   isin: ZAE000181848
   url: https://satrix.co.za/fund/mdd/SATBI
 - name: Satrix MSCI World Equity Index Feeder Fund
+  isin: ZAE000181871
   url: https://satrix.co.za/fund/mdd/SAWEF
   note: Fund now named Satrix MSCI World Index Fund.
 - name: Satrix Smartcore Index Fund
@@ -227,11 +228,13 @@ funds:
   url: https://satrix.co.za/fund/mdd/STCSA1
   note: Fund now named Satrix Capped All Share Index Fund.
 - name: Satrix ALSI Index Fund
+  isin: ZAE000181723
   url: https://satrix.co.za/fund/mdd/SAAIF
 - name: Satrix Property Fund
   isin: ZAE000181806
   url: https://satrix.co.za/fund/mdd/SAPIF
 - name: Satrix Rafi 40 Index Fund
+  isin: ZAE000181822
   url: https://satrix.co.za/fund/mdd/SARIF
 - name: Amplify Defensive Balanced [Matrix]
   isin: ZAE000186326
