@@ -7,10 +7,13 @@
 #   note:  shown in the tracker (renamed fund, quarterly MDD, not found, ...)
 funds:
 - name: Coronation Balanced Defensive
+  isin: ZAE000170445
   url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/COBA
 - name: Coronation Balanced Plus Fund
+  isin: ZAE000165205
   url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CORB
 - name: Coronation Strategic Income
+  isin: ZAE000170403
   url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CSIF
 - name: Coronation Global Optimum Growth Feeder Fund
   url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CNOG
@@ -19,8 +22,10 @@ funds:
 - name: Coronation Property Equity Fund
   url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CPEF
 - name: Coronation Top 20 Fund
+  isin: ZAE000165213
   url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CNTF
 - name: Coronation Global Managed Feeder Fund
+  isin: ZAE000170411
   url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/COGM
 - name: Coronation Global Emerging Markets Flexible Feeder Fund
   url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CGEM
@@ -37,16 +42,20 @@ funds:
 - name: Coronation Market Plus
   url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CMPF
 - name: Coronation Global Strategic USD Income ZAR Feeder Fund
+  isin: ZAE000181038
   url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CGSUI
 - name: Coronation Resources Fund
   url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CCGF
 - name: Allan Gray Balanced
+  isin: ZAE000177358
   urls:
   - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20Balanced%20Fund/Files/AGBF%20-%20{yyyy}-{mm}.pdf
 - name: Allan Gray Stable Fund
+  isin: ZAE000177366
   urls:
   - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20Stable%20Fund/Files/AGSF%20-%20{yyyy}-{mm}.pdf
 - name: Allan Gray Equity Fund
+  isin: ZAE000177341
   urls:
   - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20Equity%20Fund/Files/AGEF%20-%20{yyyy}-{mm}.pdf
 - name: Allan Gray Money Market
@@ -62,15 +71,19 @@ funds:
   urls:
   - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20Unit%20Trust%20Management%20Limited%20-%20Tax%20Free%20funds/Files/AGTF00%20-%20{yyyy}-{mm}.pdf
 - name: Allan Gray Orbis Global Equity Feeder
+  isin: ZAE000065850
   urls:
   - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20-%20Orbis%20Global%20Equity%20Feeder%20Fund/Files/AGOE%20-%20{yyyy}-{mm}.pdf
 - name: Allan Gray Orbis Global Balanced Feeder Fund
+  isin: ZAE000034708
   urls:
   - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20-%20Orbis%20Global%20Balanced%20Feeder%20Fund/Files/AGGF%20-%20{yyyy}-{mm}.pdf
 - name: Ninety One Opportunity
+  isin: ZAE000171468
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-opportunity-fund-h-zar-factsheet.pdf
   browser: true
 - name: Ninety One Global Franchise Feeder
+  isin: ZAE000171526
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-global-franchise-feeder-fund-h-zar-factsheet.pdf
   browser: true
 - name: Ninety One Managed Fund
@@ -86,9 +99,11 @@ funds:
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-diversified-income-fund-h-zar-factsheet.pdf
   browser: true
 - name: Ninety One Global Strategic Managed Feeder Fund
+  isin: ZAE000171518
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-global-strategic-managed-feeder-fund-h-zar-factsheet.pdf
   browser: true
 - name: Ninety One Global Multi Asset Income Feeder Fund
+  isin: ZAE000037396
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-global-managed-income-feeder-fund-h-zar-factsheet.pdf
   browser: true
 - name: Ninety One Money Market Expense Account
@@ -110,15 +125,19 @@ funds:
   url: https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-ut-global-diversified-income-feeder-fund-h-zar-mdd.pdf
   browser: true
 - name: Nedgroup Investments Core Guarded [Taquanta]
+  isin: ZAE000198511
   urls:
   - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Core%20Guarded%20Fund%20C.pdf
 - name: Nedgroup Investments Flexible Income [ABAX]
+  isin: ZAE000162947
   urls:
   - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Flexible%20Income%20Fund%20A.pdf
 - name: Nedgroup Investments Core Diversified [Taquanta]
+  isin: ZAE000198529
   urls:
   - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Core%20Diversified%20Fund%20B.pdf
 - name: Nedgroup Investments Balanced [Truffle]
+  isin: ZAE000158481
   urls:
   - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Balanced%20Fund%20B.pdf
 - name: Nedgroup Investments Global Equity Fund
@@ -126,9 +145,11 @@ funds:
   - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Global%20Equity%20Feeder%20Fund%20A.pdf
   note: Matched to the SA-domiciled Nedgroup Investments Global Equity Feeder Fund.
 - name: Nedgroup Investments Core Global Feeder Fund
+  isin: ZAE000212403
   urls:
   - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Core%20Global%20Feeder%20Fund%20A.pdf
 - name: Nedgroup Investments Global Cautious Fund
+  isin: ZAE000199998
   urls:
   - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Global%20Cautious%20Feeder%20Fund%20B2.pdf
   note: Matched to the SA-domiciled Nedgroup Investments Global Cautious Feeder Fund.
@@ -142,6 +163,7 @@ funds:
   urls:
   - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20SA%20Equity%20Fund%20B.pdf
 - name: Nedgroup Investments Opportunity [ABAX]
+  isin: ZAE000172920
   urls:
   - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Opportunity%20Fund%20B2.pdf
 - name: Nedgroup Investments Global Flexible Feeder Fund
@@ -167,14 +189,18 @@ funds:
   url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/DADAOF
   note: Fund now named Cogence Discovery Balanced Dynamic Asset Optimiser Fund of Funds (same fund code DADAOF).
 - name: PSG Diversified Income
+  isin: ZAE000181673
   url: https://download.psg.co.za/files/asset-management/fund-fact-sheets/PSG-Diversified-Income-Fund-Class-A.pdf
 - name: PSG Balanced
+  isin: ZAE000181616
   url: https://download.psg.co.za/files/asset-management/fund-fact-sheets/PSG-Balanced-Fund-Class-A.pdf
 - name: PSG Flexible
+  isin: ZAE000181608
   url: https://download.psg.co.za/files/asset-management/fund-fact-sheets/PSG-Flexible-Fund-Class-A.pdf
 - name: PSG Equity
   url: https://download.psg.co.za/files/asset-management/fund-fact-sheets/PSG-Equity-Fund-Class-A.pdf
 - name: PSG Stable Fund
+  isin: ZAE000181640
   url: https://download.psg.co.za/files/asset-management/fund-fact-sheets/PSG-Stable-Fund-Class-A.pdf
 - name: PSG Wealth Moderate Fund of Funds
   url: https://download.psg.co.za/files/wealth/fund-fact-sheets/PSG-Wealth-Moderate-FoFs-Class-A.pdf
@@ -182,6 +208,7 @@ funds:
   url: https://download.psg.co.za/files/wealth/fund-fact-sheets/consolidated-minimum-disclosure-documents.pdf
   note: Pages 36-37 of PSG Wealth's consolidated MDD pack.
 - name: Satrix Balanced Index
+  isin: ZAE000181848
   url: https://satrix.co.za/fund/mdd/SATBI
 - name: Satrix MSCI World Equity Index Feeder Fund
   url: https://satrix.co.za/fund/mdd/SAWEF
@@ -189,13 +216,16 @@ funds:
 - name: Satrix Smartcore Index Fund
   url: https://satrix.co.za/fund/mdd/STRTA1
 - name: Satrix Bond Index
+  isin: ZAE000181749
   url: https://satrix.co.za/fund/mdd/SABIF
 - name: Satrix Capped SWIX All Share Index Fund
+  isin: ZAE000251146
   url: https://satrix.co.za/fund/mdd/STCSA1
   note: Fund now named Satrix Capped All Share Index Fund.
 - name: Satrix ALSI Index Fund
   url: https://satrix.co.za/fund/mdd/SAAIF
 - name: Satrix Property Fund
+  isin: ZAE000181806
   url: https://satrix.co.za/fund/mdd/SAPIF
 - name: Satrix Rafi 40 Index Fund
   url: https://satrix.co.za/fund/mdd/SARIF
@@ -236,7 +266,7 @@ funds:
   isin: ZAE000239505
   sanlam_fund: Obsidian SCI Long Short Retail Hedge Fund A2
 - name: PR Truffle SCI Flexible Fund
-  isin: ZAE000152039
+  isin: ZAE000152054
   sanlam_fund: Truffle SCI Flexible Fund A
 - name: 36ONE BCI Equity
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/36ONE%20Asset%20Management/36ONE%20FR%20Equity%20Fund%20(A)%20MNTR.pdf
@@ -251,6 +281,7 @@ funds:
 - name: Granate BCI Balanced
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Granate%20Asset%20Management/Granate%20FR%20Balanced%20Fund%20(B)%20GSBFB.pdf
 - name: Granate BCI Flexible
+  isin: ZAE000283255
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Granate%20Asset%20Management/Granate%20FR%20Flexible%20Fund%20(B)%20GSFFB.pdf
 - name: Granate BCI Multi Income
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Granate%20Asset%20Management/Granate%20FR%20Multi%20Income%20Fund%20(B)%20RSMIB.pdf
@@ -263,16 +294,21 @@ funds:
 - name: Reitway BCI Global Property Fund
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Reitway%20Global/Reitway%20FR%20Global%20Property%20Feeder%20Fund%20(A)%20MGPI.pdf
 - name: Sesfikile BCI Global Property Fund
+  isin: ZAE000216503
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Sesfikile%20Capital/Sesfikile%20FR%20Global%20Property%20Fund%20(A2)%20SPFA2.pdf
 - name: Sesfikile Property Fund
+  isin: ZAE000160669
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Sesfikile%20Capital/Sesfikile%20FR%20Property%20Fund%20(B1)%20SSPF2.pdf
 - name: Visio BCI Unconstrained Fixed Interest
+  isin: ZAE000215828
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Visio%20Fund%20Management/Visio%20FR%20Unconstrained%20Fixed%20Interest%20Fund%20(B)%20RSVIB.pdf
 - name: Prescient Balanced
+  isin: ZAE000191458
   page: https://www.prescient.co.za/news-and-resources/minimum-disclosure-documents/
   link_match: prescient-balanced-fund-a1-[a-z]+-\d{4}-pimbala1
   render: true
 - name: Prescient Income Provider Fund
+  isin: ZAE000087540
   page: https://www.prescient.co.za/news-and-resources/minimum-disclosure-documents/
   link_match: prescient-income-provider-fund-a2-[a-z]+-\d{4}-pipfa2
   render: true
@@ -281,14 +317,17 @@ funds:
   link_match: prescient-defensive-fund-a1-[a-z]+-\d{4}-pabsa1
   render: true
 - name: Prescient China Balanced Fund
+  isin: ZAE000176939
   page: https://www.prescient.co.za/news-and-resources/minimum-disclosure-documents/
   link_match: prescient-china-balanced-class-d-[a-z]+-\d{4}-pgcbfd
   render: true
 - name: Prescient Global Income Provider Fund
+  isin: ZAE000122263
   page: https://www.prescient.co.za/news-and-resources/minimum-disclosure-documents/
   link_match: prescient-global-income-provider-fund-b-[a-z]+-\d{4}-pgpgifb
   render: true
 - name: Fairtree Equity Prescient Fund
+  isin: ZAE000330007
   page: https://www.prescient.co.za/funds/other-funds/
   link_match: fairtree-equity-prescient-fund-[0-9-]+_-fcbepfa1
   render: true
@@ -366,6 +405,7 @@ funds:
   render: true
   link_match: _\d{4}\.pdf
 - name: Camissa Stable
+  isin: ZAE000177648
   page: https://www.camissa-am.com/funds/stable-fund
   render: true
   link_match: _\d{4}\.pdf
@@ -394,6 +434,7 @@ funds:
   urls:
   - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Orbis%20Optimal%20SA%20Fund%20%28USD%29%20%28Class%20A%29/Files/OSDHWA%20-%20{yyyy}-{mm}.pdf
 - name: Mi-Plan IP Global Macro Fund
+  isin: ZAE000173514
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Miplan/Mi-Plan%20FR%20Global%20Macro%20Fund%20(B5)%20MGMF.pdf
 - name: Multi Asset IP Balanced Defensive
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Multi%20Asset%20Investment%20Management/Multi%20Asset%20FR%20Balanced%20Defensive%20Fund%20(A)%20MAICA.pdf
@@ -422,11 +463,13 @@ funds:
   isin: ZAE000154688
   sanlam_fund: Denker SCI Global Financial Feeder Fund A1
 - name: Stanlib Absolute Plus
+  isin: ZAE000082236
   url: https://ppsisecure.co.za/SecureDocuments/FundFactSheets/STANLIB%20Absolute%20Plus%20Fund%20-%20B1.pdf
   note: STANLIB's own site blocks automated access; the PPS platform copy is usually a month behind.
 - name: STANLIB Income Fund
   url: https://ppsisecure.co.za/SecureDocuments/FundFactSheets/STANLIB%20Income%20Fund%20-%20B2.pdf
 - name: Old Mutual Global Equity [Jupiter Merlin]
+  isin: ZAE000171153
   url: https://ppsisecure.co.za/SecureDocuments/FundFactSheets/Old%20Mutual%20Global%20Equity%20Fund%20-%20B1.pdf
 - name: SIM Inflation Plus Fund
   url: https://ppsisecure.co.za/SecureDocuments/FundFactSheets/SIM%20Inflation%20Plus%20Fund%20-%20B4.pdf
@@ -463,6 +506,7 @@ funds:
 - name: M&G Global Balanced Fund
   mandg_fund: M&G Global Balanced Fund
 - name: M&G Dividend Maximiser Fund
+  isin: ZAE000090932
   mandg_fund: M&G Dividend Maximiser Fund
 - name: M&G Property Fund D
   mandg_fund: M&G Property Fund
@@ -524,5 +568,6 @@ funds:
   note: A class MDD hosted by Momentum (linked from curateinvestments.com).
   url: https://wealth.momentum.co.za/investments/factsheets/curate-momentum-enhanced-yield-fund-(a)-zaf.pdf
 - name: Sasfin BCI Flexible Income
+  isin: ZAE000206397
   note: Renamed Otto1890 FR Flexible Income Fund (Sasfin Wealth became Otto1890).
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Otto1890%20Asset%20Management/Otto1890%20FR%20Flexible%20Income%20Fund%20(A)%20SMFIA.pdf
