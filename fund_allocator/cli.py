@@ -106,7 +106,7 @@ def cmd_collect(args: argparse.Namespace) -> int:
     months = args.month or recent_months(args.recent)
     scraper = Scraper(args.download_dir, delay=args.delay, respect_robots=not args.ignore_robots)
     try:
-        results = collect(funds, sources, scraper, args.out, months=months)
+        results = collect(funds, sources, scraper, args.out, months=months, skip_saved=not args.refetch)
     finally:
         scraper.close()
     got = len({r.fund for r in results if r.month})
@@ -155,6 +155,8 @@ def main(argv: list[str] | None = None) -> int:
     col.add_argument("--download-dir", default="data/downloads")
     col.add_argument("--delay", type=float, default=1.0)
     col.add_argument("--ignore-robots", action="store_true")
+    col.add_argument("--refetch", action="store_true",
+                     help="search for every fund, even if its MDDs for all the months are already saved")
     col.set_defaults(func=cmd_collect)
 
     args = parser.parse_args(argv)

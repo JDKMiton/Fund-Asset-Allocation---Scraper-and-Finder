@@ -111,8 +111,10 @@ your OneDrive-synced `#Webscraper MDDs` folder, so they appear in OneDrive autom
 
 **What each weekly run does**
 - Looks for the MDDs of the last two completed months (e.g. a run in mid-October collects
-  August and September) and saves each one as `#Webscraper MDDs\YYYY - MM\<Fund>.pdf`,
-  replacing last week's copy with the newest version.
+  August and September) and saves each one as `#Webscraper MDDs\YYYY - MM\<Fund>.pdf`.
+  A fund whose MDD is already saved in both month folders is not searched again (its Source
+  column reads "already saved - not searched again"); add `--refetch` to the collect command
+  to search for every fund anyway.
 - Rewrites every month's `MDD Tracker YYYY - MM.xlsx` (ISIN, Collected/Outstanding, notes). MDDs
   saved in earlier weeks stay counted even if a site is down this week.
 - Pulls the latest `config/mdd_sources.yaml` from GitHub first (if git is installed), so source

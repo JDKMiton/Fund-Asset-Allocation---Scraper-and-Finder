@@ -208,6 +208,28 @@ class CollectorTest(unittest.TestCase):
             self.assertEqual(status, {"Balanced": "Collected", "Feeder": "Collected", "No Source": "Outstanding"})
             self.assertEqual(sum(1 for r in results if r.month), 2)
 
+    def test_collect_skips_funds_already_saved_for_all_months(self):
+        from fund_allocator.collector import Fund, collect
+        from fund_allocator.config import FundSource
+        from fund_allocator.scraper import Scraper
+        with tempfile.TemporaryDirectory() as tmp:
+            balanced, _ = make_all(Path(tmp) / "pdfs")
+            out = Path(tmp) / "MDDs"
+            (out / "2026 - 08").mkdir(parents=True)
+            (out / "2026 - 08" / "Balanced.pdf").write_bytes(balanced.read_bytes())
+            src = {"Balanced": FundSource("Balanced", file=str(balanced))}
+            # September is missing, so the fund is searched and September is filed
+            collect([Fund("Balanced")], src, Scraper(Path(tmp) / "dl"), out, months=["2026 - 08", "2026 - 09"])
+            self.assertTrue((out / "2026 - 09" / "Balanced.pdf").exists())
+            # both months saved: the source isn't touched (a missing file would otherwise be an error)
+            src = {"Balanced": FundSource("Balanced", file=str(Path(tmp) / "gone.pdf"), isin="ZAE000000001")}
+            results = collect([Fund("Balanced")], src, Scraper(Path(tmp) / "dl"), out,
+                              months=["2026 - 08", "2026 - 09"])
+            self.assertEqual(sorted(r.month for r in results), ["2026 - 08", "2026 - 09"])
+            self.assertTrue(all(r.source.startswith("already saved") for r in results))
+            ws = load_workbook(out / "2026 - 09" / "MDD Tracker 2026 - 09.xlsx")["Tracker"]
+            self.assertEqual([c.value for c in ws[2]][2:4], ["ZAE000000001", "Collected"])
+
     def test_collect_tracks_sources_and_takes_aum_from_workbook(self):
         from openpyxl import Workbook
         make_all()

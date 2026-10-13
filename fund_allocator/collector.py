@@ -182,11 +182,12 @@ def candidate_urls(src: FundSource, months: list[str]) -> list[str]:
 
 
 def collect(funds: list[Fund], sources: dict[str, FundSource], scraper: Scraper, out_dir: str | Path,
-            months: list[str] | None = None) -> list[Collected]:
+            months: list[str] | None = None, skip_saved: bool = True) -> list[Collected]:
     """Fetch each fund's MDD(s), file them under out_dir/"YYYY - MM"/ and write a tracker per month.
 
     A source may list several URLs and URL templates ({yyyy}, {mm}, {month}, ...), which are
-    expanded for each month in ``months`` so earlier months can be back-filled.
+    expanded for each month in ``months`` so earlier months can be back-filled. With ``skip_saved``,
+    a fund whose MDD is already in the folder for every month in ``months`` is not searched again.
     """
     out_dir = Path(out_dir)
     months = months or []
@@ -196,6 +197,13 @@ def collect(funds: list[Fund], sources: dict[str, FundSource], scraper: Scraper,
         if src is None or not any([src.url, src.urls, src.page, src.file, src.sanlam_fund, src.mandg_fund]):
             note = (src.note if src and src.note else None) or "no MDD source configured"
             results.append(Collected(fund.name, note=note, isin=src.isin if src else None))
+            continue
+        saved = [out_dir / m / f"{_safe_name(fund.name)}.pdf" for m in months]
+        if skip_saved and saved and all(p.exists() for p in saved):
+            for month, path in zip(months, saved):
+                results.append(Collected(fund.name, month, path, "already saved - not searched again",
+                                         src.note or "", src.isin or _isin_of(path)))
+            log.info("%s: MDDs for %s already saved, not searched again", fund.name, ", ".join(months))
             continue
         got: list[Collected] = []
         errors = []
@@ -241,6 +249,14 @@ def collect(funds: list[Fund], sources: dict[str, FundSource], scraper: Scraper,
     for month in all_months:
         write_tracker(out_dir / month / f"MDD Tracker {month}.xlsx", month, funds, results)
     return results
+
+
+def _isin_of(pdf: Path) -> str | None:
+    try:
+        isins = find_isins(pdf_text(pdf))
+    except Exception:  # an unreadable PDF just leaves the ISIN blank
+        return None
+    return isins[0] if isins else None
 
 
 def _with_earlier_runs(funds: list[Fund], results: list[Collected], out_dir: Path,
