@@ -492,9 +492,14 @@ funds:
   - https://cdn.janushenderson.com/webdocs/HGLZTI_LU0572952280_MAR191_M_{dd}{mm}{yyyy}_XX(EN-GB).pdf
   - https://cdn.janushenderson.com/webdocs/HGLZTI_LU0572952280_MAR191_M_{bdd}{mm}{yyyy}_XX(EN-GB).pdf
 - name: Counterpoint SCI Global Equity Feeder Fund
-  note: Not listed by Sanlam Collective Investments or found on Counterpoint's site; may have been renamed/closed.
+  note: Renamed Merchant West SCI Global Equity Feeder Fund (B class MDD).
+  page: https://merchantwest.co.za/investments/our-funds/
+  link_match: SI_Merchant-West-SCI-Global-Equity-Feeder-Fund
 - name: Counterpoint SCI Worldwide Flexible Fund
-  note: Not listed by Sanlam Collective Investments or found on Counterpoint's site; may have been renamed/closed.
+  isin: ZAE000141727
+  note: Renamed Merchant West SCI Worldwide Flexible Fund.
+  page: https://merchantwest.co.za/investments/our-funds/
+  link_match: SI_Merchant-West-SCI-Worldwide-Flexible-Fund
 - name: Vulcan Value Equity Fund
   note: vulcanim.co.za not reachable; MDD not found on platforms.
 - name: CoreShares S&P SA Top 50 Tracker Fund
