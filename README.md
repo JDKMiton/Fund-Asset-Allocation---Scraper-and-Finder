@@ -59,8 +59,8 @@ python -m fund_allocator collect --funds AUM_By_Holding_Fund_Model_Portfolio.xls
 ```
 
 Tracks every fund listed in `config/mdd_sources.yaml` (add or remove a fund there to change the
-tracker). The `--funds` workbook is optional: its AUM (column B) fills the tracker's AUM column
-and its order sets the row order, matched on fund name. Each fund's MDD is downloaded, the
+tracker; funds are listed alphabetically). The `--funds` workbook is optional: its AUM (column B)
+fills the tracker's AUM column, matched on fund name. Each fund's MDD is downloaded, the
 reporting month is read from the PDF and it is filed as `<out>/YYYY - MM/<Fund name>.pdf`. Each month folder
 gets an `MDD Tracker YYYY - MM.xlsx` listing every fund with its **ISIN**, **Collected** or
 **Outstanding** status, other months collected, the source link and notes (renamed fund,

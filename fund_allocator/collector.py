@@ -279,7 +279,7 @@ def write_tracker(path: Path, month: str, funds: list[Fund], results: list[Colle
     ws.title = "Tracker"
     _header(ws, 1, ["Fund", "AUM", "ISIN", "Status", "MDD month", "Other months collected", "File", "Source", "Notes"])
     collected = 0
-    for i, fund in enumerate(funds, start=2):
+    for i, fund in enumerate(sorted(funds, key=lambda f: f.name.casefold()), start=2):  # A-Z
         rs = by_fund.get(fund.name) or [Collected(fund.name, note="no MDD source configured")]
         this = next((r for r in rs if r.month == month), None)
         dated = sorted((r for r in rs if r.month), key=lambda r: r.month)

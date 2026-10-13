@@ -96,14 +96,9 @@ def cmd_extract(args: argparse.Namespace) -> int:
 
 def cmd_collect(args: argparse.Namespace) -> int:
     sources_list = load_sources(args.sources)
-    # The sources file is the list of funds to track; the holdings workbook only adds AUM and
-    # orders the tracker like the workbook (funds only in the sources file go at the end).
-    funds = [Fund(s.name) for s in sources_list]
-    if args.funds:
-        held = load_fund_list(args.funds, args.sheet)
-        aum = {f.name: f.aum for f in held}
-        order = {f.name: i for i, f in enumerate(held)}
-        funds = sorted((Fund(f.name, aum.get(f.name)) for f in funds), key=lambda f: order.get(f.name, len(order)))
+    # The sources file is the list of funds to track; the holdings workbook only adds AUM.
+    aum = {f.name: f.aum for f in load_fund_list(args.funds, args.sheet)} if args.funds else {}
+    funds = [Fund(s.name, aum.get(s.name)) for s in sources_list]
     if args.exclude:
         pattern = re.compile(args.exclude, re.IGNORECASE)
         funds = [f for f in funds if not pattern.search(f.name)]
@@ -148,7 +143,7 @@ def main(argv: list[str] | None = None) -> int:
     col = sub.add_parser("collect", help="download MDDs for every fund in a holdings workbook into "
                                          "'YYYY - MM' folders with a tracker spreadsheet")
     col.add_argument("--funds", help="workbook with fund names in column A and AUM in column B, used for the "
-                                     "tracker's AUM column and order (the funds tracked are those in --sources)")
+                                     "tracker's AUM column (the funds tracked are those in --sources)")
     col.add_argument("--recent", type=int, default=2,
                      help="when no --month is given, look for the last N completed months (default 2)")
     col.add_argument("--sheet", help="worksheet to read (default: first sheet)")

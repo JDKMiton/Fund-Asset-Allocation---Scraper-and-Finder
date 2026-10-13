@@ -215,18 +215,19 @@ class CollectorTest(unittest.TestCase):
             holdings = Path(tmp) / "aum.xlsx"
             wb = Workbook()
             ws = wb.active
-            for row in [("Fund", "AUM"), ("Removed Fund", 5.0), ("Balanced", 100.0)]:
+            for row in [("Fund", "AUM"), ("Removed Fund", 5.0), ("Feeder", 7.0), ("Balanced", 100.0)]:
                 ws.append(row)
             wb.save(holdings)
             sources = Path(tmp) / "sources.yaml"
             sources.write_text(f"funds:\n- name: Feeder\n  file: {ROOT / 'examples/sample_global_equity_mdd.pdf'}\n"
-                               f"- name: Balanced\n  file: {ROOT / 'examples/sample_balanced_mdd.pdf'}\n")
+                               f"- name: Balanced\n  file: {ROOT / 'examples/sample_balanced_mdd.pdf'}\n"
+                               f"- name: alpha fund\n  note: no MDD\n")
             out = Path(tmp) / "MDDs"
             main(["collect", "--funds", str(holdings), "--sources", str(sources), "--out", str(out),
                   "--download-dir", tmp, "--month", "2026 - 09"])
             ws = load_workbook(out / "2026 - 09" / "MDD Tracker 2026 - 09.xlsx")["Tracker"]
             rows = [(r[0], r[1]) for r in ws.iter_rows(min_row=2, values_only=True) if r[0]]
-            self.assertEqual(rows, [("Balanced", 100.0), ("Feeder", None)])
+            self.assertEqual(rows, [("alpha fund", None), ("Balanced", 100.0), ("Feeder", 7.0)])
 
 
 if __name__ == "__main__":
