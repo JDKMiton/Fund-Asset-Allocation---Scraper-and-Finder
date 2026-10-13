@@ -206,11 +206,6 @@ funds:
 - name: PSG Stable Fund
   isin: ZAE000181640
   url: https://download.psg.co.za/files/asset-management/fund-fact-sheets/PSG-Stable-Fund-Class-A.pdf
-- name: PSG Wealth Moderate Fund of Funds
-  url: https://download.psg.co.za/files/wealth/fund-fact-sheets/PSG-Wealth-Moderate-FoFs-Class-A.pdf
-- name: PSG Wealth Global Moderate Feeder Fund
-  url: https://download.psg.co.za/files/wealth/fund-fact-sheets/consolidated-minimum-disclosure-documents.pdf
-  note: Pages 36-37 of PSG Wealth's consolidated MDD pack.
 - name: Satrix Balanced Index
   isin: ZAE000181848
   url: https://satrix.co.za/fund/mdd/SATBI
@@ -359,22 +354,11 @@ funds:
   page: https://www.prescient.co.za/funds/other-funds/
   link_match: bateleur-special-opportunities-prescient-ri-hedge-fund_\d{8}
   render: true
-- name: Aylett Equity Prescient Fund
-  note: Aylett publishes MDDs quarterly; latest is 30 June 2026.
-  page: https://www.prescient.co.za/funds/other-funds/
-  link_match: aylett-equity-prescient-fund-[a-z]+-\d{4}-mdd
-  render: true
 - name: 36One Prescient Retail Hedge Fund / SNN Retail Hedge Fund
   isin: ZAE000257648
   page: https://www.prescient.co.za/funds/other-funds/
   link_match: 36one-prescient-retail-hedge-fund-1-[a-z]+-\d{4}_361rf1
   render: true
-- name: Foord Flexible Fund of Funds
-  page: https://foord.co.za/investments/forms-and-documents
-  render: true
-  link_match: Foord(%20| )Flexible(%20| )Fund(%20| )of(%20| )Funds(%20| )Class(%20| )A(%20| )at
-  urls:
-  - https://foord.co.za/sites/default/files/{next_yyyy}-{next_mm}/Foord%20Flexible%20Fund%20of%20Funds%20Class%20A%20at%20{yyyy}-{mm}-{dd}.pdf
 - name: Foord Balanced Fund
   page: https://foord.co.za/investments/forms-and-documents
   render: true
