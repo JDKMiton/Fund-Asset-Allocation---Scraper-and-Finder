@@ -162,6 +162,14 @@ class CollectorTest(unittest.TestCase):
         self.assertEqual(candidate_urls(src, ["2026 - 08"]),
                          ["https://x/202608/f.pdf", "https://x/2026/august/f-08.pdf"])
 
+    def test_mandg_fact_sheets(self):
+        from fund_allocator.scraper import mandg_fact_sheets
+        html = (r'{\"name\":\"M\u0026G Balanced\",\"fundId\":\"GLOBALCOMP\",\"files\":[{\"fileType\":\"FactSheet\",'
+                r'\"path\":\"https://x/inst.pdf\"}]},{\"name\":\"M\u0026G Balanced Fund\",\"fundId\":\"PRUA\",'
+                r'\"files\":[{\"fileType\":\"FactSheet\",\"path\":\"https://x/mandg-balanced-fund.pdf\"},'
+                r'{\"fileType\":\"Commentary\",\"path\":\"https://x/c.pdf\"}]}')
+        self.assertEqual(mandg_fact_sheets(html)["m&g balanced fund"], "https://x/mandg-balanced-fund.pdf")
+
     def test_find_isins(self):
         from fund_allocator.collector import find_isins
         self.assertEqual(find_isins("ISIN Code ZAE000019808 and IE00B2RGGV79, again ZAE000019808"),

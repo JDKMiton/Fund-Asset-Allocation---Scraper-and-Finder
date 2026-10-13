@@ -454,15 +454,15 @@ funds:
 - name: Discovery Life Property Escalator fund
   note: Only a March 2025 document found on Discovery's site.
 - name: M&G Balanced Fund
-  note: M&G's site serves MDDs from https://mandg.co.za:8082/media/ssvebf0b/mandg-balanced-fund.pdf (port 8082, not reachable from the scraper's network) - download manually.
+  mandg_fund: M&G Balanced Fund
 - name: M&G Inflation Plus
-  note: 'MDD: https://mandg.co.za:8082/media/nxrnijcf/mandg-inflation-plus-fund.pdf (port 8082, not reachable) - download manually.'
+  mandg_fund: M&G Inflation Plus Fund
 - name: M&G Global Balanced Fund
-  note: 'MDD: https://mandg.co.za:8082/media/4v5j51eq/mandg-global-balanced-fund.pdf (port 8082, not reachable) - download manually.'
+  mandg_fund: M&G Global Balanced Fund
 - name: M&G Dividend Maximiser Fund
-  note: 'MDD: https://mandg.co.za:8082/media/virclx2t/mandg-dividend-maximiser-fund.pdf (port 8082, not reachable) - download manually.'
+  mandg_fund: M&G Dividend Maximiser Fund
 - name: M&G Property Fund D
-  note: 'MDD: https://mandg.co.za:8082/media/3nop0vpg/mandg-property-fund.pdf (port 8082, not reachable) - download manually.'
+  mandg_fund: M&G Property Fund
 - name: PPS Balanced Passive Fund
   note: Latest fact sheet on PPS website is dated 31 October 2025.
 - name: Old Mutual RAFI 40 Index Fund

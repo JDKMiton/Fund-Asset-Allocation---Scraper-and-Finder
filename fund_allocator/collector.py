@@ -185,7 +185,7 @@ def collect(funds: list[Fund], sources: dict[str, FundSource], scraper: Scraper,
     results: list[Collected] = []
     for fund in funds:
         src = sources.get(fund.name)
-        if src is None or not any([src.url, src.urls, src.page, src.file, src.sanlam_fund]):
+        if src is None or not any([src.url, src.urls, src.page, src.file, src.sanlam_fund, src.mandg_fund]):
             note = (src.note if src and src.note else None) or "no MDD source configured"
             results.append(Collected(fund.name, note=note, isin=src.isin if src else None))
             continue

@@ -54,6 +54,7 @@ class FundSource:
     note: str | None = None         # shown in the tracker (renamed fund, quarterly MDD, ...)
     browser: bool = False           # always download through the headless browser (bot-protected sites)
     sanlam_fund: str | None = None  # fund name in Sanlam Collective Investments' fact sheet API
+    mandg_fund: str | None = None   # fund name in M&G's all-funds list (mandg.co.za)
     ignore_robots: bool = False     # download even though the site's robots.txt asks bots not to
 
 
@@ -92,7 +93,7 @@ def load_sources(path: str | Path) -> list[FundSource]:
     sources = []
     for f in data.get("funds", []):
         src = FundSource(**f)
-        if not any([src.url, src.urls, src.page, src.file, src.allocation, src.note, src.sanlam_fund]):
+        if not any([src.url, src.urls, src.page, src.file, src.allocation, src.note, src.sanlam_fund, src.mandg_fund]):
             raise ValueError(f"{path}: fund '{src.name}' needs one of url, urls, page, file, allocation or note")
         sources.append(src)
     return sources

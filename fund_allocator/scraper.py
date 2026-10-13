@@ -44,6 +44,7 @@ class Scraper:
         self._last_request = 0.0
         self._browser: Browser | None = None
         self._sanlam: dict | None = None
+        self._mandg: dict | None = None
 
     # -- public API ---------------------------------------------------------
 
@@ -64,6 +65,8 @@ class Scraper:
         if source.sanlam_fund:
             url = self.sanlam_mdd_url(source.sanlam_fund)
             return self.download(url, source.name, {"Referer": "https://www.sanlaminvestments.com/"})
+        if source.mandg_fund:
+            return self.download(self.mandg_mdd_url(source.mandg_fund), source.name, headers)
         if source.url:
             return self.download(source.url, source.name, headers, source.browser)
         if source.page:
@@ -163,6 +166,29 @@ class Scraper:
             raise ScrapeError(f"'{fund_name}' is not in Sanlam's fund fact sheet list")
         urls = fund["mdd_urls"]
         return next((u["url"] for u in urls if u.get("product_code") == "UT"), urls[0]["url"])
+
+    def mandg_mdd_url(self, fund_name: str) -> str:
+        """Current fact sheet (MDD) link for an M&G fund, from the fund list embedded in mandg.co.za."""
+        if self._mandg is None:
+            self._mandg = mandg_fact_sheets(self._get(MANDG_FUNDS_PAGE).text)
+        url = self._mandg.get(fund_name.lower())
+        if not url:
+            raise ScrapeError(f"'{fund_name}' is not in M&G's fund list ({MANDG_FUNDS_PAGE})")
+        return url
+
+
+MANDG_FUNDS_PAGE = "https://www.mandg.co.za/all-funds?type=funds"
+
+
+def mandg_fact_sheets(html: str) -> dict[str, str]:
+    """{lower-case fund name: fact sheet URL} from the JSON M&G's all-funds page embeds."""
+    text = html.replace('\\"', '"').replace("\\u0026", "&")
+    sheets = {}
+    for m in re.finditer(r'"name":"([^"]+)","fundId":"[^"]*".*?"files":\[(.*?)\]', text):
+        sheet = re.search(r'"fileType":"FactSheet","path":"([^"]+)"', m.group(2))
+        if sheet:
+            sheets.setdefault(m.group(1).lower(), sheet.group(1))
+    return sheets
 
 
 class Browser:
