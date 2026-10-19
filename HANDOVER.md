@@ -237,6 +237,15 @@ Sasfin → Otto1890 was confirmed this way; the others need an ISIN on file that
 
 ## 10. Learning log (newest first; add a line after every scan or change)
 
+- **2026-10-19, reusable skill:** the collector is packaged as the `sa-fund-mdd-collector` skill in
+  `skill/` (for other projects and accounts). It asks where to save the MDDs, then
+  `scripts/init_project.py` creates a project with its own HANDOVER.md, CLAUDE.md, empty registry and
+  this registry as an example. The AUM column heading is now `--aum-label` (default "AUM held"; this
+  project's weekly script passes "MitonOptimal AUM"). **When `fund_allocator/` changes, copy it to
+  `skill/sa-fund-mdd-collector/assets/project/fund_allocator/`** so the skill stays in step. Quick check:
+  a new 2-fund project collected Coronation Balanced Plus and Allan Gray Balanced into the chosen folder.
+  Seen: Coronation's benchmark is cut at "ASISA fund category average (excluding" (the line wraps); still open.
+
 - **2026-10-19:** The owner confirmed the Discovery DAO → Cogence and Mi-Plan → Vunani renames (now
   `current_name`) and approved the Allan Gray M&G backup. Test: with mandg.co.za:8082 unreachable, M&G
   Balanced, Inflation Plus and Global Balanced collected both August and September from Allan Gray.

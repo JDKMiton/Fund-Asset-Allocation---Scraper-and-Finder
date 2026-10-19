@@ -1,0 +1,7 @@
+# MDD source registry: one entry per fund you want to track. The tracker lists exactly these funds.
+# See references/registry-fields.md in the skill for every field. Example:
+#
+# - name: Coronation Balanced Plus Fund        # the name you use (files and the tracker use it)
+#   isin: ZAE000165205                         # the share class you hold
+#   url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CBPF
+funds: []

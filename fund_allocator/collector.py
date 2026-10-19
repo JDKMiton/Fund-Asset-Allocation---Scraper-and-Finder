@@ -282,7 +282,7 @@ def candidate_urls(src: FundSource, months: list[str]) -> list[str]:
 
 def collect(funds: list[Fund], sources: dict[str, FundSource], scraper: Scraper, out_dir: str | Path,
             months: list[str] | None = None, skip_saved: bool = True,
-            issues: list[Issue] | None = None) -> list[Collected]:
+            issues: list[Issue] | None = None, aum_label: str = "AUM held") -> list[Collected]:
     """Fetch each fund's MDD(s), file them under out_dir/"YYYY - MM"/ and write a tracker per month.
 
     A source may list several URLs and URL templates ({yyyy}, {mm}, {month}, ...), which are
@@ -354,7 +354,7 @@ def collect(funds: list[Fund], sources: dict[str, FundSource], scraper: Scraper,
         log.warning("%s: %s - %s", issue.kind, issue.fund, issue.detail)
     for month in all_months:
         write_tracker(out_dir / month / f"!MDD Tracker {month}.xlsx", month, funds, results,
-                      issues=issues, sources=sources)
+                      issues=issues, sources=sources, aum_label=aum_label)
         (out_dir / month / f"MDD Tracker {month}.xlsx").unlink(missing_ok=True)  # name used before the "!"
     return results
 
@@ -556,7 +556,7 @@ def outstanding_status(month: str, src: FundSource | None, today: date | None = 
 
 def write_tracker(path: Path, month: str, funds: list[Fund], results: list[Collected],
                   issues: list[Issue] | None = None, sources: dict[str, FundSource] | None = None,
-                  today: date | None = None) -> Path:
+                  today: date | None = None, aum_label: str = "AUM held") -> Path:
     sources = sources or {}
     issues = [i for i in (issues or []) if i.month in (None, month)]
     counts = dict.fromkeys(STATUSES, 0)
@@ -566,7 +566,7 @@ def write_tracker(path: Path, month: str, funds: list[Fund], results: list[Colle
     wb = Workbook()
     ws = wb.active
     ws.title = "Tracker"
-    _header(ws, 1, ["Fund", "MitonOptimal AUM", "ISIN", *FACT_COLUMNS, "Status", "MDD month",
+    _header(ws, 1, ["Fund", aum_label, "ISIN", *FACT_COLUMNS, "Status", "MDD month",
                     "Other months collected", "File", "Source", "Notes"])
     def shown_name(fund: Fund) -> str:
         """The owner-confirmed current name, else the MDD's name once it prints the fund's known ISIN."""

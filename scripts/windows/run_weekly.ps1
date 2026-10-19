@@ -24,7 +24,8 @@ $cmd = @("-m", "fund_allocator", "collect",
          "--sources", "config\mdd_sources.yaml",
          "--out", $OutFolder,
          "--download-dir", (Join-Path $repo "data\downloads"),
-         "--recent", $RecentMonths)
+         "--recent", $RecentMonths,
+         "--aum-label", "MitonOptimal AUM")
 if ($Exclude) { $cmd += @("--exclude", $Exclude) }
 if ($FundsWorkbook -and (Test-Path $FundsWorkbook)) { $cmd += @("--funds", $FundsWorkbook, "--sheet", $FundsSheet) }
 

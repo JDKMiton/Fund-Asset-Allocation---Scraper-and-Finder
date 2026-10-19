@@ -108,7 +108,7 @@ def cmd_collect(args: argparse.Namespace) -> int:
     try:
         issues: list = []
         results = collect(funds, sources, scraper, args.out, months=months, skip_saved=not args.refetch,
-                          issues=issues)
+                          issues=issues, aum_label=args.aum_label)
     finally:
         scraper.close()
     got = len({r.fund for r in results if r.month})
@@ -159,10 +159,11 @@ def main(argv: list[str] | None = None) -> int:
     col.add_argument("--out", default="output/MDDs", help="folder to create the month folders in")
     col.add_argument("--month", action="append", metavar="'YYYY - MM'",
                      help="always create this month's folder and tracker, even if no MDDs are found for it")
-    col.add_argument("--exclude", metavar="REGEX", help="skip funds whose name matches, e.g. '^MitonOptimal FR'")
+    col.add_argument("--exclude", metavar="REGEX", help="skip funds whose name matches, e.g. '^MyFirm '")
     col.add_argument("--download-dir", default="data/downloads")
     col.add_argument("--delay", type=float, default=1.0)
     col.add_argument("--ignore-robots", action="store_true")
+    col.add_argument("--aum-label", default="AUM held", help="heading of the tracker's AUM column")
     col.add_argument("--refetch", action="store_true",
                      help="search for every fund, even if its MDDs for all the months are already saved")
     col.set_defaults(func=cmd_collect)

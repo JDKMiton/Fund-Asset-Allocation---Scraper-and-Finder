@@ -189,7 +189,7 @@ class CollectorTest(unittest.TestCase):
             facts = {"Fund AUM": "R1.2bn", "Inception Date": "1 May 2001", "Benchmark": "CPI + 3%"}
             write_tracker(path, "2026 - 08", [Fund("A", 5.0)], [Collected("A", "2026 - 08", Path("A.pdf"), facts=facts)])
             ws = load_workbook(path)["Tracker"]
-            self.assertEqual([c.value for c in ws[1]][:7], ["Fund", "MitonOptimal AUM", "ISIN", "Fund AUM",
+            self.assertEqual([c.value for c in ws[1]][:7], ["Fund", "AUM held", "ISIN", "Fund AUM",
                                                            "Inception Date", "Benchmark", "Status"])
             self.assertEqual([c.value for c in ws[2]][3:7], ["R1.2bn", "1 May 2001", "CPI + 3%", "Collected"])
 
