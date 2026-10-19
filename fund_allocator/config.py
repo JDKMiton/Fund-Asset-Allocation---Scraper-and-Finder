@@ -63,6 +63,7 @@ class FundSource:
     lag_days: int | None = None     # days after month-end the MDD is normally up (default DEFAULT_LAG_DAYS)
     frequency: str = "monthly"      # "quarterly": MDDs only for March, June, September and December
     keep_name: bool = False         # don't show the MDD's name in the tracker (e.g. the MDD prints an old name)
+    current_name: str | None = None  # owner-confirmed current name, shown in the tracker
 
 
 def normalise_label(text: str) -> str:

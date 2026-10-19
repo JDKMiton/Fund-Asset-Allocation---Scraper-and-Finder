@@ -324,6 +324,13 @@ class ChecksTest(unittest.TestCase):
             rows = [r for r in load_workbook(path)["Tracker"].iter_rows(min_row=2, values_only=True)]
             self.assertEqual([r[0] for r in rows], ["Allan Gray Bond", "Otto1890 FR Flexible Income Fund"])
             self.assertIn("previously 'Sasfin BCI Flexible Income'", rows[1][-1])
+            # an owner-confirmed name is shown without waiting for an ISIN match
+            from fund_allocator.config import FundSource
+            src = {"Allan Gray Bond": FundSource("Allan Gray Bond", url="u", current_name="Zeta Bond Fund")}
+            write_tracker(path, "2026 - 08", funds, results, sources=src)
+            rows = [r for r in load_workbook(path)["Tracker"].iter_rows(min_row=2, values_only=True)]
+            self.assertEqual([r[0] for r in rows], ["Otto1890 FR Flexible Income Fund", "Zeta Bond Fund"])
+            self.assertIn("confirmed by the owner", rows[1][-1])
 
     def test_names_itself(self):
         from fund_allocator.collector import names_itself

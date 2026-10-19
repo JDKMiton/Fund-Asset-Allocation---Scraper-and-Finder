@@ -91,6 +91,8 @@ Name not checked (the PDF has no text layer), No source.
 | Oct 2026 | Share classes for ISINs: Allan Gray C where it exists, otherwise A; Satrix B1, except Smartcore A1; Marriott A (or the retail class where there is no A); otherwise use the class that can be found, and the owner corrects it later. The ISINs from the owner's "Funds.xlsx" buy list are the classes actually held. |
 | 19 Oct 2026 | Asset allocation goes to a separate agent; this scraper doesn't extract it. |
 | 19 Oct 2026 | If the MDD's fund name is the correct one (the ISINs match), show that name in the tracker (§6). |
+| 19 Oct 2026 | Confirmed renames: Discovery Aggressive DAO FoF → Cogence Discovery Balanced Dynamic Asset Optimiser Fund of Funds; Mi-Plan IP Enhanced Income → Vunani FR Enhanced Income Fund. Shown in the tracker (`current_name`). |
+| 19 Oct 2026 | Use Allan Gray's platform copies as a backup for M&G Balanced, Inflation Plus and Global Balanced, despite Allan Gray's robots.txt (`ignore_robots: true` on those three). |
 
 ## 4. Where things are
 
@@ -98,7 +100,7 @@ Name not checked (the PDF has no text layer), No source.
   - `url` / `urls` (with templates `{yyyy} {mm} {yyyymm} {month} {Month} {mon} {Mon} {MON} {dd} {bdd} {next_yyyy} {next_mm}`);
   - `page` + `link_match` (the regex may contain the same templates) + `render`;
   - `sanlam_fund`, `mandg_fund`, `browser`, `referer`, `ignore_robots`;
-  - `isin`, `note`, `doc_names`, `lag_days`, `frequency`, `keep_name`.
+  - `isin`, `note`, `doc_names`, `current_name`, `lag_days`, `frequency`, `keep_name`.
 - `fund_allocator/collector.py`: the run, checks, filing, manifest, tracker. `facts.py`: Fund AUM, inception
   and benchmark. `pdfinfo.py`: PDF reading in a worker process with a 120 s limit. `scraper.py`: downloads,
   browser and site APIs.
@@ -114,9 +116,9 @@ Name not checked (the PDF has no text layer), No source.
 - **Allan Gray platform store (other managers):** the same store holds other managers' sheets, e.g.
   `M~and~G Inflation Plus Fund (Class B)/Files/PRCB - YYYY-MM.pdf` (dated, 4–5 weeks after month-end), but
   **allangray.co.za/robots.txt disallows them** (`M~and~G*`, `Coronation*`, `Nedgroup*`, `Satrix*`,
-  `STANLIB*`, `Prescient*`, `PSG*` and others). They are **not used**; using them needs the owner's OK
-  (`ignore_robots`). Folder names are on allangray.co.za/what-we-offer/unit-trusts/: M&G Balanced PRAB,
-  Inflation Plus PRCB, Global Balanced USD PRGBFB.
+  `STANLIB*`, `Prescient*`, `PSG*` and others). The owner approved them **only as the M&G backup** (19 Oct
+  2026): M&G Balanced PRAB, Inflation Plus PRCB, Global Balanced USD PRGBFB (B class, dated). Folder names
+  for any others are on allangray.co.za/what-we-offer/unit-trusts/; ask before using them.
 - **M&G:** the all-funds page embeds JSON (`"files":[{"fileType":"FactSheet","path":…}]`); `mandg_fund`
   reads it. PDFs are served from **mandg.co.za:8082**, which is blocked in the cloud environment but works on
   the owner's PC. The media key changes on every upload, and old keys keep serving old files.
@@ -174,7 +176,8 @@ Name not checked (the PDF has no text layer), No source.
 ## 6. Renamed funds
 
 The config keeps the owner's name: files, the AUM match and the skip rule depend on it. `doc_names` holds
-what the MDD prints. **The tracker shows the MDD's name** (with a "renamed - previously …" note) once an
+what the MDD prints. `current_name` is a name the owner has confirmed; the tracker always shows it.
+Otherwise **the tracker shows the MDD's name** (with a "renamed - previously …" note) once an
 MDD prints that name **together with the ISIN we hold for the fund** (`isin:` in the config). An ISIN read
 from the MDD itself proves nothing, so it doesn't count. `keep_name: true` stops this for funds whose MDD
 prints an *old* name (PPS Balanced Passive). This is the owner's rule from 19 Oct 2026. On 19 Oct only
@@ -190,23 +193,20 @@ Sasfin → Otto1890 was confirmed this way; the others need an ISIN on file that
 | Ninety One Global Multi Asset Income Feeder | Ninety One Global Managed Income Feeder |
 | SIM Inflation Plus Fund | SCI Inflation Plus; from 9 Oct 2026 SCI Ninety One Cautious Managed Fund |
 | Momentum Capped SWIX Index Fund | Momentum Capped All Share Fund |
-| Mi-Plan IP Enhanced Income | Vunani FR Enhanced Income Fund (same code MIPEI), **unconfirmed** |
-| Discovery Aggressive Dynamic Asset Optimiser FoF | Cogence Discovery **Balanced** Dynamic Asset Optimiser FoF (same code DADAOF), **unconfirmed** |
+| Mi-Plan IP Enhanced Income | Vunani FR Enhanced Income Fund (code MIPEI); confirmed by the owner, shown in the tracker |
+| Discovery Aggressive Dynamic Asset Optimiser FoF | Cogence Discovery Balanced Dynamic Asset Optimiser FoF (code DADAOF); confirmed by the owner, shown in the tracker |
 | Old Mutual RAFI 40 Index Fund | balloting a rename to Old Mutual RAFI SA Index Fund |
 
 ## 7. Open issues and questions for the owner
 
-- **Unconfirmed renames:** Discovery Aggressive DAO vs "Cogence Discovery Balanced DAO", and Mi-Plan IP
-  Enhanced Income vs "Vunani FR Enhanced Income". Same fund codes, but the names differ, so confirm they're
-  the funds held.
 - **No ISIN:** Bateleur Long Short, Bateleur Special Opportunities and M&G Property Fund D.
 - **ISINs from one source or another class:**
   - CoreShares/10X uses the ETF class A ISIN ZAE000204327, because the unit-trust class B ISIN wasn't found;
   - Allan Gray Optimal C and Tax-Free Balanced C come only from SA Shares;
   - SIM Inflation Plus ZAE000021283 has no class stated.
-- **M&G port 8082** is unreachable from the cloud environment (it works on the owner's PC). There is no
-  backup source: the Allan Gray platform copies are disallowed by robots.txt (§5). If the owner wants
-  them as a backup, set `ignore_robots` on those funds and add the PRAB/PRCB/PRGBFB URLs.
+- **M&G port 8082** is unreachable from the cloud environment (it works on the owner's PC). Balanced,
+  Inflation Plus and Global Balanced have the Allan Gray backup; Dividend Maximiser, Property D and the two
+  feeders have none (Allan Gray doesn't host them).
 - **Fund details:**
   - Fund AUM, inception date and benchmark are read automatically and can be blank or imperfect;
   - Discovery benchmarks run together without spaces;
@@ -236,6 +236,10 @@ Sasfin → Otto1890 was confirmed this way; the others need an ISIN on file that
 - Read `docs/sa-factsheet-scraping-guide.md` §6–7, on reading tables by word position and the checks.
 
 ## 10. Learning log (newest first; add a line after every scan or change)
+
+- **2026-10-19:** The owner confirmed the Discovery DAO → Cogence and Mi-Plan → Vunani renames (now
+  `current_name`) and approved the Allan Gray M&G backup. Test: with mandg.co.za:8082 unreachable, M&G
+  Balanced, Inflation Plus and Global Balanced collected both August and September from Allan Gray.
 
 - **2026-10-19, second test run** (cloud): 192 funds, MDDs for 185. No wrong documents after the link
   fix. Fundrock served 36ONE and 4D normally again (the 0-byte files were temporary). The only "Not found"

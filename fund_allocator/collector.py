@@ -568,7 +568,11 @@ def write_tracker(path: Path, month: str, funds: list[Fund], results: list[Colle
     ws.title = "Tracker"
     _header(ws, 1, ["Fund", "MitonOptimal AUM", "ISIN", *FACT_COLUMNS, "Status", "MDD month",
                     "Other months collected", "File", "Source", "Notes"])
-    def shown_name(fund: Fund) -> str:  # the current name, once an MDD with the fund's ISIN confirms it
+    def shown_name(fund: Fund) -> str:
+        """The owner-confirmed current name, else the MDD's name once it prints the fund's known ISIN."""
+        src = sources.get(fund.name)
+        if src and src.current_name:
+            return src.current_name
         rs = sorted((r for r in by_fund.get(fund.name, []) if r.month), key=lambda r: r.month, reverse=True)
         return next((r.mdd_name for r in rs if r.mdd_name), fund.name)
 
@@ -600,7 +604,8 @@ def write_tracker(path: Path, month: str, funds: list[Fund], results: list[Colle
             note = "; ".join(filter(None, [f"not posted yet - normally up by {due_date(month, src):%d %b %Y}", note]))
         facts = next((r.facts for r in [shown, *reversed(dated)] if r.facts), None) or {}
         if name != fund.name:
-            note = "; ".join(filter(None, [f"renamed - previously '{fund.name}' (ISIN {isin} matches the MDD)", note]))
+            why = "confirmed by the owner" if src and src.current_name else f"ISIN {isin} matches the MDD"
+            note = "; ".join(filter(None, [f"renamed - previously '{fund.name}' ({why})", note]))
         row = [name, fund.aum, isin, *(facts.get(c) for c in FACT_COLUMNS),
                status, shown.month if this else None, others,
                shown.path.name if this and shown.path else None, shown.source or None, note or None]
