@@ -105,6 +105,8 @@ class ScraperLinkTest(unittest.TestCase):
         links = find_matching_links(html, "https://example.com/fund", r"minimum.?disclosure|fact.?sheet")
         self.assertEqual(links, ["https://example.com/docs/bal-2026-09.pdf",
                                  "https://example.com/docs/fund-factsheet.pdf"])
+        # a fund-specific pattern that matches nothing must not fall back to other PDFs on the page
+        self.assertEqual(find_matching_links(html, "https://example.com/fund", "abax-absolute-2026-09", fallback=False), [])
 
 
 class EndToEndTest(unittest.TestCase):

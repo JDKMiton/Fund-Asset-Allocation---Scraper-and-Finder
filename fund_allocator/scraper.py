@@ -76,7 +76,9 @@ class Scraper:
 
     def find_pdf_link(self, page_url: str, pattern: str, render: bool = False) -> str:
         html = self._render(page_url) if render else self._get(page_url).text
-        links = find_matching_links(html, page_url, pattern)
+        # A fund-specific pattern must match: falling back to "any PDF on the page" picked up another
+        # fund's MDD when this month's wasn't posted yet. Only the generic default pattern may fall back.
+        links = find_matching_links(html, page_url, pattern, fallback=pattern == FundSource.link_match)
         if not links:
             raise ScrapeError(f"no PDF link matching /{pattern}/ found on {page_url}")
         log.info("found %d candidate link(s) on %s, using %s", len(links), page_url, links[0])
@@ -269,7 +271,7 @@ def as_pdf(content: bytes) -> bytes:
     return content[at:]
 
 
-def find_matching_links(html: str, base_url: str, pattern: str) -> list[str]:
+def find_matching_links(html: str, base_url: str, pattern: str, fallback: bool = True) -> list[str]:
     """PDF links on a page whose URL or link text matches ``pattern``.
 
     Links whose text/URL match are ranked first; plain PDF links are kept as a fallback
@@ -288,7 +290,7 @@ def find_matching_links(html: str, base_url: str, pattern: str) -> list[str]:
         elif is_pdf:
             other.append(href)
     seen: set[str] = set()
-    return [u for u in matched or other if not (u in seen or seen.add(u))]
+    return [u for u in (matched or (other if fallback else [])) if not (u in seen or seen.add(u))]
 
 
 def slugify(text: str) -> str:

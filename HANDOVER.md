@@ -110,11 +110,12 @@ Name not checked (the PDF has no text layer), No source.
 - **Allan Gray (own funds):** dated `…/fund/factsheet/<Fund Name>/Files/<CODE> - YYYY-MM.pdf`. Codes: AGBF,
   AGSF, AGEF, AGOE, AGGF, AGINA (Income), AGDA (SA Equity), AGTF00 (Tax-Free pack), and others in the config.
   Real 404s for months not up yet.
-- **Allan Gray platform store (other managers):** same store, e.g.
-  `M~and~G Inflation Plus Fund (Class B)/Files/PRCB - YYYY-MM.pdf`. Used as a **backup for M&G Balanced
-  (PRAB), Inflation Plus (PRCB) and Global Balanced USD (PRGBFB)**. Folder names are listed on
-  allangray.co.za/what-we-offer/unit-trusts/ and in its "Local Investment Platform Fund List" PDF. Runs 4–5
-  weeks after month-end.
+- **Allan Gray platform store (other managers):** the same store holds other managers' sheets, e.g.
+  `M~and~G Inflation Plus Fund (Class B)/Files/PRCB - YYYY-MM.pdf` (dated, 4–5 weeks after month-end), but
+  **allangray.co.za/robots.txt disallows them** (`M~and~G*`, `Coronation*`, `Nedgroup*`, `Satrix*`,
+  `STANLIB*`, `Prescient*`, `PSG*` and others). They are **not used**; using them needs the owner's OK
+  (`ignore_robots`). Folder names are on allangray.co.za/what-we-offer/unit-trusts/: M&G Balanced PRAB,
+  Inflation Plus PRCB, Global Balanced USD PRGBFB.
 - **M&G:** the all-funds page embeds JSON (`"files":[{"fileType":"FactSheet","path":…}]`); `mandg_fund`
   reads it. PDFs are served from **mandg.co.za:8082**, which is blocked in the cloud environment but works on
   the owner's PC. The media key changes on every upload, and old keys keep serving old files.
@@ -195,8 +196,9 @@ Name not checked (the PDF has no text layer), No source.
   - CoreShares/10X uses the ETF class A ISIN ZAE000204327, because the unit-trust class B ISIN wasn't found;
   - Allan Gray Optimal C and Tax-Free Balanced C come only from SA Shares;
   - SIM Inflation Plus ZAE000021283 has no class stated.
-- **M&G port 8082** is unreachable from the cloud environment. The Allan Gray backup covers Balanced,
-  Inflation Plus and Global Balanced; Dividend Maximiser, Property D and the two feeders have no backup.
+- **M&G port 8082** is unreachable from the cloud environment (it works on the owner's PC). There is no
+  backup source: the Allan Gray platform copies are disallowed by robots.txt (§5). If the owner wants
+  them as a backup, set `ignore_robots` on those funds and add the PRAB/PRCB/PRGBFB URLs.
 - **Fund details:**
   - Fund AUM, inception date and benchmark are read automatically and can be blank or imperfect;
   - Discovery benchmarks run together without spaces;
@@ -227,6 +229,17 @@ Name not checked (the PDF has no text layer), No source.
 
 ## 10. Learning log (newest first; add a line after every scan or change)
 
+- **2026-10-19, test run with the new checks** (cloud copy of the folder; 192 funds; MDDs for 185):
+  - **Bug found and fixed:** a page with no link matching the fund's pattern fell back to any PDF on the
+    page. On Prescient's other-funds page, Abax Absolute, Abax Balanced, Fairtree SA Equity and Steyn
+    Equity were handed the *Prescient Sigma Select Global Leaders Feeder* MDD while September wasn't
+    posted. The name check rejected all four (now in `_rejected/`). Fund-specific patterns no longer fall
+    back.
+  - Allan Gray's robots.txt disallows its M&G copies, so that backup was removed.
+  - Fundrock (bcis.co.za) returned **0-byte** files for 36ONE BCI Equity, 36ONE Flexible Opportunity and
+    4D Moderate FoF; refused by the 1 KB check. August was already saved; watch next week.
+  - Manifest: 77 filed, 95 unchanged, 4 rejected, 0 reissued.
+
 - **2026-10-19:**
   - Implemented the guide's checks:
     - the fund-name check (all 208 readable MDDs in the corpus pass);
@@ -235,7 +248,7 @@ Name not checked (the PDF has no text layer), No source.
     - never-overwrite with reissue copies, `_manifest.csv`, `_rejected/` and the stale-copy rule;
     - Pending/Late/Quarterly statuses and the Exceptions sheet;
     - PDF reading in a worker with a time limit, and the `%PDF` check within the first KB.
-  - Added the Allan Gray backup for 3 M&G funds and the Ninety One A-class MDD backups.
+  - Added the Ninety One A-class MDD backups.
   - The name check surfaced the Discovery DAO and Mi-Plan/Vunani name mismatches (§7).
 - **2026-10-19:** Removed Aylett, Foord Flexible FoF and the two PSG Wealth funds (owner). Tracker renamed
   "!MDD Tracker"; Fund AUM, Inception Date and Benchmark columns added (MitonOptimal AUM column renamed).

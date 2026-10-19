@@ -551,18 +551,12 @@ funds:
 - name: M&G Balanced Fund
   isin: ZAE000020863
   mandg_fund: M&G Balanced Fund
-  urls:  # backup: Allan Gray platform copy (B class), dated, 4-5 weeks after month-end
-  - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/M~and~G%20Balanced%20Fund%20(Class%20B)/Files/PRAB%20-%20{yyyy}-{mm}.pdf
 - name: M&G Inflation Plus
   isin: ZAE000041026
   mandg_fund: M&G Inflation Plus Fund
-  urls:  # backup: Allan Gray platform copy (B class), dated, 4-5 weeks after month-end
-  - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/M~and~G%20Inflation%20Plus%20Fund%20(Class%20B)/Files/PRCB%20-%20{yyyy}-{mm}.pdf
 - name: M&G Global Balanced Fund
   isin: IE00BYQDDD48
   mandg_fund: M&G Global Balanced Fund
-  urls:  # backup: Allan Gray platform copy (B class), dated, 4-5 weeks after month-end
-  - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/M~and~G%20Global%20Balanced%20Fund%20(USD)%20(Class%20B)/Files/PRGBFB%20-%20{yyyy}-{mm}.pdf
 - name: M&G Dividend Maximiser Fund
   isin: ZAE000090932
   mandg_fund: M&G Dividend Maximiser Fund
