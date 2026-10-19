@@ -237,6 +237,11 @@ Sasfin → Otto1890 was confirmed this way; the others need an ISIN on file that
 
 ## 10. Learning log (newest first; add a line after every scan or change)
 
+- **2026-10-19, second test run** (cloud): 192 funds, MDDs for 185. No wrong documents after the link
+  fix. Fundrock served 36ONE and 4D normally again (the 0-byte files were temporary). The only "Not found"
+  funds were the 7 M&G funds (port 8082, cloud only). The tracker showed "Otto1890 FR Flexible Income
+  Fund" in place of Sasfin, as intended.
+
 - **2026-10-19:** The tracker now shows a renamed fund's MDD name when the MDD prints the ISIN we hold.
   Of the 11 funds with `doc_names`, only Sasfin (→ Otto1890 FR Flexible Income Fund, ISIN ZAE000206397)
   qualifies today. Merchant West Worldwide Flexible, 10X, Amplify Active Equity and SIM have an ISIN on
