@@ -297,6 +297,34 @@ class ChecksTest(unittest.TestCase):
         wrapped = b"--boundary\r\nContent-Type: application/pdf\r\n\r\n" + b"%PDF-1.4" + b"x" * 2000
         self.assertTrue(as_pdf(wrapped).startswith(b"%PDF-1.4"))
 
+    def test_confirmed_name_needs_the_known_isin_in_the_mdd(self):
+        from fund_allocator.collector import confirmed_name
+        from fund_allocator.config import FundSource
+        body = " text" * 60
+        src = FundSource("Sasfin BCI Flexible Income", url="u", isin="ZAE000206397",
+                         doc_names=["Otto1890 FR Flexible Income Fund"])
+        mdd = "Otto1890 FR Flexible Income Fund (A) ISIN ZAE000206397" + body
+        self.assertEqual(confirmed_name(src, mdd), "Otto1890 FR Flexible Income Fund")
+        self.assertIsNone(confirmed_name(src, "Otto1890 FR Flexible Income Fund (A)" + body))  # no ISIN printed
+        self.assertIsNone(confirmed_name(FundSource("X", url="u", doc_names=["Otto1890 FR Flexible Income Fund"]),
+                                         mdd))  # no ISIN on file: the MDD's own ISIN proves nothing
+        keep = FundSource("PPS Balanced Passive Fund", url="u", isin="ZAE000206397", keep_name=True,
+                          doc_names=["Otto1890 FR Flexible Income Fund"])
+        self.assertIsNone(confirmed_name(keep, mdd))
+
+    def test_tracker_shows_the_confirmed_name(self):
+        from fund_allocator.collector import Collected, Fund, write_tracker
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "t.xlsx"
+            funds = [Fund("Sasfin BCI Flexible Income"), Fund("Allan Gray Bond")]
+            results = [Collected("Sasfin BCI Flexible Income", "2026 - 08", Path("s.pdf"), isin="ZAE000206397",
+                                 mdd_name="Otto1890 FR Flexible Income Fund"),
+                       Collected("Allan Gray Bond", "2026 - 08", Path("a.pdf"))]
+            write_tracker(path, "2026 - 08", funds, results)
+            rows = [r for r in load_workbook(path)["Tracker"].iter_rows(min_row=2, values_only=True)]
+            self.assertEqual([r[0] for r in rows], ["Allan Gray Bond", "Otto1890 FR Flexible Income Fund"])
+            self.assertIn("previously 'Sasfin BCI Flexible Income'", rows[1][-1])
+
     def test_names_itself(self):
         from fund_allocator.collector import names_itself
         body = " lorem ipsum" * 30

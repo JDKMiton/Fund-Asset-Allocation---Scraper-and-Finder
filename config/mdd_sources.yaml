@@ -563,6 +563,7 @@ funds:
 - name: M&G Property Fund D
   mandg_fund: M&G Property Fund
 - name: PPS Balanced Passive Fund
+  keep_name: true  # the MDD prints the old name "PPS Balanced Index Tracker Fund"
   note: PPS publishes the current fact sheet under the fund's old name (PPS Balanced Index Tracker Fund).
   urls:
   - https://www.pps.co.za/sites/default/files/invest-documents/fund-fact-sheets/PPS%20Monthly%20FactSheets/PPS%20Balanced%20Index%20Tracker%20Fund_%20A%20&%20A2.pdf

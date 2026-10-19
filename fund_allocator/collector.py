@@ -47,6 +47,7 @@ class Collected:
     note: str = ""
     isin: str | None = None
     facts: dict | None = None  # Fund AUM, Inception Date, Benchmark read from the MDD
+    mdd_name: str | None = None  # the fund's current name, when the MDD prints it with the fund's known ISIN
 
 
 @dataclass
@@ -306,7 +307,8 @@ def collect(funds: list[Fund], sources: dict[str, FundSource], scraper: Scraper,
                 info = _read_pdf(path)
                 isins = find_isins(info.get("text", ""))
                 results.append(Collected(fund.name, month, path, "already saved - not searched again",
-                                         src.note or "", src.isin or (isins[0] if isins else None), info.get("facts")))
+                                         src.note or "", src.isin or (isins[0] if isins else None), info.get("facts"),
+                                         confirmed_name(src, info.get("text", ""))))
             log.info("%s: MDDs for %s already saved, not searched again", fund.name, ", ".join(months))
             continue
         got: list[Collected] = []
@@ -346,7 +348,7 @@ def collect(funds: list[Fund], sources: dict[str, FundSource], scraper: Scraper,
 
     all_months = sorted({r.month for r in results if r.month} | set(months)
                         | {d.name for d in out_dir.glob("20?? - ??") if d.is_dir()})
-    results = _with_earlier_runs(funds, results, out_dir, all_months)
+    results = _with_earlier_runs(funds, results, out_dir, all_months, sources)
     shutdown_pdf_reader()
     for issue in issues:
         log.warning("%s: %s - %s", issue.kind, issue.fund, issue.detail)
@@ -425,6 +427,16 @@ def _reject(pdf: Path, fund: Fund, out_dir: Path, why: str) -> Path:
     return dest
 
 
+def confirmed_name(src: FundSource | None, text: str) -> str | None:
+    """The name the MDD prints for a renamed fund, when the fund's known ISIN (``isin`` in the config)
+    is printed in the same MDD. An ISIN read from the MDD itself proves nothing, so it isn't used."""
+    if not src or not src.isin or src.keep_name or not src.doc_names:
+        return None
+    if src.isin not in find_isins(decode_cid(text or "")):
+        return None
+    return next((n for n in src.doc_names if names_itself(text, [n])), None)
+
+
 def _month_index(month: str) -> int:
     y, m = month.split(" - ")
     return int(y) * 12 + int(m) - 1
@@ -489,11 +501,11 @@ def _file_mdd(fund: Fund, src: FundSource, pdf: Path, where: str, out_dir: Path,
     log.info("%s -> %s (%s)", fund.name, dest, result)
     isins = find_isins(text)
     return Collected(fund.name, month, dest, where, src.note or "", src.isin or (isins[0] if isins else None),
-                     info.get("facts"))
+                     info.get("facts"), confirmed_name(src, text))
 
 
 def _with_earlier_runs(funds: list[Fund], results: list[Collected], out_dir: Path,
-                       months: list[str]) -> list[Collected]:
+                       months: list[str], sources: dict[str, FundSource] | None = None) -> list[Collected]:
     """Count MDDs already in the month folders from earlier runs, so a site being down this
     week doesn't turn a collected fund back into an outstanding one."""
     have = {(r.fund, r.month) for r in results if r.month}
@@ -503,8 +515,10 @@ def _with_earlier_runs(funds: list[Fund], results: list[Collected], out_dir: Pat
         for month in months:
             path = out_dir / month / f"{_safe_name(fund.name)}.pdf"
             if (fund.name, month) not in have and path.exists():
+                info = _read_pdf(path)
                 extra.append(Collected(fund.name, month, path, "downloaded in an earlier run", "",
-                                       prev.isin if prev else None, _read_pdf(path).get("facts")))
+                                       prev.isin if prev else None, info.get("facts"),
+                                       confirmed_name((sources or {}).get(fund.name), info.get("text", ""))))
     if not extra:
         return results
     got = {r.fund for r in results if r.month} | {e.fund for e in extra}
@@ -554,7 +568,12 @@ def write_tracker(path: Path, month: str, funds: list[Fund], results: list[Colle
     ws.title = "Tracker"
     _header(ws, 1, ["Fund", "MitonOptimal AUM", "ISIN", *FACT_COLUMNS, "Status", "MDD month",
                     "Other months collected", "File", "Source", "Notes"])
-    for i, fund in enumerate(sorted(funds, key=lambda f: f.name.casefold()), start=2):  # A-Z
+    def shown_name(fund: Fund) -> str:  # the current name, once an MDD with the fund's ISIN confirms it
+        rs = sorted((r for r in by_fund.get(fund.name, []) if r.month), key=lambda r: r.month, reverse=True)
+        return next((r.mdd_name for r in rs if r.mdd_name), fund.name)
+
+    for i, fund in enumerate(sorted(funds, key=lambda f: shown_name(f).casefold()), start=2):  # A-Z
+        name = shown_name(fund)
         rs = by_fund.get(fund.name) or [Collected(fund.name, note="no MDD source configured")]
         this = next((r for r in rs if r.month == month), None)
         dated = sorted((r for r in rs if r.month), key=lambda r: r.month)
@@ -580,7 +599,9 @@ def write_tracker(path: Path, month: str, funds: list[Fund], results: list[Colle
         if status == "Pending" and src:
             note = "; ".join(filter(None, [f"not posted yet - normally up by {due_date(month, src):%d %b %Y}", note]))
         facts = next((r.facts for r in [shown, *reversed(dated)] if r.facts), None) or {}
-        row = [fund.name, fund.aum, isin, *(facts.get(c) for c in FACT_COLUMNS),
+        if name != fund.name:
+            note = "; ".join(filter(None, [f"renamed - previously '{fund.name}' (ISIN {isin} matches the MDD)", note]))
+        row = [name, fund.aum, isin, *(facts.get(c) for c in FACT_COLUMNS),
                status, shown.month if this else None, others,
                shown.path.name if this and shown.path else None, shown.source or None, note or None]
         for j, v in enumerate(row, start=1):

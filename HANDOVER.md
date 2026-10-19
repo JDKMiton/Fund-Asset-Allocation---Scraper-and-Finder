@@ -90,6 +90,7 @@ Name not checked (the PDF has no text layer), No source.
 | Oct 2026 | Tracker file name `!MDD Tracker YYYY - MM.xlsx` (the "!" sorts it to the top); funds A–Z; benchmark not cut off. |
 | Oct 2026 | Share classes for ISINs: Allan Gray C where it exists, otherwise A; Satrix B1, except Smartcore A1; Marriott A (or the retail class where there is no A); otherwise use the class that can be found, and the owner corrects it later. The ISINs from the owner's "Funds.xlsx" buy list are the classes actually held. |
 | 19 Oct 2026 | Asset allocation goes to a separate agent; this scraper doesn't extract it. |
+| 19 Oct 2026 | If the MDD's fund name is the correct one (the ISINs match), show that name in the tracker (§6). |
 
 ## 4. Where things are
 
@@ -97,7 +98,7 @@ Name not checked (the PDF has no text layer), No source.
   - `url` / `urls` (with templates `{yyyy} {mm} {yyyymm} {month} {Month} {mon} {Mon} {MON} {dd} {bdd} {next_yyyy} {next_mm}`);
   - `page` + `link_match` (the regex may contain the same templates) + `render`;
   - `sanlam_fund`, `mandg_fund`, `browser`, `referer`, `ignore_robots`;
-  - `isin`, `note`, `doc_names`, `lag_days`, `frequency`.
+  - `isin`, `note`, `doc_names`, `lag_days`, `frequency`, `keep_name`.
 - `fund_allocator/collector.py`: the run, checks, filing, manifest, tracker. `facts.py`: Fund AUM, inception
   and benchmark. `pdfinfo.py`: PDF reading in a worker process with a 120 s limit. `scraper.py`: downloads,
   browser and site APIs.
@@ -170,7 +171,14 @@ Name not checked (the PDF has no text layer), No source.
 - **Foord:** `foord.co.za/sites/default/files/{next_yyyy}-{next_mm}/<Fund>%20Class%20A%20at%20{yyyy}-{mm}-{dd}.pdf`.
 - **Gryphon:** stable `gryphon.com/documents/<fund-slug>.pdf`.
 
-## 6. Renamed funds (the tracker keeps the owner's name; `doc_names` holds what the MDD prints)
+## 6. Renamed funds
+
+The config keeps the owner's name: files, the AUM match and the skip rule depend on it. `doc_names` holds
+what the MDD prints. **The tracker shows the MDD's name** (with a "renamed - previously …" note) once an
+MDD prints that name **together with the ISIN we hold for the fund** (`isin:` in the config). An ISIN read
+from the MDD itself proves nothing, so it doesn't count. `keep_name: true` stops this for funds whose MDD
+prints an *old* name (PPS Balanced Passive). This is the owner's rule from 19 Oct 2026. On 19 Oct only
+Sasfin → Otto1890 was confirmed this way; the others need an ISIN on file that is also printed in their MDD.
 
 | Tracker name | Now printed as |
 |---|---|
@@ -228,6 +236,13 @@ Name not checked (the PDF has no text layer), No source.
 - Read `docs/sa-factsheet-scraping-guide.md` §6–7, on reading tables by word position and the checks.
 
 ## 10. Learning log (newest first; add a line after every scan or change)
+
+- **2026-10-19:** The tracker now shows a renamed fund's MDD name when the MDD prints the ISIN we hold.
+  Of the 11 funds with `doc_names`, only Sasfin (→ Otto1890 FR Flexible Income Fund, ISIN ZAE000206397)
+  qualifies today. Merchant West Worldwide Flexible, 10X, Amplify Active Equity and SIM have an ISIN on
+  file, but their MDDs don't print it as text. Discovery DAO, Mi-Plan/Vunani, Momentum Capped, Merchant West
+  Global Equity and Baillie Gifford LTGG print an ISIN, but none is on file. PPS Balanced Passive is set
+  to `keep_name` (its MDD prints the old name).
 
 - **2026-10-19, test run with the new checks** (cloud copy of the folder; 192 funds; MDDs for 185):
   - **Bug found and fixed:** a page with no link matching the fund's pattern fell back to any PDF on the
