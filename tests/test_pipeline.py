@@ -235,7 +235,7 @@ class CollectorTest(unittest.TestCase):
             self.assertTrue((out / "2026 - 09" / "Balanced.pdf").exists())
             ws = load_workbook(out / "2026 - 09" / "!MDD Tracker 2026 - 09.xlsx")["Tracker"]
             status = {ws.cell(row=i, column=1).value: ws.cell(row=i, column=7).value for i in range(2, 5)}
-            self.assertEqual(status, {"Balanced": "Collected", "Feeder": "Collected", "No Source": "Outstanding"})
+            self.assertEqual(status, {"Balanced": "Collected", "Feeder": "Collected", "No Source": "No source"})
             self.assertEqual(sum(1 for r in results if r.month), 2)
 
     def test_collect_skips_funds_already_saved_for_all_months(self):
@@ -283,6 +283,103 @@ class CollectorTest(unittest.TestCase):
             ws = load_workbook(out / "2026 - 09" / "!MDD Tracker 2026 - 09.xlsx")["Tracker"]
             rows = [(r[0], r[1]) for r in ws.iter_rows(min_row=2, values_only=True) if r[0]]
             self.assertEqual(rows, [("alpha fund", None), ("Balanced", 100.0), ("Feeder", 7.0)])
+
+
+class ChecksTest(unittest.TestCase):
+    """Fund-name check, masthead month, statuses, never-overwrite and the manifest."""
+
+    def test_as_pdf(self):
+        from fund_allocator.scraper import as_pdf
+        self.assertEqual(as_pdf(b"<html>not found</html>" * 100), b"")
+        self.assertEqual(as_pdf(b"%PDF-tiny"), b"")  # under 1 KB: an error stub, not an MDD
+        wrapped = b"--boundary\r\nContent-Type: application/pdf\r\n\r\n" + b"%PDF-1.4" + b"x" * 2000
+        self.assertTrue(as_pdf(wrapped).startswith(b"%PDF-1.4"))
+
+    def test_names_itself(self):
+        from fund_allocator.collector import names_itself
+        body = " lorem ipsum" * 30
+        self.assertTrue(names_itself("Coronation Balanced Plus Fund | Fund Information" + body,
+                                     ["Coronation Balanced Plus Fund"]))
+        self.assertFalse(names_itself("Amplify SCI Active Equity Retail Hedge Fund" + body,
+                                      ["Amplify SCI Diversified Income RIHF (Terebinth)"]))
+        # a renamed fund passes on the name it now prints
+        self.assertTrue(names_itself("Merchant West SCI Worldwide Flexible Fund A" + body,
+                                     ["Counterpoint SCI Worldwide Flexible Fund", "Merchant West SCI Worldwide Flexible Fund"]))
+        self.assertIsNone(names_itself("1 % 1 %", ["Anything"]))  # image-only PDF: can't tell
+
+    def test_masthead_month_ignores_holdings_and_inception_dates(self):
+        from datetime import date
+        from fund_allocator.collector import document_month, masthead_month
+        today = date(2026, 10, 19)
+        self.assertEqual(masthead_month("M&G Inflation Plus Fund August 2026 Risk profile", today), "2026 - 08")
+        self.assertIsNone(masthead_month("Fund launch date 1 July 2000", today))  # mid-month: not a report date
+        text = "Top 10 holdings as at 30 Jun 2026\nAsset allocation as at 31 Aug 2026"
+        self.assertEqual(document_month(text, today, masthead="Balanced Fund 31 August 2026"), "2026 - 08")
+
+    def test_allocation_stamp(self):
+        from fund_allocator.collector import allocation_stamp
+        self.assertEqual(allocation_stamp("Asset allocation as at 31 Aug 2026"), "2026 - 08")
+        self.assertEqual(allocation_stamp("Asset allocation on 30 June 2026"), "2026 - 06")
+        self.assertIsNone(allocation_stamp("no table here"))
+
+    def test_outstanding_status(self):
+        from datetime import date
+        from fund_allocator.collector import outstanding_status
+        from fund_allocator.config import FundSource
+        src = FundSource("X", url="https://x/f.pdf")
+        self.assertEqual(outstanding_status("2026 - 09", src, date(2026, 10, 19)), "Pending")
+        self.assertEqual(outstanding_status("2026 - 08", src, date(2026, 10, 19)), "Late")
+        slow = FundSource("X", url="https://x/f.pdf", lag_days=60)
+        self.assertEqual(outstanding_status("2026 - 08", slow, date(2026, 10, 19)), "Pending")
+        q = FundSource("X", url="https://x/f.pdf", frequency="quarterly")
+        self.assertEqual(outstanding_status("2026 - 08", q, date(2026, 10, 19)), "Quarterly")
+        self.assertEqual(outstanding_status("2026 - 09", None), "No source")
+
+    def _file(self, tmp, text, content=b"%PDF-1.4 one", name="Alpha Balanced Fund"):
+        """Run _file_mdd on a fake PDF whose text is ``text`` (PDF reading is stubbed)."""
+        from unittest import mock
+        from fund_allocator import collector as C
+        from fund_allocator.config import FundSource
+        pdf = Path(tmp) / f"dl-{abs(hash(content))}.pdf"
+        pdf.write_bytes(content)
+        info = {"text": text, "masthead": text[:60], "facts": {}}
+        issues, got = [], []
+        manifest = C.Manifest(Path(tmp) / "MDDs" / C.MANIFEST)
+        with mock.patch.object(C, "_read_pdf", return_value=info):
+            filed = C._file_mdd(C.Fund(name), FundSource(name, url="u"), pdf, "https://x/f.pdf",
+                                Path(tmp) / "MDDs", ["2026 - 08", "2026 - 09"], got, issues, manifest)
+        return filed, issues
+
+    def test_wrong_document_is_rejected_and_reported(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            filed, issues = self._file(tmp, "Beta Equity Fund 31 August 2026 " + "words " * 60)
+            self.assertIsNone(filed)
+            self.assertEqual([i.kind for i in issues], ["Wrong document"])
+            self.assertEqual(len(list((Path(tmp) / "MDDs" / "_rejected").glob("*.pdf"))), 1)
+            self.assertFalse((Path(tmp) / "MDDs" / "2026 - 08").exists())
+
+    def test_never_overwrites_a_filed_month(self):
+        import csv as _csv
+        with tempfile.TemporaryDirectory() as tmp:
+            text = "Alpha Balanced Fund 31 August 2026 " + "words " * 60
+            filed, _ = self._file(tmp, text, b"%PDF-1.4 first")
+            self.assertEqual(filed.month, "2026 - 08")
+            again, issues = self._file(tmp, text, b"%PDF-1.4 same text, new bytes")
+            self.assertEqual(issues, [])  # same content regenerated: unchanged
+            again, issues = self._file(tmp, text.replace("words", "revised"), b"%PDF-1.4 corrected")
+            self.assertEqual([i.kind for i in issues], ["Reissued"])
+            month = Path(tmp) / "MDDs" / "2026 - 08"
+            self.assertEqual((month / "Alpha Balanced Fund.pdf").read_bytes(), b"%PDF-1.4 first")
+            self.assertEqual(len(list(month.glob("Alpha Balanced Fund (reissued *).pdf"))), 1)
+            with open(Path(tmp) / "MDDs" / "_manifest.csv", newline="") as f:
+                results = [r["result"] for r in _csv.DictReader(f)]
+            self.assertEqual(results, ["filed", "unchanged", "reissued"])
+
+    def test_stale_copy_is_rejected(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            filed, issues = self._file(tmp, "Alpha Balanced Fund 28 February 2026 " + "words " * 60)
+            self.assertIsNone(filed)
+            self.assertEqual([i.kind for i in issues], ["Stale copy"])
 
 
 if __name__ == "__main__":

@@ -48,6 +48,9 @@ python -m unittest discover -s tests -t .
 
 4. Run it: `python -m fund_allocator run [--portfolio "Name"] [--out file.xlsx]`
 
+Before changing sources or running a scan, read [`HANDOVER.md`](HANDOVER.md): the owner's decisions,
+site notes and open issues. Update it afterwards.
+
 ## Collecting MDDs for a fund list
 
 ```bash
@@ -115,8 +118,16 @@ your OneDrive-synced `#Webscraper MDDs` folder, so they appear in OneDrive autom
   A fund whose MDD is already saved in both month folders is not searched again (its Source
   column reads "already saved - not searched again"); add `--refetch` to the collect command
   to search for every fund anyway.
-- Rewrites every month's `!MDD Tracker YYYY - MM.xlsx` (ISIN, Collected/Outstanding, notes). MDDs
-  saved in earlier weeks stay counted even if a site is down this week.
+- Checks every download before filing it: it must be a real PDF, name the fund (or a name listed in
+  `doc_names`), carry a readable month (read from the masthead first) and not be a stale copy. Refused
+  files go to `#Webscraper MDDs\_rejected\`. A filed month is never overwritten: a different copy of the
+  same month is kept beside it as `<Fund> (reissued YYYY-MM-DD).pdf`. Every download is logged in
+  `#Webscraper MDDs\_manifest.csv` (source, time, sha256, allocation stamp).
+- Rewrites every month's `!MDD Tracker YYYY - MM.xlsx`: funds A–Z with ISIN, Fund AUM, inception date,
+  benchmark and status: **Collected**, **Pending** (not posted yet, within the manager's usual delay),
+  **Late** (overdue), **Quarterly** (no MDD due) or **No source**. The **Exceptions** sheet lists wrong
+  documents, stale copies, reissues, unreadable PDFs and late funds. MDDs saved in earlier weeks stay
+  counted even if a site is down this week.
 - Pulls the latest `config/mdd_sources.yaml` from GitHub first (if git is installed), so source
   fixes reach the scheduled job automatically.
 - Logs to `logs\weekly-YYYY-MM-DD.log` (last 12 kept).

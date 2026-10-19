@@ -39,6 +39,9 @@ class Template:
         return [c.name for c in self.categories]
 
 
+DEFAULT_LAG_DAYS = 30  # most managers post an MDD 1-3 weeks after month-end
+
+
 @dataclass
 class FundSource:
     name: str
@@ -56,6 +59,9 @@ class FundSource:
     sanlam_fund: str | None = None  # fund name in Sanlam Collective Investments' fact sheet API
     mandg_fund: str | None = None   # fund name in M&G's all-funds list (mandg.co.za)
     ignore_robots: bool = False     # download even though the site's robots.txt asks bots not to
+    doc_names: list[str] | None = None  # other names the MDD may print (renamed fund, platform name)
+    lag_days: int | None = None     # days after month-end the MDD is normally up (default DEFAULT_LAG_DAYS)
+    frequency: str = "monthly"      # "quarterly": MDDs only for March, June, September and December
 
 
 def normalise_label(text: str) -> str:

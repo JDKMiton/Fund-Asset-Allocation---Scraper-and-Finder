@@ -93,11 +93,12 @@ class Scraper:
                 if "HTTP 403" not in str(exc) and "HTTP 401" not in str(exc):
                     raise
                 log.info("%s refused a plain request, retrying in a browser", url)
-        if not content.startswith(b"%PDF"):
+        if not as_pdf(content):
             if not self._allowed(url):
                 raise ScrapeError(f"robots.txt disallows {url}")
             content = self.browser.fetch(url, page)
-        if not content.startswith(b"%PDF"):
+        content = as_pdf(content)
+        if not content:
             raise ScrapeError(f"{url} did not return a PDF")
         digest = hashlib.sha1(content).hexdigest()[:8]
         path = self.download_dir / f"{slugify(name)}-{digest}.pdf"
@@ -256,6 +257,16 @@ class Browser:
     def close(self) -> None:
         self._browser.close()
         self._pw.stop()
+
+
+def as_pdf(content: bytes) -> bytes:
+    """The PDF in a response, or b"" if it isn't one. A 200 is not a PDF: content systems answer a
+    missing file with an HTML page and status 200. Some old files wrap the PDF so "%PDF-" starts a
+    few hundred bytes in; it is cut from there."""
+    at = content[:1024].find(b"%PDF-")
+    if len(content) < 1024 or at < 0:
+        return b""
+    return content[at:]
 
 
 def find_matching_links(html: str, base_url: str, pattern: str) -> list[str]:

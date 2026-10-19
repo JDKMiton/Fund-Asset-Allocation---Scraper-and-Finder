@@ -106,11 +106,19 @@ def cmd_collect(args: argparse.Namespace) -> int:
     months = args.month or recent_months(args.recent)
     scraper = Scraper(args.download_dir, delay=args.delay, respect_robots=not args.ignore_robots)
     try:
-        results = collect(funds, sources, scraper, args.out, months=months, skip_saved=not args.refetch)
+        issues: list = []
+        results = collect(funds, sources, scraper, args.out, months=months, skip_saved=not args.refetch,
+                          issues=issues)
     finally:
         scraper.close()
     got = len({r.fund for r in results if r.month})
     print(f"{len(funds)} funds: MDDs for {got}, none for {len(funds) - got}")
+    if issues:
+        kinds = {}
+        for i in issues:
+            kinds[i.kind] = kinds.get(i.kind, 0) + 1
+        print("exceptions this run: " + ", ".join(f"{k} {n}" for k, n in sorted(kinds.items()))
+              + " (see the Exceptions sheet in each tracker)")
     for month in sorted({r.month for r in results if r.month} | set(months)):
         n = sum(1 for r in results if r.month == month)
         print(f"  {args.out}/{month}: {n} MDD(s) + tracker")

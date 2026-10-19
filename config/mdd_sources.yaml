@@ -86,45 +86,71 @@ funds:
   isin: ZAE000171468
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-opportunity-fund-h-zar-factsheet.pdf
   browser: true
+  urls:  # backup: Ninety One A-class MDD
+  - https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-ut-opportunity-fund-a-zar-mdd.pdf
 - name: Ninety One Global Franchise Feeder
   isin: ZAE000171526
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-global-franchise-feeder-fund-h-zar-factsheet.pdf
   browser: true
+  urls:  # backup: Ninety One A-class MDD
+  - https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-ut-global-franchise-feeder-fund-a-zar-mdd.pdf
 - name: Ninety One Managed Fund
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-managed-fund-h-zar-factsheet.pdf
   browser: true
+  urls:  # backup: Ninety One A-class MDD
+  - https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-ut-managed-fund-a-zar-mdd.pdf
 - name: Ninety One Cautious Managed
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-cautious-managed-fund-h-zar-factsheet.pdf
   browser: true
+  urls:  # backup: Ninety One A-class MDD
+  - https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-ut-cautious-managed-fund-a-zar-mdd.pdf
 - name: Ninety One Equity
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-equity-fund-h-zar-factsheet.pdf
   browser: true
+  urls:  # backup: Ninety One A-class MDD
+  - https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-ut-equity-fund-a-zar-mdd.pdf
 - name: Ninety One Diversified Income
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-diversified-income-fund-h-zar-factsheet.pdf
   browser: true
+  urls:  # backup: Ninety One A-class MDD
+  - https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-ut-diversified-income-fund-a-zar-mdd.pdf
 - name: Ninety One Global Strategic Managed Feeder Fund
   isin: ZAE000171518
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-global-strategic-managed-feeder-fund-h-zar-factsheet.pdf
   browser: true
+  urls:  # backup: Ninety One A-class MDD
+  - https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-ut-global-strategic-managed-feeder-fund-a-zar-mdd.pdf
 - name: Ninety One Global Multi Asset Income Feeder Fund
   isin: ZAE000037396
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-global-managed-income-feeder-fund-h-zar-factsheet.pdf
   browser: true
+  urls:  # backup: Ninety One A-class MDD
+  - https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-ut-global-managed-income-feeder-fund-a-zar-mdd.pdf
 - name: Ninety One Money Market Expense Account
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-money-market-fund-a-zar-factsheet.pdf
   browser: true
+  urls:  # backup: Ninety One A-class MDD
+  - https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-ut-money-market-fund-a-zar-mdd.pdf
 - name: Ninety One Commodity Fund
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-commodity-fund-h-zar-factsheet.pdf
   browser: true
+  urls:  # backup: Ninety One A-class MDD
+  - https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-ut-commodity-fund-a-zar-mdd.pdf
 - name: Ninety One STeFI Plus Fund
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-stefi-plus-fund-h-zar-factsheet.pdf
   browser: true
+  urls:  # backup: Ninety One A-class MDD
+  - https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-ut-stefi-plus-fund-a-zar-mdd.pdf
 - name: Ninety One Value
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-value-fund-h-zar-factsheet.pdf
   browser: true
+  urls:  # backup: Ninety One A-class MDD
+  - https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-ut-value-fund-a-zar-mdd.pdf
 - name: Ninety One Property Equity
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-property-equity-fund-h-zar-factsheet.pdf
   browser: true
+  urls:  # backup: Ninety One A-class MDD
+  - https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-ut-property-equity-fund-a-zar-mdd.pdf
 - name: Ninety One Global Diversified Income Fund
   url: https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-ut-global-diversified-income-feeder-fund-h-zar-mdd.pdf
   browser: true
@@ -192,6 +218,8 @@ funds:
 - name: Discovery Aggressive Dynamic Asset Optimiser Fund of Funds
   url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/DADAOF
   note: Fund now named Cogence Discovery Balanced Dynamic Asset Optimiser Fund of Funds (same fund code DADAOF).
+  doc_names:
+  - Cogence Discovery Balanced Dynamic Asset Optimiser
 - name: PSG Diversified Income
   isin: ZAE000181673
   url: https://download.psg.co.za/files/asset-management/fund-fact-sheets/PSG-Diversified-Income-Fund-Class-A.pdf
@@ -386,16 +414,22 @@ funds:
   url: https://www.marriott.co.za/downloads/factsheets/Marriott_Dividend_Growth_Fund_Fact_Sheet.pdf
   note: Marriott publishes MDDs quarterly; latest is 30 June 2026.
   ignore_robots: true
+  frequency: quarterly
+  lag_days: 45
 - name: Marriott Essential Income Fund
   isin: ZAE000266896
   url: https://www.marriott.co.za/downloads/factsheets/Marriott_Essential_Income_Fund_Factsheet.pdf
   note: Marriott publishes MDDs quarterly; latest is 30 June 2026.
   ignore_robots: true
+  frequency: quarterly
+  lag_days: 45
 - name: Marriot Property Income Fund
   isin: ZAE000023156
   url: https://www.marriott.co.za/downloads/factsheets/Marriott_Property_Income_Fund_Fact_Sheet.pdf
   note: Marriott publishes MDDs quarterly; latest is 30 June 2026.
   ignore_robots: true
+  frequency: quarterly
+  lag_days: 45
 - name: Camissa Equity Alpha
   page: https://www.camissa-am.com/funds/equity-alpha-fund
   render: true
@@ -437,6 +471,8 @@ funds:
 - name: Mi-Plan IP Enhanced Income
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Vunani%20Fund%20Managers/Vunani%20FR%20Enhanced%20Income%20Fund%20(A1)%20MIPEI.pdf
   note: Matched to Vunani FR Enhanced Income Fund (fund code MIPEI) - appears to be the renamed fund; please confirm.
+  doc_names:
+  - Vunani FR Enhanced Income Fund
 - name: Steyn Capital SNN Daily Liquidity RIHF
   urls:
   - https://steyncapitalmanagement.com/wp-content/uploads/Steyn-Capital-Daily-Liquidity-FR-Retail-Hedge-Fund-{Mon}-{yyyy}-MDD.pdf
@@ -466,8 +502,10 @@ funds:
   isin: ZAE000082236
   url: https://ppsisecure.co.za/SecureDocuments/FundFactSheets/STANLIB%20Absolute%20Plus%20Fund%20-%20B1.pdf
   note: STANLIB's own site blocks automated access; the PPS platform copy is usually a month behind.
+  lag_days: 60
 - name: STANLIB Income Fund
   url: https://ppsisecure.co.za/SecureDocuments/FundFactSheets/STANLIB%20Income%20Fund%20-%20B2.pdf
+  lag_days: 60
 - name: Old Mutual Global Equity [Jupiter Merlin]
   isin: ZAE000171153
   url: https://ppsisecure.co.za/SecureDocuments/FundFactSheets/Old%20Mutual%20Global%20Equity%20Fund%20-%20B1.pdf
@@ -475,9 +513,15 @@ funds:
   isin: ZAE000021283
   url: https://ppsisecure.co.za/SecureDocuments/FundFactSheets/SIM%20Inflation%20Plus%20Fund%20-%20B4.pdf
   note: Renamed SCI Ninety One Cautious Managed Fund from 9 October 2026 (absorbing SIM Inflation Beater and SIM Managed Cautious FoF); the PPS platform copy is updated late.
+  doc_names:
+  - SCI Inflation Plus Fund
+  - SCI Ninety One Cautious Managed Fund
+  lag_days: 60
 - name: Momentum Capped SWIX Index Fund
   url: https://wealth.momentum.co.za/investments/factsheets/momentum-capped-all-share-index-fund-(a).pdf
   note: Fund now named Momentum Capped All Share Index Fund (benchmark changed after the JSE retired the SWIX indices).
+  doc_names:
+  - Momentum Capped All Share Fund
 - name: Ninety One Sterling Money Fund
   url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/LU0898847727
 - name: Ninety One US Dollar Money Fund
@@ -486,6 +530,8 @@ funds:
   url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/LU0345775018
 - name: Baille Gifford Worldwide Long Term Global Growth Fund
   url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/IE00BYQG5606
+  doc_names:
+  - Baillie Gifford Worldwide Long Term Global Growth
 - name: Jupiter Merian World Equity Fund
   url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/IE00B42HMS87
 - name: Baillie Gifford Managed Fund
@@ -500,15 +546,23 @@ funds:
   isin: ZAE000282844
   note: Renamed Amplify SCI Active Equity Retail Hedge Fund; AG Capital replaced Obsidian as manager.
   sanlam_fund: Amplify SCI Active Equity Retail Hedge Fund A1
+  doc_names:
+  - Amplify SCI Active Equity
 - name: M&G Balanced Fund
   isin: ZAE000020863
   mandg_fund: M&G Balanced Fund
+  urls:  # backup: Allan Gray platform copy (B class), dated, 4-5 weeks after month-end
+  - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/M~and~G%20Balanced%20Fund%20(Class%20B)/Files/PRAB%20-%20{yyyy}-{mm}.pdf
 - name: M&G Inflation Plus
   isin: ZAE000041026
   mandg_fund: M&G Inflation Plus Fund
+  urls:  # backup: Allan Gray platform copy (B class), dated, 4-5 weeks after month-end
+  - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/M~and~G%20Inflation%20Plus%20Fund%20(Class%20B)/Files/PRCB%20-%20{yyyy}-{mm}.pdf
 - name: M&G Global Balanced Fund
   isin: IE00BYQDDD48
   mandg_fund: M&G Global Balanced Fund
+  urls:  # backup: Allan Gray platform copy (B class), dated, 4-5 weeks after month-end
+  - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/M~and~G%20Global%20Balanced%20Fund%20(USD)%20(Class%20B)/Files/PRGBFB%20-%20{yyyy}-{mm}.pdf
 - name: M&G Dividend Maximiser Fund
   isin: ZAE000090932
   mandg_fund: M&G Dividend Maximiser Fund
@@ -519,6 +573,8 @@ funds:
   urls:
   - https://www.pps.co.za/sites/default/files/invest-documents/fund-fact-sheets/PPS%20Monthly%20FactSheets/PPS%20Balanced%20Index%20Tracker%20Fund_%20A%20&%20A2.pdf
   - https://wealth.momentum.co.za/investments/factsheets/pps-balanced-passive-fund-(a2).pdf
+  doc_names:
+  - PPS Balanced Index Tracker Fund
 - name: Old Mutual RAFI 40 Index Fund
   note: MDD link from Old Mutual's local equity fund table; fund is balloting a rename to Old Mutual RAFI SA Index Fund.
   url: https://www.oldmutualinvest.com/om-docs/blt534f03c64ce9c4b6/OldMutualRAFI40TrackerFund.pdf
@@ -553,11 +609,15 @@ funds:
   note: Renamed Merchant West SCI Global Equity Feeder Fund (B class MDD).
   page: https://merchantwest.co.za/investments/our-funds/
   link_match: SI_Merchant-West-SCI-Global-Equity-Feeder-Fund
+  doc_names:
+  - Merchant West SCI Global Equity Feeder Fund
 - name: Counterpoint SCI Worldwide Flexible Fund
   isin: ZAE000141727
   note: Renamed Merchant West SCI Worldwide Flexible Fund.
   page: https://merchantwest.co.za/investments/our-funds/
   link_match: SI_Merchant-West-SCI-Worldwide-Flexible-Fund
+  doc_names:
+  - Merchant West SCI Worldwide Flexible Fund
 - name: Vulcan Value Equity Fund
   isin: IE00B8FGBZ03
   note: Irish UCITS fund (Vulcan Value Partners) - fact sheet from Prescient's fund page; ISIN is the USD Acc class.
@@ -569,6 +629,9 @@ funds:
   note: Renamed 10X S&P SA Top50 Tracker Fund (10X bought CoreShares); 10X publishes MDDs about 6 weeks after month-end.
   page: https://assetmanagement.10x.co.za/fund/10x-sp-south-africa-top50-index-etf/
   link_match: Top50-Tracker-Fund-.*MDD-Class-B
+  doc_names:
+  - 10X S&P SA Top50 Tracker Fund
+  lag_days: 50
 - name: Curate Momentum Enhanced Yield Fund
   isin: ZAE000160479
   note: A class MDD hosted by Momentum (linked from curateinvestments.com).
@@ -577,6 +640,8 @@ funds:
   isin: ZAE000206397
   note: Renamed Otto1890 FR Flexible Income Fund (Sasfin Wealth became Otto1890).
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Otto1890%20Asset%20Management/Otto1890%20FR%20Flexible%20Income%20Fund%20(A)%20SMFIA.pdf
+  doc_names:
+  - Otto1890 FR Flexible Income Fund
 # Added from the MitonOptimal local buy list (Funds.xlsx), October 2026
 - name: Abax Absolute Prescient Fund
   isin: ZAE000144275
@@ -646,15 +711,19 @@ funds:
   isin: ZAE000214946
   url: https://ppsisecure.co.za/SecureDocuments/FundFactSheets/STANLIB%20Enhanced%20Multi%20Style%20Equity%20Fund%20-%20B1.pdf
   note: STANLIB's own site blocks automated access; the PPS platform copy is usually a month behind.
+  lag_days: 60
 - name: STANLIB Global Balanced Feeder Fund
   isin: ZAE000213021
   url: https://wealth.momentum.co.za/investments/factsheets/stanlib-global-balanced-feeder-fund-(b3).pdf
   note: STANLIB's own site blocks automated access; Momentum's copy is usually a month behind.
+  lag_days: 60
 - name: STANLIB Multi-Asset Cautious Fund
   isin: ZAE000288486
   url: https://wealth.momentum.co.za/investments/factsheets/stanlib-multi-asset-cautious-fund-(c3).pdf
   note: STANLIB's own site blocks automated access; Momentum's copy is usually a month behind.
+  lag_days: 60
 - name: STANLIB Multi-Asset Growth Fund
   isin: ZAE000314555
   url: https://wealth.momentum.co.za/investments/factsheets/stanlib-multi-asset-growth-fund-(b1).pdf
   note: B1 class MDD (Momentum's C3 copy is out of date); STANLIB's own site blocks automated access.
+  lag_days: 60
