@@ -237,8 +237,15 @@ Management". Don't rename Linka's folders; change the config. Owner's filing dec
 | Catalyst SCI Global Real Estate | Catalyst Fund Managers (Linka's "Catalyx Capital" is a different firm) |
 | SIM Inflation Plus (SCI Ninety One Cautious Managed from 9 Oct 2026) | Ninety One (Linka files it under Ninety One Cautious Managed) |
 
-After this, 38 managers (156 funds) match a folder. Still open: 25 managers (36 funds) with no folder,
-e.g. Orbis (5), Foord (4), Oyster Catcher, Merchant West, Northstar, Baillie Gifford (2 each).
+| Foord funds incl. Nedgroup Stable [Foord] | Foord (folder created by the owner) |
+| Orbis funds incl. the 2 Allan Gray Orbis feeders | Orbis Investment Management (folder created by the owner) |
+| Amplify boutiques | AG Capital, Acumen Capital, Marble Rock Asset Management, Oyster Catcher Investments (empty folders created by Claude) |
+| Momentum Capped SWIX, Curate Enhanced Yield | Momentum (folder created by Claude) |
+| Discovery Aggressive DAO FoF (Cogence) | Cogence (folder created by Claude) |
+
+After this, 45 managers (173 funds) match a folder. Still without a folder: 16 managers (19 funds),
+listed to the owner on 20 Oct with the exact names to create (e.g. Merchant West Investments, Northstar
+Asset Management, Baillie Gifford, Veritas Asset Management, Vunani Fund Managers).
 
 ## 7. Open issues and questions for the owner
 
@@ -279,6 +286,11 @@ e.g. Orbis (5), Foord (4), Oyster Catcher, Merchant West, Northstar, Baillie Gif
 - Read `docs/sa-factsheet-scraping-guide.md` §6–7, on reading tables by word position and the checks.
 
 ## 10. Learning log (newest first; add a line after every scan or change)
+
+- **2026-10-20, more manager folders:** the owner created Orbis Investment Management and Foord;
+  at the owner's request Claude created empty folders AG Capital, Acumen Capital, Marble Rock Asset
+  Management, Oyster Catcher Investments, Momentum and Cogence in Linka's Asset Management folder.
+  SIM Inflation Plus set to Ninety One. 45 managers / 173 funds now match; 16 / 19 still need folders.
 
 - **2026-10-20, Fund Manager mismatches decided** (owner, one by one; table in §6). Also corrected:
   the first pass had missed that "STANLIB Asset Management" (5 funds) matches the Stanlib folder; now

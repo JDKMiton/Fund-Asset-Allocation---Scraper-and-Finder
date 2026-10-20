@@ -236,7 +236,7 @@ funds:
   urls:
   - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Entrepreneur%20Fund%20A.pdf
 - name: Nedgroup Investments Stable Fund [Foord]
-  fund_manager: "Foord Asset Management"
+  fund_manager: "Foord"
   urls:
   - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Stable%20Fund%20A.pdf
 - name: Nedgroup Investments SA Equity Fund
@@ -277,7 +277,7 @@ funds:
   fund_manager: "Ninety One"
   url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/DMMF
 - name: Discovery Aggressive Dynamic Asset Optimiser Fund of Funds
-  fund_manager: "Cogence (asset allocation advised by BlackRock)"
+  fund_manager: "Cogence"
   current_name: Cogence Discovery Balanced Dynamic Asset Optimiser Fund of Funds
   url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/DADAOF
   note: Renamed Cogence Discovery Balanced Dynamic Asset Optimiser Fund of Funds (same fund code); rename confirmed by the owner 19 Oct 2026.
@@ -504,21 +504,21 @@ funds:
   link_match: 36one-prescient-retail-hedge-fund-1-[a-z]+-\d{4}_361rf1
   render: true
 - name: Foord Balanced Fund
-  fund_manager: "Foord Asset Management"
+  fund_manager: "Foord"
   page: https://foord.co.za/investments/forms-and-documents
   render: true
   link_match: Foord(%20| )Balanced(%20| )Fund(%20| )Class(%20| )A(%20| )at
   urls:
   - https://foord.co.za/sites/default/files/{next_yyyy}-{next_mm}/Foord%20Balanced%20Fund%20Class%20A%20at%20{yyyy}-{mm}-{dd}.pdf
 - name: Foord Equity Fund
-  fund_manager: "Foord Asset Management"
+  fund_manager: "Foord"
   page: https://foord.co.za/investments/forms-and-documents
   render: true
   link_match: Foord(%20| )Equity(%20| )Fund(%20| )Class(%20| )A(%20| )at
   urls:
   - https://foord.co.za/sites/default/files/{next_yyyy}-{next_mm}/Foord%20Equity%20Fund%20Class%20A%20at%20{yyyy}-{mm}-{dd}.pdf
 - name: Foord International Fund
-  fund_manager: "Foord Asset Management"
+  fund_manager: "Foord"
   page: https://foord.co.za/investments/forms-and-documents
   render: true
   link_match: Foord(%20| )International(%20| )Fund(%20| )Class(%20| )R(%20| )at
@@ -665,7 +665,7 @@ funds:
   - SCI Ninety One Cautious Managed Fund
   lag_days: 60
 - name: Momentum Capped SWIX Index Fund
-  fund_manager: "Momentum Asset Management"
+  fund_manager: "Momentum"
   url: https://wealth.momentum.co.za/investments/factsheets/momentum-capped-all-share-index-fund-(a).pdf
   note: Fund now named Momentum Capped All Share Index Fund (benchmark changed after the JSE retired the SWIX indices).
   doc_names:
@@ -809,7 +809,7 @@ funds:
   - 10X S&P SA Top50 Tracker Fund
   lag_days: 50
 - name: Curate Momentum Enhanced Yield Fund
-  fund_manager: "Momentum Fixed Income"
+  fund_manager: "Momentum"
   isin: ZAE000160479
   note: A class MDD hosted by Momentum (linked from curateinvestments.com).
   url: https://wealth.momentum.co.za/investments/factsheets/curate-momentum-enhanced-yield-fund-(a)-zaf.pdf
