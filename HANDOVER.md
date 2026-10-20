@@ -34,7 +34,7 @@ records what was actually seen for *these* funds and wins.
 
 | Item | Value |
 |---|---|
-| Install on the owner's work PC | `C:\Tools\MDD-Scraper` (updated by copying the branch ZIP over it, choosing Replace and keeping `.venv`; it is not a git clone, so the `git pull` in `run_weekly.ps1` does nothing there) |
+| Install on the owner's work PC | `C:\Tools\MDD-Scraper`. Until 20 Oct 2026 it was updated by copying the branch ZIP over it (Replace, keep `.venv`). From 20 Oct the owner was given steps to make it a git clone of this branch: `run_weekly.ps1` then runs `git pull --ff-only` before each run, and reinstalls packages when `requirements.txt` changes. **Pushing to this branch updates the PC at the next weekly run.** Check the top of the weekly log for the pull result. |
 | Scheduled task | "Fund MDD weekly download", Mondays 07:00, runs `scripts\windows\run_weekly.ps1`; set up by `scripts\windows\setup_weekly_task.ps1` |
 | Output folder | `E:\OneDrive - MitonOptimal Portfolio Management (Pty) Ltd\#Webscraper MDDs` (synced by OneDrive) |
 | Fund list | `config/mdd_sources.yaml` (192 funds on 19 Oct 2026). **This file defines the tracker.** |
@@ -256,6 +256,12 @@ Check these when a fund changes manager (e.g. Amplify Multi Strategy: Obsidian �
 - Read `docs/sa-factsheet-scraping-guide.md` §6–7, on reading tables by word position and the checks.
 
 ## 10. Learning log (newest first; add a line after every scan or change)
+
+- **2026-10-20, self-updating install:** extracting the branch ZIP into Downloads failed with "Path too long"
+  (0x80010135) on the deep `skill\...\scripts\windows\setup_weekly_task.ps1`. The owner was told to
+  extract to a short folder, then given one-time steps (install Git, turn `C:\Tools\MDD-Scraper` into a clone,
+  sign in to GitHub once) so the weekly task pulls updates itself. `run_weekly.ps1` now pulls only in a
+  git clone, and reinstalls packages if `requirements.txt` changed.
 
 - **2026-10-20, Fund Manager column:** added to every tracker (second column) at the owner's request. Each
   fund's latest MDD was read for its manager, and the result is in `fund_manager` for all 192 funds (§6).

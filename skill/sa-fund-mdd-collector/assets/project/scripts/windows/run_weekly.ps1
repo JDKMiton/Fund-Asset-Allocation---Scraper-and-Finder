@@ -16,10 +16,19 @@ $logDir = Join-Path $repo "logs"
 New-Item -ItemType Directory -Force -Path $logDir | Out-Null
 $log = Join-Path $logDir ("weekly-{0:yyyy-MM-dd}.log" -f (Get-Date))
 
-# Pick up any updated fund sources pushed to the repository (ignored if git isn't available).
-if (Get-Command git -ErrorAction SilentlyContinue) { git pull --ff-only *>> $log }
-
 $python = Join-Path $repo ".venv\Scripts\python.exe"
+
+# Pick up code and fund-source updates pushed to the repository (needs git and a git clone; skipped otherwise).
+# If the update changed the required packages, install them before collecting.
+if ((Get-Command git -ErrorAction SilentlyContinue) -and (Test-Path (Join-Path $repo ".git"))) {
+    $before = (Get-FileHash requirements.txt).Hash
+    "=== $(Get-Date -Format s) updating from GitHub" | Out-File -Append $log
+    git pull --ff-only *>> $log
+    if ((Get-FileHash requirements.txt).Hash -ne $before) {
+        & $python -m pip install -r requirements.txt *>> $log
+        & $python -m playwright install chromium *>> $log
+    }
+}
 $cmd = @("-m", "fund_allocator", "collect",
          "--sources", "config\mdd_sources.yaml",
          "--out", $OutFolder,

@@ -29,7 +29,22 @@ Give the owner these steps, filling in their paths.
 4. **Run it once now:** `Start-ScheduledTask -TaskName "Fund MDD weekly download"`. Check
    `logs\weekly-YYYY-MM-DD.log`; the end says `N funds: MDDs for X …` and lists the exceptions.
    PowerShell doesn't need to stay open.
-5. To change the AUM column heading, edit `"--aum-label"` in `scripts\windows\run_weekly.ps1`.
+5. **Automatic updates (optional):** if the project is in a GitHub repository, make the install folder a
+   git clone. `run_weekly.ps1` then runs `git pull` before every run, and reinstalls packages when
+   `requirements.txt` changes, so anything pushed reaches the PC at the next run. Install Git
+   (`winget install --id Git.Git -e`), then run, in the project folder:
+   ```powershell
+   git config --global core.longpaths true
+   git init
+   git remote add origin https://github.com/<owner>/<repo>.git
+   git fetch origin <branch>
+   git checkout -f -B <branch> --track origin/<branch>
+   ```
+   A private repository asks the user to sign in to GitHub once; Windows remembers it for the task.
+   Without this, an update means downloading the ZIP and copying it over the folder, keeping `.venv`.
+   Extract the ZIP to a short path such as `C:\MDDzip`; deep paths can hit Windows' 260-character
+   limit ("Path too long").
+6. To change the AUM column heading, edit `"--aum-label"` in `scripts\windows\run_weekly.ps1`.
 
 **Common problems:**
 - "Python 3.11–3.14 is needed": install 3.13 and rerun.
