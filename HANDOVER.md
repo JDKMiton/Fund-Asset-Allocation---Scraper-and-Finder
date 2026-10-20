@@ -257,8 +257,48 @@ usually a "General - Fund Manager Info" folder. `fund_folder` in the config name
 Global Inflation Plus Feeder Fund"). Claude created the other 122 as empty folders named after the fund
 (the tracker's `current_name` where set; "Baille" and "Marriot" typos corrected). Not the same fund, so
 kept apart: Jupiter Merian World Equity vs. "Jupiter Merian Global Equity Fund", PPS Equity vs. "PPS
-Global Equity Fund", Ranmore Global Equity vs. the BCI Ranmore feeder. **Where MDDs go inside a fund
-folder is not decided yet; the owner will set that up. Don't copy MDDs there until asked.**
+Global Equity Fund", Ranmore Global Equity vs. the BCI Ranmore feeder. **On 20 Oct 2026 an empty `MDDs` folder was
+created in each of the 191 fund folders** (owner's request). How MDDs are filed into it is still for the
+owner to decide; don't copy MDDs there until asked.
+
+**Fund folders in Linka's share that are not in the tracker** (71 on 20 Oct 2026; candidates to add,
+for the owner to decide; "General", "Additional Information" and "New folder" folders not counted):
+
+| Manager folder | Fund folders |
+|---|---|
+| AIP Capital | AIP RCIS Multi-Strategy RHF |
+| Artisan Partners | Artisan Partners Global Value Fund |
+| Bateleur | Bateleur Market Neutral Prescienr RIHF |
+| BlackRock | BGF World Real Estate Securities Fund; iShares Copper Miners ETF; iShares Global Infrastructure ETF; iShares India Govt Bond ETF; iShares Lithium Miners and Producers ETF; iShares Lithium and Battery Producers UCITS ETF; iShares Silver Trust ETF; iShares US Industrials ETF |
+| Camissa | Camissa Protector; Camissa SA Equity |
+| Cartesian | CAEP RCIS Fixed Income Retail Hedge Fund; MitonOptimal BCI Interest Plus Fund |
+| Causeway Securities (Levendi) | Causeway Defined Growth Fund; Causeway Defined Return Fund; Levendi Thornbridge Defined Return Fund |
+| Coronation | Coronation Active Income Plus |
+| Denker Capital | UBS DNKOPP 30Nov27 |
+| Fairtree | Fairtree Flexible Income |
+| Flagship | Flagship IP Flexible Value Fund; Flagship IP Worldwide Flexible FOF; Flagship IP Worldwide Flexible Fund |
+| Franklin Templeton | FTGT Brandywine Global Income Optimiser; Franklin Alternative Strategies; Franklin Biotechnology Discovery; Franklin Emerging Market Corporate Debt; Franklin Flexible Alpha Bond; Franklin India; Franklin Technology; Franklin US Opportunites; Templeton BRIC; Templeton Emerging Markets; Templeton Emerging Markets Smaller Companies |
+| Invesco Capital Management | Invesco S&P MidCap Momentum ETF |
+| Jupiter Merian Fund Management | Jupiter Merian Global Equity Fund (not the tracker's Jupiter Merian World Equity) |
+| Laurium Capital | Laurium Enhanced Growth |
+| Lyrical Asset Management (Curate-Momentum) | Curate Global Quality Equity Fund; Curate Global Value Equity Fund |
+| MitonOptimal | MO BCI Worldwide Growth; MO FR Active Beta; MO FR Worldwide Active Beta (the FR funds are excluded on purpose, §3) |
+| Nedgroup | **Nedgroup Global Equity Fund** (the tracker's Nedgroup Global Equity files under Veritas, §6: two folders for one fund); Nedgroup Rainmaker Fund |
+| Old Mutual Wealth - OMI | Old Mutual Global Managed Alpha; Old Mutual Multi-Manager Private Equity Fund; Old Mutual Private Equity Secondary Fund; Old Mutual RAFI All World Index Fund |
+| Omba | Omba Global Equity Fund; Omba Global Thematic Fund; Omba Moderate Risk Global Allocattion Fund |
+| PPS | PPS Global Equity Fund (not the tracker's PPS Equity) |
+| Peregrine | Peregrine Capital High Growth; Peregrine Capital Pure Hedge |
+| Perspective Investment Mgmt | Perspective Balanced Prescient; Perspective Executive Equity Prescient |
+| Portfoliometrix | Portfoliometrix FR Income Fund |
+| Riscura | Riscura BCI China Equity Feeder |
+| Robeco (Curate) | Curate Global Emerging Markets Equity Fund |
+| Sanlam | Sanlam AI Global Managed Risk Fund; Sanlam Global High Quality Strategy Fund; Sanlam Multi-Strategy Fund; Sanlam Real Assets Fund |
+| Schroders | Schroder ISF QEP Global Core Strategy |
+| Southern Cross Capital | Southern Cross Market Neutral |
+| Sprott Asset Management | Sprott Silver Miners & Physical Silver ETF |
+| Stanlib | Stanlib Global Select |
+| State Street Global Advisers - SPDR S&P | SPDR S&P Pan Asia Dividend Aristocrats UCITS ETF |
+| UBS | Coherent Capital Global Commodity Investment (CCMGCZ); UBS Solactive China Technology ETF |
 
 ## 7. Open issues and questions for the owner
 
@@ -299,6 +339,10 @@ folder is not decided yet; the owner will set that up. Don't copy MDDs there unt
 - Read `docs/sa-factsheet-scraping-guide.md` §6–7, on reading tables by word position and the checks.
 
 ## 10. Learning log (newest first; add a line after every scan or change)
+
+- **2026-10-20, MDDs folders:** created an empty `MDDs` folder in each of the 191 fund folders. Listed the
+  71 fund folders in Linka's share that aren't in the tracker (§6). Found: Linka has a "Nedgroup Global
+  Equity Fund" folder under Nedgroup, while the owner filed that fund under Veritas earlier today.
 
 - **2026-10-20, fund folders:** each tracker fund matched to its fund folder in Linka's share (§6, Fund
   folders); new config field `fund_folder` (also copied to the skill). The owner reviewed the doubtful
