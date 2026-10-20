@@ -1206,10 +1206,6 @@ funds:
   note: Now Old Mutual RAFI Select Global Index Feeder Fund (class A); rename not yet confirmed by the owner.
   doc_names:
   - Old Mutual RAFI Select Global Index Feeder Fund
-- name: "Sanlam Multi-Strategy Fund"
-  fund_manager: "Sanlam"
-  fund_folder: "Sanlam Multi-Strategy Fund"
-  note: 'No public MDD found: the Irish UCITS fund (now Sanlam Ninety One Multi Strategy Fund) is not in Sanlam''s fact sheet API and Ninety One''s site is behind Cloudflare. Share class held unknown.'
 - name: "Flagship IP Flexible Value Fund"
   fund_manager: "Flagship"
   fund_folder: "Flagship IP Flexible Value Fund"
@@ -1221,7 +1217,7 @@ funds:
   fund_folder: "Flagship IP Worldwide Flexible Fund"
   isin: ZAE000139036
   url: 'https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Flagship%20Asset%20Management/Flagship%20FR%20Worldwide%20Flexible%20Feeder%20Fund%20(A)%20FLWF.pdf'
-  note: Now Flagship FR Worldwide Flexible Feeder Fund (A); the MDD names only its earlier BCI name, so the owner should confirm the ISIN.
+  note: Now Flagship FR Worldwide Flexible Feeder Fund (A); the MDD names only its earlier BCI name; the owner accepted it as the same fund on 20 Oct 2026.
 - name: "Flagship IP Worldwide Flexible FoF"
   fund_manager: "Flagship"
   fund_folder: "Flagship IP Worldwide Flexible FOF"
@@ -1231,21 +1227,23 @@ funds:
 - name: "Omba Global Equity Fund"
   fund_manager: "Omba"
   fund_folder: "Omba Global Equity Fund"
+  isin: IE00032SOEO9
   page: 'https://www.prescient.co.za/funds/other-funds/'
   link_match: omba-global-equity-fund-mdd
   render: true
   frequency: quarterly
   lag_days: 45
-  note: 'Irish UCITS (Omba Investments ICAV); quarterly MDD on Prescient''s page. Share class held not confirmed.'
+  note: 'Irish UCITS (Omba Investments ICAV), A USD Acc held (owner, 20 Oct 2026); quarterly MDD on Prescient''s page.'
 - name: "Omba Global Thematic Fund"
   fund_manager: "Omba"
   fund_folder: "Omba Global Thematic Fund"
+  isin: IE00024JYLP6
   page: 'https://www.prescient.co.za/funds/other-funds/'
   link_match: omba-global-thematic-fund-mdd
   render: true
   frequency: quarterly
   lag_days: 45
-  note: 'Irish UCITS (Omba Investments ICAV); quarterly MDD on Prescient''s page. Share class held not confirmed.'
+  note: 'Irish UCITS (Omba Investments ICAV), A USD Acc held (owner, 20 Oct 2026); quarterly MDD on Prescient''s page.'
 - name: "Camissa Protector Fund"
   fund_manager: "Camissa"
   fund_folder: "Camissa Protector"
@@ -1257,11 +1255,11 @@ funds:
 - name: "Camissa SA Equity Fund"
   fund_manager: "Camissa"
   fund_folder: "Camissa SA Equity"
-  isin: ZAE000313102
+  isin: ZAE000313128
   page: 'https://www.camissa-am.com/funds/sa-equity-fund'
   link_match: '_\d{4}\.pdf'
   render: true
-  note: A class MDD from camissa-am.com.
+  note: C class held (Linka's DD pack); camissa-am.com publishes only the A class MDD (ZAE000313102), same portfolio.
 - name: "CAEP RCIS Fixed Income Retail Hedge Fund"
   fund_manager: "Cartesian"
   fund_folder: "CAEP RCIS Fixed Income Retail Hedge Fund"
@@ -1283,9 +1281,9 @@ funds:
 - name: "Curate Global Emerging Markets Equity Fund"
   fund_manager: "Robeco (Curate)"
   fund_folder: "Curate Global Emerging Markets Equity Fund"
-  isin: LU2377867424
+  isin: LU2377870212
   url: 'https://wealth.momentum.co.za/investments/factsheets/curate-global-emerging-markets-equity-fund-a-usd.pdf'
-  note: A Class USD fact sheet (Luxembourg MGF SICAV) hosted by Momentum.
+  note: R Class USD held (Linka's Sep 2026 FRA pack); Momentum hosts only the A Class USD fact sheet (LU2377867424), same portfolio.
 - name: "Nedgroup Investments Rainmaker Fund"
   fund_manager: "Nedgroup"
   fund_folder: "Nedgroup Rainmaker Fund"
@@ -1299,14 +1297,14 @@ funds:
   isin: ZAE000346482
   page: 'https://www.peregrinecapital.co.za/factsheets'
   link_match: Peregrine_Capital_High_Growth_Retail_Hedge_Fund_MDD_[0-9a-f_]+\.pdf
-  note: Retail hedge fund class A MDD (a QI class also exists); the link changes monthly.
+  note: Retail hedge fund class A, as on the buy list (a QI class also exists); the link changes monthly.
 - name: "Peregrine Capital Pure Hedge Fund"
   fund_manager: "Peregrine"
   fund_folder: "Peregrine Capital Pure Hedge"
   isin: ZAE000346557
   page: 'https://www.peregrinecapital.co.za/factsheets'
   link_match: Peregrine_Capital_Pure_Hedge_Retail_Hedge_Fund_MDD_[0-9a-f_]+\.pdf
-  note: Retail hedge fund class A MDD (a QI class also exists); the link changes monthly.
+  note: Retail hedge fund class A, as on the buy list (a QI class also exists); the link changes monthly.
 - name: "Perspective Balanced Prescient Fund"
   fund_manager: "Perspective Investment Mgmt"
   fund_folder: "Perspective Balanced Prescient"
