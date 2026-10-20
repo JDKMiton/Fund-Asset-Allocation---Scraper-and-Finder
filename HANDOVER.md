@@ -293,6 +293,7 @@ Management". Don't rename Linka's folders; change the config. Owner's filing dec
 | Amplify boutiques | AG Capital, Acumen Capital, Marble Rock Asset Management, Oyster Catcher Investments (empty folders created by Claude) |
 | Momentum Capped SWIX, Curate Enhanced Yield | Momentum (folder created by Claude) |
 | Discovery Aggressive DAO FoF (Cogence) | Cogence (folder created by Claude) |
+| CAEP RCIS Fixed Income RHF (owner, 20 Oct 2026) | Cartesian: Cartesian Capital (Anthea Gardner) runs it under CAEP Asset Managers' Category IIA licence, so the MDD names CAEP. |
 | Curate Global Quality Equity (owner, 20 Oct 2026) | Evenlode, the adviser named on the fact sheet (empty folder created by Claude). **Exception:** its fund folder stays under Lyrical Asset Management (Curate-Momentum), with Linka's DD pack. |
 
 The other 16 managers got empty folders named exactly as in the config (created by Claude at the
@@ -358,9 +359,7 @@ through them one by one:
 - **The funds added on 20 Oct 2026, still open:**
   - Sprott SLVR: download by hand each quarter?
   - Share classes were settled on 20 Oct 2026 (§3).
-  - Fund Manager values that may be wrong: CAEP
-    RCIS names CAEP Asset Managers (filed under Cartesian); Nedgroup Rainmaker is run by Ninety One's
-    Quality team. Not changed (owner's folder decisions).
+  - Fund Manager value that may be wrong: Nedgroup Rainmaker is run by Ninety One's Quality team.
 - **Old files:** if `2026 - 09\Marriott Core Income.pdf` exists from an early run, it is the August sheet
   and should be moved.
 
@@ -386,6 +385,9 @@ through them one by one:
 - Read `docs/sa-factsheet-scraping-guide.md` §6–7, on reading tables by word position and the checks.
 
 ## 10. Learning log (newest first; add a line after every scan or change)
+
+- **2026-10-20, CAEP stays under Cartesian** (owner): Cartesian's DD pack (12 Oct 2026) shows the fund is
+  Cartesian Capital's, run under CAEP Asset Managers' licence. Note added to the config; no change to the run.
 
 - **2026-10-20, Curate Global Quality → Evenlode** (owner): `fund_manager` set to Evenlode, the adviser on
   the fact sheet; empty Evenlode folder created in Linka's share. The fund folder stays under Lyrical (§6).

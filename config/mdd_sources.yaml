@@ -1265,7 +1265,7 @@ funds:
   fund_folder: "CAEP RCIS Fixed Income Retail Hedge Fund"
   isin: ZAE000330874
   url: 'https://realfin.co.za/fund-files/mdd-files/MDD-CAEP-RCIS-Fixed-Income-RHF.pdf'
-  note: A class MDD from RealFin (RCIS); the MDD names CAEP Asset Managers as investment manager.
+  note: A class MDD from RealFin (RCIS). Run by Cartesian Capital (Anthea Gardner) under CAEP Asset Managers' licence, so the MDD names CAEP as investment manager; filed under Cartesian (owner, 20 Oct 2026).
 - name: "Curate Global Quality Equity Fund"
   fund_manager: "Evenlode"
   fund_folder: "Curate Global Quality Equity Fund"
