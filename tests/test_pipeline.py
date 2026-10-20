@@ -371,6 +371,11 @@ class ChecksTest(unittest.TestCase):
         self.assertIsNone(masthead_month("Fund launch date 1 July 2000", today))  # mid-month: not a report date
         text = "Top 10 holdings as at 30 Jun 2026\nAsset allocation as at 31 Aug 2026"
         self.assertEqual(document_month(text, today, masthead="Balanced Fund 31 August 2026"), "2026 - 08")
+        # Flagship prints a letter o for the zero of the day
+        self.assertEqual(masthead_month("MINIMUM DISCLOSURE DOCUMENT | 3oSEPTEMBER2026", today), "2026 - 09")
+        # US fact sheets (iShares) print "as of June 30, 2026"
+        self.assertEqual(masthead_month("iShares Silver Trust Fact Sheet as of June 30, 2026", today), "2026 - 06")
+        self.assertEqual(document_month("Inception 4/21/2006 Fact Sheet as of June 30, 2026", today), "2026 - 06")
 
     def test_allocation_stamp(self):
         from fund_allocator.collector import allocation_stamp

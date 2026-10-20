@@ -88,25 +88,31 @@ _AS_AT = [  # explicit reporting-date phrases, most reliable first
 def _dates(text: str) -> list[tuple[int, int]]:
     """All (year, month) pairs in the order they appear in ``text``."""
     pattern = re.compile(rf"\b(?:\d{{1,2}}\s*)?{_MON}\s*(\d{{4}})\b|\b(\d{{4}})[/-](\d{{1,2}})[/-]\d{{1,2}}\b"
-                         rf"|\b\d{{1,2}}[/.-](\d{{1,2}})[/.-](\d{{4}})\b", re.IGNORECASE)
+                         rf"|\b\d{{1,2}}[/.-](\d{{1,2}})[/.-](\d{{4}})\b"
+                         rf"|\b{_MON}\s+\d{{1,2}},\s*(\d{{4}})\b", re.IGNORECASE)  # US: "June 30, 2026"
     out = []
     for m in pattern.finditer(text):
         if m.group(1):
             out.append((int(m.group(2)), MONTHS[m.group(1).lower()[:3]]))
         elif m.group(3):
             out.append((int(m.group(3)), int(m.group(4))))
+        elif m.group(7):
+            out.append((int(m.group(8)), MONTHS[m.group(7).lower()[:3]]))
         else:
             out.append((int(m.group(6)), int(m.group(5))))
     return out
 
 
 _CID = re.compile(r"\(cid:(\d+)\)")
+# Flagship's masthead prints "3oSEPTEMBER2026": a letter o for the zero of the day
+_O_FOR_ZERO = re.compile(rf"\b([0-3])o(?=\s*{_MON}\s*\d{{4}})", re.I)
 
 
 def decode_cid(text: str) -> str:
     """Some MDDs use fonts whose text comes out as "(cid:21)(cid:19)..." - glyph numbers that are a
     fixed offset away from the real characters. Find the offset that turns them into month names
     and decode, so dates in those headers can be read."""
+    text = _O_FOR_ZERO.sub(r"\g<1>0", text)
     if "(cid:" not in text:
         return text
     best, best_hits = None, 0
@@ -139,6 +145,10 @@ def masthead_month(masthead: str, today: date | None = None) -> str | None:
         y, mo, d = int(m.group(3)), MONTHS[m.group(2).lower()[:3]], int(m.group(1))
         spans.append(m.span())
         hits.append((y, mo, d == calendar.monthrange(y, mo)[1] if 1 <= mo <= 12 and y >= 2000 else False, False))
+    for m in re.finditer(rf"\b{_MON}\s+(\d{{1,2}}),\s*(\d{{4}})\b", text, re.I):  # US: "June 30, 2026"
+        y, mo, d = int(m.group(3)), MONTHS[m.group(1).lower()[:3]], int(m.group(2))
+        spans.append(m.span())
+        hits.append((y, mo, y >= 2000 and d == calendar.monthrange(y, mo)[1], False))
     for m in re.finditer(rf"\b{_MON}\s*(\d{{4}})\d?\b", text, re.I):
         if not any(a <= m.start() < b for a, b in spans):
             hits.append((int(m.group(2)), MONTHS[m.group(1).lower()[:3]], False, True))

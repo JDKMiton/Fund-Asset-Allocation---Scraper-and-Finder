@@ -37,7 +37,7 @@ records what was actually seen for *these* funds and wins.
 | Install on the owner's work PC | `C:\Tools\MDD-Scraper`. Until 20 Oct 2026 it was updated by copying the branch ZIP over it (Replace, keep `.venv`). From 20 Oct the owner was given steps to make it a git clone of this branch: `run_weekly.ps1` then runs `git pull --ff-only` before each run, and reinstalls packages when `requirements.txt` changes. **Pushing to this branch updates the PC at the next weekly run.** Check the top of the weekly log for the pull result. |
 | Scheduled task | "Fund MDD weekly download", Mondays 07:00, runs `scripts\windows\run_weekly.ps1`; set up by `scripts\windows\setup_weekly_task.ps1` |
 | Output folder | `E:\OneDrive - MitonOptimal Portfolio Management (Pty) Ltd\#Webscraper MDDs` (synced by OneDrive) |
-| Fund list | `config/mdd_sources.yaml` (236 funds on 20 Oct 2026: 191, plus 45 added from Linka's folders that have no MDD source yet). **This file defines the tracker.** |
+| Fund list | `config/mdd_sources.yaml` (236 funds on 20 Oct 2026: 191, plus 45 added from Linka's folders; 42 of those 45 now have a source, 3 have a documented reason for none). **This file defines the tracker.** |
 | AUM workbook | `AUM_By_Holding_Fund_Model_Portfolio.xlsx`, sheet "Holding Fund Totals". Only fills the "MitonOptimal AUM" column; it does not add or remove funds. |
 | Excluded | `--exclude "^MitonOptimal FR"`: the owner sources the MitonOptimal FR funds directly. |
 | Branch | `claude/fund-location-scraper-kvsmox` on GitHub `JDKMiton/Fund-Asset-Allocation---Scraper-and-Finder` (moved from the personal account JacDK777 on 20 Oct 2026) |
@@ -174,6 +174,50 @@ Name not checked (the PDF has no text layer), No source.
 - **Foord:** `foord.co.za/sites/default/files/{next_yyyy}-{next_mm}/<Fund>%20Class%20A%20at%20{yyyy}-{mm}-{dd}.pdf`.
 - **Gryphon:** stable `gryphon.com/documents/<fund-slug>.pdf`.
 
+Sources found on 20 Oct 2026 for the 45 funds added from Linka's folders:
+
+- **Franklin Templeton (FTIF, I (acc) USD, ZA edition MDD):** `franklintempleton.co.za/download/en-za/factsheet/<document id>/Factsheet-<Fund>-I(acc)USD-<code>-J-FF-ZA-en-GB.PDF`.
+  The document id stays the same month to month (seen Dec 2025 to Oct 2026), so a fixed `url` works. Links
+  come from the public literature API `franklintempleton.co.za/api/literature/v1/documents?channel=en-za&docTypeCode=FF`.
+  The browser site shows a terms gate; the download links don't. MDDs print "U.S." (doc_names).
+- **iShares US ETFs (IGF, IYJ, SLV, ILIT):** `ishares.com/us/literature/fact-sheet/<ticker>-<name>-fund-fact-sheet-en-us.pdf`.
+  **Quarterly**, dated US style "as of June 30, 2026"; the month reader now handles that form (it read
+  IGF as 2007 and IYJ as 2000 before). The UCITS ETFs (INGB, Copper Miners, LITM) are monthly at
+  `ishares.com/gls-download/literature/fact-sheet/<ticker>-<name>-fund-fact-sheet-en-gb.pdf`.
+- **Old Mutual global feeders:** links on the rendered `/individual/funds/global-funds/` table. Global
+  Managed Alpha is the rand feeder `bltc5262aa7fb355d6d`; RAFI All World is now **RAFI Select Global Index
+  Feeder** `blt92b726bac5247d33`. Other blt links on those rows are holdings and risk/return reports.
+- **Flagship:** moved from IP to Fundrock on 19 Sep 2025; now `Flagship FR …` on bcis.co.za. The Flexible
+  Value masthead prints "3oSEPTEMBER2026" (a letter o); the month reader now accepts that.
+- **Prescient other-funds page** also has Omba (quarterly Irish ICAV MDDs, `{yyyy}-q2-omba-…-mdd`), Artisan
+  Global Value (`globalvalue-mdd-MMYY-vucits-zaf.pdf`; Pzena and T. Rowe Price "Global Value" sheets sit
+  beside it), PPS Global Equity (Irish ICAV, A1), Laurium Enhanced Growth feeder (the MDD prints "Laurium
+  Enh Growth") and Bateleur Market Neutral.
+- **Camissa:** fund pages on camissa-am.com (rendered); `link_match: _\d{4}\.pdf` picks the monthly MDD.
+- **Perspective:** quarterly only since Dec 2020, `perspectiveim.co.za/downloads/mdd/Perspective-<Balanced|Equity>-Fund-MDD-{yyyy}-{mm}.pdf`.
+  A missing month answers 200 with HTML, so non-quarter months show "did not return a PDF".
+- **Peregrine Capital:** left H4 on 7 Aug 2025; `peregrinecapital.co.za/factsheets` links Azure blob PDFs
+  with a hash in the name that changes monthly (Retail and QI classes). Momentum and Discovery copies are the
+  stale H4 ones.
+- **RealFin (RCIS: CAEP, AIP):** stable `realfin.co.za/fund-files/mdd-files/MDD-<fund>.pdf`. AIP's text
+  reads "PUBLISHED ON 9 OCTOBER 2026 SEPTEMBER 2026"; it dates correctly as September.
+- **Novare CIS (Southern Cross Market Neutral):** stable `novarecis.co.za/docs/mdd/<fund>-MDD.pdf`, listed on
+  `/third-party-funds/`. Southern Cross's own site is stale.
+- **Curate global funds (Luxembourg MGF SICAV, A Class USD):** Momentum `…/factsheets/curate-global-<fund>-a-usd.pdf`
+  (not the `curate-momentum-…-(a)-zaf` pattern).
+- **Jupiter (UK funds):** permalink by ISIN on `dms-api.jupiteram.instinctcentral.io/documents/permalink?group.name=Factsheet&systemMetadata={"shareClassIds":["<ISIN>"]}…`
+  redirects to the current fact sheet. It also serves Jupiter Merian World Equity (IE00B42HMS87), a
+  possible backup for that fund.
+- **Schroders QEP Global Core:** only C Acc and C Dis have fact sheets (`SISF-QEP-Global-Core-C-Acc-FMR-LUEN.pdf`).
+- **UBS KeyInvest (Coherent CCMGCZ):** a JSE-listed UBS note, not a unit trust; the rendered product page
+  links a monthly "AMC SALES FACTSHEET" (the link has no .pdf).
+- **STANLIB Global Select:** only the Momentum copy of the rand feeder (B2), 2 to 3 months behind
+  (`lag_days: 90`). `stanlib.literaturehub.co.za` has `Disallow: /`. stanlib.com itself answered plain
+  requests on 20 Oct 2026 and its robots.txt allows all.
+- **No source (documented in the config):** Sanlam Multi-Strategy (Irish UCITS, now Sanlam Ninety One Multi
+  Strategy; not in Sanlam's API, Ninety One behind Cloudflare); Sprott SLVR (sprott.com and sprottetfs.com
+  behind a Cloudflare challenge; quarterly US sheet); Riscura BCI China Equity Feeder (wound up 4 Sep 2026).
+
 ## 6. Renamed funds
 
 The config keeps the owner's name: files, the AUM match and the skip rule depend on it. `doc_names` holds
@@ -197,6 +241,10 @@ Sasfin → Otto1890 was confirmed this way; the others need an ISIN on file that
 | Mi-Plan IP Enhanced Income | Vunani FR Enhanced Income Fund (code MIPEI); confirmed by the owner, shown in the tracker |
 | Discovery Aggressive Dynamic Asset Optimiser FoF | Cogence Discovery Balanced Dynamic Asset Optimiser FoF (code DADAOF); confirmed by the owner, shown in the tracker |
 | Old Mutual RAFI 40 Index Fund | balloting a rename to Old Mutual RAFI SA Index Fund |
+| Old Mutual RAFI All World Index Fund | Old Mutual RAFI Select Global Index Feeder Fund (not yet confirmed by the owner) |
+| Fairtree Flexible Income Fund | Fairtree FR Income Plus Fund (ex Fairtree Flexible Income Plus Prescient, ex MET Income Plus) |
+| Flagship IP Flexible Value / Worldwide Flexible / Worldwide Flexible FoF | Flagship FR Flexible Value Fund / FR Worldwide Flexible Feeder Fund / FR Worldwide Flexible Fund of Funds |
+| Sanlam Multi-Strategy Fund | Sanlam Ninety One Multi Strategy Fund (no source) |
 
 ### Fund managers (owner's request, 20 Oct 2026)
 
@@ -263,8 +311,9 @@ owner to decide; don't copy MDDs there until asked.
 
 **Fund folders in Linka's share that were not in the tracker** (71 on 20 Oct 2026). The owner went
 through them one by one:
-- **Added (45)**, each with `fund_folder`, an `MDDs` folder and the note "MDD source not found yet", so
-  they show as **No source** until a source is found: Templeton Emerging Markets, Templeton EM Smaller
+- **Added (45)**, each with `fund_folder` and an `MDDs` folder. Sources were found on 20 Oct 2026 for 42
+  (§5); Sanlam Multi-Strategy, Sprott SLVR and Riscura China (wound up) stay **No source** with the reason
+  in their note: Templeton Emerging Markets, Templeton EM Smaller
   Companies, Franklin Technology, Franklin US Opportunities; iShares Global Infrastructure, US Industrials,
   India Govt Bond, Silver Trust, Copper Miners, Lithium Miners and Producers, Lithium and Battery Producers;
   Old Mutual Global Managed Alpha, Old Mutual RAFI All World Index; Sanlam Multi-Strategy; Flagship IP
@@ -302,6 +351,18 @@ through them one by one:
   - Fund AUM, inception date and benchmark are read automatically and can be blank or imperfect;
   - Discovery benchmarks run together without spaces;
   - a few long composite benchmarks stop where the MDD mixes in text from another column.
+- **The 45 funds added on 20 Oct 2026, for the owner to confirm** (classes chosen by default; correct the
+  `isin` and link if another class is held):
+  - Riscura BCI China Equity Feeder was wound up on 4 Sep 2026: remove it, or track the underlying RisCura
+    China Equity Fund (Prescient other-funds page, `riscura-china-equity-fund-mdd-\d{6}`)?
+  - Sanlam Multi-Strategy: which class is held, and can the owner supply the Ninety One fact sheet link?
+  - Sprott SLVR: download by hand each quarter?
+  - Classes: Omba (A USD Acc or the SA feeder POGEC1?), Peregrine (Retail chosen; QI exists), Nedgroup
+    Rainmaker (A chosen; A1 and R exist), Laurium Enhanced Growth (ZAR feeder chosen; USD UCITS exists),
+    Old Mutual Global Managed Alpha (rand feeder A chosen), Flagship Worldwide Flexible (ISIN ZAE000139036).
+  - Fund Manager values that may be wrong: Curate Global Quality Equity names Evenlode, not Lyrical; CAEP
+    RCIS names CAEP Asset Managers (filed under Cartesian); Nedgroup Rainmaker is run by Ninety One's
+    Quality team. Not changed (owner's folder decisions).
 - **Old files:** if `2026 - 09\Marriott Core Income.pdf` exists from an early run, it is the August sheet
   and should be moved.
 
@@ -327,6 +388,13 @@ through them one by one:
 - Read `docs/sa-factsheet-scraping-guide.md` §6–7, on reading tables by word position and the checks.
 
 ## 10. Learning log (newest first; add a line after every scan or change)
+
+- **2026-10-20, sources for the 45 added funds:** 42 now have a source (§5), each tested with `collect`
+  into a scratch folder: 41 MDDs filed (Jun to Sep 2026), every one passing the name and month checks; the
+  two Perspective funds are quarterly and their September sheet isn't up yet (June verified). No source:
+  Sanlam Multi-Strategy, Sprott SLVR (Cloudflare), Riscura China (wound up). Month reader fixes, with
+  tests, also copied to the skill: US dates "June 30, 2026" (iShares US) and "3oSEPTEMBER2026" (Flagship).
+  US iShares and Perspective and Omba are `frequency: quarterly`. Owner questions in §7.
 
 - **2026-10-20, 45 funds added to the tracker** from Linka's folders (owner's choices, §6). They have no
   download source yet (status No source); finding one per fund is the next job. 236 funds in the config.

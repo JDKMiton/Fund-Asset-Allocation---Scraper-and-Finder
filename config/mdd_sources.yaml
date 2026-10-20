@@ -1111,180 +1111,323 @@ funds:
 - name: "Templeton Emerging Markets Fund"
   fund_manager: "Franklin Templeton"
   fund_folder: "Templeton Emerging Markets Fund"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: LU0195951610
+  url: 'https://www.franklintempleton.co.za/download/en-za/factsheet/02536407-7261-423f-8610-f90326b511da/Factsheet-TempletonEmergingMarketsFund-I(acc)USD-250-J-FF-ZA-en-GB.PDF'
+  note: FTIF I (acc) USD; monthly ZA edition MDD from franklintempleton.co.za (the document link stays the same each month).
 - name: "Templeton Emerging Markets Smaller Companies Fund"
   fund_manager: "Franklin Templeton"
   fund_folder: "Templeton Emerging Markets Smaller Companies Fund"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: LU0300738944
+  url: 'https://www.franklintempleton.co.za/download/en-za/factsheet/0f181f35-543e-4b78-9dc6-4d5cd6a79532/Factsheet-TempletonEmergingMarketsSmallerCompaniesFund-I(acc)USD-11615-J-FF-ZA-en-GB.PDF'
+  note: FTIF I (acc) USD; monthly ZA edition MDD from franklintempleton.co.za (the document link stays the same each month).
 - name: "Franklin Technology Fund"
   fund_manager: "Franklin Templeton"
   fund_folder: "Franklin Technology Fund"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: LU0626261944
+  url: 'https://www.franklintempleton.co.za/download/en-za/factsheet/942e54c0-672f-4df1-9987-75aae4c9f69b/Factsheet-FranklinTechnologyFund-I(acc)USD-4916-J-FF-ZA-en-GB.PDF'
+  note: FTIF I (acc) USD; monthly ZA edition MDD from franklintempleton.co.za (the document link stays the same each month).
 - name: "Franklin US Opportunities Fund"
   fund_manager: "Franklin Templeton"
   fund_folder: "Franklin US Opportunites Fund"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: LU0195948665
+  url: 'https://www.franklintempleton.co.za/download/en-za/factsheet/3776f3fd-91d1-4c57-9146-2fa30caddcfb/Factsheet-FranklinUSOpportunitiesFund-I(acc)USD-4913-J-FF-ZA-en-GB.PDF'
+  note: FTIF I (acc) USD; monthly ZA edition MDD from franklintempleton.co.za (the document link stays the same each month).
+  doc_names:
+  - Franklin U.S. Opportunities Fund
 - name: "iShares Global Infrastructure ETF"
   fund_manager: "BlackRock"
   fund_folder: "iShares Global Infrastructure ETF"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: US4642883726
+  url: 'https://www.ishares.com/us/literature/fact-sheet/igf-ishares-global-infrastructure-etf-fund-fact-sheet-en-us.pdf'
+  frequency: quarterly
+  note: US ETF IGF; iShares US fact sheets are quarterly.
 - name: "iShares US Industrials ETF"
   fund_manager: "BlackRock"
   fund_folder: "iShares US Industrials ETF"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: US4642877546
+  url: 'https://www.ishares.com/us/literature/fact-sheet/iyj-ishares-u-s-industrials-etf-fund-fact-sheet-en-us.pdf'
+  frequency: quarterly
+  note: US ETF IYJ; iShares US fact sheets are quarterly.
+  doc_names:
+  - iShares U.S. Industrials ETF
 - name: "iShares India Govt Bond ETF"
   fund_manager: "BlackRock"
   fund_folder: "iShares India Govt Bond ETF"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: IE0004L9EID2
+  url: 'https://www.ishares.com/gls-download/literature/fact-sheet/ingb-ishares-india-inr-govt-bond-ucits-etf-fund-fact-sheet-en-gb.pdf'
+  note: iShares India INR Govt Bond UCITS ETF USD (Dist), INGB; monthly BlackRock fact sheet.
+  doc_names:
+  - iShares India INR Govt Bond UCITS ETF
 - name: "iShares Silver Trust ETF"
   fund_manager: "BlackRock"
   fund_folder: "iShares Silver Trust ETF"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: US46428Q1094
+  url: 'https://www.ishares.com/us/literature/fact-sheet/slv-ishares-silver-trust-fund-fact-sheet-en-us.pdf'
+  frequency: quarterly
+  note: US SLV; iShares US fact sheets are quarterly.
+  doc_names:
+  - iShares Silver Trust
 - name: "iShares Copper Miners ETF"
   fund_manager: "BlackRock"
   fund_folder: "iShares Copper Miners ETF"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: IE00063FT9K6
+  url: 'https://www.ishares.com/gls-download/literature/fact-sheet/copm-ishares-copper-miners-ucits-etf-fund-fact-sheet-en-gb.pdf'
+  note: iShares Copper Miners UCITS ETF USD (Acc); monthly BlackRock fact sheet.
+  doc_names:
+  - iShares Copper Miners UCITS ETF
 - name: "iShares Lithium Miners and Producers ETF"
   fund_manager: "BlackRock"
   fund_folder: "iShares Lithium Miners and Producers ETF"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: US46436E1718
+  url: 'https://www.ishares.com/us/literature/fact-sheet/ilit-ishares-lithium-miners-and-producers-etf-fund-fact-sheet-en-us.pdf'
+  frequency: quarterly
+  note: US ETF ILIT; iShares US fact sheets are quarterly.
 - name: "iShares Lithium and Battery Producers UCITS ETF"
   fund_manager: "BlackRock"
   fund_folder: "iShares Lithium and Battery Producers UCITS ETF"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: IE000WDG5795
+  url: 'https://www.ishares.com/gls-download/literature/fact-sheet/litm-ishares-lithium-battery-producers-ucits-etf-fund-fact-sheet-en-gb.pdf'
+  note: USD (Acc), LITM; monthly BlackRock fact sheet.
+  doc_names:
+  - 'iShares Lithium & Battery Producers UCITS ETF'
 - name: "Old Mutual Global Managed Alpha Fund"
   fund_manager: "Old Mutual Wealth - OMI"
   fund_folder: "Old Mutual Global Managed Alpha"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: ZAE000331070
+  url: 'https://www.oldmutualinvest.com/om-docs/bltc5262aa7fb355d6d/OldMutualGlobalManagedAlphaEquityFeederFund.pdf'
+  note: MDD of the rand feeder, Old Mutual Global Managed Alpha Equity Feeder Fund (class A); no public sheet found for the offshore fund.
+  doc_names:
+  - Old Mutual Global Managed Alpha Equity Feeder Fund
 - name: "Old Mutual RAFI All World Index Fund"
   fund_manager: "Old Mutual Wealth - OMI"
   fund_folder: "Old Mutual RAFI All World Index Fund"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: ZAE000164620
+  url: 'https://www.oldmutualinvest.com/om-docs/blt92b726bac5247d33/OldMutualRAFISelectGlobalIndexFeederFund.pdf'
+  note: Now Old Mutual RAFI Select Global Index Feeder Fund (class A); rename not yet confirmed by the owner.
+  doc_names:
+  - Old Mutual RAFI Select Global Index Feeder Fund
 - name: "Sanlam Multi-Strategy Fund"
   fund_manager: "Sanlam"
   fund_folder: "Sanlam Multi-Strategy Fund"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  note: 'No public MDD found: the Irish UCITS fund (now Sanlam Ninety One Multi Strategy Fund) is not in Sanlam''s fact sheet API and Ninety One''s site is behind Cloudflare. Share class held unknown.'
 - name: "Flagship IP Flexible Value Fund"
   fund_manager: "Flagship"
   fund_folder: "Flagship IP Flexible Value Fund"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: ZAE000159877
+  url: 'https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Flagship%20Asset%20Management/Flagship%20FR%20Flexible%20Value%20Fund%20(A1)%20FIFA1.pdf'
+  note: Now Flagship FR Flexible Value Fund (A1); Fundrock replaced IP as manager on 19 Sep 2025.
 - name: "Flagship IP Worldwide Flexible Fund"
   fund_manager: "Flagship"
   fund_folder: "Flagship IP Worldwide Flexible Fund"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: ZAE000139036
+  url: 'https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Flagship%20Asset%20Management/Flagship%20FR%20Worldwide%20Flexible%20Feeder%20Fund%20(A)%20FLWF.pdf'
+  note: Now Flagship FR Worldwide Flexible Feeder Fund (A); the MDD names only its earlier BCI name, so the owner should confirm the ISIN.
 - name: "Flagship IP Worldwide Flexible FoF"
   fund_manager: "Flagship"
   fund_folder: "Flagship IP Worldwide Flexible FOF"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: ZAE000139044
+  url: 'https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Flagship%20Asset%20Management/Flagship%20FR%20Worldwide%20Flexible%20Fund%20of%20Funds%20(A)%20FLFF.pdf'
+  note: Now Flagship FR Worldwide Flexible Fund of Funds (A); Fundrock replaced IP as manager on 19 Sep 2025.
 - name: "Omba Global Equity Fund"
   fund_manager: "Omba"
   fund_folder: "Omba Global Equity Fund"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  page: 'https://www.prescient.co.za/funds/other-funds/'
+  link_match: omba-global-equity-fund-mdd
+  render: true
+  frequency: quarterly
+  lag_days: 45
+  note: 'Irish UCITS (Omba Investments ICAV); quarterly MDD on Prescient''s page. Share class held not confirmed.'
 - name: "Omba Global Thematic Fund"
   fund_manager: "Omba"
   fund_folder: "Omba Global Thematic Fund"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  page: 'https://www.prescient.co.za/funds/other-funds/'
+  link_match: omba-global-thematic-fund-mdd
+  render: true
+  frequency: quarterly
+  lag_days: 45
+  note: 'Irish UCITS (Omba Investments ICAV); quarterly MDD on Prescient''s page. Share class held not confirmed.'
 - name: "Camissa Protector Fund"
   fund_manager: "Camissa"
   fund_folder: "Camissa Protector"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: ZAE000150850
+  page: 'https://www.camissa-am.com/funds/protector-fund'
+  link_match: '_\d{4}\.pdf'
+  render: true
+  note: A class MDD from camissa-am.com.
 - name: "Camissa SA Equity Fund"
   fund_manager: "Camissa"
   fund_folder: "Camissa SA Equity"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: ZAE000313102
+  page: 'https://www.camissa-am.com/funds/sa-equity-fund'
+  link_match: '_\d{4}\.pdf'
+  render: true
+  note: A class MDD from camissa-am.com.
 - name: "CAEP RCIS Fixed Income Retail Hedge Fund"
   fund_manager: "Cartesian"
   fund_folder: "CAEP RCIS Fixed Income Retail Hedge Fund"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: ZAE000330874
+  url: 'https://realfin.co.za/fund-files/mdd-files/MDD-CAEP-RCIS-Fixed-Income-RHF.pdf'
+  note: A class MDD from RealFin (RCIS); the MDD names CAEP Asset Managers as investment manager.
 - name: "Curate Global Quality Equity Fund"
   fund_manager: "Lyrical Asset Management (Curate-Momentum)"
   fund_folder: "Curate Global Quality Equity Fund"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: LU2863672676
+  url: 'https://wealth.momentum.co.za/investments/factsheets/curate-global-quality-equity-fund-a-usd.pdf'
+  note: A Class USD fact sheet (Luxembourg MGF SICAV) hosted by Momentum; the fact sheet names Evenlode as adviser.
 - name: "Curate Global Value Equity Fund"
   fund_manager: "Lyrical Asset Management (Curate-Momentum)"
   fund_folder: "Curate Global Value Equity Fund"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: LU2863666512
+  url: 'https://wealth.momentum.co.za/investments/factsheets/curate-global-value-equity-fund-a-usd.pdf'
+  note: A Class USD fact sheet (Luxembourg MGF SICAV) hosted by Momentum.
 - name: "Curate Global Emerging Markets Equity Fund"
   fund_manager: "Robeco (Curate)"
   fund_folder: "Curate Global Emerging Markets Equity Fund"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: LU2377867424
+  url: 'https://wealth.momentum.co.za/investments/factsheets/curate-global-emerging-markets-equity-fund-a-usd.pdf'
+  note: A Class USD fact sheet (Luxembourg MGF SICAV) hosted by Momentum.
 - name: "Nedgroup Investments Rainmaker Fund"
   fund_manager: "Nedgroup"
   fund_folder: "Nedgroup Rainmaker Fund"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: ZAE000019477
+  urls:
+  - 'https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Rainmaker%20Fund%20A.pdf'
+  note: A class MDD; classes A1 and R also exist.
 - name: "Peregrine Capital High Growth Fund"
   fund_manager: "Peregrine"
   fund_folder: "Peregrine Capital High Growth"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: ZAE000346482
+  page: 'https://www.peregrinecapital.co.za/factsheets'
+  link_match: Peregrine_Capital_High_Growth_Retail_Hedge_Fund_MDD_[0-9a-f_]+\.pdf
+  note: Retail hedge fund class A MDD (a QI class also exists); the link changes monthly.
 - name: "Peregrine Capital Pure Hedge Fund"
   fund_manager: "Peregrine"
   fund_folder: "Peregrine Capital Pure Hedge"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: ZAE000346557
+  page: 'https://www.peregrinecapital.co.za/factsheets'
+  link_match: Peregrine_Capital_Pure_Hedge_Retail_Hedge_Fund_MDD_[0-9a-f_]+\.pdf
+  note: Retail hedge fund class A MDD (a QI class also exists); the link changes monthly.
 - name: "Perspective Balanced Prescient Fund"
   fund_manager: "Perspective Investment Mgmt"
   fund_folder: "Perspective Balanced Prescient"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: ZAE000248605
+  urls:
+  - 'https://www.perspectiveim.co.za/downloads/mdd/Perspective-Balanced-Fund-MDD-{yyyy}-{mm}.pdf'
+  frequency: quarterly
+  lag_days: 60
+  note: Quarterly MDD (class A1) from perspectiveim.co.za.
 - name: "Perspective Executive Equity Prescient Fund"
   fund_manager: "Perspective Investment Mgmt"
   fund_folder: "Perspective Executive Equity Prescient"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: ZAE000291829
+  urls:
+  - 'https://www.perspectiveim.co.za/downloads/mdd/Perspective-Equity-Fund-MDD-{yyyy}-{mm}.pdf'
+  frequency: quarterly
+  lag_days: 60
+  note: Quarterly MDD (class A1) from perspectiveim.co.za, file named Perspective Equity Fund.
 - name: "Coherent Capital Global Commodity Investment"
   fund_manager: "UBS"
   fund_folder: "Coherent Capital Global Commodity Investment (CCMGCZ)"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: ZAE000316303
+  page: 'https://keyinvest-za.ubs.com/product/detail/index/isin/ZAE000316303'
+  link_match: AMC SALES FACTSHEET
+  render: true
+  note: UBS AG note (JSE CCMGCZ) on the Coherent Global Commodity Investment Portfolio, maturing 30 Nov 2027; monthly UBS KeyInvest fact sheet.
+  doc_names:
+  - Coherent Global Commodity Investment Portfolio
 - name: "AIP RCIS Multi-Strategy Retail Hedge Fund"
   fund_manager: "AIP Capital"
   fund_folder: "AIP RCIS Multi-Strategy RHF"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: ZAE000325668
+  url: 'https://realfin.co.za/fund-files/mdd-files/MDD-AIP-RCIS-RHF.pdf'
+  note: A class MDD from RealFin (RCIS).
 - name: "Artisan Partners Global Value Fund"
   fund_manager: "Artisan Partners"
   fund_folder: "Artisan Partners Global Value Fund"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: IE00B43C0T93
+  page: 'https://www.prescient.co.za/funds/other-funds/'
+  link_match: 'globalvalue-mdd-{mm}\d{2}-vucits-zaf\.pdf'
+  render: true
+  note: 'Irish UCITS, class I USD; SA MDD on Prescient''s page.'
+  doc_names:
+  - Artisan Global Value Fund
 - name: "Bateleur Market Neutral Prescient RI Hedge Fund"
   fund_manager: "Bateleur"
   fund_folder: "Bateleur Market Neutral Prescienr RIHF"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  page: 'https://www.prescient.co.za/funds/other-funds/'
+  link_match: 'bateleur-market-neutral-prescient-ri-hedge-fund_\d{8}'
+  render: true
+  note: 'MDD on Prescient''s page; no ISIN printed.'
 - name: "Coronation Active Income Plus Fund"
   fund_manager: "Coronation"
   fund_folder: "Coronation Active Income Plus"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: ZAE000327516
+  url: 'https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CAIPA'
 - name: "Fairtree Flexible Income Fund"
   fund_manager: "Fairtree"
   fund_folder: "Fairtree Flexible Income"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: ZAE000206256
+  url: 'https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Fairtree%20Asset%20Management/Fairtree%20FR%20Income%20Plus%20Fund%20(A)%20BIPFA.pdf'
+  note: Now Fairtree FR Income Plus Fund (class A), formerly Fairtree Flexible Income Plus Prescient.
+  doc_names:
+  - Fairtree FR Income Plus Fund
 - name: "Jupiter Merian Global Equity Fund"
   fund_manager: "Jupiter Merian Fund Management"
   fund_folder: "Jupiter Merian Global Equity Fund"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: GB00B1XG9821
+  url: 'https://dms-api.jupiteram.instinctcentral.io/documents/permalink?group.name=Factsheet&systemMetadata=%7B%22shareClassIds%22:%5B%22GB00B1XG9821%22%5D%7D&metadata=%7B%22documentLanguage%22:%22en-GB%22%2C%22jurisdiction%22:%5B%22UK%22%5D%2C%22investorType%22:%5B%22Professional%22%5D%7D'
+  note: 'UK unit trust, I GBP Acc; Jupiter''s permalink serves the current fact sheet.'
 - name: "Laurium Enhanced Growth Fund"
   fund_manager: "Laurium Capital"
   fund_folder: "Laurium Enhanced Growth"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: ZAE000330585
+  page: 'https://www.prescient.co.za/funds/other-funds/'
+  link_match: 'laurium-enhanced-growth-prescient-ri-hedge-feeder-fund-\d{6}'
+  render: true
+  note: Laurium Enhanced Growth Prescient RI Hedge Feeder Fund (ZAR); a USD UCITS fund also exists.
+  doc_names:
+  - Laurium Enh Growth
 - name: "PPS Global Equity Fund"
   fund_manager: "PPS"
   fund_folder: "PPS Global Equity Fund"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: IE00BJXT2F50
+  page: 'https://www.prescient.co.za/funds/other-funds/'
+  link_match: pps-global-equity-fund-a1\.pdf
+  render: true
+  note: Irish UCITS (Prescient Global Funds ICAV), class A1; the PPS platform feeder copies are stale.
 - name: "Portfoliometrix FR Income Fund"
   fund_manager: "Portfoliometrix"
   fund_folder: "Portfoliometrix FR Income Fund"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: ZAE000203154
+  url: 'https://www.bcis.co.za/upload/factsheet_categories_folders/funds/PortfolioMetrix%20Asset%20Management%20SA/PortfolioMetrix%20FR%20Income%20Fund%20(A)%20PMIFA.pdf'
 - name: "Riscura BCI China Equity Feeder Fund"
   fund_manager: "Riscura"
   fund_folder: "Riscura BCI China Equity Feeder"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  note: 'No MDD: the fund was wound up on 4 Sep 2026 (FundRock notice of 17 Jul 2026). Owner to decide whether to remove it.'
 - name: "Schroder ISF QEP Global Core Fund"
   fund_manager: "Schroders"
   fund_folder: "Schroder ISF QEP Global Core Strategy"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: LU0106255481
+  url: 'https://api.schroders.com/document-store/SISF-QEP-Global-Core-C-Acc-FMR-LUEN.pdf'
+  note: C Acc USD (the only accumulating class with a fact sheet); monthly Schroders report.
+  doc_names:
+  - Schroder International Selection Fund QEP Global Core
 - name: "Southern Cross Market Neutral Fund"
   fund_manager: "Southern Cross Capital"
   fund_folder: "Southern Cross Market Neutral"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  url: 'https://www.novarecis.co.za/docs/mdd/SouthernCross-NCIS-Market-Neutral-RHF-MDD.pdf'
+  lag_days: 50
+  note: 'SouthernCross NCIS Market Neutral RHF A1 MDD from Novare CIS (stable link); the manager''s own site is stale.'
 - name: "Sprott Silver Miners & Physical Silver ETF"
   fund_manager: "Sprott Asset Management"
   fund_folder: "Sprott Silver Miners & Physical Silver ETF"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  note: 'No source the scraper can use: sprott.com and sprottetfs.com are behind a Cloudflare challenge. Quarterly US ETF fact sheet; download by hand.'
 - name: "STANLIB Global Select Fund"
   fund_manager: "Stanlib"
   fund_folder: "Stanlib Global Select"
-  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+  isin: ZAE000327003
+  url: 'https://wealth.momentum.co.za/investments/factsheets/stanlib-global-select-feeder-fund-(b2).pdf'
+  lag_days: 90
+  note: 'Momentum platform copy of the rand feeder (B2), 2 to 3 months behind; STANLIB''s literature hub disallows bots.'
+  doc_names:
+  - STANLIB Global Select Feeder Fund
