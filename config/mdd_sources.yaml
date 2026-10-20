@@ -1108,3 +1108,183 @@ funds:
   url: https://wealth.momentum.co.za/investments/factsheets/stanlib-multi-asset-growth-fund-(b1).pdf
   note: B1 class MDD (Momentum's C3 copy is out of date); STANLIB's own site blocks automated access.
   lag_days: 60
+- name: "Templeton Emerging Markets Fund"
+  fund_manager: "Franklin Templeton"
+  fund_folder: "Templeton Emerging Markets Fund"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Templeton Emerging Markets Smaller Companies Fund"
+  fund_manager: "Franklin Templeton"
+  fund_folder: "Templeton Emerging Markets Smaller Companies Fund"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Franklin Technology Fund"
+  fund_manager: "Franklin Templeton"
+  fund_folder: "Franklin Technology Fund"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Franklin US Opportunities Fund"
+  fund_manager: "Franklin Templeton"
+  fund_folder: "Franklin US Opportunites Fund"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "iShares Global Infrastructure ETF"
+  fund_manager: "BlackRock"
+  fund_folder: "iShares Global Infrastructure ETF"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "iShares US Industrials ETF"
+  fund_manager: "BlackRock"
+  fund_folder: "iShares US Industrials ETF"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "iShares India Govt Bond ETF"
+  fund_manager: "BlackRock"
+  fund_folder: "iShares India Govt Bond ETF"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "iShares Silver Trust ETF"
+  fund_manager: "BlackRock"
+  fund_folder: "iShares Silver Trust ETF"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "iShares Copper Miners ETF"
+  fund_manager: "BlackRock"
+  fund_folder: "iShares Copper Miners ETF"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "iShares Lithium Miners and Producers ETF"
+  fund_manager: "BlackRock"
+  fund_folder: "iShares Lithium Miners and Producers ETF"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "iShares Lithium and Battery Producers UCITS ETF"
+  fund_manager: "BlackRock"
+  fund_folder: "iShares Lithium and Battery Producers UCITS ETF"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Old Mutual Global Managed Alpha Fund"
+  fund_manager: "Old Mutual Wealth - OMI"
+  fund_folder: "Old Mutual Global Managed Alpha"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Old Mutual RAFI All World Index Fund"
+  fund_manager: "Old Mutual Wealth - OMI"
+  fund_folder: "Old Mutual RAFI All World Index Fund"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Sanlam Multi-Strategy Fund"
+  fund_manager: "Sanlam"
+  fund_folder: "Sanlam Multi-Strategy Fund"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Flagship IP Flexible Value Fund"
+  fund_manager: "Flagship"
+  fund_folder: "Flagship IP Flexible Value Fund"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Flagship IP Worldwide Flexible Fund"
+  fund_manager: "Flagship"
+  fund_folder: "Flagship IP Worldwide Flexible Fund"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Flagship IP Worldwide Flexible FoF"
+  fund_manager: "Flagship"
+  fund_folder: "Flagship IP Worldwide Flexible FOF"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Omba Global Equity Fund"
+  fund_manager: "Omba"
+  fund_folder: "Omba Global Equity Fund"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Omba Global Thematic Fund"
+  fund_manager: "Omba"
+  fund_folder: "Omba Global Thematic Fund"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Camissa Protector Fund"
+  fund_manager: "Camissa"
+  fund_folder: "Camissa Protector"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Camissa SA Equity Fund"
+  fund_manager: "Camissa"
+  fund_folder: "Camissa SA Equity"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "CAEP RCIS Fixed Income Retail Hedge Fund"
+  fund_manager: "Cartesian"
+  fund_folder: "CAEP RCIS Fixed Income Retail Hedge Fund"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Curate Global Quality Equity Fund"
+  fund_manager: "Lyrical Asset Management (Curate-Momentum)"
+  fund_folder: "Curate Global Quality Equity Fund"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Curate Global Value Equity Fund"
+  fund_manager: "Lyrical Asset Management (Curate-Momentum)"
+  fund_folder: "Curate Global Value Equity Fund"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Curate Global Emerging Markets Equity Fund"
+  fund_manager: "Robeco (Curate)"
+  fund_folder: "Curate Global Emerging Markets Equity Fund"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Nedgroup Investments Rainmaker Fund"
+  fund_manager: "Nedgroup"
+  fund_folder: "Nedgroup Rainmaker Fund"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Peregrine Capital High Growth Fund"
+  fund_manager: "Peregrine"
+  fund_folder: "Peregrine Capital High Growth"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Peregrine Capital Pure Hedge Fund"
+  fund_manager: "Peregrine"
+  fund_folder: "Peregrine Capital Pure Hedge"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Perspective Balanced Prescient Fund"
+  fund_manager: "Perspective Investment Mgmt"
+  fund_folder: "Perspective Balanced Prescient"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Perspective Executive Equity Prescient Fund"
+  fund_manager: "Perspective Investment Mgmt"
+  fund_folder: "Perspective Executive Equity Prescient"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Coherent Capital Global Commodity Investment"
+  fund_manager: "UBS"
+  fund_folder: "Coherent Capital Global Commodity Investment (CCMGCZ)"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "AIP RCIS Multi-Strategy Retail Hedge Fund"
+  fund_manager: "AIP Capital"
+  fund_folder: "AIP RCIS Multi-Strategy RHF"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Artisan Partners Global Value Fund"
+  fund_manager: "Artisan Partners"
+  fund_folder: "Artisan Partners Global Value Fund"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Bateleur Market Neutral Prescient RI Hedge Fund"
+  fund_manager: "Bateleur"
+  fund_folder: "Bateleur Market Neutral Prescienr RIHF"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Coronation Active Income Plus Fund"
+  fund_manager: "Coronation"
+  fund_folder: "Coronation Active Income Plus"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Fairtree Flexible Income Fund"
+  fund_manager: "Fairtree"
+  fund_folder: "Fairtree Flexible Income"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Jupiter Merian Global Equity Fund"
+  fund_manager: "Jupiter Merian Fund Management"
+  fund_folder: "Jupiter Merian Global Equity Fund"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Laurium Enhanced Growth Fund"
+  fund_manager: "Laurium Capital"
+  fund_folder: "Laurium Enhanced Growth"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "PPS Global Equity Fund"
+  fund_manager: "PPS"
+  fund_folder: "PPS Global Equity Fund"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Portfoliometrix FR Income Fund"
+  fund_manager: "Portfoliometrix"
+  fund_folder: "Portfoliometrix FR Income Fund"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Riscura BCI China Equity Feeder Fund"
+  fund_manager: "Riscura"
+  fund_folder: "Riscura BCI China Equity Feeder"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Schroder ISF QEP Global Core Fund"
+  fund_manager: "Schroders"
+  fund_folder: "Schroder ISF QEP Global Core Strategy"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Southern Cross Market Neutral Fund"
+  fund_manager: "Southern Cross Capital"
+  fund_folder: "Southern Cross Market Neutral"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "Sprott Silver Miners & Physical Silver ETF"
+  fund_manager: "Sprott Asset Management"
+  fund_folder: "Sprott Silver Miners & Physical Silver ETF"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.
+- name: "STANLIB Global Select Fund"
+  fund_manager: "Stanlib"
+  fund_folder: "Stanlib Global Select"
+  note: Added 20 Oct 2026 at the owner's request; MDD source not found yet.

@@ -37,7 +37,7 @@ records what was actually seen for *these* funds and wins.
 | Install on the owner's work PC | `C:\Tools\MDD-Scraper`. Until 20 Oct 2026 it was updated by copying the branch ZIP over it (Replace, keep `.venv`). From 20 Oct the owner was given steps to make it a git clone of this branch: `run_weekly.ps1` then runs `git pull --ff-only` before each run, and reinstalls packages when `requirements.txt` changes. **Pushing to this branch updates the PC at the next weekly run.** Check the top of the weekly log for the pull result. |
 | Scheduled task | "Fund MDD weekly download", Mondays 07:00, runs `scripts\windows\run_weekly.ps1`; set up by `scripts\windows\setup_weekly_task.ps1` |
 | Output folder | `E:\OneDrive - MitonOptimal Portfolio Management (Pty) Ltd\#Webscraper MDDs` (synced by OneDrive) |
-| Fund list | `config/mdd_sources.yaml` (191 funds on 20 Oct 2026, after SIM Inflation Plus was removed). **This file defines the tracker.** |
+| Fund list | `config/mdd_sources.yaml` (236 funds on 20 Oct 2026: 191, plus 45 added from Linka's folders that have no MDD source yet). **This file defines the tracker.** |
 | AUM workbook | `AUM_By_Holding_Fund_Model_Portfolio.xlsx`, sheet "Holding Fund Totals". Only fills the "MitonOptimal AUM" column; it does not add or remove funds. |
 | Excluded | `--exclude "^MitonOptimal FR"`: the owner sources the MitonOptimal FR funds directly. |
 | Branch | `claude/fund-location-scraper-kvsmox` on GitHub `JDKMiton/Fund-Asset-Allocation---Scraper-and-Finder` (moved from the personal account JacDK777 on 20 Oct 2026) |
@@ -261,44 +261,32 @@ Global Equity Fund", Ranmore Global Equity vs. the BCI Ranmore feeder. **On 20 O
 created in each of the 191 fund folders** (owner's request). How MDDs are filed into it is still for the
 owner to decide; don't copy MDDs there until asked.
 
-**Fund folders in Linka's share that are not in the tracker** (71 on 20 Oct 2026; candidates to add,
-for the owner to decide; "General", "Additional Information" and "New folder" folders not counted):
-
-| Manager folder | Fund folders |
-|---|---|
-| AIP Capital | AIP RCIS Multi-Strategy RHF |
-| Artisan Partners | Artisan Partners Global Value Fund |
-| Bateleur | Bateleur Market Neutral Prescienr RIHF |
-| BlackRock | BGF World Real Estate Securities Fund; iShares Copper Miners ETF; iShares Global Infrastructure ETF; iShares India Govt Bond ETF; iShares Lithium Miners and Producers ETF; iShares Lithium and Battery Producers UCITS ETF; iShares Silver Trust ETF; iShares US Industrials ETF |
-| Camissa | Camissa Protector; Camissa SA Equity |
-| Cartesian | CAEP RCIS Fixed Income Retail Hedge Fund; MitonOptimal BCI Interest Plus Fund |
-| Causeway Securities (Levendi) | Causeway Defined Growth Fund; Causeway Defined Return Fund; Levendi Thornbridge Defined Return Fund |
-| Coronation | Coronation Active Income Plus |
-| Denker Capital | UBS DNKOPP 30Nov27 |
-| Fairtree | Fairtree Flexible Income |
-| Flagship | Flagship IP Flexible Value Fund; Flagship IP Worldwide Flexible FOF; Flagship IP Worldwide Flexible Fund |
-| Franklin Templeton | FTGT Brandywine Global Income Optimiser; Franklin Alternative Strategies; Franklin Biotechnology Discovery; Franklin Emerging Market Corporate Debt; Franklin Flexible Alpha Bond; Franklin India; Franklin Technology; Franklin US Opportunites; Templeton BRIC; Templeton Emerging Markets; Templeton Emerging Markets Smaller Companies |
-| Invesco Capital Management | Invesco S&P MidCap Momentum ETF |
-| Jupiter Merian Fund Management | Jupiter Merian Global Equity Fund (not the tracker's Jupiter Merian World Equity) |
-| Laurium Capital | Laurium Enhanced Growth |
-| Lyrical Asset Management (Curate-Momentum) | Curate Global Quality Equity Fund; Curate Global Value Equity Fund |
-| MitonOptimal | MO BCI Worldwide Growth; MO FR Active Beta; MO FR Worldwide Active Beta (the FR funds are excluded on purpose, §3) |
-| Nedgroup | **Nedgroup Global Equity Fund** (the tracker's Nedgroup Global Equity files under Veritas, §6: two folders for one fund); Nedgroup Rainmaker Fund |
-| Old Mutual Wealth - OMI | Old Mutual Global Managed Alpha; Old Mutual Multi-Manager Private Equity Fund; Old Mutual Private Equity Secondary Fund; Old Mutual RAFI All World Index Fund |
-| Omba | Omba Global Equity Fund; Omba Global Thematic Fund; Omba Moderate Risk Global Allocattion Fund |
-| PPS | PPS Global Equity Fund (not the tracker's PPS Equity) |
-| Peregrine | Peregrine Capital High Growth; Peregrine Capital Pure Hedge |
-| Perspective Investment Mgmt | Perspective Balanced Prescient; Perspective Executive Equity Prescient |
-| Portfoliometrix | Portfoliometrix FR Income Fund |
-| Riscura | Riscura BCI China Equity Feeder |
-| Robeco (Curate) | Curate Global Emerging Markets Equity Fund |
-| Sanlam | Sanlam AI Global Managed Risk Fund; Sanlam Global High Quality Strategy Fund; Sanlam Multi-Strategy Fund; Sanlam Real Assets Fund |
-| Schroders | Schroder ISF QEP Global Core Strategy |
-| Southern Cross Capital | Southern Cross Market Neutral |
-| Sprott Asset Management | Sprott Silver Miners & Physical Silver ETF |
-| Stanlib | Stanlib Global Select |
-| State Street Global Advisers - SPDR S&P | SPDR S&P Pan Asia Dividend Aristocrats UCITS ETF |
-| UBS | Coherent Capital Global Commodity Investment (CCMGCZ); UBS Solactive China Technology ETF |
+**Fund folders in Linka's share that were not in the tracker** (71 on 20 Oct 2026). The owner went
+through them one by one:
+- **Added (45)**, each with `fund_folder`, an `MDDs` folder and the note "MDD source not found yet", so
+  they show as **No source** until a source is found: Templeton Emerging Markets, Templeton EM Smaller
+  Companies, Franklin Technology, Franklin US Opportunities; iShares Global Infrastructure, US Industrials,
+  India Govt Bond, Silver Trust, Copper Miners, Lithium Miners and Producers, Lithium and Battery Producers;
+  Old Mutual Global Managed Alpha, Old Mutual RAFI All World Index; Sanlam Multi-Strategy; Flagship IP
+  Flexible Value, Worldwide Flexible, Worldwide Flexible FoF; Omba Global Equity, Global Thematic; Camissa
+  Protector, Camissa SA Equity; CAEP RCIS Fixed Income RHF; Curate Global Quality Equity, Global Value
+  Equity, Global EM Equity; Nedgroup Rainmaker; Peregrine High Growth, Pure Hedge; Perspective Balanced,
+  Executive Equity; Coherent Capital Global Commodity; AIP RCIS Multi-Strategy; Artisan Global Value;
+  Bateleur Market Neutral; Coronation Active Income Plus; Fairtree Flexible Income; Jupiter Merian Global
+  Equity; Laurium Enhanced Growth; PPS Global Equity; Portfoliometrix FR Income; Riscura BCI China Equity
+  Feeder; Schroder ISF QEP Global Core; Southern Cross Market Neutral; Sprott Silver Miners & Physical
+  Silver ETF; STANLIB Global Select. None is in the AUM workbook.
+- **Waiting:** "MitonOptimal BCI Interest Plus Fund" (Cartesian folder), which looks like the AUM workbook's
+  "MitonOptimal FR Interest Plus Fund", a MitonOptimal FR fund the owner sources directly (§3).
+- **Left out (24):** Templeton BRIC; Franklin India, Biotechnology Discovery, Alternative Strategies,
+  Flexible Alpha Bond, EM Corporate Debt; FTGT Brandywine Global Income Optimiser; BGF World Real Estate;
+  the two Old Mutual private equity funds; Sanlam AI Global Managed Risk, Global High Quality, Real Assets;
+  Causeway Defined Growth, Defined Return; Levendi Thornbridge Defined Return; Omba Moderate Risk Global
+  Allocation; UBS Solactive China Technology ETF; Denker UBS DNKOPP 30Nov27; Invesco S&P MidCap Momentum
+  ETF; SPDR S&P Pan Asia Dividend Aristocrats; MO BCI Worldwide Growth, MO FR Active Beta, MO FR Worldwide
+  Active Beta.
+- **Duplicate:** Linka's "Nedgroup \ Nedgroup Global Equity Fund" is the tracker's Nedgroup Global Equity,
+  which the owner filed under Veritas (two folders for one fund; not resolved).
 
 ## 7. Open issues and questions for the owner
 
@@ -339,6 +327,9 @@ for the owner to decide; "General", "Additional Information" and "New folder" fo
 - Read `docs/sa-factsheet-scraping-guide.md` §6–7, on reading tables by word position and the checks.
 
 ## 10. Learning log (newest first; add a line after every scan or change)
+
+- **2026-10-20, 45 funds added to the tracker** from Linka's folders (owner's choices, §6). They have no
+  download source yet (status No source); finding one per fund is the next job. 236 funds in the config.
 
 - **2026-10-20, MDDs folders:** created an empty `MDDs` folder in each of the 191 fund folders. Listed the
   71 fund folders in Linka's share that aren't in the tracker (§6). Found: Linka has a "Nedgroup Global
