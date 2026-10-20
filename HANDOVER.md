@@ -418,6 +418,15 @@ through them one by one:
 
 ## 10. Learning log (newest first; add a line after every scan or change)
 
+- **2026-10-20, first live run with fund folders** (started by hand at the owner's request, 19:51 to 20:04,
+  exit 0): 41 MDDs filed, 74 unchanged, **350 copied to the fund folders** (no folder missing, no reissue).
+  Trackers: Aug 194 collected, Sep 138 collected / 95 pending; every collected row has its fund-folder
+  path and Collected on date. 20 of Aug's 21 Late are funds added today whose sources only serve the
+  current sheet, so their August MDD can't be fetched any more (the other is Baillie Gifford Managed).
+  The June and July trackers show over 200 Late each: those folders exist only for quarterly sheets, and
+  every monthly fund is counted as missing there (not new; open). Perspective (2) Not found until its
+  September sheet is posted.
+
 - **2026-10-20, collection dates and timing; to-do clean-up** (owner): tracker columns Collected on and
   Usually available, new `_runs.csv`; Pending/Late use a fund's learned timing once 2 months are known.
   Copies to and from the fund folders keep the file's date. The to-do workbook lost its Who column
