@@ -24,6 +24,8 @@ an AUM column. An entry needs at least one of `url`, `urls`, `page`, `file`, `sa
 | `doc_names` | list | Other names the MDD may print (renamed fund, platform name). The name check accepts any of them. |
 | `current_name` | `Vunani FR Enhanced Income Fund` | An owner-confirmed current name; the tracker shows it, with "previously …" in Notes. |
 | `fund_manager` | `Veritas Asset Management` | Who actually manages the money, shown in the tracker's **Fund Manager** column. Set it from the MDD ("Investment manager", "About the fund manager", "Managed by"). For platform and multi-boutique ranges (Amplify, Nedgroup, PPS, Curate, Discovery, Fundrock/Prescient co-named funds) it is a third party, not the name on the fund. Without it the tracker uses the investment manager read from the MDD, which can be blank or, for funds with an offshore partner, name that partner. |
+| `fund_folder` | `Coronation Top 20` | The fund's folder inside `<fund_manager>` in the owner's fund-document share. With `--fund-share`, each MDD is also copied to `<share>\<fund_manager>\<fund_folder>\MDDs\YYYY\<Fund> - YYYY-MM.pdf`. Fund folders are never created; a missing one is an exception. |
+| `fund_path` | `Lyrical\Curate Global Quality Equity Fund` | The fund's folder relative to the share, only where it isn't under `<fund_manager>`. |
 | `keep_name` | `true` | Don't switch to the MDD's name even when the ISIN confirms it (e.g. the MDD prints an *old* name). |
 | `lag_days` | `60` | Days after month-end the MDD is normally up (default 30). Before this the fund is **Pending**, after it **Late**. |
 | `frequency` | `quarterly` | MDDs only for March, June, September and December; other months show **Quarterly**. |

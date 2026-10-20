@@ -6,6 +6,8 @@
 #   isin:  ISIN to show in the tracker when the MDD doesn't print one
 #   note:  shown in the tracker (renamed fund, quarterly MDD, not found, ...)
 #   fund_manager: who manages the money (a third party for Amplify, Nedgroup, PPS, ...), from the MDD
+#   fund_folder: the fund's folder inside <fund_manager> in the Asset Management share (MDDs are copied to its MDDs\YYYY)
+#   fund_path: the fund's folder relative to the share, only where it isn't under <fund_manager>
 funds:
 - name: Coronation Balanced Defensive
   fund_manager: "Coronation"
@@ -1269,6 +1271,7 @@ funds:
 - name: "Curate Global Quality Equity Fund"
   fund_manager: "Evenlode"
   fund_folder: "Curate Global Quality Equity Fund"
+  fund_path: "Lyrical Asset Management (Curate-Momentum)/Curate Global Quality Equity Fund"
   isin: LU2863672676
   url: 'https://wealth.momentum.co.za/investments/factsheets/curate-global-quality-equity-fund-a-usd.pdf'
   note: A Class USD fact sheet (Luxembourg MGF SICAV) hosted by Momentum; Evenlode is the adviser. The fund folder is under Lyrical Asset Management (Curate-Momentum) in Linka's share.

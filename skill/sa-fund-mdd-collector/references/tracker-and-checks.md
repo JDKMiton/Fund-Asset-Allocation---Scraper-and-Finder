@@ -30,6 +30,10 @@
 6. **Manifest:** `<MDD folder>\_manifest.csv` gets one row per download: fetched_at, fund, month, result
    (filed/unchanged/reissued/rejected), file, source, sha256, text_sha256, allocation_stamp, detail.
 7. **Trackers:** `!MDD Tracker YYYY - MM.xlsx` in every month folder. The "!" sorts it to the top.
+8. **Fund folders (optional, `--fund-share <folder>`):** every MDD in every month folder is also copied to
+   `<folder>\<fund_manager>\<fund_folder>\MDDs\YYYY\<Fund> - YYYY-MM.pdf` (Fund = `current_name`, else
+   `name`), so a fund's sheets sort by month. Earlier months are back-filled; nothing is overwritten (a
+   different file is kept beside it as a reissue); a missing fund folder is reported, never created.
 
 ## The tracker
 
@@ -43,7 +47,9 @@
 | ISIN | `isin`, else the first ISIN printed in the MDD |
 | Fund AUM, Inception Date, Benchmark | read from the MDD by word position, with a text fallback; blank when unsure |
 | Status | see below |
-| MDD month, Other months collected, File, Source, Notes | |
+| MDD month, Other months collected, File | |
+| Fund folder copy | where this month's MDD was copied, relative to `--fund-share` (or why it wasn't) |
+| Source, Notes | |
 
 **Status values:**
 
@@ -58,7 +64,8 @@
 **Summary sheet:** the counts per status, % collected and the number of exceptions.
 
 **Exceptions sheet:** one row per issue, most serious first: Wrong document, Stale copy, Reissued, PDF
-unreadable, Date unreadable, Not found, Late, Name not checked, No source.
+unreadable, Date unreadable, Not found, Fund folder copy failed, Fund folder missing, Late, Name not checked,
+No source.
 
 ## Reading the results
 

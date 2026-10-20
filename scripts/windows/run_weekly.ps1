@@ -1,11 +1,14 @@
 # Weekly MDD collection - run by the "Fund MDD weekly download" scheduled task.
 # Downloads the latest MDDs into <OutFolder>\YYYY - MM\ and refreshes each month's MDD Tracker.
+# With -FundShare, each MDD is also copied to its fund's folder there (<Fund> - YYYY-MM.pdf).
 param(
     [Parameter(Mandatory = $true)][string]$OutFolder,
     [string]$FundsWorkbook = "",
     [string]$FundsSheet = "Holding Fund Totals",
     [string]$Exclude = "^MitonOptimal FR",
-    [int]$RecentMonths = 2
+    [int]$RecentMonths = 2,
+    # Fund folders (<manager>\<fund folder>\MDDs\YYYY) to copy each MDD into; skipped if not found.
+    [string]$FundShare = 'E:\OneDrive - MitonOptimal Portfolio Management (Pty) Ltd\Linka Henning''s files - Asset Management (FRA-DD Documents)'
 )
 
 $ErrorActionPreference = "Continue"
@@ -36,6 +39,7 @@ $cmd = @("-m", "fund_allocator", "collect",
          "--recent", $RecentMonths,
          "--aum-label", "MitonOptimal AUM")
 if ($Exclude) { $cmd += @("--exclude", $Exclude) }
+if ($FundShare -and (Test-Path -LiteralPath $FundShare)) { $cmd += @("--fund-share", $FundShare) }
 if ($FundsWorkbook -and (Test-Path $FundsWorkbook)) { $cmd += @("--funds", $FundsWorkbook, "--sheet", $FundsSheet) }
 
 "=== $(Get-Date -Format s) collecting into $OutFolder" | Out-File -Append $log

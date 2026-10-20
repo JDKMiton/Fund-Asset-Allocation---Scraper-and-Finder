@@ -108,7 +108,7 @@ def cmd_collect(args: argparse.Namespace) -> int:
     try:
         issues: list = []
         results = collect(funds, sources, scraper, args.out, months=months, skip_saved=not args.refetch,
-                          issues=issues, aum_label=args.aum_label)
+                          issues=issues, aum_label=args.aum_label, fund_share=args.fund_share)
     finally:
         scraper.close()
     got = len({r.fund for r in results if r.month})
@@ -164,6 +164,8 @@ def main(argv: list[str] | None = None) -> int:
     col.add_argument("--delay", type=float, default=1.0)
     col.add_argument("--ignore-robots", action="store_true")
     col.add_argument("--aum-label", default="AUM held", help="heading of the tracker's AUM column")
+    col.add_argument("--fund-share", metavar="FOLDER",
+                     help="also copy each MDD to <FOLDER>\\<fund_manager>\\<fund_folder>\\MDDs\\YYYY\\<Fund> - YYYY-MM.pdf")
     col.add_argument("--refetch", action="store_true",
                      help="search for every fund, even if its MDDs for all the months are already saved")
     col.set_defaults(func=cmd_collect)

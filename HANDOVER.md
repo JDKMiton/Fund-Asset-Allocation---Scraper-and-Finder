@@ -58,11 +58,20 @@ records what was actually seen for *these* funds and wins.
    kept beside the original as `<Fund> (reissued YYYY-MM-DD).pdf` and flagged.
 5. Logs every download in `_manifest.csv`: time, fund, month, result, file, source, sha256, text hash and
    allocation stamp.
-6. Rewrites `!MDD Tracker YYYY - MM.xlsx` in each month folder.
+6. **Copies every MDD to its fund folder** in Linka's share (owner, 20 Oct 2026):
+   `<share>\<fund_manager>\<fund_folder>\MDDs\YYYY\<Fund> - YYYY-MM.pdf`, where Fund is the tracker name
+   (`current_name`, else `name`). It goes over **all** month folders each run, so earlier months are
+   back-filled. Never overwrites (a different file is kept beside it as `(reissued YYYY-MM-DD)`); never
+   creates a fund folder (a missing one is the exception "Fund folder missing"; a failed copy is "Fund
+   folder copy failed" and doesn't stop the run). Set by `--fund-share`; `run_weekly.ps1` passes Linka's
+   share by default (`-FundShare`) and skips it if the share isn't there. The month-folder copies stay:
+   the skip rule, reissue check, `_rejected` and the asset-allocation agent use them.
+7. Rewrites `!MDD Tracker YYYY - MM.xlsx` in each month folder (they stay in `#Webscraper MDDs`).
 
 **The tracker** has three sheets:
 - **Tracker**, funds A–Z, with columns: Fund | Fund Manager | MitonOptimal AUM | ISIN | Fund AUM | Inception Date |
-  Benchmark | Status | MDD month | Other months collected | File | Source | Notes.
+  Benchmark | Status | MDD month | Other months collected | File | Fund folder copy | Source | Notes.
+  "Fund folder copy" is where this month's MDD was copied, relative to Linka's share (or why it wasn't).
 - **Summary**, the counts per status.
 - **Exceptions**, one line per problem.
 
@@ -76,7 +85,8 @@ Statuses:
 | Quarterly | `frequency: quarterly` fund; no MDD is due for this month |
 | No source | the fund has no download source configured |
 
-Exception kinds: Wrong document, Stale copy, Reissued, PDF unreadable, Date unreadable, Not found, Late,
+Exception kinds: Wrong document, Stale copy, Reissued, PDF unreadable, Date unreadable, Not found, Fund folder
+copy failed, Fund folder missing, Late,
 Name not checked (the PDF has no text layer), No source.
 
 ## 3. Owner decisions (follow these; ask before changing them)
@@ -92,6 +102,7 @@ Name not checked (the PDF has no text layer), No source.
 | 19 Oct 2026 | Asset allocation goes to a separate agent; this scraper doesn't extract it. |
 | 19 Oct 2026 | If the MDD's fund name is the correct one (the ISINs match), show that name in the tracker (§6). |
 | 19 Oct 2026 | Confirmed renames: Discovery Aggressive DAO FoF → Cogence Discovery Balanced Dynamic Asset Optimiser Fund of Funds; Mi-Plan IP Enhanced Income → Vunani FR Enhanced Income Fund. Shown in the tracker (`current_name`). |
+| 20 Oct 2026 | Every run also saves each MDD in its fund folder: `MDDs\YYYY\<Fund> - YYYY-MM.pdf` (tracker name; all earlier months back-filled), and the tracker shows where. Month-folder copies and the trackers stay in `#Webscraper MDDs`. |
 | 20 Oct 2026 | Removed Sprott Silver Miners & Physical Silver ETF (fact sheet site behind Cloudflare) from the tracker and weekly grab. Don't add it back unless asked. |
 | 20 Oct 2026 | Keep a list of folder and name mismatches for the owner and Linka to fix: [`docs/fix-list.md`](docs/fix-list.md). |
 | 20 Oct 2026 | Removed Sanlam Multi-Strategy (no public fact sheet) from the tracker and weekly grab. Don't add it back unless asked. |
@@ -106,7 +117,9 @@ Name not checked (the PDF has no text layer), No source.
   - `url` / `urls` (with templates `{yyyy} {mm} {yyyymm} {month} {Month} {mon} {Mon} {MON} {dd} {bdd} {next_yyyy} {next_mm}`);
   - `page` + `link_match` (the regex may contain the same templates) + `render`;
   - `sanlam_fund`, `mandg_fund`, `browser`, `referer`, `ignore_robots`;
-  - `isin`, `note`, `doc_names`, `current_name`, `lag_days`, `frequency`, `keep_name`, `fund_manager`, `fund_folder`.
+  - `isin`, `note`, `doc_names`, `current_name`, `lag_days`, `frequency`, `keep_name`, `fund_manager`, `fund_folder`,
+    `fund_path` (the fund folder relative to the share, only where it isn't under `fund_manager`: Curate
+    Global Quality, under Lyrical).
 - `fund_allocator/collector.py`: the run, checks, filing, manifest, tracker. `facts.py`: Fund AUM, inception
   and benchmark. `pdfinfo.py`: PDF reading in a worker process with a 120 s limit. `scraper.py`: downloads,
   browser and site APIs.
@@ -317,8 +330,8 @@ Global Inflation Plus Feeder Fund"). Claude created the other 122 as empty folde
 (the tracker's `current_name` where set; "Baille" and "Marriot" typos corrected). Not the same fund, so
 kept apart: Jupiter Merian World Equity vs. "Jupiter Merian Global Equity Fund", PPS Equity vs. "PPS
 Global Equity Fund", Ranmore Global Equity vs. the BCI Ranmore feeder. **On 20 Oct 2026 an empty `MDDs` folder was
-created in each of the 191 fund folders** (owner's request). How MDDs are filed into it is still for the
-owner to decide; don't copy MDDs there until asked.
+created in each of the 191 fund folders** (owner's request). Since 20 Oct 2026 every run copies the MDDs
+into it, one folder per year (§2, step 6).
 
 **Fund folders in Linka's share that were not in the tracker** (71 on 20 Oct 2026). The owner went
 through them one by one:
@@ -389,6 +402,14 @@ through them one by one:
 - Read `docs/sa-factsheet-scraping-guide.md` §6–7, on reading tables by word position and the checks.
 
 ## 10. Learning log (newest first; add a line after every scan or change)
+
+- **2026-10-20, MDDs copied to the fund folders** (owner): new step 6 (§2), `--fund-share`, tracker column
+  "Fund folder copy", config field `fund_path` (Curate Global Quality). Rehearsed on copies of `#Webscraper
+  MDDs` and a folders-only mirror of Linka's share: 350 MDDs (Jun to Sep 2026) filed into 231 funds'
+  `MDDs\YYYY` folders, no fund folder missing, every collected row shows its path. Not copied: 5 old files
+  of removed funds (Aylett, SIM, Foord FoF, two PSG Wealth). The real share is first written by the next
+  weekly run. About 40 worst-case paths (reissued copies) pass 260 characters; long paths are enabled on
+  the PC and OneDrive allows 400.
 
 - **2026-10-20, Sprott removed; fix list started** (owner): Sprott SLVR out of the config (233 funds, all
   with a source). Compared every `fund_manager\fund_folder` with Linka's share: all exist except Curate

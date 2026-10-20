@@ -1,11 +1,14 @@
 # Weekly MDD collection - run by the "Fund MDD weekly download" scheduled task.
 # Downloads the latest MDDs into <OutFolder>\YYYY - MM\ and refreshes each month's MDD Tracker.
+# With -FundShare, each MDD is also copied to its fund's folder there (<Fund> - YYYY-MM.pdf).
 param(
     [Parameter(Mandatory = $true)][string]$OutFolder,
     [string]$FundsWorkbook = "",
     [string]$FundsSheet = "",
     [string]$Exclude = "",
-    [int]$RecentMonths = 2
+    [int]$RecentMonths = 2,
+    # Fund folders (<manager>\<fund folder>\MDDs\YYYY) to copy each MDD into; skipped if not found.
+    [string]$FundShare = ''
 )
 
 $ErrorActionPreference = "Continue"
@@ -35,6 +38,7 @@ $cmd = @("-m", "fund_allocator", "collect",
          "--download-dir", (Join-Path $repo "data\downloads"),
          "--recent", $RecentMonths)
 if ($Exclude) { $cmd += @("--exclude", $Exclude) }
+if ($FundShare -and (Test-Path -LiteralPath $FundShare)) { $cmd += @("--fund-share", $FundShare) }
 if ($FundsWorkbook -and (Test-Path $FundsWorkbook)) {
     $cmd += @("--funds", $FundsWorkbook)
     if ($FundsSheet) { $cmd += @("--sheet", $FundsSheet) }

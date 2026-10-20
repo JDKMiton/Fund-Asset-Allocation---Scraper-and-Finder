@@ -284,6 +284,43 @@ class CollectorTest(unittest.TestCase):
             row = [c.value for c in ws[2]]
             self.assertEqual((row[3], row[7]), ("ZAE000000001", "Collected"))
 
+    def test_collect_copies_mdds_to_fund_folders(self):
+        from fund_allocator.collector import Fund, collect
+        from fund_allocator.config import FundSource
+        from fund_allocator.scraper import Scraper
+        with tempfile.TemporaryDirectory() as tmp:
+            balanced, feeder = make_all(Path(tmp) / "pdfs")
+            share = Path(tmp) / "share"
+            (share / "Mgr" / "Balanced Folder").mkdir(parents=True)
+            (share / "Other" / "Feeder Folder").mkdir(parents=True)
+            out = Path(tmp) / "MDDs"
+            (out / "2026 - 07").mkdir(parents=True)  # filed by an earlier run: copied too
+            (out / "2026 - 07" / "Balanced.pdf").write_bytes(feeder.read_bytes())
+            sources = {"Balanced": FundSource("Balanced", file=str(balanced), fund_manager="Mgr",
+                                              fund_folder="Balanced Folder", current_name="Balanced Now"),
+                       "Feeder": FundSource("Feeder", file=str(feeder), fund_manager="Moved",
+                                            fund_folder="Feeder Folder", fund_path="Other/Feeder Folder"),
+                       "Lost": FundSource("Lost", file=str(feeder), fund_manager="Mgr", fund_folder="Nowhere")}
+            funds = [Fund("Balanced"), Fund("Feeder"), Fund("Lost")]
+            issues = []
+            collect(funds, sources, Scraper(Path(tmp) / "dl"), out, issues=issues, fund_share=share)
+            mdds = share / "Mgr" / "Balanced Folder" / "MDDs"
+            self.assertTrue((mdds / "2026" / "Balanced Now - 2026-09.pdf").exists())
+            self.assertTrue((mdds / "2026" / "Balanced Now - 2026-07.pdf").exists())
+            self.assertTrue((share / "Other" / "Feeder Folder" / "MDDs" / "2026" / "Feeder - 2026-09.pdf").exists())
+            self.assertFalse((share / "Mgr" / "Nowhere").exists())  # fund folders are never created
+            self.assertIn(("Lost", "Fund folder missing"), {(i.fund, i.kind) for i in issues})
+            ws = load_workbook(out / "2026 - 09" / "!MDD Tracker 2026 - 09.xlsx")["Tracker"]
+            col = [c.value for c in ws[1]].index("Fund folder copy") + 1
+            copy = {ws.cell(row=i, column=1).value: ws.cell(row=i, column=col).value for i in range(2, 5)}
+            self.assertEqual(copy["Balanced Now"], str(Path("Mgr/Balanced Folder/MDDs/2026/Balanced Now - 2026-09.pdf")))
+            self.assertEqual(copy["Lost"], "fund folder not found")
+            # never overwrite: a different file already in the fund folder is kept, the new one saved beside it
+            (mdds / "2026" / "Balanced Now - 2026-07.pdf").write_bytes(balanced.read_bytes())
+            collect(funds, sources, Scraper(Path(tmp) / "dl"), out, fund_share=share)
+            self.assertEqual(len(list((mdds / "2026").glob("Balanced Now - 2026-07 (reissued *).pdf"))), 1)
+            self.assertEqual((mdds / "2026" / "Balanced Now - 2026-07.pdf").read_bytes(), balanced.read_bytes())
+
     def test_collect_tracks_sources_and_takes_aum_from_workbook(self):
         from openpyxl import Workbook
         make_all()

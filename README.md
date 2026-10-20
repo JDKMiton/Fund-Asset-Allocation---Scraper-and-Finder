@@ -70,6 +70,12 @@ gets an `!MDD Tracker YYYY - MM.xlsx` listing every fund with its **ISIN**, **Co
 quarterly MDD, not found, ...). Pointing `--out` at your OneDrive-synced folder puts everything
 straight into OneDrive.
 
+With `--fund-share <folder>`, every MDD in the month folders is also copied to its fund's own folder,
+`<folder>\<fund_manager>\<fund_folder>\MDDs\YYYY\<Fund> - YYYY-MM.pdf`, and the tracker's **Fund folder
+copy** column shows where. Earlier months are back-filled, nothing is overwritten, and fund folders are
+never created (a missing one is listed under Exceptions). The weekly script passes the Asset Management
+share by default.
+
 `config/mdd_sources.yaml` records, for each tracked fund, where its MDD is published:
 
 | Source type | Example | How it is used |

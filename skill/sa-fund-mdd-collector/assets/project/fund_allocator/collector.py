@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import calendar
 import csv
+import glob
 import hashlib
 import logging
 import re
@@ -292,12 +293,14 @@ def candidate_urls(src: FundSource, months: list[str]) -> list[str]:
 
 def collect(funds: list[Fund], sources: dict[str, FundSource], scraper: Scraper, out_dir: str | Path,
             months: list[str] | None = None, skip_saved: bool = True,
-            issues: list[Issue] | None = None, aum_label: str = "AUM held") -> list[Collected]:
+            issues: list[Issue] | None = None, aum_label: str = "AUM held",
+            fund_share: str | Path | None = None) -> list[Collected]:
     """Fetch each fund's MDD(s), file them under out_dir/"YYYY - MM"/ and write a tracker per month.
 
     A source may list several URLs and URL templates ({yyyy}, {mm}, {month}, ...), which are
     expanded for each month in ``months`` so earlier months can be back-filled. With ``skip_saved``,
     a fund whose MDD is already in the folder for every month in ``months`` is not searched again.
+    With ``fund_share``, every MDD in the month folders is also copied to its fund's folder there.
     """
     out_dir = Path(out_dir)
     months = months or []
@@ -360,11 +363,13 @@ def collect(funds: list[Fund], sources: dict[str, FundSource], scraper: Scraper,
                         | {d.name for d in out_dir.glob("20?? - ??") if d.is_dir()})
     results = _with_earlier_runs(funds, results, out_dir, all_months, sources)
     shutdown_pdf_reader()
+    copies = (file_in_fund_folders(funds, sources, out_dir, fund_share, all_months, issues, manifest)
+              if fund_share else None)
     for issue in issues:
         log.warning("%s: %s - %s", issue.kind, issue.fund, issue.detail)
     for month in all_months:
         write_tracker(out_dir / month / f"!MDD Tracker {month}.xlsx", month, funds, results,
-                      issues=issues, sources=sources, aum_label=aum_label)
+                      issues=issues, sources=sources, aum_label=aum_label, fund_copies=copies)
         (out_dir / month / f"MDD Tracker {month}.xlsx").unlink(missing_ok=True)  # name used before the "!"
     return results
 
@@ -536,6 +541,72 @@ def _with_earlier_runs(funds: list[Fund], results: list[Collected], out_dir: Pat
     return [r for r in results if r.month or r.fund not in got] + extra
 
 
+FUND_MDDS = "MDDs"  # the folder inside each fund folder that holds its MDDs, one sub-folder per year
+
+
+def fund_folder(src: FundSource | None, share: Path) -> Path | None:
+    """The fund's own folder in the Asset Management share: <manager>\\<fund folder>, or ``fund_path``
+    where the folder sits under another manager (Curate Global Quality under Lyrical)."""
+    if src is None:
+        return None
+    if src.fund_path:
+        return share / src.fund_path
+    if src.fund_manager and src.fund_folder:
+        return share / src.fund_manager / src.fund_folder
+    return None
+
+
+def file_in_fund_folders(funds: list[Fund], sources: dict[str, FundSource], out_dir: Path, share: str | Path,
+                         months: list[str], issues: list[Issue], manifest: Manifest) -> dict[tuple[str, str], str]:
+    """Copy every MDD in the month folders to its fund's folder in the share, as
+    <fund folder>\\MDDs\\YYYY\\<Fund> - YYYY-MM.pdf (the tracker name, so the files sort by month).
+
+    Runs over all month folders, so MDDs filed before this existed are copied too. Never overwrites: a
+    different file for the same month is kept beside it as a reissue, as in the month folders. Fund folders
+    are never created; a missing one is reported. Returns (fund, month) -> path shown in the tracker."""
+    share = Path(share)
+    copied: dict[tuple[str, str], str] = {}
+    for fund in funds:
+        src = sources.get(fund.name)
+        home = fund_folder(src, share)
+        shown = _safe_name((src.current_name if src else None) or fund.name)
+        for month in months:
+            filed = out_dir / month / f"{_safe_name(fund.name)}.pdf"
+            if not filed.exists():
+                continue
+            if home is None or not home.is_dir():
+                copied[(fund.name, month)] = "fund folder not found"
+                issues.append(Issue(fund.name, "Fund folder missing",
+                                    f"{home or 'no fund_manager / fund_folder in the config'}; MDD kept in the "
+                                    f"month folder only", month))
+                continue
+            year, mm = month.split(" - ")
+            dest = home / FUND_MDDS / year / f"{shown} - {year}-{mm}.pdf"
+            copies = [(filed, dest)] + [  # reissued copies follow their original
+                (r, dest.with_name(f"{dest.stem}{r.stem[len(filed.stem):]}.pdf"))
+                for r in sorted(filed.parent.glob(f"{glob.escape(filed.stem)} (reissued *).pdf"))]
+            try:
+                for one, to in copies:
+                    if to.exists() and sha256(to) == sha256(one):
+                        continue
+                    if to.exists():  # never overwrite: a different file is already there
+                        to = to.with_name(f"{to.stem} (reissued {date.today():%Y-%m-%d}).pdf")
+                        if to.exists():
+                            continue
+                        issues.append(Issue(fund.name, "Reissued", f"the fund folder already had a different "
+                                                                   f"{month} MDD; saved this one as '{to.name}'", month))
+                    to.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copyfile(one, to)
+                    manifest.add(fund=fund.name, month=month, result="copied to fund folder", file=to,
+                                 source=str(one), sha256=sha256(to))
+                    log.info("%s %s -> %s", fund.name, month, to)
+                copied[(fund.name, month)] = str(dest.relative_to(share))
+            except OSError as exc:  # a locked or unsynced OneDrive folder shouldn't stop the run
+                copied[(fund.name, month)] = "not copied (see Exceptions)"
+                issues.append(Issue(fund.name, "Fund folder copy failed", f"{dest}: {exc}", month))
+    return copied
+
+
 def recent_months(n: int, today: date | None = None) -> list[str]:
     """The last ``n`` completed months as "YYYY - MM" (MDDs are published after month-end)."""
     today = today or date.today()
@@ -566,8 +637,10 @@ def outstanding_status(month: str, src: FundSource | None, today: date | None = 
 
 def write_tracker(path: Path, month: str, funds: list[Fund], results: list[Collected],
                   issues: list[Issue] | None = None, sources: dict[str, FundSource] | None = None,
-                  today: date | None = None, aum_label: str = "AUM held") -> Path:
+                  today: date | None = None, aum_label: str = "AUM held",
+                  fund_copies: dict[tuple[str, str], str] | None = None) -> Path:
     sources = sources or {}
+    fund_copies = fund_copies or {}
     issues = [i for i in (issues or []) if i.month in (None, month)]
     counts = dict.fromkeys(STATUSES, 0)
     by_fund: dict[str, list[Collected]] = {}
@@ -577,7 +650,7 @@ def write_tracker(path: Path, month: str, funds: list[Fund], results: list[Colle
     ws = wb.active
     ws.title = "Tracker"
     _header(ws, 1, ["Fund", "Fund Manager", aum_label, "ISIN", *FACT_COLUMNS, "Status", "MDD month",
-                    "Other months collected", "File", "Source", "Notes"])
+                    "Other months collected", "File", "Fund folder copy", "Source", "Notes"])
     def shown_name(fund: Fund) -> str:
         """The owner-confirmed current name, else the MDD's name once it prints the fund's known ISIN."""
         src = sources.get(fund.name)
@@ -619,7 +692,8 @@ def write_tracker(path: Path, month: str, funds: list[Fund], results: list[Colle
         manager = (src.fund_manager if src else None) or facts.get("Fund Manager")
         row = [name, manager, fund.aum, isin, *(facts.get(c) for c in FACT_COLUMNS),
                status, shown.month if this else None, others,
-               shown.path.name if this and shown.path else None, shown.source or None, note or None]
+               shown.path.name if this and shown.path else None,
+               fund_copies.get((fund.name, month)) if this else None, shown.source or None, note or None]
         for j, v in enumerate(row, start=1):
             ws.cell(row=i, column=j, value=v).fill = fill
         ws.cell(row=i, column=3).number_format = "#,##0"
@@ -643,7 +717,8 @@ def write_tracker(path: Path, month: str, funds: list[Fund], results: list[Colle
     e = wb.create_sheet("Exceptions")
     _header(e, 1, ["Fund", "Issue", "Detail"])
     order = {k: i for i, k in enumerate(["Wrong document", "Stale copy", "Reissued", "PDF unreadable",
-                                         "Date unreadable", "Not found", "Late", "Name not checked", "No source"])}
+                                         "Date unreadable", "Not found", "Fund folder copy failed", "Fund folder missing",
+                                         "Late", "Name not checked", "No source"])}
     for i, issue in enumerate(sorted(issues, key=lambda x: (order.get(x.kind, 99), x.fund.casefold())), start=2):
         e.cell(row=i, column=1, value=issue.fund)
         e.cell(row=i, column=2, value=issue.kind)

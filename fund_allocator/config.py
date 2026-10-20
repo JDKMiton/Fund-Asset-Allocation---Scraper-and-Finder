@@ -66,6 +66,7 @@ class FundSource:
     current_name: str | None = None  # owner-confirmed current name, shown in the tracker
     fund_manager: str | None = None  # who manages the money (a third party for Amplify, Nedgroup, ...)
     fund_folder: str | None = None   # the fund's folder inside its manager's folder in the Asset Management share
+    fund_path: str | None = None     # the fund's folder relative to the share, when it isn't under fund_manager
 
 
 def normalise_label(text: str) -> str:
