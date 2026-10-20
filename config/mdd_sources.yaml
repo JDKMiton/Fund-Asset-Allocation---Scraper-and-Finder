@@ -1267,11 +1267,11 @@ funds:
   url: 'https://realfin.co.za/fund-files/mdd-files/MDD-CAEP-RCIS-Fixed-Income-RHF.pdf'
   note: A class MDD from RealFin (RCIS); the MDD names CAEP Asset Managers as investment manager.
 - name: "Curate Global Quality Equity Fund"
-  fund_manager: "Lyrical Asset Management (Curate-Momentum)"
+  fund_manager: "Evenlode"
   fund_folder: "Curate Global Quality Equity Fund"
   isin: LU2863672676
   url: 'https://wealth.momentum.co.za/investments/factsheets/curate-global-quality-equity-fund-a-usd.pdf'
-  note: A Class USD fact sheet (Luxembourg MGF SICAV) hosted by Momentum; the fact sheet names Evenlode as adviser.
+  note: A Class USD fact sheet (Luxembourg MGF SICAV) hosted by Momentum; Evenlode is the adviser. The fund folder is under Lyrical Asset Management (Curate-Momentum) in Linka's share.
 - name: "Curate Global Value Equity Fund"
   fund_manager: "Lyrical Asset Management (Curate-Momentum)"
   fund_folder: "Curate Global Value Equity Fund"
