@@ -235,8 +235,9 @@ Management". Don't rename Linka's folders; change the config. Owner's filing dec
 | Curate Flexible Property / Curate Enhanced Yield | Sesfikile / Momentum Fixed Income (underlying managers; not Lyrical) |
 | Old Mutual RAFI 40 | Old Mutual Wealth - OMI |
 | Catalyst SCI Global Real Estate | Catalyst Fund Managers (Linka's "Catalyx Capital" is a different firm) |
+| SIM Inflation Plus (SCI Ninety One Cautious Managed from 9 Oct 2026) | Ninety One (Linka files it under Ninety One Cautious Managed) |
 
-After this, 37 managers (155 funds) match a folder. Still open: 26 managers (37 funds) with no folder,
+After this, 38 managers (156 funds) match a folder. Still open: 25 managers (36 funds) with no folder,
 e.g. Orbis (5), Foord (4), Oyster Catcher, Merchant West, Northstar, Baillie Gifford (2 each).
 
 ## 7. Open issues and questions for the owner

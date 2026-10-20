@@ -656,7 +656,7 @@ funds:
   isin: ZAE000171153
   url: https://ppsisecure.co.za/SecureDocuments/FundFactSheets/Old%20Mutual%20Global%20Equity%20Fund%20-%20B1.pdf
 - name: SIM Inflation Plus Fund
-  fund_manager: "Ninety One (management outsourced to Sanlam Investment Management)"
+  fund_manager: "Ninety One"
   isin: ZAE000021283
   url: https://ppsisecure.co.za/SecureDocuments/FundFactSheets/SIM%20Inflation%20Plus%20Fund%20-%20B4.pdf
   note: Renamed SCI Ninety One Cautious Managed Fund from 9 October 2026 (absorbing SIM Inflation Beater and SIM Managed Cautious FoF); the PPS platform copy is updated late.
