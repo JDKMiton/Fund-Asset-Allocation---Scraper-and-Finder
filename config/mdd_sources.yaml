@@ -9,108 +9,135 @@
 funds:
 - name: Coronation Balanced Defensive
   fund_manager: "Coronation"
+  fund_folder: "Coronation Balanced Defensive"
   isin: ZAE000170445
   url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/COBA
 - name: Coronation Balanced Plus Fund
   fund_manager: "Coronation"
+  fund_folder: "Coronation Balanced Plus"
   isin: ZAE000165205
   url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CORB
 - name: Coronation Strategic Income
   fund_manager: "Coronation"
+  fund_folder: "Coronation Strategic Income"
   isin: ZAE000170403
   url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CSIF
 - name: Coronation Global Optimum Growth Feeder Fund
   fund_manager: "Coronation"
+  fund_folder: "Coronation Global Optimum Growth Feeder Fund"
   url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CNOG
 - name: Coronation Capital Plus
   fund_manager: "Coronation"
+  fund_folder: "Coronation Capital Plus"
   url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CCPF
 - name: Coronation Property Equity Fund
   fund_manager: "Coronation"
+  fund_folder: "Coronation Property Equity Fund"
   url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CPEF
 - name: Coronation Top 20 Fund
   fund_manager: "Coronation"
+  fund_folder: "Coronation Top 20"
   isin: ZAE000165213
   url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CNTF
 - name: Coronation Global Managed Feeder Fund
   fund_manager: "Coronation"
+  fund_folder: "Coronation Global Managed Feeder Fund"
   isin: ZAE000170411
   url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/COGM
 - name: Coronation Global Emerging Markets Flexible Feeder Fund
   fund_manager: "Coronation"
+  fund_folder: "Coronation Global Emerging Markets Flexible Feeder Fund"
   url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CGEM
 - name: Coronation Global Capital Plus Feeder Fund
   fund_manager: "Coronation"
+  fund_folder: "Coronation Global Capital Plus Feeder Fund"
   url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/COLA
 - name: Coronation Global Opportunities Equity Fund
   fund_manager: "Coronation"
+  fund_folder: "Coronation Global Opportunities Equity Fund"
   url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CUWEA
 - name: Coronation Global Emerging Markets Fund
   fund_manager: "Coronation"
+  fund_folder: "Coronation Global Emerging Markets Fund"
   url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CUGEB
 - name: Coronation Global Strategic Income Fund
   fund_manager: "Coronation"
+  fund_folder: "Coronation Global Strategic Income Fund"
   url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CUGSI
 - name: Coronation Equity Fund
   fund_manager: "Coronation"
+  fund_folder: "Coronation Equity Fund"
   url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CORA
 - name: Coronation Market Plus
   fund_manager: "Coronation"
+  fund_folder: "Coronation Market Plus"
   url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CMPF
 - name: Coronation Global Strategic USD Income ZAR Feeder Fund
   fund_manager: "Coronation"
+  fund_folder: "Coronation Global Strategic USD Income ZAR Feeder Fund"
   isin: ZAE000181038
   url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CGSUI
 - name: Coronation Resources Fund
   fund_manager: "Coronation"
+  fund_folder: "Coronation Resources Fund"
   url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CCGF
 - name: Allan Gray Balanced
   fund_manager: "Allan Gray"
+  fund_folder: "Allan Gray Balanced"
   isin: ZAE000177358
   urls:
   - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20Balanced%20Fund/Files/AGBF%20-%20{yyyy}-{mm}.pdf
 - name: Allan Gray Stable Fund
   fund_manager: "Allan Gray"
+  fund_folder: "Allan Gray Stable"
   isin: ZAE000177366
   urls:
   - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20Stable%20Fund/Files/AGSF%20-%20{yyyy}-{mm}.pdf
 - name: Allan Gray Equity Fund
   fund_manager: "Allan Gray"
+  fund_folder: "Allan Gray Equity Fund"
   isin: ZAE000177341
   urls:
   - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20Equity%20Fund/Files/AGEF%20-%20{yyyy}-{mm}.pdf
 - name: Allan Gray Money Market
   fund_manager: "Allan Gray"
+  fund_folder: "Allan Gray Money Market"
   isin: ZAE000030946
   urls:
   - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20Money%20Market%20Fund/Files/AGMF%20-%20{yyyy}-{mm}.pdf
 - name: Allan Gray Bond
   fund_manager: "Allan Gray"
+  fund_folder: "Allan Gray Bond"
   isin: ZAE000058079
   urls:
   - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20Bond%20Fund/Files/AGBD%20-%20{yyyy}-{mm}.pdf
 - name: Allan Gray Optimal Fund
   fund_manager: "Allan Gray"
+  fund_folder: "Allan Gray Optimal Fund"
   isin: ZAE000177374
   urls:
   - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20Optimal%20Fund/Files/AGOF%20-%20{yyyy}-{mm}.pdf
 - name: Allan Gray Tax-Free Balanced Fund
   fund_manager: "Allan Gray"
+  fund_folder: "Allan Gray Tax-Free Balanced Fund"
   isin: ZAE000214433
   urls:
   - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20Unit%20Trust%20Management%20Limited%20-%20Tax%20Free%20funds/Files/AGTF00%20-%20{yyyy}-{mm}.pdf
 - name: Allan Gray Orbis Global Equity Feeder
   fund_manager: "Orbis Investment Management"
+  fund_folder: "Allan Gray Orbis Global Equity Feeder"
   isin: ZAE000065850
   urls:
   - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20-%20Orbis%20Global%20Equity%20Feeder%20Fund/Files/AGOE%20-%20{yyyy}-{mm}.pdf
 - name: Allan Gray Orbis Global Balanced Feeder Fund
   fund_manager: "Orbis Investment Management"
+  fund_folder: "Allan Gray Orbis Global Balanced Feeder Fund"
   isin: ZAE000034708
   urls:
   - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20-%20Orbis%20Global%20Balanced%20Feeder%20Fund/Files/AGGF%20-%20{yyyy}-{mm}.pdf
 - name: Ninety One Opportunity
   fund_manager: "Ninety One"
+  fund_folder: "Ninety One Opportunity"
   isin: ZAE000171468
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-opportunity-fund-h-zar-factsheet.pdf
   browser: true
@@ -118,6 +145,7 @@ funds:
   - https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-ut-opportunity-fund-a-zar-mdd.pdf
 - name: Ninety One Global Franchise Feeder
   fund_manager: "Ninety One"
+  fund_folder: "Ninety One Global Franchise Feeder"
   isin: ZAE000171526
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-global-franchise-feeder-fund-h-zar-factsheet.pdf
   browser: true
@@ -125,30 +153,35 @@ funds:
   - https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-ut-global-franchise-feeder-fund-a-zar-mdd.pdf
 - name: Ninety One Managed Fund
   fund_manager: "Ninety One"
+  fund_folder: "Ninety One Managed"
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-managed-fund-h-zar-factsheet.pdf
   browser: true
   urls:  # backup: Ninety One A-class MDD
   - https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-ut-managed-fund-a-zar-mdd.pdf
 - name: Ninety One Cautious Managed
   fund_manager: "Ninety One"
+  fund_folder: "Ninety One Cautious Managed"
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-cautious-managed-fund-h-zar-factsheet.pdf
   browser: true
   urls:  # backup: Ninety One A-class MDD
   - https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-ut-cautious-managed-fund-a-zar-mdd.pdf
 - name: Ninety One Equity
   fund_manager: "Ninety One"
+  fund_folder: "Ninety One Equity"
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-equity-fund-h-zar-factsheet.pdf
   browser: true
   urls:  # backup: Ninety One A-class MDD
   - https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-ut-equity-fund-a-zar-mdd.pdf
 - name: Ninety One Diversified Income
   fund_manager: "Ninety One"
+  fund_folder: "Ninety One Diversified Income"
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-diversified-income-fund-h-zar-factsheet.pdf
   browser: true
   urls:  # backup: Ninety One A-class MDD
   - https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-ut-diversified-income-fund-a-zar-mdd.pdf
 - name: Ninety One Global Strategic Managed Feeder Fund
   fund_manager: "Ninety One"
+  fund_folder: "Ninety One Global Strategic Managed Feeder Fund"
   isin: ZAE000171518
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-global-strategic-managed-feeder-fund-h-zar-factsheet.pdf
   browser: true
@@ -156,6 +189,7 @@ funds:
   - https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-ut-global-strategic-managed-feeder-fund-a-zar-mdd.pdf
 - name: Ninety One Global Multi Asset Income Feeder Fund
   fund_manager: "Ninety One"
+  fund_folder: "Ninety One Global Multi Asset Income Feeder Fund"
   isin: ZAE000037396
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-global-managed-income-feeder-fund-h-zar-factsheet.pdf
   browser: true
@@ -163,121 +197,148 @@ funds:
   - https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-ut-global-managed-income-feeder-fund-a-zar-mdd.pdf
 - name: Ninety One Money Market Expense Account
   fund_manager: "Ninety One"
+  fund_folder: "Ninety One Money Market Expense Account"
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-money-market-fund-a-zar-factsheet.pdf
   browser: true
   urls:  # backup: Ninety One A-class MDD
   - https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-ut-money-market-fund-a-zar-mdd.pdf
 - name: Ninety One Commodity Fund
   fund_manager: "Ninety One"
+  fund_folder: "Ninety One Commodity Fund"
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-commodity-fund-h-zar-factsheet.pdf
   browser: true
   urls:  # backup: Ninety One A-class MDD
   - https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-ut-commodity-fund-a-zar-mdd.pdf
 - name: Ninety One STeFI Plus Fund
   fund_manager: "Ninety One"
+  fund_folder: "Ninety One STeFI Plus Fund"
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-stefi-plus-fund-h-zar-factsheet.pdf
   browser: true
   urls:  # backup: Ninety One A-class MDD
   - https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-ut-stefi-plus-fund-a-zar-mdd.pdf
 - name: Ninety One Value
   fund_manager: "Ninety One"
+  fund_folder: "Ninety One Value"
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-value-fund-h-zar-factsheet.pdf
   browser: true
   urls:  # backup: Ninety One A-class MDD
   - https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-ut-value-fund-a-zar-mdd.pdf
 - name: Ninety One Property Equity
   fund_manager: "Ninety One"
+  fund_folder: "Ninety One Property Equity"
   url: https://ninetyone.com/-/media/documents/factsheet/91-sa-ut-property-equity-fund-h-zar-factsheet.pdf
   browser: true
   urls:  # backup: Ninety One A-class MDD
   - https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-ut-property-equity-fund-a-zar-mdd.pdf
 - name: Ninety One Global Diversified Income Fund
   fund_manager: "Ninety One"
+  fund_folder: "Ninety One Global Diversified Income Fund"
   url: https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-ut-global-diversified-income-feeder-fund-h-zar-mdd.pdf
   browser: true
 - name: Nedgroup Investments Core Guarded [Taquanta]
   fund_manager: "Nedgroup"
+  fund_folder: "Nedgroup Core Guarded Fund"
   isin: ZAE000198511
   urls:
   - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Core%20Guarded%20Fund%20C.pdf
 - name: Nedgroup Investments Flexible Income [ABAX]
   fund_manager: "Abax"
+  fund_folder: "Nedgroup Flexible Income"
   isin: ZAE000162947
   urls:
   - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Flexible%20Income%20Fund%20A.pdf
 - name: Nedgroup Investments Core Diversified [Taquanta]
   fund_manager: "Nedgroup"
+  fund_folder: "Nedgroup Core Diversified Fund"
   isin: ZAE000198529
   urls:
   - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Core%20Diversified%20Fund%20B.pdf
 - name: Nedgroup Investments Balanced [Truffle]
   fund_manager: "Truffle"
+  fund_folder: "Nedgroup Inv Balanced"
   isin: ZAE000158481
   urls:
   - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Balanced%20Fund%20B.pdf
 - name: Nedgroup Investments Global Equity Fund
   fund_manager: "Veritas Asset Management"
+  fund_folder: "Nedgroup Investments Global Equity Fund"
   urls:
   - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Global%20Equity%20Feeder%20Fund%20A.pdf
   note: Matched to the SA-domiciled Nedgroup Investments Global Equity Feeder Fund.
 - name: Nedgroup Investments Core Global Feeder Fund
   fund_manager: "Nedgroup"
+  fund_folder: "Nedgroup Investments Core Global Feeder Fund"
   isin: ZAE000212403
   urls:
   - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Core%20Global%20Feeder%20Fund%20A.pdf
 - name: Nedgroup Investments Global Cautious Fund
   fund_manager: "Pyrford International"
+  fund_folder: "Nedgroup Investments Global Cautious Fund"
   isin: ZAE000199998
   urls:
   - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Global%20Cautious%20Feeder%20Fund%20B2.pdf
   note: Matched to the SA-domiciled Nedgroup Investments Global Cautious Feeder Fund.
 - name: Nedgroup Investments Entrepreneur Fund
   fund_manager: "Abax"
+  fund_folder: "Nedgroup Investments Entrepreneur Fund"
   urls:
   - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Entrepreneur%20Fund%20A.pdf
 - name: Nedgroup Investments Stable Fund [Foord]
   fund_manager: "Foord"
+  fund_folder: "Nedgroup Investments Stable Fund [Foord]"
   urls:
   - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Stable%20Fund%20A.pdf
 - name: Nedgroup Investments SA Equity Fund
   fund_manager: "Laurium Capital"
+  fund_folder: "Nedgroup Investments SA Equity Fund"
   urls:
   - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20SA%20Equity%20Fund%20B.pdf
 - name: Nedgroup Investments Opportunity [ABAX]
   fund_manager: "Abax"
+  fund_folder: "Nedgroup Opportunity"
   isin: ZAE000172920
   urls:
   - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Opportunity%20Fund%20B2.pdf
 - name: Nedgroup Investments Global Flexible Feeder Fund
   fund_manager: "First Pacific Advisors (FPA)"
+  fund_folder: "Nedgroup Investments Global Flexible Feeder Fund"
   urls:
   - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Global%20Flexible%20Feeder%20Fund%20A.pdf
 - name: Discovery Balanced Fund
   fund_manager: "Ninety One"
+  fund_folder: "Discovery Balanced Fund"
   url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/DBFD
 - name: Discovery Equity Fund
   fund_manager: "Ninety One"
+  fund_folder: "Discovery Equity Fund"
   url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/DIEF
 - name: Discovery Diversified Income Fund
   fund_manager: "Ninety One"
+  fund_folder: "Discovery Diversified Income Fund"
   url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/DDIF
 - name: Discovery Cautious Balanced Fund
   fund_manager: "Ninety One"
+  fund_folder: "Discovery Cautious Balanced Fund"
   url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/DCBF
 - name: Discovery Flexible Property Fund
   fund_manager: "Ninety One"
+  fund_folder: "Discovery Flexible Property Fund"
   url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/DFPF
 - name: Discovery Global Multi Asset Fund
   fund_manager: "Ninety One"
+  fund_folder: "Discovery Global Multi Asset Fund"
   url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/DWWBI
 - name: Discovery Global Equity Feeder Fund
   fund_manager: "Ninety One"
+  fund_folder: "Discovery Global Equity Feeder Fund"
   url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/DGEF
 - name: Discovery Money Market Fund
   fund_manager: "Ninety One"
+  fund_folder: "Discovery Money Market Fund"
   url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/DMMF
 - name: Discovery Aggressive Dynamic Asset Optimiser Fund of Funds
   fund_manager: "Cogence"
+  fund_folder: "Cogence Discovery Balanced Dynamic Asset Optimiser Fund of Funds"
   current_name: Cogence Discovery Balanced Dynamic Asset Optimiser Fund of Funds
   url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/DADAOF
   note: Renamed Cogence Discovery Balanced Dynamic Asset Optimiser Fund of Funds (same fund code); rename confirmed by the owner 19 Oct 2026.
@@ -285,226 +346,280 @@ funds:
   - Cogence Discovery Balanced Dynamic Asset Optimiser
 - name: PSG Diversified Income
   fund_manager: "PSG"
+  fund_folder: "PSG Diversified Income"
   isin: ZAE000181673
   url: https://download.psg.co.za/files/asset-management/fund-fact-sheets/PSG-Diversified-Income-Fund-Class-A.pdf
 - name: PSG Balanced
   fund_manager: "PSG"
+  fund_folder: "PSG Balanced"
   isin: ZAE000181616
   url: https://download.psg.co.za/files/asset-management/fund-fact-sheets/PSG-Balanced-Fund-Class-A.pdf
 - name: PSG Flexible
   fund_manager: "PSG"
+  fund_folder: "PSG Flexible"
   isin: ZAE000181608
   url: https://download.psg.co.za/files/asset-management/fund-fact-sheets/PSG-Flexible-Fund-Class-A.pdf
 - name: PSG Equity
   fund_manager: "PSG"
+  fund_folder: "PSG Equity"
   url: https://download.psg.co.za/files/asset-management/fund-fact-sheets/PSG-Equity-Fund-Class-A.pdf
 - name: PSG Stable Fund
   fund_manager: "PSG"
+  fund_folder: "PSG Stable"
   isin: ZAE000181640
   url: https://download.psg.co.za/files/asset-management/fund-fact-sheets/PSG-Stable-Fund-Class-A.pdf
 - name: Satrix Balanced Index
   fund_manager: "Satrix"
+  fund_folder: "Satrix Balanced Index"
   isin: ZAE000181848
   url: https://satrix.co.za/fund/mdd/SATBI
 - name: Satrix MSCI World Equity Index Feeder Fund
   fund_manager: "Satrix"
+  fund_folder: "Satrix MSCI World Equity Index Feeder Fund"
   isin: ZAE000181871
   url: https://satrix.co.za/fund/mdd/SAWEF
   note: Fund now named Satrix MSCI World Index Fund.
 - name: Satrix Smartcore Index Fund
   fund_manager: "Satrix"
+  fund_folder: "Satrix Smartcore Index Fund"
   isin: ZAE000271151
   url: https://satrix.co.za/fund/mdd/STRTA1
 - name: Satrix Bond Index
   fund_manager: "Satrix"
+  fund_folder: "Satrix Bond Index"
   isin: ZAE000181749
   url: https://satrix.co.za/fund/mdd/SABIF
 - name: Satrix Capped SWIX All Share Index Fund
   fund_manager: "Satrix"
+  fund_folder: "Satrix Capped SWIX All Share Index Fund"
   isin: ZAE000251146
   url: https://satrix.co.za/fund/mdd/STCSA1
   note: Fund now named Satrix Capped All Share Index Fund.
 - name: Satrix ALSI Index Fund
   fund_manager: "Satrix"
+  fund_folder: "Satrix ALSI Index Fund"
   isin: ZAE000181723
   url: https://satrix.co.za/fund/mdd/SAAIF
 - name: Satrix Property Fund
   fund_manager: "Satrix"
+  fund_folder: "Satrix Property Fund"
   isin: ZAE000181806
   url: https://satrix.co.za/fund/mdd/SAPIF
 - name: Satrix Rafi 40 Index Fund
   fund_manager: "Satrix"
+  fund_folder: "Satrix Rafi 40 Index Fund"
   isin: ZAE000181822
   url: https://satrix.co.za/fund/mdd/SARIF
 - name: Amplify Defensive Balanced [Matrix]
   fund_manager: "Matrix"
+  fund_folder: "Amplify Defensive Balanced"
   isin: ZAE000186326
   sanlam_fund: Amplify SCI Defensive Balanced Fund A1
 - name: Amplify SCI Strategic Income [Terebinth]
   fund_manager: "Terebinth (Amplify)"
+  fund_folder: "Amplify SCI Strategic Income"
   isin: ZAE000186243
   sanlam_fund: Amplify SCI Strategic Income Fund A1
 - name: Amplify Wealth Protector [Truffle]
   fund_manager: "Truffle"
+  fund_folder: "Amplify Wealth Protector"
   isin: ZAE000222147
   sanlam_fund: Amplify SCI Wealth Protector Fund B5
 - name: Amplify SCI Managed Equity RIHF (Oyster Catcher)
   fund_manager: "Oyster Catcher Investments"
+  fund_folder: "Amplify SCI Managed Equity RIHF (Oyster Catcher)"
   isin: ZAE000292199
   sanlam_fund: Amplify SCI Managed Equity Retail Hedge Fund A1
 - name: Amplify SCI Income Plus RIHF (Matrix)
   fund_manager: "Matrix"
+  fund_folder: "Amplify Income Plus RIHF"
   isin: ZAE000282877
   sanlam_fund: Amplify SCI Income Plus Retail Hedge Fund A1
 - name: Amplify SCI Real Income RIHF (Marble Rock)
   fund_manager: "Marble Rock Asset Management"
+  fund_folder: "Amplify SCI Real Income RIHF (Marble Rock)"
   isin: ZAE000282828
   sanlam_fund: Amplify SCI Real Income Retail Hedge Fund A1
 - name: Amplify SCI Absolute Income RIHF (Acumen)
   fund_manager: "Acumen Capital"
+  fund_folder: "Amplify SCI Absolute Income RIHF (Acumen)"
   isin: ZAE000282851
   sanlam_fund: Amplify SCI Absolute Income Retail Hedge Fund A1
 - name: Amplify SCI Absolute
   fund_manager: "Matrix"
+  fund_folder: "Amplify SCI Absolute"
   isin: ZAE000186367
   sanlam_fund: Amplify SCI Absolute Fund A1
 - name: Amplify SCI Enhanced Equity RIHF (All Weather)
   fund_manager: "All Weather"
+  fund_folder: "Amplify SCI Enhanced Equity RHIF"
   isin: ZAE000292991
   sanlam_fund: Amplify SCI Enhanced Equity Retail Hedge Fund A1
 - name: Catalyst SCI Global Real Estate Feeder Fund
   fund_manager: "Catalyst Fund Managers"
+  fund_folder: "Catalyst SCI Global Real Estate Feeder Fund"
   isin: ZAE000164752
   sanlam_fund: Catalyst SCI Global Real Estate Feeder Fund B
 - name: Matrix SCI SA Equity Fund
   fund_manager: "Matrix"
+  fund_folder: "Matrix SCI SA Equity Fund"
   isin: ZAE000263364
   sanlam_fund: Matrix SCI SA Equity Fund B1
 - name: Obsidian Long Short Retail Hedge Fund
   fund_manager: "Obsidian Capital"
+  fund_folder: "Obsidian Long Short Retail Hedge Fund"
   isin: ZAE000239505
   sanlam_fund: Obsidian SCI Long Short Retail Hedge Fund A2
 - name: PR Truffle SCI Flexible Fund
   fund_manager: "Truffle"
+  fund_folder: "Truffle Flexible Fund"
   isin: ZAE000152054
   sanlam_fund: Truffle SCI Flexible Fund A
 - name: 36ONE BCI Equity
   fund_manager: "36One Asset Management"
+  fund_folder: "36ONE BCI Equity"
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/36ONE%20Asset%20Management/36ONE%20FR%20Equity%20Fund%20(A)%20MNTR.pdf
 - name: 36ONE BCI Flexible Opportunity
   fund_manager: "36One Asset Management"
+  fund_folder: "36One Flexible Opportunity Fund"
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/36ONE%20Asset%20Management/36ONE%20FR%20Flexible%20Opportunity%20Fund%20(A)%20MNFO.pdf
 - name: 4D BCI Moderate FoF
   fund_manager: "4D Wealth Management"
+  fund_folder: "4D BCI Moderate FoF"
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/4D%20Wealth%20Management/4D%20FR%20Moderate%20Fund%20of%20Funds%20(A)%20MDMF.pdf
 - name: Centaur BCI Flexible
   fund_manager: "Centaur"
+  fund_folder: "Centaur BCI Flexible"
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Centaur%20Asset%20Management/Centaur%20FR%20Flexible%20Fund%20(A)%20MCFM.pdf
 - name: BCI Ginsglobal Global Equity Index Feeder Fund
   fund_manager: "Ginsglobal Index Funds"
+  fund_folder: "BCI Ginsglobal Global Equity Index Feeder Fund"
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/GinsGlobal/FR%20GinsGlobal%20Global%20Equity%20Index%20Feeder%20Fund%20(A)%20BGGGFA.pdf
 - name: Granate BCI Balanced
   fund_manager: "Granate"
+  fund_folder: "Granate BCI Balanced"
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Granate%20Asset%20Management/Granate%20FR%20Balanced%20Fund%20(B)%20GSBFB.pdf
 - name: Granate BCI Flexible
   fund_manager: "Granate"
+  fund_folder: "Granate BCI Flexible"
   isin: ZAE000283255
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Granate%20Asset%20Management/Granate%20FR%20Flexible%20Fund%20(B)%20GSFFB.pdf
 - name: Granate BCI Multi Income
   fund_manager: "Granate"
+  fund_folder: "Granate BCI Multi Income"
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Granate%20Asset%20Management/Granate%20FR%20Multi%20Income%20Fund%20(B)%20RSMIB.pdf
 - name: Northstar BCI Income Fund
   fund_manager: "Northstar Asset Management"
+  fund_folder: "Northstar BCI Income Fund"
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Northstar%20Asset%20Management/Northstar%20FR%20Income%20Fund%20(A)%20NMIF.pdf
 - name: Northstar BCI Managed Fund
   fund_manager: "Northstar Asset Management"
+  fund_folder: "Northstar BCI Managed Fund"
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Northstar%20Asset%20Management/Northstar%20FR%20Managed%20Fund%20(A1)%20METP.pdf
 - name: BCI Ranmore Global Value Equity Feeder Fund
   fund_manager: "Ranmore"
+  fund_folder: "BCI Ranmore Global Value Equity Feeder Fund"
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Ranmore/FR%20Ranmore%20Global%20Value%20Equity%20Feeder%20Fund%20(B)%20RANFFB.pdf
 - name: Reitway BCI Global Property Fund
   fund_manager: "Reitway"
+  fund_folder: "Reitway BCI Global Property Fund"
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Reitway%20Global/Reitway%20FR%20Global%20Property%20Feeder%20Fund%20(A)%20MGPI.pdf
 - name: Sesfikile BCI Global Property Fund
   fund_manager: "Sesfikile"
+  fund_folder: "Sesfikile Global Property"
   isin: ZAE000216503
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Sesfikile%20Capital/Sesfikile%20FR%20Global%20Property%20Fund%20(A2)%20SPFA2.pdf
 - name: Sesfikile Property Fund
   fund_manager: "Sesfikile"
+  fund_folder: "Sesfikile Property Fund"
   isin: ZAE000160669
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Sesfikile%20Capital/Sesfikile%20FR%20Property%20Fund%20(B1)%20SSPF2.pdf
 - name: Visio BCI Unconstrained Fixed Interest
   fund_manager: "Visio Fund Management"
+  fund_folder: "Visio BCI Unconstrained Fixed Interest"
   isin: ZAE000215828
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Visio%20Fund%20Management/Visio%20FR%20Unconstrained%20Fixed%20Interest%20Fund%20(B)%20RSVIB.pdf
 - name: Prescient Balanced
   fund_manager: "Prescient"
+  fund_folder: "Prescient Balanced"
   isin: ZAE000191458
   page: https://www.prescient.co.za/news-and-resources/minimum-disclosure-documents/
   link_match: prescient-balanced-fund-a1-[a-z]+-\d{4}-pimbala1
   render: true
 - name: Prescient Income Provider Fund
   fund_manager: "Prescient"
+  fund_folder: "Prescient Income Provider"
   isin: ZAE000087540
   page: https://www.prescient.co.za/news-and-resources/minimum-disclosure-documents/
   link_match: prescient-income-provider-fund-a2-[a-z]+-\d{4}-pipfa2
   render: true
 - name: Prescient Defensive Fund
   fund_manager: "Prescient"
+  fund_folder: "Prescient Defensive Fund"
   page: https://www.prescient.co.za/news-and-resources/minimum-disclosure-documents/
   link_match: prescient-defensive-fund-a1-[a-z]+-\d{4}-pabsa1
   render: true
 - name: Prescient China Balanced Fund
   fund_manager: "Prescient"
+  fund_folder: "Prescient China Balanced Fund"
   isin: ZAE000176939
   page: https://www.prescient.co.za/news-and-resources/minimum-disclosure-documents/
   link_match: prescient-china-balanced-class-d-[a-z]+-\d{4}-pgcbfd
   render: true
 - name: Prescient Global Income Provider Fund
   fund_manager: "Prescient"
+  fund_folder: "Prescient Global Income Provider"
   isin: ZAE000122263
   page: https://www.prescient.co.za/news-and-resources/minimum-disclosure-documents/
   link_match: prescient-global-income-provider-fund-b-[a-z]+-\d{4}-pgpgifb
   render: true
 - name: Fairtree Equity Prescient Fund
   fund_manager: "Fairtree"
+  fund_folder: "Fairtree Equity Prescient"
   isin: ZAE000330007
   page: https://www.prescient.co.za/funds/other-funds/
   link_match: fairtree-equity-prescient-fund-[0-9-]+_-fcbepfa1
   render: true
 - name: Laurium Market Neutral Prescient RIHF
   fund_manager: "Laurium Capital"
+  fund_folder: "Laurium Market Neutral Prescient RIHF"
   page: https://www.prescient.co.za/funds/other-funds/
   link_match: laurium-market-neutral-prescient-ri-hedge-fund-\d{6}
   render: true
 - name: Laurium Flexible Prescient
   fund_manager: "Laurium Capital"
+  fund_folder: "Laurium Flexible Prescient"
   page: https://www.prescient.co.za/funds/other-funds/
   link_match: /laurium-flexible-prescient-fund-\d{6}
   render: true
 - name: Laurium Long Short Prescient RIHF
   fund_manager: "Laurium Capital"
+  fund_folder: "Laurium Long Short"
   page: https://www.prescient.co.za/funds/other-funds/
   link_match: laurium-long-short-prescient-ri-hedge-\d{6}
   render: true
 - name: Bateleur Long Short Prescient RI Hedge Fund
   fund_manager: "Bateleur"
+  fund_folder: "Bateleur Long Short Prescient RIHF"
   page: https://www.prescient.co.za/funds/other-funds/
   link_match: bateleur-long-short-prescient-ri-hedge-fund_\d{8}
   render: true
 - name: Bateleur Special Opportunities Prescient RI Hedge Fund
   fund_manager: "Bateleur"
+  fund_folder: "Bateleur Special Opps Prescient RIHF"
   page: https://www.prescient.co.za/funds/other-funds/
   link_match: bateleur-special-opportunities-prescient-ri-hedge-fund_\d{8}
   render: true
 - name: 36One Prescient Retail Hedge Fund / SNN Retail Hedge Fund
   fund_manager: "36One Asset Management"
+  fund_folder: "36One Prescient Retail Hedge Fund"
   isin: ZAE000257648
   page: https://www.prescient.co.za/funds/other-funds/
   link_match: 36one-prescient-retail-hedge-fund-1-[a-z]+-\d{4}_361rf1
   render: true
 - name: Foord Balanced Fund
   fund_manager: "Foord"
+  fund_folder: "Foord Balanced Fund"
   page: https://foord.co.za/investments/forms-and-documents
   render: true
   link_match: Foord(%20| )Balanced(%20| )Fund(%20| )Class(%20| )A(%20| )at
@@ -512,6 +627,7 @@ funds:
   - https://foord.co.za/sites/default/files/{next_yyyy}-{next_mm}/Foord%20Balanced%20Fund%20Class%20A%20at%20{yyyy}-{mm}-{dd}.pdf
 - name: Foord Equity Fund
   fund_manager: "Foord"
+  fund_folder: "Foord Equity Fund"
   page: https://foord.co.za/investments/forms-and-documents
   render: true
   link_match: Foord(%20| )Equity(%20| )Fund(%20| )Class(%20| )A(%20| )at
@@ -519,6 +635,7 @@ funds:
   - https://foord.co.za/sites/default/files/{next_yyyy}-{next_mm}/Foord%20Equity%20Fund%20Class%20A%20at%20{yyyy}-{mm}-{dd}.pdf
 - name: Foord International Fund
   fund_manager: "Foord"
+  fund_folder: "Foord International Fund"
   page: https://foord.co.za/investments/forms-and-documents
   render: true
   link_match: Foord(%20| )International(%20| )Fund(%20| )Class(%20| )R(%20| )at
@@ -526,11 +643,13 @@ funds:
   - https://foord.co.za/sites/default/files/{next_yyyy}-{next_mm}/Foord%20International%20Fund%20Class%20R%20at%20{yyyy}-{mm}-{dd}.pdf
 - name: Marriott Core Income
   fund_manager: "Marriott"
+  fund_folder: "Marriott Core Income"
   isin: ZAE000027991
   url: https://www.marriott.co.za/downloads/factsheets/Marriott_Core_Income_Fund_Fact_Sheet.pdf
   ignore_robots: true
 - name: Marriott Dividend Growth Fund
   fund_manager: "Marriott"
+  fund_folder: "Marriott Dividend Growth Fund"
   isin: ZAE000020186
   url: https://www.marriott.co.za/downloads/factsheets/Marriott_Dividend_Growth_Fund_Fact_Sheet.pdf
   note: Marriott publishes MDDs quarterly; latest is 30 June 2026.
@@ -539,6 +658,7 @@ funds:
   lag_days: 45
 - name: Marriott Essential Income Fund
   fund_manager: "Marriott"
+  fund_folder: "Marriott Essential Income Fund"
   isin: ZAE000266896
   url: https://www.marriott.co.za/downloads/factsheets/Marriott_Essential_Income_Fund_Factsheet.pdf
   note: Marriott publishes MDDs quarterly; latest is 30 June 2026.
@@ -547,6 +667,7 @@ funds:
   lag_days: 45
 - name: Marriot Property Income Fund
   fund_manager: "Marriott"
+  fund_folder: "Marriott Property Income Fund"
   isin: ZAE000023156
   url: https://www.marriott.co.za/downloads/factsheets/Marriott_Property_Income_Fund_Fact_Sheet.pdf
   note: Marriott publishes MDDs quarterly; latest is 30 June 2026.
@@ -555,54 +676,65 @@ funds:
   lag_days: 45
 - name: Camissa Equity Alpha
   fund_manager: "Camissa"
+  fund_folder: "Camissa Equity Alpha"
   page: https://www.camissa-am.com/funds/equity-alpha-fund
   render: true
   link_match: _\d{4}\.pdf
 - name: Camissa Stable
   fund_manager: "Camissa"
+  fund_folder: "Camissa Stable"
   isin: ZAE000177648
   page: https://www.camissa-am.com/funds/stable-fund
   render: true
   link_match: _\d{4}\.pdf
 - name: Rezco Managed Plus Fund
   fund_manager: "Rezco Asset Management"
+  fund_folder: "Rezco Managed Plus Fund"
   page: https://rezco.com/fund-fact-sheets/rezco-managed-plus-fund-class-a-{yyyy}-{mm}
   render: true
   link_match: _assets/
   note: Rezco fact sheet pages are per month; the PDF link is on the page.
 - name: Rezco Value Trend Fund
   fund_manager: "Rezco Asset Management"
+  fund_folder: "Rezco Value Trend Fund"
   page: https://rezco.com/fund-fact-sheets/rezco-value-trend-fund-class-a-{yyyy}-{mm}
   render: true
   link_match: _assets/
   note: Rezco fact sheet pages are per month; the PDF link is on the page.
 - name: Rezco Stable Fund
   fund_manager: "Rezco Asset Management"
+  fund_folder: "Rezco Stable Fund"
   page: https://rezco.com/fund-fact-sheets/rezco-stable-fund-class-c-{yyyy}-{mm}
   render: true
   link_match: _assets/
   note: Rezco fact sheet pages are per month; the PDF link is on the page.
 - name: Orbis SICAV Global Balanced
   fund_manager: "Orbis Investment Management"
+  fund_folder: "Orbis SICAV Global Balanced"
   urls:
   - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Orbis%20SICAV%20Global%20Balanced%20Fund%20%28USD%29%20%28Class%20RRFA%29/Files/GBSRA%20-%20{yyyy}-{mm}.pdf
 - name: Orbis Global Equity Fund
   fund_manager: "Orbis Investment Management"
+  fund_folder: "Orbis Global Equity Fund"
   urls:
   - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Orbis%20Global%20Equity%20Fund%20%28USD%29%20%28Class%20RRFA%29/Files/OGSRA%20-%20{yyyy}-{mm}.pdf
 - name: Orbis Optimal Fund
   fund_manager: "Orbis Investment Management"
+  fund_folder: "Orbis Optimal Fund"
   urls:
   - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Orbis%20Optimal%20SA%20Fund%20%28USD%29%20%28Class%20A%29/Files/OSDHWA%20-%20{yyyy}-{mm}.pdf
 - name: Mi-Plan IP Global Macro Fund
   fund_manager: "Mi-Plan"
+  fund_folder: "Mi-Plan IP Global Macro Fund"
   isin: ZAE000173514
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Miplan/Mi-Plan%20FR%20Global%20Macro%20Fund%20(B5)%20MGMF.pdf
 - name: Multi Asset IP Balanced Defensive
   fund_manager: "Mi-Plan"
+  fund_folder: "Multi Asset IP Balanced Defensive"
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Multi%20Asset%20Investment%20Management/Multi%20Asset%20FR%20Balanced%20Defensive%20Fund%20(A)%20MAICA.pdf
 - name: Mi-Plan IP Enhanced Income
   fund_manager: "Vunani Fund Managers"
+  fund_folder: "Vunani FR Enhanced Income Fund"
   current_name: Vunani FR Enhanced Income Fund
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Vunani%20Fund%20Managers/Vunani%20FR%20Enhanced%20Income%20Fund%20(A1)%20MIPEI.pdf
   note: Renamed Vunani FR Enhanced Income Fund (same fund code); rename confirmed by the owner 19 Oct 2026.
@@ -610,88 +742,98 @@ funds:
   - Vunani FR Enhanced Income Fund
 - name: Steyn Capital SNN Daily Liquidity RIHF
   fund_manager: "Steyn Capital Management"
+  fund_folder: "Steyn Capital Daily Liquidity RIHF"
   urls:
   - https://steyncapitalmanagement.com/wp-content/uploads/Steyn-Capital-Daily-Liquidity-FR-Retail-Hedge-Fund-{Mon}-{yyyy}-MDD.pdf
   ignore_robots: true
 - name: Fairtree Silver Oak Equity LS SNN Retail Hedge Fund
   fund_manager: "Fairtree"
+  fund_folder: "Fairtree Silver Oak Hedge Fund"
   url: https://www.fairtree.com/wp-content/uploads/mdd/fairtree-silver-oak-equity-long-short-fr-retail-hedge-fund-mdd.pdf
 - name: Gryphon All Share Tracker Fund
   fund_manager: "Gryphon"
+  fund_folder: "Gryphon All Share Tracker Fund"
   isin: ZAE000020947
   url: https://gryphon.com/documents/gryphon-all-share-tracker-fund.pdf
 - name: Sygnia 4th Industrial Revolution Global Equity Fund
   fund_manager: "Sygnia Asset Management"
+  fund_folder: "Sygnia 4th Industrial Revolution Global Equity Fund"
   isin: ZAE000227856
   page: https://www.sygnia.co.za/blog/fund/sygnia-4th-industrial-revolution-global-equity-fund-class-a/
   render: true
   link_match: SIRGA.*FFS
 - name: PPS Managed Fund
   fund_manager: "36One Asset Management"
+  fund_folder: "PPS Managed Fund"
   url: https://www.pps.co.za/sites/default/files/invest-documents/fund-fact-sheets/PPS%20Monthly%20FactSheets/PPS%20Managed%20Fund_%20A%20&%20A2.pdf
 - name: PPS Equity Fund
   fund_manager: "PPS"
+  fund_folder: "PPS Equity Fund"
   isin: ZAE000140638
   url: https://www.pps.co.za/sites/default/files/invest-documents/fund-fact-sheets/PPS%20Monthly%20FactSheets/PPS%20Equity%20Fund_%20A-A2.pdf
 - name: PPS Flexible Income Fund
   fund_manager: "PPS"
+  fund_folder: "PPS Flexible Income Fund"
   isin: ZAE000173175
   url: https://www.pps.co.za/sites/default/files/invest-documents/fund-fact-sheets/PPS%20Monthly%20FactSheets/PPS%20Flexible%20Income%20Fund_%20A%20-%20A2.pdf
 - name: Denker Global Financial Fund
   fund_manager: "Denker Capital"
+  fund_folder: "Denker Global Financial Fund"
   isin: ZAE000154688
   sanlam_fund: Denker SCI Global Financial Feeder Fund A1
 - name: Stanlib Absolute Plus
   fund_manager: "Stanlib"
+  fund_folder: "Stanlib Absolute Plus"
   isin: ZAE000082236
   url: https://ppsisecure.co.za/SecureDocuments/FundFactSheets/STANLIB%20Absolute%20Plus%20Fund%20-%20B1.pdf
   note: STANLIB's own site blocks automated access; the PPS platform copy is usually a month behind.
   lag_days: 60
 - name: STANLIB Income Fund
   fund_manager: "Stanlib"
+  fund_folder: "STANLIB Income Fund"
   url: https://ppsisecure.co.za/SecureDocuments/FundFactSheets/STANLIB%20Income%20Fund%20-%20B2.pdf
   lag_days: 60
 - name: Old Mutual Global Equity [Jupiter Merlin]
   fund_manager: "Jupiter Merian Fund Management"
+  fund_folder: "Old Mutual Global Equity Fund (Jupiter Merlin)"
   isin: ZAE000171153
   url: https://ppsisecure.co.za/SecureDocuments/FundFactSheets/Old%20Mutual%20Global%20Equity%20Fund%20-%20B1.pdf
-- name: SIM Inflation Plus Fund
-  fund_manager: "Ninety One"
-  isin: ZAE000021283
-  url: https://ppsisecure.co.za/SecureDocuments/FundFactSheets/SIM%20Inflation%20Plus%20Fund%20-%20B4.pdf
-  note: Renamed SCI Ninety One Cautious Managed Fund from 9 October 2026 (absorbing SIM Inflation Beater and SIM Managed Cautious FoF); the PPS platform copy is updated late.
-  doc_names:
-  - SCI Inflation Plus Fund
-  - SCI Ninety One Cautious Managed Fund
-  lag_days: 60
 - name: Momentum Capped SWIX Index Fund
   fund_manager: "Momentum"
+  fund_folder: "Momentum Capped SWIX Index Fund"
   url: https://wealth.momentum.co.za/investments/factsheets/momentum-capped-all-share-index-fund-(a).pdf
   note: Fund now named Momentum Capped All Share Index Fund (benchmark changed after the JSE retired the SWIX indices).
   doc_names:
   - Momentum Capped All Share Fund
 - name: Ninety One Sterling Money Fund
   fund_manager: "Ninety One"
+  fund_folder: "Ninety One Sterling Money Fund"
   url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/LU0898847727
 - name: Ninety One US Dollar Money Fund
   fund_manager: "Ninety One"
+  fund_folder: "Ninety One US Dollar Money Fund"
   url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/LU0439319624
 - name: Ninety One UK Alpha Fund
   fund_manager: "Ninety One"
+  fund_folder: "Ninety One UK Alpha Fund"
   url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/LU0345775018
 - name: Baille Gifford Worldwide Long Term Global Growth Fund
   fund_manager: "Baillie Gifford"
+  fund_folder: "Baillie Gifford Worldwide Long Term Global Growth Fund"
   url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/IE00BYQG5606
   doc_names:
   - Baillie Gifford Worldwide Long Term Global Growth
 - name: Jupiter Merian World Equity Fund
   fund_manager: "Jupiter Merian Fund Management"
+  fund_folder: "Jupiter Merian World Equity Fund"
   url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/IE00B42HMS87
 - name: Baillie Gifford Managed Fund
   fund_manager: "Baillie Gifford"
+  fund_folder: "Baillie Gifford Managed Fund"
   url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/GB0006010168
 - name: Amplify SCI Diversified Income RIHF (Terebinth)
   fund_manager: "Terebinth (Amplify)"
+  fund_folder: "Amplify SCI Diversified Income RIHF"
   isin: ZAE000284147
   note: MDD linked from Amplify's fund page (Sanlam's list links the wrong fund).
   page: https://www.amplify.co.za/funds/amplify-sci-diversified-income-retail-hedge-fund/
@@ -699,6 +841,7 @@ funds:
   referer: https://www.amplify.co.za/
 - name: Amplify SCI Multi Strategy RIHF (Obsidian)
   fund_manager: "AG Capital"
+  fund_folder: "Amplify SCI Multi Strategy RIHF (Obsidian)"
   isin: ZAE000282844
   note: Renamed Amplify SCI Active Equity Retail Hedge Fund; AG Capital replaced Obsidian as manager.
   sanlam_fund: Amplify SCI Active Equity Retail Hedge Fund A1
@@ -706,6 +849,7 @@ funds:
   - Amplify SCI Active Equity
 - name: M&G Balanced Fund
   fund_manager: "M & G"
+  fund_folder: "M&G Balanced Fund"
   isin: ZAE000020863
   mandg_fund: M&G Balanced Fund
   urls:  # backup: Allan Gray platform copy (B class), dated, 4-5 weeks after month-end
@@ -713,6 +857,7 @@ funds:
   ignore_robots: true  # owner's OK (19 Oct 2026): allangray.co.za robots.txt disallows M~and~G*
 - name: M&G Inflation Plus
   fund_manager: "M & G"
+  fund_folder: "M&G Inflation Plus"
   isin: ZAE000041026
   mandg_fund: M&G Inflation Plus Fund
   urls:  # backup: Allan Gray platform copy (B class), dated, 4-5 weeks after month-end
@@ -720,6 +865,7 @@ funds:
   ignore_robots: true  # owner's OK (19 Oct 2026): allangray.co.za robots.txt disallows M~and~G*
 - name: M&G Global Balanced Fund
   fund_manager: "M & G"
+  fund_folder: "M&G Global Balanced Fund"
   isin: IE00BYQDDD48
   mandg_fund: M&G Global Balanced Fund
   urls:  # backup: Allan Gray platform copy (B class), dated, 4-5 weeks after month-end
@@ -727,13 +873,16 @@ funds:
   ignore_robots: true  # owner's OK (19 Oct 2026): allangray.co.za robots.txt disallows M~and~G*
 - name: M&G Dividend Maximiser Fund
   fund_manager: "M & G"
+  fund_folder: "M&G Dividend Maximiser Fund"
   isin: ZAE000090932
   mandg_fund: M&G Dividend Maximiser Fund
 - name: M&G Property Fund D
   fund_manager: "M & G"
+  fund_folder: "M&G Property Fund D"
   mandg_fund: M&G Property Fund
 - name: PPS Balanced Passive Fund
   fund_manager: "Prescient"
+  fund_folder: "PPS Balanced Passive Fund"
   keep_name: true  # the MDD prints the old name "PPS Balanced Index Tracker Fund"
   note: PPS publishes the current fact sheet under the fund's old name (PPS Balanced Index Tracker Fund).
   urls:
@@ -743,15 +892,18 @@ funds:
   - PPS Balanced Index Tracker Fund
 - name: Old Mutual RAFI 40 Index Fund
   fund_manager: "Old Mutual Wealth - OMI"
+  fund_folder: "Old Mutual RAFI 40 Index Fund"
   note: MDD link from Old Mutual's local equity fund table; fund is balloting a rename to Old Mutual RAFI SA Index Fund.
   url: https://www.oldmutualinvest.com/om-docs/blt534f03c64ce9c4b6/OldMutualRAFI40TrackerFund.pdf
 - name: Schroder ISF Global Sustainable Growth Fund
   fund_manager: "Schroders"
+  fund_folder: "Schroder ISF Global Sustainable Growth Fund"
   isin: LU0557290698
   note: Schroder ISF Global Sustainable Growth A Acc USD - monthly fund report from Schroders' document store.
   url: https://api.schroders.com/document-store/SISF-Global-Sustainable-Growth-A-Acc-FMR-LUEN.pdf
 - name: iShares World Equity Index Fund
   fund_manager: "BlackRock"
+  fund_folder: "iShares World Equity Index Fund"
   isin: LU0836515477
   note: iShares World Equity Index Fund (LU) Class F2 USD - monthly BlackRock fact sheet (the SA MDD is only quarterly).
   urls:
@@ -759,6 +911,7 @@ funds:
   - https://www.blackrock.com/gls-download/literature/fact-sheet/ishares-world-equity-index-fund-lu-class-f2-usd-factsheet-lu0836515477-za-en-individual.pdf
 - name: iShares Emerging Markets Equity Index Fund
   fund_manager: "BlackRock"
+  fund_folder: "iShares Emerging Markets Equity Index Fund"
   isin: LU0836515980
   note: iShares Emerging Markets Equity Index Fund (LU) Class F2 USD - monthly BlackRock fact sheet.
   urls:
@@ -766,12 +919,14 @@ funds:
   - https://www.blackrock.com/gls-download/literature/fact-sheet/ishares-emerging-markets-equity-index-fund-lu-class-f2-usd-factsheet-lu0836515980-za-en-individual.pdf
 - name: Ranmore Global Equity Fund
   fund_manager: "Ranmore"
+  fund_folder: "Ranmore Global Equity Fund"
   isin: IE00B746L328
   note: Ranmore Global Equity Investor USD - monthly fact sheet from ranmorefunds.com/historic-factsheets.
   page: https://ranmorefunds.com/historic-factsheets/
   link_match: /{Month}-{yyyy}[^/]*\.pdf$
 - name: Janus Henderson Horizon Fund
   fund_manager: "Janus Henderson Investors"
+  fund_folder: "Janus Henderson Horizon Fund"
   isin: LU0572952280
   note: Global Technology Leaders Fund A2 EUR. Janus Henderson only keeps the latest month's fact sheet online.
   urls:
@@ -779,6 +934,7 @@ funds:
   - https://cdn.janushenderson.com/webdocs/HGLZTI_LU0572952280_MAR191_M_{bdd}{mm}{yyyy}_XX(EN-GB).pdf
 - name: Counterpoint SCI Global Equity Feeder Fund
   fund_manager: "Merchant West Investments"
+  fund_folder: "Counterpoint SCI Global Equity Feeder Fund"
   note: Renamed Merchant West SCI Global Equity Feeder Fund (B class MDD).
   page: https://merchantwest.co.za/investments/our-funds/
   link_match: SI_Merchant-West-SCI-Global-Equity-Feeder-Fund
@@ -786,6 +942,7 @@ funds:
   - Merchant West SCI Global Equity Feeder Fund
 - name: Counterpoint SCI Worldwide Flexible Fund
   fund_manager: "Merchant West Investments"
+  fund_folder: "Counterpoint SCI Worldwide Flexible Fund"
   isin: ZAE000141727
   note: Renamed Merchant West SCI Worldwide Flexible Fund.
   page: https://merchantwest.co.za/investments/our-funds/
@@ -794,6 +951,7 @@ funds:
   - Merchant West SCI Worldwide Flexible Fund
 - name: Vulcan Value Equity Fund
   fund_manager: "Vulcan Value Partners"
+  fund_folder: "Vulcan Value Equity Fund"
   isin: IE00B8FGBZ03
   note: Irish UCITS fund (Vulcan Value Partners) - fact sheet from Prescient's fund page; ISIN is the USD Acc class.
   page: https://www.prescient.co.za/funds/other-funds/
@@ -801,6 +959,7 @@ funds:
   render: true
 - name: CoreShares S&P SA Top 50 Tracker Fund
   fund_manager: "10X Investments"
+  fund_folder: "CoreShares S&P SA Top 50 Tracker Fund"
   isin: ZAE000204327
   note: Renamed 10X S&P SA Top50 Tracker Fund (10X bought CoreShares); 10X publishes MDDs about 6 weeks after month-end.
   page: https://assetmanagement.10x.co.za/fund/10x-sp-south-africa-top50-index-etf/
@@ -810,11 +969,13 @@ funds:
   lag_days: 50
 - name: Curate Momentum Enhanced Yield Fund
   fund_manager: "Momentum"
+  fund_folder: "Curate Momentum Enhanced Yield Fund"
   isin: ZAE000160479
   note: A class MDD hosted by Momentum (linked from curateinvestments.com).
   url: https://wealth.momentum.co.za/investments/factsheets/curate-momentum-enhanced-yield-fund-(a)-zaf.pdf
 - name: Sasfin BCI Flexible Income
   fund_manager: "Otto1890"
+  fund_folder: "Otto1890 BCI Flexible Fund"
   isin: ZAE000206397
   note: Renamed Otto1890 FR Flexible Income Fund (Sasfin Wealth became Otto1890).
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Otto1890%20Asset%20Management/Otto1890%20FR%20Flexible%20Income%20Fund%20(A)%20SMFIA.pdf
@@ -823,105 +984,126 @@ funds:
 # Added from the MitonOptimal local buy list (Funds.xlsx), October 2026
 - name: Abax Absolute Prescient Fund
   fund_manager: "Abax"
+  fund_folder: "Abax Absolute Prescient"
   isin: ZAE000144275
   page: https://www.prescient.co.za/funds/other-funds/
   link_match: '{yyyy}-{mm}-abax-absolute-fund-mdd'
   render: true
 - name: Abax Balanced Prescient Fund
   fund_manager: "Abax"
+  fund_folder: "Abax Balanced Prescient"
   isin: ZAE000163556
   page: https://www.prescient.co.za/funds/other-funds/
   link_match: '{yyyy}-{mm}-abax-balanced-fund-mdd'
   render: true
 - name: Allan Gray Income Fund
   fund_manager: "Allan Gray"
+  fund_folder: "Allan Gray Income"
   isin: ZAE000334355
   urls:
   - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20Income%20Fund/Files/AGINA%20-%20{yyyy}-{mm}.pdf
 - name: Allan Gray SA Equity Fund
   fund_manager: "Allan Gray"
+  fund_folder: "Allan Gray SA Equity Fund"
   isin: ZAE000202396
   urls:
   - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Allan%20Gray%20SA%20Equity%20Fund/Files/AGDA%20-%20{yyyy}-{mm}.pdf
 - name: Amplify SCI Equity Fund
   fund_manager: "Oyster Catcher Investments"
+  fund_folder: "Amplify SCI Equity Fund"
   isin: ZAE000291415
   sanlam_fund: Amplify SCI Equity Fund A1
 - name: Camissa Balanced Fund
   fund_manager: "Camissa"
+  fund_folder: "Camissa Balanced"
   isin: ZAE000177655
   page: https://www.camissa-am.com/funds/balanced-fund
   render: true
   link_match: _\d{4}\.pdf
 - name: Centaur FR Balanced Fund
   fund_manager: "Centaur"
+  fund_folder: "Centaur Balanced Fund"
   isin: ZAE000203428
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Centaur%20Asset%20Management/Centaur%20FR%20Balanced%20Fund%20(A)%20CMBFA.pdf
 - name: Coronation Bond Fund
   fund_manager: "Coronation"
+  fund_folder: "Coronation Bond Fund"
   isin: ZAE000202453
   url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CNSB
 - name: Curate Momentum Flexible Property Fund
   fund_manager: "Sesfikile"
+  fund_folder: "Curate Momentum Flexible Property Fund"
   isin: ZAE000337291
   url: https://wealth.momentum.co.za/investments/factsheets/curate-momentum-flexible-property-fund-(a)-zaf.pdf
 - name: Fairtree SA Equity Prescient Fund
   fund_manager: "Fairtree"
+  fund_folder: "Fairtree SA Equity Prescient"
   isin: ZAE000203576
   page: https://www.prescient.co.za/funds/other-funds/
   link_match: 'fairtree-sa-equity-prescient-fund-{yyyy}-{mm}-'
   render: true
 - name: Gryphon Core Managed Fund
   fund_manager: "Gryphon"
+  fund_folder: "Gryphon Core Managed"
   isin: ZAE000339305
   url: https://gryphon.com/documents/gryphon-core-managed-fund.pdf
 - name: M&G Global Balanced Feeder Fund
   fund_manager: "M & G"
+  fund_folder: "M&G Global Balanced Feeder Fund"
   isin: ZAE000259396
   mandg_fund: M&G Global Balanced Feeder Fund
 - name: M&G Global Inflation Plus Feeder Fund
   fund_manager: "M & G"
+  fund_folder: "M&G Global Inflation Plus Feeder Fund"
   isin: ZAE000179412
   mandg_fund: M&G Global Inflation Plus Feeder Fund
 - name: Methodical FR Equity Fund
   fund_manager: "Methodical"
+  fund_folder: "Methodical FR Equity Fund"
   isin: ZAE000273967
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Methodical%20Investment%20Management/Methodical%20FR%20Equity%20Fund%20(B1)%20ACPB2.pdf
 - name: Nedgroup Investments Core Accelerated Fund
   fund_manager: "Nedgroup"
+  fund_folder: "Nedgroup Core Accelerated Fund"
   isin: ZAE000240537
   urls:
   - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Core%20Accelerated%20Fund%20B.pdf
 - name: Satrix Low Equity Balanced Index Fund
   fund_manager: "Satrix"
+  fund_folder: "Satrix Low Equity Balanced Index"
   isin: ZAE000189379
   url: https://satrix.co.za/fund/mdd/SLEA1
 - name: Steyn Capital Equity Prescient Fund
   fund_manager: "Steyn Capital Management"
+  fund_folder: "Steyn Capital Equity Prescient Fund"
   isin: ZAE000222352
   page: https://www.prescient.co.za/funds/other-funds/
   link_match: 'steyn-capital-equity-prescient-fund-{mon}-{yyyy}-mdd'
   render: true
 - name: STANLIB Enhanced Multi Style Equity Fund
   fund_manager: "Stanlib"
+  fund_folder: "Stanlib Enhanced Multi Style Equity"
   isin: ZAE000214946
   url: https://ppsisecure.co.za/SecureDocuments/FundFactSheets/STANLIB%20Enhanced%20Multi%20Style%20Equity%20Fund%20-%20B1.pdf
   note: STANLIB's own site blocks automated access; the PPS platform copy is usually a month behind.
   lag_days: 60
 - name: STANLIB Global Balanced Feeder Fund
   fund_manager: "Stanlib"
+  fund_folder: "Stanlib Global Balanced"
   isin: ZAE000213021
   url: https://wealth.momentum.co.za/investments/factsheets/stanlib-global-balanced-feeder-fund-(b3).pdf
   note: STANLIB's own site blocks automated access; Momentum's copy is usually a month behind.
   lag_days: 60
 - name: STANLIB Multi-Asset Cautious Fund
   fund_manager: "Stanlib"
+  fund_folder: "Stanlib Multi Asset Cautious"
   isin: ZAE000288486
   url: https://wealth.momentum.co.za/investments/factsheets/stanlib-multi-asset-cautious-fund-(c3).pdf
   note: STANLIB's own site blocks automated access; Momentum's copy is usually a month behind.
   lag_days: 60
 - name: STANLIB Multi-Asset Growth Fund
   fund_manager: "Stanlib"
+  fund_folder: "Stanlib Multi Asset Growth"
   isin: ZAE000314555
   url: https://wealth.momentum.co.za/investments/factsheets/stanlib-multi-asset-growth-fund-(b1).pdf
   note: B1 class MDD (Momentum's C3 copy is out of date); STANLIB's own site blocks automated access.

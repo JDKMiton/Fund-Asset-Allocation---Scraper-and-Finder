@@ -37,7 +37,7 @@ records what was actually seen for *these* funds and wins.
 | Install on the owner's work PC | `C:\Tools\MDD-Scraper`. Until 20 Oct 2026 it was updated by copying the branch ZIP over it (Replace, keep `.venv`). From 20 Oct the owner was given steps to make it a git clone of this branch: `run_weekly.ps1` then runs `git pull --ff-only` before each run, and reinstalls packages when `requirements.txt` changes. **Pushing to this branch updates the PC at the next weekly run.** Check the top of the weekly log for the pull result. |
 | Scheduled task | "Fund MDD weekly download", Mondays 07:00, runs `scripts\windows\run_weekly.ps1`; set up by `scripts\windows\setup_weekly_task.ps1` |
 | Output folder | `E:\OneDrive - MitonOptimal Portfolio Management (Pty) Ltd\#Webscraper MDDs` (synced by OneDrive) |
-| Fund list | `config/mdd_sources.yaml` (192 funds on 19 Oct 2026). **This file defines the tracker.** |
+| Fund list | `config/mdd_sources.yaml` (191 funds on 20 Oct 2026, after SIM Inflation Plus was removed). **This file defines the tracker.** |
 | AUM workbook | `AUM_By_Holding_Fund_Model_Portfolio.xlsx`, sheet "Holding Fund Totals". Only fills the "MitonOptimal AUM" column; it does not add or remove funds. |
 | Excluded | `--exclude "^MitonOptimal FR"`: the owner sources the MitonOptimal FR funds directly. |
 | Branch | `claude/fund-location-scraper-kvsmox` on GitHub `JDKMiton/Fund-Asset-Allocation---Scraper-and-Finder` (moved from the personal account JacDK777 on 20 Oct 2026) |
@@ -92,6 +92,7 @@ Name not checked (the PDF has no text layer), No source.
 | 19 Oct 2026 | Asset allocation goes to a separate agent; this scraper doesn't extract it. |
 | 19 Oct 2026 | If the MDD's fund name is the correct one (the ISINs match), show that name in the tracker (§6). |
 | 19 Oct 2026 | Confirmed renames: Discovery Aggressive DAO FoF → Cogence Discovery Balanced Dynamic Asset Optimiser Fund of Funds; Mi-Plan IP Enhanced Income → Vunani FR Enhanced Income Fund. Shown in the tracker (`current_name`). |
+| 20 Oct 2026 | Removed SIM Inflation Plus (SCI Ninety One Cautious Managed) from the tracker and weekly grab; use Ninety One Cautious Managed instead. Don't add it back unless asked. |
 | 19 Oct 2026 | Use Allan Gray's platform copies as a backup for M&G Balanced, Inflation Plus and Global Balanced, despite Allan Gray's robots.txt (`ignore_robots: true` on those three). |
 
 ## 4. Where things are
@@ -100,7 +101,7 @@ Name not checked (the PDF has no text layer), No source.
   - `url` / `urls` (with templates `{yyyy} {mm} {yyyymm} {month} {Month} {mon} {Mon} {MON} {dd} {bdd} {next_yyyy} {next_mm}`);
   - `page` + `link_match` (the regex may contain the same templates) + `render`;
   - `sanlam_fund`, `mandg_fund`, `browser`, `referer`, `ignore_robots`;
-  - `isin`, `note`, `doc_names`, `current_name`, `lag_days`, `frequency`, `keep_name`, `fund_manager`.
+  - `isin`, `note`, `doc_names`, `current_name`, `lag_days`, `frequency`, `keep_name`, `fund_manager`, `fund_folder`.
 - `fund_allocator/collector.py`: the run, checks, filing, manifest, tracker. `facts.py`: Fund AUM, inception
   and benchmark. `pdfinfo.py`: PDF reading in a worker process with a 120 s limit. `scraper.py`: downloads,
   browser and site APIs.
@@ -235,7 +236,6 @@ Management". Don't rename Linka's folders; change the config. Owner's filing dec
 | Curate Flexible Property / Curate Enhanced Yield | Sesfikile / Momentum Fixed Income (underlying managers; not Lyrical) |
 | Old Mutual RAFI 40 | Old Mutual Wealth - OMI |
 | Catalyst SCI Global Real Estate | Catalyst Fund Managers (Linka's "Catalyx Capital" is a different firm) |
-| SIM Inflation Plus (SCI Ninety One Cautious Managed from 9 Oct 2026) | Ninety One (Linka files it under Ninety One Cautious Managed) |
 
 | Foord funds incl. Nedgroup Stable [Foord] | Foord (folder created by the owner) |
 | Orbis funds incl. the 2 Allan Gray Orbis feeders | Orbis Investment Management (folder created by the owner) |
@@ -246,6 +246,19 @@ Management". Don't rename Linka's folders; change the config. Owner's filing dec
 The other 16 managers got empty folders named exactly as in the config (created by Claude at the
 owner's request). **Every fund's Fund Manager now matches a folder (192 of 192).** When a fund is
 added or changes manager, use an existing folder name, or create the folder with the same name.
+
+### Fund folders (owner's request, 20 Oct 2026)
+
+Inside each manager folder there is one folder per fund (holding Linka's **FRA** and **DD** packs) and
+usually a "General - Fund Manager Info" folder. `fund_folder` in the config names the fund's folder inside
+`<fund_manager>`; **all 191 funds have one, and every one exists.** 69 matched folders Linka already had
+(often under a shorter name, e.g. "Nedgroup Core Guarded Fund", "Truffle Flexible Fund" for PR Truffle,
+"Otto1890 BCI Flexible Fund" for Sasfin); the owner renamed two to match ("Marriott Core Income", "M&G
+Global Inflation Plus Feeder Fund"). Claude created the other 122 as empty folders named after the fund
+(the tracker's `current_name` where set; "Baille" and "Marriot" typos corrected). Not the same fund, so
+kept apart: Jupiter Merian World Equity vs. "Jupiter Merian Global Equity Fund", PPS Equity vs. "PPS
+Global Equity Fund", Ranmore Global Equity vs. the BCI Ranmore feeder. **Where MDDs go inside a fund
+folder is not decided yet; the owner will set that up. Don't copy MDDs there until asked.**
 
 ## 7. Open issues and questions for the owner
 
@@ -286,6 +299,10 @@ added or changes manager, use an existing folder name, or create the folder with
 - Read `docs/sa-factsheet-scraping-guide.md` §6–7, on reading tables by word position and the checks.
 
 ## 10. Learning log (newest first; add a line after every scan or change)
+
+- **2026-10-20, fund folders:** each tracker fund matched to its fund folder in Linka's share (§6, Fund
+  folders); new config field `fund_folder` (also copied to the skill). The owner reviewed the doubtful
+  ones one by one and removed SIM Inflation Plus (§3). 69 existing folders, 122 created empty. Tests pass.
 
 - **2026-10-20, all managers have a folder:** created 16 more empty folders (10X Investments, 4D Wealth
   Management, Baillie Gifford, Catalyst Fund Managers, First Pacific Advisors (FPA), Ginsglobal Index

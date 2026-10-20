@@ -65,6 +65,7 @@ class FundSource:
     keep_name: bool = False         # don't show the MDD's name in the tracker (e.g. the MDD prints an old name)
     current_name: str | None = None  # owner-confirmed current name, shown in the tracker
     fund_manager: str | None = None  # who manages the money (a third party for Amplify, Nedgroup, ...)
+    fund_folder: str | None = None   # the fund's folder inside its manager's folder in the Asset Management share
 
 
 def normalise_label(text: str) -> str:
