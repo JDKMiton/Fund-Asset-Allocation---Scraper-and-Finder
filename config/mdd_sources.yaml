@@ -1400,10 +1400,6 @@ funds:
   fund_folder: "Portfoliometrix FR Income Fund"
   isin: ZAE000203154
   url: 'https://www.bcis.co.za/upload/factsheet_categories_folders/funds/PortfolioMetrix%20Asset%20Management%20SA/PortfolioMetrix%20FR%20Income%20Fund%20(A)%20PMIFA.pdf'
-- name: "Riscura BCI China Equity Feeder Fund"
-  fund_manager: "Riscura"
-  fund_folder: "Riscura BCI China Equity Feeder"
-  note: 'No MDD: the fund was wound up on 4 Sep 2026 (FundRock notice of 17 Jul 2026). Owner to decide whether to remove it.'
 - name: "Schroder ISF QEP Global Core Fund"
   fund_manager: "Schroders"
   fund_folder: "Schroder ISF QEP Global Core Strategy"
