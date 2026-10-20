@@ -8,7 +8,9 @@ param(
     [string]$Exclude = "^MitonOptimal FR",
     [int]$RecentMonths = 2,
     # Fund folders (<manager>\<fund folder>\MDDs\YYYY) to copy each MDD into; skipped if not found.
-    [string]$FundShare = 'E:\OneDrive - MitonOptimal Portfolio Management (Pty) Ltd\Linka Henning''s files - Asset Management (FRA-DD Documents)'
+    [string]$FundShare = 'E:\OneDrive - MitonOptimal Portfolio Management (Pty) Ltd\Linka Henning''s files - Asset Management (FRA-DD Documents)',
+    # To-do workbook (relative to -FundShare, or a full path): rows marked Done move to its 'Done' sheet.
+    [string]$TodoList = '# TO DO LIST\Folder and tracker fixes.xlsx'
 )
 
 $ErrorActionPreference = "Continue"
@@ -40,6 +42,8 @@ $cmd = @("-m", "fund_allocator", "collect",
          "--aum-label", "MitonOptimal AUM")
 if ($Exclude) { $cmd += @("--exclude", $Exclude) }
 if ($FundShare -and (Test-Path -LiteralPath $FundShare)) { $cmd += @("--fund-share", $FundShare) }
+if ($TodoList -and $FundShare -and -not [System.IO.Path]::IsPathRooted($TodoList)) { $TodoList = Join-Path $FundShare $TodoList }
+if ($TodoList -and (Test-Path -LiteralPath $TodoList)) { $cmd += @("--todo-list", $TodoList) }
 if ($FundsWorkbook -and (Test-Path $FundsWorkbook)) { $cmd += @("--funds", $FundsWorkbook, "--sheet", $FundsSheet) }
 
 "=== $(Get-Date -Format s) collecting into $OutFolder" | Out-File -Append $log

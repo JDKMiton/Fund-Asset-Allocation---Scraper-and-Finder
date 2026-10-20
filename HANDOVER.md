@@ -61,7 +61,7 @@ records what was actually seen for *these* funds and wins.
 4. Files it as `<YYYY - MM>\<Fund>.pdf`. **Never overwrites:** the same month with different content is
    kept beside the original as `<Fund> (reissued YYYY-MM-DD).pdf` and flagged.
 5. Logs every download in `_manifest.csv`: time, fund, month, result, file, source, sha256, text hash and
-   allocation stamp.
+   allocation stamp; and each run's start time and the funds it searched in `_runs.csv` (for the timing below).
 6. **Copies every MDD to its fund folder** in Linka's share (owner, 20 Oct 2026):
    `<share>\<fund_manager>\<fund_folder>\MDDs\YYYY\YYYY-MM - <Fund>.pdf`, where Fund is the tracker name
    (`current_name`, else `name`). It goes over **all** month folders each run, so earlier months are
@@ -74,7 +74,13 @@ records what was actually seen for *these* funds and wins.
 
 **The tracker** has three sheets:
 - **Tracker**, funds A–Z, with columns: Fund | Fund Manager | MitonOptimal AUM | ISIN | Fund AUM | Inception Date |
-  Benchmark | Status | MDD month | Other months collected | File | Fund folder copy | Source | Notes.
+  Benchmark | Status | MDD month | Collected on | Usually available | Other months collected | File | Fund folder
+  copy | Source | Notes.
+  **Collected on** is the day the MDD was first collected (the manifest's first "filed" row; for MDDs from
+  before the manifest, the saved file's date). **Usually available** is the fund's average number of days
+  after month-end, learned (owner, 20 Oct 2026): a month counts only if an earlier run searched for the fund
+  after month-end and didn't find it, so first-run back-fills don't count. It is accurate to about a week
+  (the run is weekly) and fills in over the coming months.
   "Fund folder copy" is where this month's MDD was copied, relative to Linka's share (or why it wasn't).
 - **Summary**, the counts per status.
 - **Exceptions**, one line per problem.
@@ -84,7 +90,7 @@ Statuses:
 | Status | Meaning |
 |---|---|
 | Collected | the MDD for this month is in the folder |
-| Pending | not posted yet; still within the manager's normal delay (default 30 days after month-end, or `lag_days`) |
+| Pending | not posted yet; still within the normal delay: the fund's learned average plus 7 days once 2 months are learned, otherwise `lag_days` (default 30) |
 | Late | past the normal delay and still missing: look at it |
 | Quarterly | `frequency: quarterly` fund; no MDD is due for this month |
 | No source | the fund has no download source configured |
@@ -109,7 +115,8 @@ Name not checked (the PDF has no text layer), No source.
 | 20 Oct 2026 | Fund-folder MDDs are named `YYYY-MM - <Fund>.pdf` (date first, so they sort). An MDD already in the fund folder means the fund isn't searched again for that month. |
 | 20 Oct 2026 | Every run also saves each MDD in its fund folder: `MDDs\YYYY\YYYY-MM - <Fund>.pdf` (tracker name; all earlier months back-filled), and the tracker shows where. Month-folder copies and the trackers stay in `#Webscraper MDDs`. |
 | 20 Oct 2026 | Removed Sprott Silver Miners & Physical Silver ETF (fact sheet site behind Cloudflare) from the tracker and weekly grab. Don't add it back unless asked. |
-| 20 Oct 2026 | Keep a list of folder and name mismatches for the owner and Linka to fix, as a spreadsheet in `# TO DO LIST` in Linka's share (see §4). |
+| 20 Oct 2026 | Keep a list of folder and name mismatches for the owner and Linka to fix, as a spreadsheet in `# TO DO LIST` in Linka's share (see §4). No "who" column. Rows marked Done are removed by the next weekly run (moved to its Done sheet); others stay. |
+| 20 Oct 2026 | The tracker records when each MDD was collected, and learns per fund how long after month-end its MDD usually appears. |
 | 20 Oct 2026 | Removed Sanlam Multi-Strategy (no public fact sheet) from the tracker and weekly grab. Don't add it back unless asked. |
 | 20 Oct 2026 | Share classes for the funds added from Linka's folders: keep the A class for Fairtree FR Income Plus, Curate Global Quality and Global Value, Old Mutual Global Managed Alpha and RAFI (the rand feeders), and Nedgroup Rainmaker; Omba A USD Acc; Laurium Enhanced Growth the ZAR feeder; Peregrine Retail class A (buy list); Flagship FR Worldwide Flexible Feeder accepted as the IP Worldwide Flexible fund. From Linka's packs: Camissa SA Equity C class, Curate Global EM R Class USD (only the A sheets are published; same portfolio). |
 | 20 Oct 2026 | Removed Riscura BCI China Equity Feeder (wound up 4 Sep 2026) from the tracker and weekly grab. Don't add it back unless asked. |
@@ -130,8 +137,10 @@ Name not checked (the PDF has no text layer), No source.
   browser and site APIs.
 - **`# TO DO LIST\Folder and tracker fixes.xlsx`** in Linka's share: the mismatches between the folders,
   the tracker and the MDDs (and the buy list) for the owner and Linka to fix. **Append a row** whenever a
-  scan or change finds a new one; never rewrite the workbook or their Status/Notes. When a row is Done, make
-  the config match. How: [`docs/fix-list.md`](docs/fix-list.md). The `# TO DO LIST` folder is not a manager.
+  scan or change finds a new one; never rewrite the workbook or their Status/Notes. Each weekly run moves
+  rows marked Done to the workbook's **Done** sheet (`--todo-list`; `run_weekly.ps1 -TodoList`). Check the
+  Done sheet for items that need the config to follow (renamed or moved folders, confirmed names). How:
+  [`docs/fix-list.md`](docs/fix-list.md). The `# TO DO LIST` folder is not a manager.
 - `#Webscraper MDDs\_manifest.csv`, `#Webscraper MDDs\_rejected\`: evidence; never delete them during a run.
 
 ## 5. Manager and site notes (what was actually seen)
@@ -408,6 +417,13 @@ through them one by one:
 - Read `docs/sa-factsheet-scraping-guide.md` §6–7, on reading tables by word position and the checks.
 
 ## 10. Learning log (newest first; add a line after every scan or change)
+
+- **2026-10-20, collection dates and timing; to-do clean-up** (owner): tracker columns Collected on and
+  Usually available, new `_runs.csv`; Pending/Late use a fund's learned timing once 2 months are known.
+  Copies to and from the fund folders keep the file's date. The to-do workbook lost its Who column
+  (regenerated; nobody had edited it), and the weekly run moves Done rows to its Done sheet. On the real
+  data, Collected on starts from the manifest (from 20 Oct 2026); Usually available is empty until next
+  month's runs. Tests pass (42).
 
 - **2026-10-20, fund-folder names, skip rule, to-do spreadsheet** (owner): fund-folder MDDs renamed to
   `YYYY-MM - <Fund>.pdf` (nothing had been written to the share yet, so nothing to rename). An MDD already

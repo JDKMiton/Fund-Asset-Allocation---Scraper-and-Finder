@@ -7,6 +7,7 @@ import csv
 import glob
 import hashlib
 import logging
+import math
 import re
 import shutil
 from dataclasses import dataclass, replace
@@ -308,6 +309,7 @@ def collect(funds: list[Fund], sources: dict[str, FundSource], scraper: Scraper,
     results: list[Collected] = []
     issues = [] if issues is None else issues  # the caller may pass a list to get the exceptions back
     manifest = Manifest(out_dir / MANIFEST)
+    started, searched = datetime.now(), []
     for fund in funds:
         src = sources.get(fund.name)
         if src is None or not any([src.url, src.urls, src.page, src.file, src.sanlam_fund, src.mandg_fund]):
@@ -330,6 +332,7 @@ def collect(funds: list[Fund], sources: dict[str, FundSource], scraper: Scraper,
                                          confirmed_name(src, info.get("text", ""))))
             log.info("%s: MDDs for %s already saved, not searched again", fund.name, ", ".join(due) or "-")
             continue
+        searched.append(fund.name)
         got: list[Collected] = []
         errors = []
         plain = dict(urls=None, page=None, sanlam_fund=None, mandg_fund=None)
@@ -371,11 +374,15 @@ def collect(funds: list[Fund], sources: dict[str, FundSource], scraper: Scraper,
     shutdown_pdf_reader()
     copies = (file_in_fund_folders(funds, sources, out_dir, fund_share, all_months, issues, manifest)
               if fund_share else None)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    log_run(out_dir, started, searched)
+    history = History.load(out_dir)
     for issue in issues:
         log.warning("%s: %s - %s", issue.kind, issue.fund, issue.detail)
     for month in all_months:
         write_tracker(out_dir / month / f"!MDD Tracker {month}.xlsx", month, funds, results,
-                      issues=issues, sources=sources, aum_label=aum_label, fund_copies=copies)
+                      issues=issues, sources=sources, aum_label=aum_label, fund_copies=copies,
+                      history=history)
         (out_dir / month / f"MDD Tracker {month}.xlsx").unlink(missing_ok=True)  # name used before the "!"
     return results
 
@@ -581,7 +588,7 @@ def _restore_from_fund_folder(fund: Fund, src: FundSource, out_dir: Path, share:
         kept = home / FUND_MDDS / month[:4] / fund_mdd_name(shown, month)
         if not filed.exists() and kept.is_file():
             filed.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(kept, filed)
+            shutil.copy2(kept, filed)  # keeps the file's date: the day it was collected
             manifest.add(fund=fund.name, month=month, result="restored from fund folder", file=filed,
                          source=str(kept), sha256=sha256(filed))
             log.info("%s %s: already in the fund folder, copied back to %s", fund.name, month, filed)
@@ -627,7 +634,7 @@ def file_in_fund_folders(funds: list[Fund], sources: dict[str, FundSource], out_
                         issues.append(Issue(fund.name, "Reissued", f"the fund folder already had a different "
                                                                    f"{month} MDD; saved this one as '{to.name}'", month))
                     to.parent.mkdir(parents=True, exist_ok=True)
-                    shutil.copyfile(one, to)
+                    shutil.copy2(one, to)  # keeps the file's date: the day it was collected
                     manifest.add(fund=fund.name, month=month, result="copied to fund folder", file=to,
                                  source=str(one), sha256=sha256(to))
                     log.info("%s %s -> %s", fund.name, month, to)
@@ -648,14 +655,93 @@ def recent_months(n: int, today: date | None = None) -> list[str]:
 FACT_COLUMNS = ["Fund AUM", "Inception Date", "Benchmark"]
 
 
-def due_date(month: str, src: FundSource | None) -> date:
-    """The day an MDD for ``month`` is normally up: month-end plus the manager's usual delay."""
+RUNS = "_runs.csv"     # one row per run: when it started and which funds it searched
+LEARN_MIN = 2          # months of history before a fund's own timing replaces lag_days
+LEARN_SLACK = 7        # days added to the learned timing: the run is weekly
+
+
+def _month_end(month: str) -> date:
     y, m = (int(x) for x in month.split(" - "))
-    lag = (src.lag_days if src and src.lag_days is not None else DEFAULT_LAG_DAYS)
-    return date(y, m, calendar.monthrange(y, m)[1]) + timedelta(days=lag)
+    return date(y, m, calendar.monthrange(y, m)[1])
 
 
-def outstanding_status(month: str, src: FundSource | None, today: date | None = None) -> str:
+def log_run(out_dir: Path, started: datetime, searched: list[str]) -> None:
+    """Record which funds this run searched, so a later collection can tell how long an MDD took to appear."""
+    path = out_dir / RUNS
+    new = not path.exists()
+    with path.open("a", newline="", encoding="utf-8") as f:
+        w = csv.writer(f)
+        if new:
+            w.writerow(["started_at", "searched"])
+        w.writerow([started.isoformat(timespec="seconds"), ";".join(searched)])
+
+
+@dataclass
+class History:
+    """When each MDD was first collected (from the manifest) and which funds each run searched (_runs.csv)."""
+    first_filed: dict[tuple[str, str], datetime]
+    runs: list[tuple[datetime, set[str]]]
+
+    @classmethod
+    def load(cls, out_dir: Path) -> "History":
+        first: dict[tuple[str, str], datetime] = {}
+        if (out_dir / MANIFEST).exists():
+            with (out_dir / MANIFEST).open(newline="", encoding="utf-8") as f:
+                for row in csv.DictReader(f):
+                    if row.get("result") != "filed" or not row.get("month"):
+                        continue
+                    try:
+                        when = datetime.fromisoformat(row["fetched_at"])
+                    except (KeyError, ValueError):
+                        continue
+                    key = (row["fund"], row["month"])
+                    first[key] = min(first.get(key, when), when)
+        runs = []
+        if (out_dir / RUNS).exists():
+            with (out_dir / RUNS).open(newline="", encoding="utf-8") as f:
+                for row in csv.DictReader(f):
+                    try:
+                        runs.append((datetime.fromisoformat(row["started_at"]),
+                                     set(filter(None, (row.get("searched") or "").split(";")))))
+                    except (KeyError, ValueError):
+                        continue
+        return cls(first, runs)
+
+    def collected_on(self, fund: str, month: str, path: Path | None = None) -> date | None:
+        """The day the MDD was first collected: the manifest, else the saved file's date (MDDs collected
+        before the manifest existed)."""
+        if (fund, month) in self.first_filed:
+            return self.first_filed[(fund, month)].date()
+        if path and Path(path).exists():
+            return datetime.fromtimestamp(Path(path).stat().st_mtime).date()
+        return None
+
+    def typical_days(self, fund: str) -> tuple[float, int] | None:
+        """Average days after month-end the fund's MDD was collected, and from how many months. A month
+        only counts if an earlier run searched for the fund after month-end and didn't find it: then the
+        collection day says when the MDD appeared (within a week), not when the scraper first looked."""
+        days = []
+        for (f, month), when in self.first_filed.items():
+            if f != fund:
+                continue
+            end = _month_end(month)
+            if any(end < r.date() < when.date() and fund in searched for r, searched in self.runs):
+                days.append((when.date() - end).days)
+        return (sum(days) / len(days), len(days)) if days else None
+
+
+def due_date(month: str, src: FundSource | None, learned: tuple[float, int] | None = None) -> date:
+    """The day an MDD for ``month`` is normally up: month-end plus the fund's own average delay once it is
+    known from LEARN_MIN months (plus a week, as the run is weekly), else the manager's usual delay."""
+    if learned and learned[1] >= LEARN_MIN:
+        lag = math.ceil(learned[0]) + LEARN_SLACK
+    else:
+        lag = (src.lag_days if src and src.lag_days is not None else DEFAULT_LAG_DAYS)
+    return _month_end(month) + timedelta(days=lag)
+
+
+def outstanding_status(month: str, src: FundSource | None, today: date | None = None,
+                       learned: tuple[float, int] | None = None) -> str:
     """Why a fund has no MDD for ``month``: not posted yet (Pending), overdue (Late), a quarterly fund
     with nothing due this month (Quarterly), or nothing to search (No source)."""
     today = today or date.today()
@@ -663,14 +749,15 @@ def outstanding_status(month: str, src: FundSource | None, today: date | None = 
         return "No source"
     if src.frequency == "quarterly" and int(month[-2:]) % 3:
         return "Quarterly"
-    return "Pending" if today <= due_date(month, src) else "Late"
+    return "Pending" if today <= due_date(month, src, learned) else "Late"
 
 
 def write_tracker(path: Path, month: str, funds: list[Fund], results: list[Collected],
                   issues: list[Issue] | None = None, sources: dict[str, FundSource] | None = None,
                   today: date | None = None, aum_label: str = "AUM held",
-                  fund_copies: dict[tuple[str, str], str] | None = None) -> Path:
+                  fund_copies: dict[tuple[str, str], str] | None = None, history: History | None = None) -> Path:
     sources = sources or {}
+    history = history or History({}, [])
     fund_copies = fund_copies or {}
     issues = [i for i in (issues or []) if i.month in (None, month)]
     counts = dict.fromkeys(STATUSES, 0)
@@ -680,8 +767,8 @@ def write_tracker(path: Path, month: str, funds: list[Fund], results: list[Colle
     wb = Workbook()
     ws = wb.active
     ws.title = "Tracker"
-    _header(ws, 1, ["Fund", "Fund Manager", aum_label, "ISIN", *FACT_COLUMNS, "Status", "MDD month",
-                    "Other months collected", "File", "Fund folder copy", "Source", "Notes"])
+    _header(ws, 1, ["Fund", "Fund Manager", aum_label, "ISIN", *FACT_COLUMNS, "Status", "MDD month", "Collected on",
+                    "Usually available", "Other months collected", "File", "Fund folder copy", "Source", "Notes"])
     def shown_name(fund: Fund) -> str:
         """The owner-confirmed current name, else the MDD's name once it prints the fund's known ISIN."""
         src = sources.get(fund.name)
@@ -698,36 +785,39 @@ def write_tracker(path: Path, month: str, funds: list[Fund], results: list[Colle
         shown = this or (dated[-1] if dated else rs[0])
         isin = next((r.isin for r in rs if r.isin), None)
         src = sources.get(fund.name)
+        learned = history.typical_days(fund.name)
         if this:
             status = "Collected"
         elif not sources:  # called without the sources: fall back to the plain wording
             status = "Late"
         else:
-            status = outstanding_status(month, src, today)
+            status = outstanding_status(month, src, today, learned)
         fill = {"Collected": COLLECTED_FILL, "Pending": PENDING_FILL, "Quarterly": QUIET_FILL}.get(status,
                                                                                                  OUTSTANDING_FILL)
         counts[status] += 1
         if status == "Late":
             issues.append(Issue(fund.name, "Late", f"no {month} MDD yet; normally up by "
-                                                  f"{due_date(month, src):%d %b %Y}", month))
+                                                  f"{due_date(month, src, learned):%d %b %Y}", month))
         others = ", ".join(r.month for r in dated if r.month != month) or None
         note = shown.note
         if not this and dated:
             note = "; ".join(filter(None, [f"latest MDD found is for {dated[-1].month}", note]))
         if status == "Pending" and src:
-            note = "; ".join(filter(None, [f"not posted yet - normally up by {due_date(month, src):%d %b %Y}", note]))
+            note = "; ".join(filter(None, [f"not posted yet; normally up by {due_date(month, src, learned):%d %b %Y}", note]))
         facts = next((r.facts for r in [shown, *reversed(dated)] if r.facts), None) or {}
         if name != fund.name:
             why = "confirmed by the owner" if src and src.current_name else f"ISIN {isin} matches the MDD"
             note = "; ".join(filter(None, [f"renamed - previously '{fund.name}' ({why})", note]))
         manager = (src.fund_manager if src else None) or facts.get("Fund Manager")
         row = [name, manager, fund.aum, isin, *(facts.get(c) for c in FACT_COLUMNS),
-               status, shown.month if this else None, others,
+               status, shown.month if this else None,
+               history.collected_on(fund.name, month, shown.path) if this else None, _usually(learned), others,
                shown.path.name if this and shown.path else None,
                fund_copies.get((fund.name, month)) if this else None, shown.source or None, note or None]
         for j, v in enumerate(row, start=1):
             ws.cell(row=i, column=j, value=v).fill = fill
         ws.cell(row=i, column=3).number_format = "#,##0"
+        ws.cell(row=i, column=10).number_format = "dd mmm yyyy"  # Collected on
     ws.freeze_panes = "A2"
     ws.auto_filter.ref = ws.dimensions
     _autosize(ws)
@@ -760,6 +850,15 @@ def write_tracker(path: Path, month: str, funds: list[Fund], results: list[Colle
     path.parent.mkdir(parents=True, exist_ok=True)
     wb.save(path)
     return path
+
+
+def _usually(learned: tuple[float, int] | None) -> str | None:
+    """'about 12 days after month-end (3 months)': how long the fund's MDD usually takes to appear."""
+    if not learned:
+        return None
+    days, n = learned
+    return (f"about {round(days)} days after month-end ({n} month{'s' if n > 1 else ''}"
+            f"{'' if n >= LEARN_MIN else ', still learning'})")
 
 
 def _safe_name(name: str) -> str:

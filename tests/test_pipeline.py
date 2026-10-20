@@ -1,6 +1,7 @@
 import sys
 import tempfile
 import unittest
+from datetime import date
 from pathlib import Path
 
 from openpyxl import load_workbook
@@ -320,6 +321,55 @@ class CollectorTest(unittest.TestCase):
             collect(funds, sources, Scraper(Path(tmp) / "dl"), out, fund_share=share)
             self.assertEqual(len(list((mdds / "2026").glob("2026-07 - Balanced Now (reissued *).pdf"))), 1)
             self.assertEqual((mdds / "2026" / "2026-07 - Balanced Now.pdf").read_bytes(), balanced.read_bytes())
+
+    def test_history_learns_when_an_mdd_appears(self):
+        from datetime import date, datetime
+        from fund_allocator.collector import History, due_date
+        from fund_allocator.config import FundSource
+        runs = [(datetime(2026, 8, 3), {"A"}), (datetime(2026, 8, 10), {"A"}),
+                (datetime(2026, 9, 7), {"A"}), (datetime(2026, 9, 14), {"A"})]
+        first = {("A", "2026 - 07"): datetime(2026, 8, 10, 7), ("A", "2026 - 08"): datetime(2026, 9, 14, 7),
+                 ("A", "2026 - 06"): datetime(2026, 8, 3, 7)}  # June: no earlier search, so it doesn't count
+        h = History(first, runs)
+        self.assertEqual(h.typical_days("A"), (12.0, 2))  # 31 Jul + 10 days, 31 Aug + 14 days
+        self.assertEqual(h.collected_on("A", "2026 - 07"), date(2026, 8, 10))
+        src = FundSource("A", url="x", lag_days=60)
+        self.assertEqual(due_date("2026 - 09", src, h.typical_days("A")), date(2026, 10, 19))  # 30 Sep + 12 + 7
+        self.assertEqual(due_date("2026 - 09", src, (12.0, 1)), date(2026, 11, 29))  # too little history: lag_days
+
+    def test_tracker_shows_when_each_mdd_was_collected(self):
+        from fund_allocator.collector import Fund, collect
+        from fund_allocator.config import FundSource
+        from fund_allocator.scraper import Scraper
+        with tempfile.TemporaryDirectory() as tmp:
+            balanced, _ = make_all(Path(tmp) / "pdfs")
+            out = Path(tmp) / "MDDs"
+            collect([Fund("Balanced")], {"Balanced": FundSource("Balanced", file=str(balanced))},
+                    Scraper(Path(tmp) / "dl"), out)
+            ws = load_workbook(out / "2026 - 09" / "!MDD Tracker 2026 - 09.xlsx")["Tracker"]
+            head = [c.value for c in ws[1]]
+            when = ws.cell(row=2, column=head.index("Collected on") + 1).value
+            self.assertEqual(when.date(), date.today())
+            self.assertIn("Usually available", head)
+            self.assertTrue((out / "_runs.csv").read_text(encoding="utf-8").strip().endswith("Balanced"))
+
+    def test_todo_list_moves_done_rows(self):
+        from openpyxl import Workbook
+        from fund_allocator.todo import move_done_rows
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "todo.xlsx"
+            wb = Workbook()
+            ws = wb.active
+            ws.title = "To do"
+            for row in [("#", "What", "Status"), (1, "rename", "Open"), (2, "delete", "Done"), (3, "move", "done")]:
+                ws.append(row)
+            wb.save(path)
+            self.assertEqual(move_done_rows(path, date(2026, 10, 26)), 2)
+            wb = load_workbook(path)
+            self.assertEqual([r[1] for r in wb["To do"].iter_rows(min_row=2, values_only=True)], ["rename"])
+            self.assertEqual([r[1:] for r in wb["Done"].iter_rows(min_row=2, values_only=True)],
+                             [("delete", "Done", "2026-10-26"), ("move", "done", "2026-10-26")])
+            self.assertEqual(move_done_rows(path), 0)
 
     def test_mdd_in_fund_folder_is_not_searched_again(self):
         from fund_allocator.collector import Fund, collect

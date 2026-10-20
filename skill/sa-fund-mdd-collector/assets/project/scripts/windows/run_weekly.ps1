@@ -8,7 +8,9 @@ param(
     [string]$Exclude = "",
     [int]$RecentMonths = 2,
     # Fund folders (<manager>\<fund folder>\MDDs\YYYY) to copy each MDD into; skipped if not found.
-    [string]$FundShare = ''
+    [string]$FundShare = '',
+    # To-do workbook (relative to -FundShare, or a full path): rows marked Done move to its 'Done' sheet.
+    [string]$TodoList = ''
 )
 
 $ErrorActionPreference = "Continue"
@@ -39,6 +41,8 @@ $cmd = @("-m", "fund_allocator", "collect",
          "--recent", $RecentMonths)
 if ($Exclude) { $cmd += @("--exclude", $Exclude) }
 if ($FundShare -and (Test-Path -LiteralPath $FundShare)) { $cmd += @("--fund-share", $FundShare) }
+if ($TodoList -and $FundShare -and -not [System.IO.Path]::IsPathRooted($TodoList)) { $TodoList = Join-Path $FundShare $TodoList }
+if ($TodoList -and (Test-Path -LiteralPath $TodoList)) { $cmd += @("--todo-list", $TodoList) }
 if ($FundsWorkbook -and (Test-Path $FundsWorkbook)) {
     $cmd += @("--funds", $FundsWorkbook)
     if ($FundsSheet) { $cmd += @("--sheet", $FundsSheet) }

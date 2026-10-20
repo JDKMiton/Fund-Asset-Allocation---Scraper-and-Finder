@@ -18,6 +18,7 @@ from .config import FundSource, Template, load_sources, load_template
 from .extractor import Extraction, extract_from_pdf, match_category
 from .report import write_workbook
 from .scraper import Scraper, ScrapeError
+from .todo import move_done_rows
 
 log = logging.getLogger("fund_allocator")
 
@@ -104,6 +105,8 @@ def cmd_collect(args: argparse.Namespace) -> int:
         funds = [f for f in funds if not pattern.search(f.name)]
     sources = {s.name: s for s in sources_list}
     months = args.month or recent_months(args.recent)
+    if args.todo_list:
+        move_done_rows(args.todo_list)
     scraper = Scraper(args.download_dir, delay=args.delay, respect_robots=not args.ignore_robots)
     try:
         issues: list = []
@@ -166,6 +169,8 @@ def main(argv: list[str] | None = None) -> int:
     col.add_argument("--aum-label", default="AUM held", help="heading of the tracker's AUM column")
     col.add_argument("--fund-share", metavar="FOLDER",
                      help="also copy each MDD to <FOLDER>\\<fund_manager>\\<fund_folder>\\MDDs\\YYYY\\YYYY-MM - <Fund>.pdf")
+    col.add_argument("--todo-list", metavar="XLSX",
+                     help="the owner's to-do workbook: rows marked Done move to its 'Done' sheet")
     col.add_argument("--refetch", action="store_true",
                      help="search for every fund, even if its MDDs for all the months are already saved")
     col.set_defaults(func=cmd_collect)

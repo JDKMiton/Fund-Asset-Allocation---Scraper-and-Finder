@@ -47,7 +47,10 @@
 | ISIN | `isin`, else the first ISIN printed in the MDD |
 | Fund AUM, Inception Date, Benchmark | read from the MDD by word position, with a text fallback; blank when unsure |
 | Status | see below |
-| MDD month, Other months collected, File | |
+| MDD month | |
+| Collected on | the day the MDD was first collected (manifest; else the saved file's date) |
+| Usually available | how many days after month-end the fund's MDD usually appears, learned from earlier runs |
+| Other months collected, File | |
 | Fund folder copy | where this month's MDD was copied, relative to `--fund-share` (or why it wasn't) |
 | Source, Notes | |
 
@@ -56,7 +59,7 @@
 | Status | Meaning |
 |---|---|
 | Collected | this month's MDD is in the folder |
-| Pending | not posted yet; within `lag_days` (default 30) of month-end |
+| Pending | not posted yet; within the fund's learned timing plus a week, or `lag_days` (default 30) until 2 months are learned |
 | Late | past the normal delay: look at it |
 | Quarterly | quarterly fund, nothing due this month |
 | No source | no download source configured |

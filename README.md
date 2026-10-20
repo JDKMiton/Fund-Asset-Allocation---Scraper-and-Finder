@@ -76,6 +76,12 @@ copy** column shows where. Earlier months are back-filled, nothing is overwritte
 never created (a missing one is listed under Exceptions). The weekly script passes the Asset Management
 share by default.
 
+The tracker also shows **Collected on** (the day each MDD was first collected) and **Usually available**
+(how many days after month-end the fund's MDD usually appears, learned from earlier runs; `_runs.csv`
+records which funds each run searched). Once two months are learned, Pending/Late use that timing plus a
+week instead of `lag_days`. With `--todo-list <xlsx>`, rows marked Done in the owner's to-do workbook move
+to its Done sheet at the start of the run.
+
 `config/mdd_sources.yaml` records, for each tracked fund, where its MDD is published:
 
 | Source type | Example | How it is used |

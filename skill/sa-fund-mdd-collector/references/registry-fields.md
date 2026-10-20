@@ -27,7 +27,7 @@ an AUM column. An entry needs at least one of `url`, `urls`, `page`, `file`, `sa
 | `fund_folder` | `Coronation Top 20` | The fund's folder inside `<fund_manager>` in the owner's fund-document share. With `--fund-share`, each MDD is also copied to `<share>\<fund_manager>\<fund_folder>\MDDs\YYYY\YYYY-MM - <Fund>.pdf`. Fund folders are never created; a missing one is an exception. |
 | `fund_path` | `Lyrical\Curate Global Quality Equity Fund` | The fund's folder relative to the share, only where it isn't under `<fund_manager>`. |
 | `keep_name` | `true` | Don't switch to the MDD's name even when the ISIN confirms it (e.g. the MDD prints an *old* name). |
-| `lag_days` | `60` | Days after month-end the MDD is normally up (default 30). Before this the fund is **Pending**, after it **Late**. |
+| `lag_days` | `60` | Until the fund's own timing is learned (2 months, from `_runs.csv` and the manifest): days after month-end the MDD is normally up (default 30). Before this the fund is **Pending**, after it **Late**. |
 | `frequency` | `quarterly` | MDDs only for March, June, September and December; other months show **Quarterly**. |
 | `ignore_robots` | `true` | Download even though the site's robots.txt disallows it. **Only with the owner's explicit agreement**; record the decision in HANDOVER.md. |
 
