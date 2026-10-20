@@ -40,7 +40,7 @@ records what was actually seen for *these* funds and wins.
 | Fund list | `config/mdd_sources.yaml` (192 funds on 19 Oct 2026). **This file defines the tracker.** |
 | AUM workbook | `AUM_By_Holding_Fund_Model_Portfolio.xlsx`, sheet "Holding Fund Totals". Only fills the "MitonOptimal AUM" column; it does not add or remove funds. |
 | Excluded | `--exclude "^MitonOptimal FR"`: the owner sources the MitonOptimal FR funds directly. |
-| Branch | `claude/fund-location-scraper-kvsmox` on GitHub `JacDK777/Fund-Asset-Allocation---Scraper-and-Finder` |
+| Branch | `claude/fund-location-scraper-kvsmox` on GitHub `JDKMiton/Fund-Asset-Allocation---Scraper-and-Finder` (moved from the personal account JacDK777 on 20 Oct 2026) |
 | Manual run | `Start-ScheduledTask -TaskName "Fund MDD weekly download"`, or `run_weekly.ps1 -OutFolder ... -FundsWorkbook ...` |
 | Logs | `C:\Tools\MDD-Scraper\logs\weekly-YYYY-MM-DD.log` (last 12 kept) |
 
@@ -256,6 +256,11 @@ Check these when a fund changes manager (e.g. Amplify Multi Strategy: Obsidian �
 - Read `docs/sa-factsheet-scraping-guide.md` §6–7, on reading tables by word position and the checks.
 
 ## 10. Learning log (newest first; add a line after every scan or change)
+
+- **2026-10-20, repository moved:** transferred from the personal GitHub account JacDK777 to the work
+  account JDKMiton, now `JDKMiton/Fund-Asset-Allocation---Scraper-and-Finder` (§2). The PC's clone at
+  `C:\Tools\MDD-Scraper` has `origin` pointing at JDKMiton, and `git pull` works there, so the weekly
+  self-update keeps working. No scraping change.
 
 - **2026-10-20, self-updating install:** extracting the branch ZIP into Downloads failed with "Path too long"
   (0x80010135) on the deep `skill\...\scripts\windows\setup_weekly_task.ps1`. The owner was told to
