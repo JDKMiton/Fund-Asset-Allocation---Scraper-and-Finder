@@ -243,9 +243,9 @@ Management". Don't rename Linka's folders; change the config. Owner's filing dec
 | Momentum Capped SWIX, Curate Enhanced Yield | Momentum (folder created by Claude) |
 | Discovery Aggressive DAO FoF (Cogence) | Cogence (folder created by Claude) |
 
-After this, 45 managers (173 funds) match a folder. Still without a folder: 16 managers (19 funds),
-listed to the owner on 20 Oct with the exact names to create (e.g. Merchant West Investments, Northstar
-Asset Management, Baillie Gifford, Veritas Asset Management, Vunani Fund Managers).
+The other 16 managers got empty folders named exactly as in the config (created by Claude at the
+owner's request). **Every fund's Fund Manager now matches a folder (192 of 192).** When a fund is
+added or changes manager, use an existing folder name, or create the folder with the same name.
 
 ## 7. Open issues and questions for the owner
 
@@ -286,6 +286,12 @@ Asset Management, Baillie Gifford, Veritas Asset Management, Vunani Fund Manager
 - Read `docs/sa-factsheet-scraping-guide.md` §6–7, on reading tables by word position and the checks.
 
 ## 10. Learning log (newest first; add a line after every scan or change)
+
+- **2026-10-20, all managers have a folder:** created 16 more empty folders (10X Investments, 4D Wealth
+  Management, Baillie Gifford, Catalyst Fund Managers, First Pacific Advisors (FPA), Ginsglobal Index
+  Funds, Janus Henderson Investors, Merchant West Investments, Northstar Asset Management, Obsidian
+  Capital, Pyrford International, Sygnia Asset Management, Veritas Asset Management, Visio Fund
+  Management, Vulcan Value Partners, Vunani Fund Managers). All 192 funds now match a folder.
 
 - **2026-10-20, more manager folders:** the owner created Orbis Investment Management and Foord;
   at the owner's request Claude created empty folders AG Capital, Acumen Capital, Marble Rock Asset
