@@ -257,6 +257,25 @@ Check these when a fund changes manager (e.g. Amplify Multi Strategy: Obsidian โ
 
 ## 10. Learning log (newest first; add a line after every scan or change)
 
+- **2026-10-20, full run on the PC after the move:** started from Task Scheduler; the pull from JDKMiton
+  worked ("Already up to date"). The first run stopped while writing the trackers: `!MDD Tracker 2026 -
+  09.xlsx` was open in Excel (PermissionError), so September's tracker was not rewritten. **Task Scheduler
+  still showed result 0**, because `run_weekly.ps1` doesn't pass on Python's exit code; only the log's
+  "finished with exit code 1" shows the failure. Rerun with the file closed: exit code 0, all four trackers
+  rewritten. New: Fairtree Silver Oak and Momentum Capped SWIX for September. August 181 of 192 collected
+  (Baillie Gifford Managed Late; 7 STANLIB/SIM/10X Pending; 3 Marriott Quarterly). September 117 collected,
+  75 Pending (still within the 30-day delay). Open: keep trackers closed at 07:00 on Mondays, or make the
+  tracker write survive a locked file and the task report failures (offered to the owner).
+- **2026-10-20, Fund Manager names vs. Linka Henning's "Asset Management (FRA-DD Documents)" folders:**
+  the owner wants the tracker's Fund Manager column to match those folder names. 29 folders match a
+  tracker manager (mostly the folders use a short name, e.g. "Coronation" for "Coronation Asset
+  Management"). Mismatches waiting for the owner: Nedgroup Core funds and Global Equity (folder: Nedgroup;
+  tracker: Taquanta/BlackRock, Veritas), STANLIB Global Balanced (folder: Stanlib; tracker: J.P. Morgan),
+  the 4 PPS funds, Jupiter and BlackRock spelled two ways, Mi-Plan (Think Cell, Vunani), Curate (folder
+  says Lyrical), Old Mutual (folder "Old Mutual Wealth - OMI"), Catalyx folder is not Catalyst. 27 tracker
+  managers have no folder (Orbis, Foord, Oyster Catcher and others). Nothing changed yet; renaming
+  Linka's folders was advised against.
+
 - **2026-10-20, repository moved:** transferred from the personal GitHub account JacDK777 to the work
   account JDKMiton, now `JDKMiton/Fund-Asset-Allocation---Scraper-and-Finder` (ยง2). The PC's clone at
   `C:\Tools\MDD-Scraper` has `origin` pointing at JDKMiton, and `git pull` works there, so the weekly
