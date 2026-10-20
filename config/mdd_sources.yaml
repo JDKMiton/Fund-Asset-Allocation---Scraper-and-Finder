@@ -1285,12 +1285,12 @@ funds:
   url: 'https://wealth.momentum.co.za/investments/factsheets/curate-global-emerging-markets-equity-fund-a-usd.pdf'
   note: R Class USD held (Linka's Sep 2026 FRA pack); Momentum hosts only the A Class USD fact sheet (LU2377867424), same portfolio.
 - name: "Nedgroup Investments Rainmaker Fund"
-  fund_manager: "Nedgroup"
+  fund_manager: "Ninety One"
   fund_folder: "Nedgroup Rainmaker Fund"
   isin: ZAE000019477
   urls:
   - 'https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Rainmaker%20Fund%20A.pdf'
-  note: A class MDD; classes A1 and R also exist.
+  note: A class MDD; classes A1 and R also exist. Managed by the Ninety One Quality team.
 - name: "Peregrine Capital High Growth Fund"
   fund_manager: "Peregrine"
   fund_folder: "Peregrine Capital High Growth"

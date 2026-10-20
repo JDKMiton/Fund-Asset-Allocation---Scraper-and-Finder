@@ -293,6 +293,7 @@ Management". Don't rename Linka's folders; change the config. Owner's filing dec
 | Amplify boutiques | AG Capital, Acumen Capital, Marble Rock Asset Management, Oyster Catcher Investments (empty folders created by Claude) |
 | Momentum Capped SWIX, Curate Enhanced Yield | Momentum (folder created by Claude) |
 | Discovery Aggressive DAO FoF (Cogence) | Cogence (folder created by Claude) |
+| Nedgroup Rainmaker (owner, 20 Oct 2026) | Ninety One, the investment manager named on the MDD (Quality team): same rule as Nedgroup Stable to Foord. Claude created `Ninety One\Nedgroup Rainmaker Fund\MDDs`. Linka's `Nedgroup\Nedgroup Rainmaker Fund` (empty DD and MDDs folders) is left as it is: two folders for one fund, like Nedgroup Global Equity. |
 | CAEP RCIS Fixed Income RHF (owner, 20 Oct 2026) | Cartesian: Cartesian Capital (Anthea Gardner) runs it under CAEP Asset Managers' Category IIA licence, so the MDD names CAEP. |
 | Curate Global Quality Equity (owner, 20 Oct 2026) | Evenlode, the adviser named on the fact sheet (empty folder created by Claude). **Exception:** its fund folder stays under Lyrical Asset Management (Curate-Momentum), with Linka's DD pack. |
 
@@ -339,8 +340,9 @@ through them one by one:
   Allocation; UBS Solactive China Technology ETF; Denker UBS DNKOPP 30Nov27; Invesco S&P MidCap Momentum
   ETF; SPDR S&P Pan Asia Dividend Aristocrats; MO BCI Worldwide Growth, MO FR Active Beta, MO FR Worldwide
   Active Beta.
-- **Duplicate:** Linka's "Nedgroup \ Nedgroup Global Equity Fund" is the tracker's Nedgroup Global Equity,
-  which the owner filed under Veritas (two folders for one fund; not resolved).
+- **Duplicates:** Linka's "Nedgroup \ Nedgroup Global Equity Fund" is the tracker's Nedgroup Global Equity,
+  which the owner filed under Veritas; and "Nedgroup \ Nedgroup Rainmaker Fund" (empty), now filed under
+  Ninety One (two folders for one fund each; not resolved).
 
 ## 7. Open issues and questions for the owner
 
@@ -359,7 +361,6 @@ through them one by one:
 - **The funds added on 20 Oct 2026, still open:**
   - Sprott SLVR: download by hand each quarter?
   - Share classes were settled on 20 Oct 2026 (§3).
-  - Fund Manager value that may be wrong: Nedgroup Rainmaker is run by Ninety One's Quality team.
 - **Old files:** if `2026 - 09\Marriott Core Income.pdf` exists from an early run, it is the August sheet
   and should be moved.
 
@@ -385,6 +386,10 @@ through them one by one:
 - Read `docs/sa-factsheet-scraping-guide.md` §6–7, on reading tables by word position and the checks.
 
 ## 10. Learning log (newest first; add a line after every scan or change)
+
+- **2026-10-20, Nedgroup Rainmaker to Ninety One** (owner): the manager named on the MDD, same rule as the
+  other Nedgroup third-party funds. Created `Ninety One\Nedgroup Rainmaker Fund\MDDs`; Linka's empty Nedgroup
+  folder for it left in place (§6). The three Fund Manager questions from the added funds are settled.
 
 - **2026-10-20, CAEP stays under Cartesian** (owner): Cartesian's DD pack (12 Oct 2026) shows the fund is
   Cartesian Capital's, run under CAEP Asset Managers' licence. Note added to the config; no change to the run.
