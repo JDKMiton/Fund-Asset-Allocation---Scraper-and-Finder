@@ -38,6 +38,7 @@
 | Column | Contents |
 |---|---|
 | Fund | `current_name`, else the MDD's name if the MDD prints the fund's known ISIN, else `name` |
+| Fund Manager | `fund_manager`, else the investment manager named in the MDD (blank if none is found) |
 | AUM held | from the holdings workbook (label set by `--aum-label`) |
 | ISIN | `isin`, else the first ISIN printed in the MDD |
 | Fund AUM, Inception Date, Benchmark | read from the MDD by word position, with a text fallback; blank when unsure |

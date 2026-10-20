@@ -566,7 +566,7 @@ def write_tracker(path: Path, month: str, funds: list[Fund], results: list[Colle
     wb = Workbook()
     ws = wb.active
     ws.title = "Tracker"
-    _header(ws, 1, ["Fund", aum_label, "ISIN", *FACT_COLUMNS, "Status", "MDD month",
+    _header(ws, 1, ["Fund", "Fund Manager", aum_label, "ISIN", *FACT_COLUMNS, "Status", "MDD month",
                     "Other months collected", "File", "Source", "Notes"])
     def shown_name(fund: Fund) -> str:
         """The owner-confirmed current name, else the MDD's name once it prints the fund's known ISIN."""
@@ -606,12 +606,13 @@ def write_tracker(path: Path, month: str, funds: list[Fund], results: list[Colle
         if name != fund.name:
             why = "confirmed by the owner" if src and src.current_name else f"ISIN {isin} matches the MDD"
             note = "; ".join(filter(None, [f"renamed - previously '{fund.name}' ({why})", note]))
-        row = [name, fund.aum, isin, *(facts.get(c) for c in FACT_COLUMNS),
+        manager = (src.fund_manager if src else None) or facts.get("Fund Manager")
+        row = [name, manager, fund.aum, isin, *(facts.get(c) for c in FACT_COLUMNS),
                status, shown.month if this else None, others,
                shown.path.name if this and shown.path else None, shown.source or None, note or None]
         for j, v in enumerate(row, start=1):
             ws.cell(row=i, column=j, value=v).fill = fill
-        ws.cell(row=i, column=2).number_format = "#,##0"
+        ws.cell(row=i, column=3).number_format = "#,##0"
     ws.freeze_panes = "A2"
     ws.auto_filter.ref = ws.dimensions
     _autosize(ws)

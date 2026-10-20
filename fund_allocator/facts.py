@@ -212,8 +212,29 @@ def _scan_words(pdf: pdfplumber.PDF, pages: int, fields: list) -> dict[str, str 
     return out
 
 
+_COMPANY = r"[A-Z0-9][\w&'’-]*(?:\s(?:[A-Z][\w&'’-]*|&|and|of)){0,5}?"
+_SUFFIX = r"\s*(?:\(Pty\)|\(Proprietary\)|Proprietary\b|Limited\b|Ltd\b|LLP\b|LLC\b|PLC\b)"
+_MANAGER = [  # label, then a capitalised company name ending in a company suffix (or a full stop after "Managed by")
+    re.compile(rf"(?i:investment\s?manager(?:\s?information)?|investments\s+managed\s+by)\s*:?\s*({_COMPANY}){_SUFFIX}"),
+    re.compile(rf"(?i:managed\s+by)\s+({_COMPANY})(?:{_SUFFIX}|\.\s)"),
+]
+
+
+def fund_manager(text: str) -> str | None:
+    """The investment manager an MDD names ("Investment manager: Truffle Asset Management (Pty) Ltd",
+    "Managed by Matrix Fund Managers."), or None. Only a capitalised company name straight after the
+    label counts, so a label followed by other text (a table heading, a sentence) gives None."""
+    flat = re.sub(r"\s+", " ", text or "")
+    for pattern in _MANAGER:
+        for m in pattern.finditer(flat):
+            name = m.group(1).strip()
+            if len(name) > 3 and not re.match(r"(?:The|This|A|An|Our|Details|Income)\b", name):
+                return name
+    return None
+
+
 def mdd_facts(pdf_path: str | Path, text: str | None = None) -> dict[str, str | None]:
-    """{"Fund AUM", "Inception Date", "Benchmark"} from an MDD (None where not found)."""
+    """{"Fund AUM", "Inception Date", "Benchmark", "Fund Manager"} from an MDD (None where not found)."""
     words: dict[str, str | None] = {}
     try:
         with pdfplumber.open(pdf_path) as pdf:
@@ -234,4 +255,5 @@ def mdd_facts(pdf_path: str | Path, text: str | None = None) -> dict[str, str | 
     return {"Fund AUM": first(words.get("Fund AUM"), from_text.get("Fund AUM"),
                               words.get("Fund AUM (loose)"), from_text.get("Fund AUM (loose)")),
             "Inception Date": first(words.get("Inception Date"), from_text.get("Inception Date")),
-            "Benchmark": first(from_text.get("Benchmark"), words.get("Benchmark"))}
+            "Benchmark": first(from_text.get("Benchmark"), words.get("Benchmark")),
+            "Fund Manager": fund_manager(text) if text else None}

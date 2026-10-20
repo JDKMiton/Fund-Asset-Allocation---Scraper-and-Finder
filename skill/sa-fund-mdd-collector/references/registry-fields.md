@@ -23,6 +23,7 @@ an AUM column. An entry needs at least one of `url`, `urls`, `page`, `file`, `sa
 | `note` | free text | Shown in the tracker's Notes column. |
 | `doc_names` | list | Other names the MDD may print (renamed fund, platform name). The name check accepts any of them. |
 | `current_name` | `Vunani FR Enhanced Income Fund` | An owner-confirmed current name; the tracker shows it, with "previously …" in Notes. |
+| `fund_manager` | `Veritas Asset Management` | Who actually manages the money, shown in the tracker's **Fund Manager** column. Set it from the MDD ("Investment manager", "About the fund manager", "Managed by"). For platform and multi-boutique ranges (Amplify, Nedgroup, PPS, Curate, Discovery, Fundrock/Prescient co-named funds) it is a third party, not the name on the fund. Without it the tracker uses the investment manager read from the MDD, which can be blank or, for funds with an offshore partner, name that partner. |
 | `keep_name` | `true` | Don't switch to the MDD's name even when the ISIN confirms it (e.g. the MDD prints an *old* name). |
 | `lag_days` | `60` | Days after month-end the MDD is normally up (default 30). Before this the fund is **Pending**, after it **Late**. |
 | `frequency` | `quarterly` | MDDs only for March, June, September and December; other months show **Quarterly**. |
@@ -43,7 +44,8 @@ an AUM column. An entry needs at least one of `url`, `urls`, `page`, `file`, `sa
 
 Then test the entry on its own:
 `python -m fund_allocator collect --exclude '^(?!<Fund name>)' --out <scratch folder>`.
-Check that the PDF names the fund, the month is right and the ISIN is the owner's class.
+Check that the PDF names the fund, the month is right and the ISIN is the owner's class, and set
+`fund_manager` from what the MDD says.
 
 ## Share classes
 

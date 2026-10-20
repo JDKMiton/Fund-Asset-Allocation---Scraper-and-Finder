@@ -61,7 +61,7 @@ records what was actually seen for *these* funds and wins.
 6. Rewrites `!MDD Tracker YYYY - MM.xlsx` in each month folder.
 
 **The tracker** has three sheets:
-- **Tracker**, funds A–Z, with columns: Fund | MitonOptimal AUM | ISIN | Fund AUM | Inception Date |
+- **Tracker**, funds A–Z, with columns: Fund | Fund Manager | MitonOptimal AUM | ISIN | Fund AUM | Inception Date |
   Benchmark | Status | MDD month | Other months collected | File | Source | Notes.
 - **Summary**, the counts per status.
 - **Exceptions**, one line per problem.
@@ -100,7 +100,7 @@ Name not checked (the PDF has no text layer), No source.
   - `url` / `urls` (with templates `{yyyy} {mm} {yyyymm} {month} {Month} {mon} {Mon} {MON} {dd} {bdd} {next_yyyy} {next_mm}`);
   - `page` + `link_match` (the regex may contain the same templates) + `render`;
   - `sanlam_fund`, `mandg_fund`, `browser`, `referer`, `ignore_robots`;
-  - `isin`, `note`, `doc_names`, `current_name`, `lag_days`, `frequency`, `keep_name`.
+  - `isin`, `note`, `doc_names`, `current_name`, `lag_days`, `frequency`, `keep_name`, `fund_manager`.
 - `fund_allocator/collector.py`: the run, checks, filing, manifest, tracker. `facts.py`: Fund AUM, inception
   and benchmark. `pdfinfo.py`: PDF reading in a worker process with a 120 s limit. `scraper.py`: downloads,
   browser and site APIs.
@@ -197,6 +197,26 @@ Sasfin → Otto1890 was confirmed this way; the others need an ISIN on file that
 | Discovery Aggressive Dynamic Asset Optimiser FoF | Cogence Discovery Balanced Dynamic Asset Optimiser FoF (code DADAOF); confirmed by the owner, shown in the tracker |
 | Old Mutual RAFI 40 Index Fund | balloting a rename to Old Mutual RAFI SA Index Fund |
 
+### Fund managers (owner's request, 20 Oct 2026)
+
+The tracker's **Fund Manager** column shows `fund_manager` from the config. If a fund has no `fund_manager`,
+it shows the investment manager the MDD names. All 192 funds were set on 20 Oct 2026, checked against each
+fund's latest MDD ("Investment manager", "About the fund manager", "Managed by", "Asset managers"). The rule:
+where the manager is the one in the fund's name, that manager; otherwise the third party. Third parties
+found:
+
+| Range | Who manages it |
+|---|---|
+| Amplify (Sanlam) | each fund's boutique: Matrix (Defensive Balanced, Income Plus, Absolute), Terebinth (Strategic Income, Diversified Income), Truffle (Wealth Protector), Oyster Catcher (Managed Equity, Equity), Marble Rock (Real Income), Acumen Capital (Absolute Income), All Weather (Enhanced Equity), AG Capital (Multi Strategy, ex-Obsidian) |
+| Nedgroup | Taquanta + BlackRock (Core Guarded, Diversified, Accelerated), BlackRock (Core Global), Abax (Flexible Income, Opportunity, Entrepreneur), Truffle (Balanced), Foord (Stable), Veritas (Global Equity), Pyrford (Global Cautious), Laurium (SA Equity), First Pacific Advisors (Global Flexible) |
+| Discovery | Ninety One SA, for all 8 Discovery funds; the DAO fund is Cogence, with asset allocation advised by BlackRock |
+| PPS (multi-manager) | Managed: 36ONE (exclusive manager); Equity: Truffle, 36ONE, STANLIB, Oyster Catcher, Fairtree; Flexible Income: Prescient, Ninety One; Balanced Passive: Prescient. Underlying managers can change quarterly. |
+| Allan Gray Orbis feeders | Orbis Investment Management (Allan Gray's own funds are Allan Gray) |
+| Curate (Momentum) | Enhanced Yield: Momentum Fixed Income; Flexible Property: Sesfikile Capital |
+| Others | Old Mutual Global Equity: Jupiter Fund Management; STANLIB Global Balanced Feeder: J.P. Morgan (underlying fund); SIM Inflation Plus: Ninety One investment team (management outsourced to SIM; renamed SCI Ninety One Cautious Managed from 9 Oct 2026); Mi-Plan Enhanced Income: Vunani Fund Managers; Mi-Plan Global Macro and Multi Asset Balanced Defensive: sub-investment manager Think Cell; Sasfin: Otto1890; Counterpoint: Merchant West; CoreShares: 10X; iShares: BlackRock; PR Truffle: Truffle |
+
+Check these when a fund changes manager (e.g. Amplify Multi Strategy: Obsidian → AG Capital in Nov 2024).
+
 ## 7. Open issues and questions for the owner
 
 - **No ISIN:** Bateleur Long Short, Bateleur Special Opportunities and M&G Property Fund D.
@@ -236,6 +256,14 @@ Sasfin → Otto1890 was confirmed this way; the others need an ISIN on file that
 - Read `docs/sa-factsheet-scraping-guide.md` §6–7, on reading tables by word position and the checks.
 
 ## 10. Learning log (newest first; add a line after every scan or change)
+
+- **2026-10-20, Fund Manager column:** added to every tracker (second column) at the owner's request. Each
+  fund's latest MDD was read for its manager, and the result is in `fund_manager` for all 192 funds (§6).
+  If `fund_manager` isn't set, the MDD's investment manager is used; it is read for 79 of the 175 MDDs.
+  It only takes a capitalised company name straight after the label, because a looser pattern picked up
+  table headings and sentences. Seen: Discovery's funds are all managed by Ninety One; the SIM Inflation
+  Plus MDD already names the Ninety One team; Allan Gray's balanced MDDs mention Orbis for the offshore
+  part. The weekly run rewrites every month folder's tracker, so June and July get the column too.
 
 - **2026-10-19, reusable skill:** the collector is packaged as the `sa-fund-mdd-collector` skill in
   `skill/` (for other projects and accounts). It asks where to save the MDDs, then

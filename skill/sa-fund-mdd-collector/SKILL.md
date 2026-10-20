@@ -47,6 +47,9 @@ If the user already has a project (look for `HANDOVER.md` + `config/mdd_sources.
    - For the rest, use `references/manager-notes.md` (what each manager's site does) and
      `references/scraping-guide.md` §4 (how to find where a site keeps its sheets).
    - Test one fund: `python -m fund_allocator collect --exclude '^(?!<Fund>)' --out <scratch folder>`.
+   - Set `fund_manager` from the MDD for each fund (the tracker's Fund Manager column). Platform and
+     multi-boutique ranges such as Amplify, Nedgroup, PPS, Curate and Discovery use third-party managers;
+     the example registry and `references/manager-notes.md` list the ones already seen.
 4. **Agree the registry with the user** before scheduling. List funds with no source, funds using another
    share class's sheet, and any `ignore_robots` you'd need. robots.txt overrides need the user's explicit
    agreement; record it in HANDOVER.md §3.

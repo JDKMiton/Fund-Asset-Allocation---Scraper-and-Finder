@@ -8,6 +8,7 @@ the URL carries the month. Always date the MDD by its content, never by the URL.
 ## Contents
 - Managers A–Z
 - Platforms that host other managers' sheets
+- Third-party fund managers (for `fund_manager`)
 - Renamed funds seen in 2025–26
 - Traps that caught this collector
 
@@ -105,6 +106,30 @@ the URL carries the month. Always date the MDD by its content, never by the URL.
   **It has served stale sheets and the wrong fund**, so the name and stale checks matter here.
 - **PPS secure:** `ppsisecure.co.za/SecureDocuments/FundFactSheets/<Fund> - <Class>.pdf`, about a month behind.
 - **EasyEquities:** `resources.easyequities.co.za/Unit%20Trusts/<CODE>.pdf`, often stale.
+
+## Third-party fund managers (for `fund_manager`, seen Oct 2026)
+
+Where the money is managed by someone other than the name on the fund. The MDD says so under "Investment
+manager", "About the fund manager", "Managed by" or "Asset managers". Check it again when a fund changes.
+
+- **Amplify (Sanlam):** a boutique per fund: Matrix (Defensive Balanced, Income Plus, Absolute), Terebinth
+  (Strategic Income, Diversified Income), Truffle (Wealth Protector), Oyster Catcher (Managed Equity, Equity),
+  Marble Rock (Real Income), Acumen Capital (Absolute Income), All Weather (Enhanced Equity), AG Capital
+  (Multi Strategy, which was Obsidian).
+- **Nedgroup:** Taquanta + BlackRock (Core Guarded, Diversified, Accelerated), BlackRock (Core Global), Abax
+  (Flexible Income, Opportunity, Entrepreneur), Truffle (Balanced), Foord (Stable), Veritas (Global Equity),
+  Pyrford (Global Cautious), Laurium (SA Equity), First Pacific Advisors (Global Flexible).
+- **Discovery:** Ninety One SA manages the Discovery unit trusts. The Dynamic Asset Optimiser funds are Cogence,
+  with asset allocation advised by BlackRock.
+- **PPS:** PPS Multi-Managers appoints the managers: Managed = 36ONE; Equity = Truffle, 36ONE, STANLIB, Oyster
+  Catcher, Fairtree; Flexible Income = Prescient, Ninety One; Balanced Passive = Prescient.
+- **Allan Gray Orbis feeders:** Orbis Investment Management.
+- **Curate (Momentum):** Enhanced Yield = Momentum Fixed Income; Flexible Property = Sesfikile Capital.
+- **Others:** Old Mutual Global Equity = Jupiter; STANLIB Global Balanced Feeder = J.P. Morgan (underlying);
+  SIM / SCI Inflation Plus = the Ninety One team; Mi-Plan Enhanced Income = Vunani; Mi-Plan and MultiAsset
+  FR funds = sub-investment manager Think Cell.
+- **Co-named funds** on Fundrock (BCI/FR), Prescient, Sanlam (SCI) and Boutique Collective Investments are run
+  by the manager in the name; the management company is only the platform.
 
 ## Renamed funds seen in 2025–26 (keep the old name in `name`, add the new one to `doc_names`)
 

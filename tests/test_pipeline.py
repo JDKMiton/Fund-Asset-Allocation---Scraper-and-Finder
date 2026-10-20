@@ -182,6 +182,25 @@ class CollectorTest(unittest.TestCase):
         # fee lines and performance rows are not benchmarks
         self.assertIsNone(_from_text("Benchmark: 1.00% p.a. excl. VAT\nBenchmark 18.15 16.70 14.33")["Benchmark"])
 
+    def test_fund_manager_from_mdd_and_registry(self):
+        from fund_allocator.collector import Collected, Fund, write_tracker
+        from fund_allocator.config import FundSource
+        from fund_allocator.facts import fund_manager
+        self.assertEqual(fund_manager("Investment manager: Truffle Asset Management (Pty) Ltd is authorised"),
+                         "Truffle Asset Management")
+        self.assertEqual(fund_manager("Fund manager Managed by Matrix Fund Managers. An award winning"),
+                         "Matrix Fund Managers")
+        self.assertIsNone(fund_manager("Investment manager Income distributions Portfolio metrics"))
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "t.xlsx"
+            write_tracker(path, "2026 - 08", [Fund("A"), Fund("B")],
+                          [Collected("A", "2026 - 08", Path("A.pdf"), facts={"Fund Manager": "Read Ltd"}),
+                           Collected("B", "2026 - 08", Path("B.pdf"), facts={"Fund Manager": "Read Ltd"})],
+                          sources={"B": FundSource("B", url="x", fund_manager="Veritas Asset Management")})
+            ws = load_workbook(path)["Tracker"]
+            self.assertEqual([(r[0], r[1]) for r in ws.iter_rows(min_row=2, values_only=True)],
+                             [("A", "Read Ltd"), ("B", "Veritas Asset Management")])
+
     def test_tracker_has_mdd_fact_columns(self):
         from fund_allocator.collector import Collected, Fund, write_tracker
         with tempfile.TemporaryDirectory() as tmp:
@@ -189,9 +208,9 @@ class CollectorTest(unittest.TestCase):
             facts = {"Fund AUM": "R1.2bn", "Inception Date": "1 May 2001", "Benchmark": "CPI + 3%"}
             write_tracker(path, "2026 - 08", [Fund("A", 5.0)], [Collected("A", "2026 - 08", Path("A.pdf"), facts=facts)])
             ws = load_workbook(path)["Tracker"]
-            self.assertEqual([c.value for c in ws[1]][:7], ["Fund", "AUM held", "ISIN", "Fund AUM",
+            self.assertEqual([c.value for c in ws[1]][:8], ["Fund", "Fund Manager", "AUM held", "ISIN", "Fund AUM",
                                                            "Inception Date", "Benchmark", "Status"])
-            self.assertEqual([c.value for c in ws[2]][3:7], ["R1.2bn", "1 May 2001", "CPI + 3%", "Collected"])
+            self.assertEqual([c.value for c in ws[2]][4:8], ["R1.2bn", "1 May 2001", "CPI + 3%", "Collected"])
 
     def test_expand_url_templates(self):
         from fund_allocator.collector import candidate_urls
@@ -236,7 +255,7 @@ class CollectorTest(unittest.TestCase):
             results = collect(funds, sources, Scraper(Path(tmp) / "dl"), out)
             self.assertTrue((out / "2026 - 09" / "Balanced.pdf").exists())
             ws = load_workbook(out / "2026 - 09" / "!MDD Tracker 2026 - 09.xlsx")["Tracker"]
-            status = {ws.cell(row=i, column=1).value: ws.cell(row=i, column=7).value for i in range(2, 5)}
+            status = {ws.cell(row=i, column=1).value: ws.cell(row=i, column=8).value for i in range(2, 5)}
             self.assertEqual(status, {"Balanced": "Collected", "Feeder": "Collected", "No Source": "No source"})
             self.assertEqual(sum(1 for r in results if r.month), 2)
 
@@ -263,7 +282,7 @@ class CollectorTest(unittest.TestCase):
             self.assertTrue(all(r.source.startswith("already saved") for r in results))
             ws = load_workbook(out / "2026 - 09" / "!MDD Tracker 2026 - 09.xlsx")["Tracker"]
             row = [c.value for c in ws[2]]
-            self.assertEqual((row[2], row[6]), ("ZAE000000001", "Collected"))
+            self.assertEqual((row[3], row[7]), ("ZAE000000001", "Collected"))
 
     def test_collect_tracks_sources_and_takes_aum_from_workbook(self):
         from openpyxl import Workbook
@@ -283,7 +302,7 @@ class CollectorTest(unittest.TestCase):
             main(["collect", "--funds", str(holdings), "--sources", str(sources), "--out", str(out),
                   "--download-dir", tmp, "--month", "2026 - 09"])
             ws = load_workbook(out / "2026 - 09" / "!MDD Tracker 2026 - 09.xlsx")["Tracker"]
-            rows = [(r[0], r[1]) for r in ws.iter_rows(min_row=2, values_only=True) if r[0]]
+            rows = [(r[0], r[2]) for r in ws.iter_rows(min_row=2, values_only=True) if r[0]]
             self.assertEqual(rows, [("alpha fund", None), ("Balanced", 100.0), ("Feeder", 7.0)])
 
 
