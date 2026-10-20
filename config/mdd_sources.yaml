@@ -1412,10 +1412,6 @@ funds:
   url: 'https://www.novarecis.co.za/docs/mdd/SouthernCross-NCIS-Market-Neutral-RHF-MDD.pdf'
   lag_days: 50
   note: 'SouthernCross NCIS Market Neutral RHF A1 MDD from Novare CIS (stable link); the manager''s own site is stale.'
-- name: "Sprott Silver Miners & Physical Silver ETF"
-  fund_manager: "Sprott Asset Management"
-  fund_folder: "Sprott Silver Miners & Physical Silver ETF"
-  note: 'No source the scraper can use: sprott.com and sprottetfs.com are behind a Cloudflare challenge. Quarterly US ETF fact sheet; download by hand.'
 - name: "STANLIB Global Select Fund"
   fund_manager: "Stanlib"
   fund_folder: "Stanlib Global Select"

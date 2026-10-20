@@ -37,7 +37,7 @@ records what was actually seen for *these* funds and wins.
 | Install on the owner's work PC | `C:\Tools\MDD-Scraper`. Until 20 Oct 2026 it was updated by copying the branch ZIP over it (Replace, keep `.venv`). From 20 Oct the owner was given steps to make it a git clone of this branch: `run_weekly.ps1` then runs `git pull --ff-only` before each run, and reinstalls packages when `requirements.txt` changes. **Pushing to this branch updates the PC at the next weekly run.** Check the top of the weekly log for the pull result. |
 | Scheduled task | "Fund MDD weekly download", Mondays 07:00, runs `scripts\windows\run_weekly.ps1`; set up by `scripts\windows\setup_weekly_task.ps1` |
 | Output folder | `E:\OneDrive - MitonOptimal Portfolio Management (Pty) Ltd\#Webscraper MDDs` (synced by OneDrive) |
-| Fund list | `config/mdd_sources.yaml` (234 funds on 20 Oct 2026: 191, plus 43 added from Linka's folders; 42 of those 43 have a source, Sprott SLVR has a documented reason for none). **This file defines the tracker.** |
+| Fund list | `config/mdd_sources.yaml` (233 funds on 20 Oct 2026: 191, plus 42 added from Linka's folders, all with a source). **This file defines the tracker.** |
 | AUM workbook | `AUM_By_Holding_Fund_Model_Portfolio.xlsx`, sheet "Holding Fund Totals". Only fills the "MitonOptimal AUM" column; it does not add or remove funds. |
 | Excluded | `--exclude "^MitonOptimal FR"`: the owner sources the MitonOptimal FR funds directly. |
 | Branch | `claude/fund-location-scraper-kvsmox` on GitHub `JDKMiton/Fund-Asset-Allocation---Scraper-and-Finder` (moved from the personal account JacDK777 on 20 Oct 2026) |
@@ -92,6 +92,8 @@ Name not checked (the PDF has no text layer), No source.
 | 19 Oct 2026 | Asset allocation goes to a separate agent; this scraper doesn't extract it. |
 | 19 Oct 2026 | If the MDD's fund name is the correct one (the ISINs match), show that name in the tracker (§6). |
 | 19 Oct 2026 | Confirmed renames: Discovery Aggressive DAO FoF → Cogence Discovery Balanced Dynamic Asset Optimiser Fund of Funds; Mi-Plan IP Enhanced Income → Vunani FR Enhanced Income Fund. Shown in the tracker (`current_name`). |
+| 20 Oct 2026 | Removed Sprott Silver Miners & Physical Silver ETF (fact sheet site behind Cloudflare) from the tracker and weekly grab. Don't add it back unless asked. |
+| 20 Oct 2026 | Keep a list of folder and name mismatches for the owner and Linka to fix: [`docs/fix-list.md`](docs/fix-list.md). |
 | 20 Oct 2026 | Removed Sanlam Multi-Strategy (no public fact sheet) from the tracker and weekly grab. Don't add it back unless asked. |
 | 20 Oct 2026 | Share classes for the funds added from Linka's folders: keep the A class for Fairtree FR Income Plus, Curate Global Quality and Global Value, Old Mutual Global Managed Alpha and RAFI (the rand feeders), and Nedgroup Rainmaker; Omba A USD Acc; Laurium Enhanced Growth the ZAR feeder; Peregrine Retail class A (buy list); Flagship FR Worldwide Flexible Feeder accepted as the IP Worldwide Flexible fund. From Linka's packs: Camissa SA Equity C class, Curate Global EM R Class USD (only the A sheets are published; same portfolio). |
 | 20 Oct 2026 | Removed Riscura BCI China Equity Feeder (wound up 4 Sep 2026) from the tracker and weekly grab. Don't add it back unless asked. |
@@ -108,6 +110,9 @@ Name not checked (the PDF has no text layer), No source.
 - `fund_allocator/collector.py`: the run, checks, filing, manifest, tracker. `facts.py`: Fund AUM, inception
   and benchmark. `pdfinfo.py`: PDF reading in a worker process with a 120 s limit. `scraper.py`: downloads,
   browser and site APIs.
+- `docs/fix-list.md`: mismatches between the tracker, Linka's folders and the buy list, for the owner and
+  Linka to fix. **Add to it** whenever a scan or change finds a new one (a duplicate folder, a typo, an
+  old fund name), and remove an item once the owner says it's done (changing the config to match).
 - `#Webscraper MDDs\_manifest.csv`, `#Webscraper MDDs\_rejected\`: evidence; never delete them during a run.
 
 ## 5. Manager and site notes (what was actually seen)
@@ -217,7 +222,7 @@ Sources found on 20 Oct 2026 for the 45 funds added from Linka's folders:
 - **STANLIB Global Select:** only the Momentum copy of the rand feeder (B2), 2 to 3 months behind
   (`lag_days: 90`). `stanlib.literaturehub.co.za` has `Disallow: /`. stanlib.com itself answered plain
   requests on 20 Oct 2026 and its robots.txt allows all.
-- **No source (documented in the config):** Sprott SLVR (sprott.com and sprottetfs.com
+- **Removed for having no reachable source:** Sprott SLVR (sprott.com and sprottetfs.com
   behind a Cloudflare challenge; quarterly US sheet). Riscura BCI China Equity Feeder was wound up on 4 Sep
   2026 and removed from the tracker (§3). Sanlam Multi-Strategy (Irish UCITS, now Sanlam Ninety One Multi
   Strategy; not in Sanlam's API, Ninety One behind Cloudflare) was removed for having no public sheet (§3).
@@ -318,8 +323,8 @@ owner to decide; don't copy MDDs there until asked.
 **Fund folders in Linka's share that were not in the tracker** (71 on 20 Oct 2026). The owner went
 through them one by one:
 - **Added (45)**, each with `fund_folder` and an `MDDs` folder. Sources were found on 20 Oct 2026 for 42
-  (§5); Sprott SLVR stays **No source** with the reason in its note; Sanlam Multi-Strategy (no public
-  sheet) and Riscura China (wound up) were removed (§3): Templeton Emerging Markets, Templeton EM Smaller
+  (§5); Sprott SLVR and Sanlam Multi-Strategy (no reachable sheet) and Riscura China (wound up) were
+  removed (§3): Templeton Emerging Markets, Templeton EM Smaller
   Companies, Franklin Technology, Franklin US Opportunities; iShares Global Infrastructure, US Industrials,
   India Govt Bond, Silver Trust, Copper Miners, Lithium Miners and Producers, Lithium and Battery Producers;
   Old Mutual Global Managed Alpha, Old Mutual RAFI All World Index; Sanlam Multi-Strategy; Flagship IP
@@ -358,9 +363,7 @@ through them one by one:
   - Fund AUM, inception date and benchmark are read automatically and can be blank or imperfect;
   - Discovery benchmarks run together without spaces;
   - a few long composite benchmarks stop where the MDD mixes in text from another column.
-- **The funds added on 20 Oct 2026, still open:**
-  - Sprott SLVR: download by hand each quarter?
-  - Share classes were settled on 20 Oct 2026 (§3).
+- **Folder and name mismatches** for the owner and Linka: [`docs/fix-list.md`](docs/fix-list.md).
 - **Old files:** if `2026 - 09\Marriott Core Income.pdf` exists from an early run, it is the August sheet
   and should be moved.
 
@@ -386,6 +389,11 @@ through them one by one:
 - Read `docs/sa-factsheet-scraping-guide.md` §6–7, on reading tables by word position and the checks.
 
 ## 10. Learning log (newest first; add a line after every scan or change)
+
+- **2026-10-20, Sprott removed; fix list started** (owner): Sprott SLVR out of the config (233 funds, all
+  with a source). Compared every `fund_manager\fund_folder` with Linka's share: all exist except Curate
+  Global Quality (under Lyrical by choice). Mismatches found (duplicates, typos, old BCI/IP names, folders
+  of removed funds, out-of-date buy list names) are in `docs/fix-list.md`.
 
 - **2026-10-20, Nedgroup Rainmaker to Ninety One** (owner): the manager named on the MDD, same rule as the
   other Nedgroup third-party funds. Created `Ninety One\Nedgroup Rainmaker Fund\MDDs`; Linka's empty Nedgroup
