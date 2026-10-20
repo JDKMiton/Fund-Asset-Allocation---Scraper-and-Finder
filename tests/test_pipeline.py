@@ -352,6 +352,28 @@ class CollectorTest(unittest.TestCase):
             self.assertEqual(len(list((mdds / "2026").glob("2026-07 - Balanced Now (reissued *).pdf"))), 1)
             self.assertEqual((mdds / "2026" / "2026-07 - Balanced Now.pdf").read_bytes(), balanced.read_bytes())
 
+    def test_months_the_run_no_longer_searches_are_not_late(self):
+        from fund_allocator.collector import Collected, Fund, Issue, write_tracker
+        from fund_allocator.config import FundSource
+        with tempfile.TemporaryDirectory() as tmp:
+            src = {"A": FundSource("A", url="x"), "Q": FundSource("Q", url="x")}
+            results = [Collected("Q", "2026 - 06", Path("Q.pdf"))]  # a quarterly sheet made the June folder
+            for month in ("2026 - 06", "2026 - 08"):
+                issues: list[Issue] = []
+                path = Path(tmp) / f"{month}.xlsx"
+                write_tracker(path, month, [Fund("A"), Fund("Q")], results, issues=issues, sources=src,
+                              today=date(2026, 10, 20), window=["2026 - 08", "2026 - 09"])
+                wb = load_workbook(path)
+                rows = {r[0]: r for r in wb["Tracker"].iter_rows(min_row=2, values_only=True)}
+                late = [r[0] for r in wb["Exceptions"].iter_rows(min_row=2, values_only=True) if r[1] == "Late"]
+                if month == "2026 - 06":
+                    self.assertEqual(rows["A"][7], "Not collected")
+                    self.assertIn("only searches 2026 - 08 and 2026 - 09", rows["A"][-1])
+                    self.assertEqual(late, [])
+                else:
+                    self.assertEqual(rows["A"][7], "Late")  # still searched, so still chased
+                    self.assertEqual(late, ["A", "Q"])
+
     def test_locked_tracker_does_not_stop_the_run_but_fails_it(self):
         from unittest import mock
         import fund_allocator.collector as collector

@@ -98,6 +98,7 @@ Statuses:
 | Pending | not posted yet; still within the normal delay: the fund's learned average plus 7 days once 2 months are learned, otherwise `lag_days` (default 30) |
 | Late | past the normal delay and still missing: look at it |
 | Quarterly | `frequency: quarterly` fund; no MDD is due for this month |
+| Not collected | a month older than the run's search window (the last two completed months), so it isn't searched any more; a real gap, but nothing to chase (grey, not an exception). June and July exist only because of quarterly or late sheets. |
 | No source | the fund has no download source configured |
 
 Exception kinds: Wrong document, Stale copy, Reissued, PDF unreadable, Date unreadable, Not found, Fund folder
@@ -424,6 +425,11 @@ through them one by one:
 
 ## 10. Learning log (newest first; add a line after every scan or change)
 
+- **2026-10-20, "Not collected" for months outside the window** (owner): a fund missing an MDD for a month the
+  run no longer searches shows Not collected (grey, with a note), not Late, and is left off Exceptions. On
+  the real data: June 224 and July 213 Late became Not collected; Aug/Sep unchanged (Aug keeps 21 Late).
+  From November's run, August's remaining gaps will show Not collected too.
+
 - **2026-10-20, failed runs now show as failed** (owner): a tracker open in Excel no longer stops the run;
   the others are written, the exception "Tracker not updated" is logged and the run exits 2.
   `run_weekly.ps1` ends with `exit $code`, so Task Scheduler shows 2 or 1 instead of 0 (checked: a normal
@@ -440,7 +446,7 @@ through them one by one:
   path and Collected on date. 20 of Aug's 21 Late are funds added today whose sources only serve the
   current sheet, so their August MDD can't be fetched any more (the other is Baillie Gifford Managed).
   The June and July trackers show over 200 Late each: those folders exist only for quarterly sheets, and
-  every monthly fund is counted as missing there (not new; open). Perspective (2) Not found until its
+  every monthly fund is counted as missing there (fixed the same day: now "Not collected"). Perspective (2) Not found until its
   September sheet is posted.
 
 - **2026-10-20, collection dates and timing; to-do clean-up** (owner): tracker columns Collected on and

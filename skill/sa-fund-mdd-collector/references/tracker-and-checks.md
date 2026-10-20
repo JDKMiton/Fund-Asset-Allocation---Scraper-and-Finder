@@ -64,6 +64,7 @@
 | Pending | not posted yet; within the fund's learned timing plus a week, or `lag_days` (default 30) until 2 months are learned |
 | Late | past the normal delay: look at it |
 | Quarterly | quarterly fund, nothing due this month |
+| Not collected | a month older than the run's search window (`--recent`/`--month`): no longer searched, so not chased |
 | No source | no download source configured |
 
 **Summary sheet:** the counts per status, % collected and the number of exceptions.

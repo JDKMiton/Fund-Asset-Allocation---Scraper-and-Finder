@@ -31,8 +31,8 @@ MONTHS = {m: i for i, m in enumerate(
 COLLECTED_FILL = PatternFill("solid", fgColor="E2EFDA")
 OUTSTANDING_FILL = PatternFill("solid", fgColor="FCE4D6")  # late
 PENDING_FILL = PatternFill("solid", fgColor="FFF2CC")
-QUIET_FILL = PatternFill("solid", fgColor="EDEDED")   # quarterly fund, no MDD due this month
-STATUSES = ["Collected", "Pending", "Late", "Quarterly", "No source"]
+QUIET_FILL = PatternFill("solid", fgColor="EDEDED")   # nothing to chase: quarterly, or a month the run no longer searches
+STATUSES = ["Collected", "Pending", "Late", "Quarterly", "Not collected", "No source"]
 
 
 @dataclass
@@ -384,7 +384,7 @@ def collect(funds: list[Fund], sources: dict[str, FundSource], scraper: Scraper,
         tracker = out_dir / month / f"!MDD Tracker {month}.xlsx"
         try:
             write_tracker(tracker, month, funds, results, issues=issues, sources=sources, aum_label=aum_label,
-                          fund_copies=copies, history=history)
+                          fund_copies=copies, history=history, window=months)
         except PermissionError:  # open in Excel: write the other trackers, report this one
             issues.append(Issue("(all funds)", TRACKER_LOCKED, f"{tracker.name} is open in Excel or locked, so it "
                                                                f"still shows the previous run", month))
@@ -764,7 +764,10 @@ def outstanding_status(month: str, src: FundSource | None, today: date | None = 
 def write_tracker(path: Path, month: str, funds: list[Fund], results: list[Collected],
                   issues: list[Issue] | None = None, sources: dict[str, FundSource] | None = None,
                   today: date | None = None, aum_label: str = "AUM held",
-                  fund_copies: dict[tuple[str, str], str] | None = None, history: History | None = None) -> Path:
+                  fund_copies: dict[tuple[str, str], str] | None = None, history: History | None = None,
+                  window: list[str] | None = None) -> Path:
+    """Write a month's tracker. ``window`` is the months the run searched: a fund missing an MDD for an
+    earlier month is 'Not collected' (it won't be searched again), not 'Late'."""
     sources = sources or {}
     history = history or History({}, [])
     fund_copies = fund_copies or {}
@@ -801,8 +804,10 @@ def write_tracker(path: Path, month: str, funds: list[Fund], results: list[Colle
             status = "Late"
         else:
             status = outstanding_status(month, src, today, learned)
-        fill = {"Collected": COLLECTED_FILL, "Pending": PENDING_FILL, "Quarterly": QUIET_FILL}.get(status,
-                                                                                                 OUTSTANDING_FILL)
+            if window and month not in window and status in ("Pending", "Late"):
+                status = "Not collected"
+        fill = {"Collected": COLLECTED_FILL, "Pending": PENDING_FILL, "Quarterly": QUIET_FILL,
+                "Not collected": QUIET_FILL}.get(status, OUTSTANDING_FILL)
         counts[status] += 1
         if status == "Late":
             issues.append(Issue(fund.name, "Late", f"no {month} MDD yet; normally up by "
@@ -811,6 +816,8 @@ def write_tracker(path: Path, month: str, funds: list[Fund], results: list[Colle
         note = shown.note
         if not this and dated:
             note = "; ".join(filter(None, [f"latest MDD found is for {dated[-1].month}", note]))
+        if status == "Not collected":
+            note = "; ".join(filter(None, [f"not collected: the run only searches {' and '.join(window)}", note]))
         if status == "Pending" and src:
             note = "; ".join(filter(None, [f"not posted yet; normally up by {due_date(month, src, learned):%d %b %Y}", note]))
         facts = next((r.facts for r in [shown, *reversed(dated)] if r.facts), None) or {}
