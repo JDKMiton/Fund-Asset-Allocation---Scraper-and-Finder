@@ -196,7 +196,7 @@ funds:
   url: https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-ut-global-diversified-income-feeder-fund-h-zar-mdd.pdf
   browser: true
 - name: Nedgroup Investments Core Guarded [Taquanta]
-  fund_manager: "Taquanta Asset Managers and BlackRock Investment Management"
+  fund_manager: "Nedgroup"
   isin: ZAE000198511
   urls:
   - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Core%20Guarded%20Fund%20C.pdf
@@ -206,7 +206,7 @@ funds:
   urls:
   - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Flexible%20Income%20Fund%20A.pdf
 - name: Nedgroup Investments Core Diversified [Taquanta]
-  fund_manager: "Taquanta Asset Managers and BlackRock Investment Management"
+  fund_manager: "Nedgroup"
   isin: ZAE000198529
   urls:
   - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Core%20Diversified%20Fund%20B.pdf
@@ -221,7 +221,7 @@ funds:
   - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Global%20Equity%20Feeder%20Fund%20A.pdf
   note: Matched to the SA-domiciled Nedgroup Investments Global Equity Feeder Fund.
 - name: Nedgroup Investments Core Global Feeder Fund
-  fund_manager: "BlackRock Investment Management"
+  fund_manager: "Nedgroup"
   isin: ZAE000212403
   urls:
   - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Core%20Global%20Feeder%20Fund%20A.pdf
@@ -595,11 +595,11 @@ funds:
   urls:
   - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Orbis%20Optimal%20SA%20Fund%20%28USD%29%20%28Class%20A%29/Files/OSDHWA%20-%20{yyyy}-{mm}.pdf
 - name: Mi-Plan IP Global Macro Fund
-  fund_manager: "Miplan (sub-investment manager: Think Cell)"
+  fund_manager: "Mi-Plan"
   isin: ZAE000173514
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Miplan/Mi-Plan%20FR%20Global%20Macro%20Fund%20(B5)%20MGMF.pdf
 - name: Multi Asset IP Balanced Defensive
-  fund_manager: "MultiAsset Investment Manager (sub-investment manager: Think Cell)"
+  fund_manager: "Mi-Plan"
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Multi%20Asset%20Investment%20Management/Multi%20Asset%20FR%20Balanced%20Defensive%20Fund%20(A)%20MAICA.pdf
 - name: Mi-Plan IP Enhanced Income
   fund_manager: "Vunani Fund Managers"
@@ -627,14 +627,14 @@ funds:
   render: true
   link_match: SIRGA.*FFS
 - name: PPS Managed Fund
-  fund_manager: "36ONE Asset Management (via PPS Multi-Managers)"
+  fund_manager: "36One Asset Management"
   url: https://www.pps.co.za/sites/default/files/invest-documents/fund-fact-sheets/PPS%20Monthly%20FactSheets/PPS%20Managed%20Fund_%20A%20&%20A2.pdf
 - name: PPS Equity Fund
-  fund_manager: "PPS Multi-Managers: Truffle, 36ONE, STANLIB, Oyster Catcher, Fairtree"
+  fund_manager: "PPS"
   isin: ZAE000140638
   url: https://www.pps.co.za/sites/default/files/invest-documents/fund-fact-sheets/PPS%20Monthly%20FactSheets/PPS%20Equity%20Fund_%20A-A2.pdf
 - name: PPS Flexible Income Fund
-  fund_manager: "PPS Multi-Managers: Prescient, Ninety One"
+  fund_manager: "PPS"
   isin: ZAE000173175
   url: https://www.pps.co.za/sites/default/files/invest-documents/fund-fact-sheets/PPS%20Monthly%20FactSheets/PPS%20Flexible%20Income%20Fund_%20A%20-%20A2.pdf
 - name: Denker Global Financial Fund
@@ -642,17 +642,17 @@ funds:
   isin: ZAE000154688
   sanlam_fund: Denker SCI Global Financial Feeder Fund A1
 - name: Stanlib Absolute Plus
-  fund_manager: "STANLIB Asset Management"
+  fund_manager: "Stanlib"
   isin: ZAE000082236
   url: https://ppsisecure.co.za/SecureDocuments/FundFactSheets/STANLIB%20Absolute%20Plus%20Fund%20-%20B1.pdf
   note: STANLIB's own site blocks automated access; the PPS platform copy is usually a month behind.
   lag_days: 60
 - name: STANLIB Income Fund
-  fund_manager: "STANLIB Asset Management"
+  fund_manager: "Stanlib"
   url: https://ppsisecure.co.za/SecureDocuments/FundFactSheets/STANLIB%20Income%20Fund%20-%20B2.pdf
   lag_days: 60
 - name: Old Mutual Global Equity [Jupiter Merlin]
-  fund_manager: "Jupiter Fund Management"
+  fund_manager: "Jupiter Merian Fund Management"
   isin: ZAE000171153
   url: https://ppsisecure.co.za/SecureDocuments/FundFactSheets/Old%20Mutual%20Global%20Equity%20Fund%20-%20B1.pdf
 - name: SIM Inflation Plus Fund
@@ -685,7 +685,7 @@ funds:
   doc_names:
   - Baillie Gifford Worldwide Long Term Global Growth
 - name: Jupiter Merian World Equity Fund
-  fund_manager: "Jupiter Asset Management"
+  fund_manager: "Jupiter Merian Fund Management"
   url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/IE00B42HMS87
 - name: Baillie Gifford Managed Fund
   fund_manager: "Baillie Gifford"
@@ -733,7 +733,7 @@ funds:
   fund_manager: "M & G"
   mandg_fund: M&G Property Fund
 - name: PPS Balanced Passive Fund
-  fund_manager: "Prescient Investment Management (via PPS Multi-Managers)"
+  fund_manager: "Prescient"
   keep_name: true  # the MDD prints the old name "PPS Balanced Index Tracker Fund"
   note: PPS publishes the current fact sheet under the fund's old name (PPS Balanced Index Tracker Fund).
   urls:
@@ -742,7 +742,7 @@ funds:
   doc_names:
   - PPS Balanced Index Tracker Fund
 - name: Old Mutual RAFI 40 Index Fund
-  fund_manager: "Old Mutual Customised Solutions"
+  fund_manager: "Old Mutual Wealth - OMI"
   note: MDD link from Old Mutual's local equity fund table; fund is balloting a rename to Old Mutual RAFI SA Index Fund.
   url: https://www.oldmutualinvest.com/om-docs/blt534f03c64ce9c4b6/OldMutualRAFI40TrackerFund.pdf
 - name: Schroder ISF Global Sustainable Growth Fund
@@ -809,7 +809,7 @@ funds:
   - 10X S&P SA Top50 Tracker Fund
   lag_days: 50
 - name: Curate Momentum Enhanced Yield Fund
-  fund_manager: "Momentum Fixed Income (for Curate Investments)"
+  fund_manager: "Momentum Fixed Income"
   isin: ZAE000160479
   note: A class MDD hosted by Momentum (linked from curateinvestments.com).
   url: https://wealth.momentum.co.za/investments/factsheets/curate-momentum-enhanced-yield-fund-(a)-zaf.pdf
@@ -862,7 +862,7 @@ funds:
   isin: ZAE000202453
   url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CNSB
 - name: Curate Momentum Flexible Property Fund
-  fund_manager: "Sesfikile Capital (for Curate Investments)"
+  fund_manager: "Sesfikile"
   isin: ZAE000337291
   url: https://wealth.momentum.co.za/investments/factsheets/curate-momentum-flexible-property-fund-(a)-zaf.pdf
 - name: Fairtree SA Equity Prescient Fund
@@ -888,7 +888,7 @@ funds:
   isin: ZAE000273967
   url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Methodical%20Investment%20Management/Methodical%20FR%20Equity%20Fund%20(B1)%20ACPB2.pdf
 - name: Nedgroup Investments Core Accelerated Fund
-  fund_manager: "Taquanta Asset Managers and BlackRock Investment Management"
+  fund_manager: "Nedgroup"
   isin: ZAE000240537
   urls:
   - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Core%20Accelerated%20Fund%20B.pdf
@@ -903,25 +903,25 @@ funds:
   link_match: 'steyn-capital-equity-prescient-fund-{mon}-{yyyy}-mdd'
   render: true
 - name: STANLIB Enhanced Multi Style Equity Fund
-  fund_manager: "STANLIB Asset Management"
+  fund_manager: "Stanlib"
   isin: ZAE000214946
   url: https://ppsisecure.co.za/SecureDocuments/FundFactSheets/STANLIB%20Enhanced%20Multi%20Style%20Equity%20Fund%20-%20B1.pdf
   note: STANLIB's own site blocks automated access; the PPS platform copy is usually a month behind.
   lag_days: 60
 - name: STANLIB Global Balanced Feeder Fund
-  fund_manager: "J.P. Morgan Asset Management (underlying fund; feeder by STANLIB)"
+  fund_manager: "Stanlib"
   isin: ZAE000213021
   url: https://wealth.momentum.co.za/investments/factsheets/stanlib-global-balanced-feeder-fund-(b3).pdf
   note: STANLIB's own site blocks automated access; Momentum's copy is usually a month behind.
   lag_days: 60
 - name: STANLIB Multi-Asset Cautious Fund
-  fund_manager: "STANLIB Asset Management"
+  fund_manager: "Stanlib"
   isin: ZAE000288486
   url: https://wealth.momentum.co.za/investments/factsheets/stanlib-multi-asset-cautious-fund-(c3).pdf
   note: STANLIB's own site blocks automated access; Momentum's copy is usually a month behind.
   lag_days: 60
 - name: STANLIB Multi-Asset Growth Fund
-  fund_manager: "STANLIB Asset Management"
+  fund_manager: "Stanlib"
   isin: ZAE000314555
   url: https://wealth.momentum.co.za/investments/factsheets/stanlib-multi-asset-growth-fund-(b1).pdf
   note: B1 class MDD (Momentum's C3 copy is out of date); STANLIB's own site blocks automated access.

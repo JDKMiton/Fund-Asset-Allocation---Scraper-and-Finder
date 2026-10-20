@@ -220,9 +220,24 @@ Check these when a fund changes manager (e.g. Amplify Multi Strategy: Obsidian �
 **Names follow Linka Henning's folders (owner, 20 Oct 2026).** `fund_manager` uses the folder names in
 `E:\OneDrive - MitonOptimal Portfolio Management (Pty) Ltd\Linka Henning's files - Asset Management (FRA-DD Documents)`
 exactly, so MDDs can be filed by name: e.g. "Coronation", "M & G", "Terebinth (Amplify)", "36One Asset
-Management". Done for the 29 managers that already had a folder. Don't rename Linka's folders; change
-the config. Still open (owner to decide): Nedgroup, Stanlib Global Balanced, PPS, Jupiter, BlackRock,
-Mi-Plan, Curate/Lyrical, Old Mutual, Catalyst, and the 27 managers with no folder (learning log, 20 Oct).
+Management". Don't rename Linka's folders; change the config. Owner's filing decisions (20 Oct 2026):
+
+| Funds | Fund Manager |
+|---|---|
+| Nedgroup Core Guarded, Core Diversified, Core Accelerated, Core Global Feeder | Nedgroup |
+| Nedgroup Global Equity | Veritas Asset Management (a Veritas folder is needed) |
+| All 6 STANLIB funds, incl. STANLIB Global Balanced Feeder (not J.P. Morgan) | Stanlib |
+| PPS Managed / PPS Balanced Passive | 36One Asset Management / Prescient (the single underlying manager) |
+| PPS Equity, PPS Flexible Income (several managers) | PPS |
+| Jupiter Merian World Equity, Old Mutual Global Equity [Jupiter Merlin] | Jupiter Merian Fund Management |
+| Mi-Plan IP Global Macro, Multi Asset IP Balanced Defensive | Mi-Plan |
+| Mi-Plan IP Enhanced Income (Vunani FR) | Vunani Fund Managers (no folder yet) |
+| Curate Flexible Property / Curate Enhanced Yield | Sesfikile / Momentum Fixed Income (underlying managers; not Lyrical) |
+| Old Mutual RAFI 40 | Old Mutual Wealth - OMI |
+| Catalyst SCI Global Real Estate | Catalyst Fund Managers (Linka's "Catalyx Capital" is a different firm) |
+
+After this, 37 managers (155 funds) match a folder. Still open: 26 managers (37 funds) with no folder,
+e.g. Orbis (5), Foord (4), Oyster Catcher, Merchant West, Northstar, Baillie Gifford (2 each).
 
 ## 7. Open issues and questions for the owner
 
@@ -263,6 +278,11 @@ Mi-Plan, Curate/Lyrical, Old Mutual, Catalyst, and the 27 managers with no folde
 - Read `docs/sa-factsheet-scraping-guide.md` §6–7, on reading tables by word position and the checks.
 
 ## 10. Learning log (newest first; add a line after every scan or change)
+
+- **2026-10-20, Fund Manager mismatches decided** (owner, one by one; table in §6). Also corrected:
+  the first pass had missed that "STANLIB Asset Management" (5 funds) matches the Stanlib folder; now
+  "Stanlib". BlackRock needed no change once Nedgroup Core Global moved to Nedgroup. 37 managers / 155
+  funds now match a folder; 26 managers / 37 funds have none.
 
 - **2026-10-20, Fund Manager names set to the folder names:** the owner approved matching the 29 managers
   that have a folder. 88 `fund_manager` values changed in 23 names (e.g. Coronation Asset Management →
