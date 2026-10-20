@@ -217,6 +217,13 @@ found:
 
 Check these when a fund changes manager (e.g. Amplify Multi Strategy: Obsidian → AG Capital in Nov 2024).
 
+**Names follow Linka Henning's folders (owner, 20 Oct 2026).** `fund_manager` uses the folder names in
+`E:\OneDrive - MitonOptimal Portfolio Management (Pty) Ltd\Linka Henning's files - Asset Management (FRA-DD Documents)`
+exactly, so MDDs can be filed by name: e.g. "Coronation", "M & G", "Terebinth (Amplify)", "36One Asset
+Management". Done for the 29 managers that already had a folder. Don't rename Linka's folders; change
+the config. Still open (owner to decide): Nedgroup, Stanlib Global Balanced, PPS, Jupiter, BlackRock,
+Mi-Plan, Curate/Lyrical, Old Mutual, Catalyst, and the 27 managers with no folder (learning log, 20 Oct).
+
 ## 7. Open issues and questions for the owner
 
 - **No ISIN:** Bateleur Long Short, Bateleur Special Opportunities and M&G Property Fund D.
@@ -256,6 +263,13 @@ Check these when a fund changes manager (e.g. Amplify Multi Strategy: Obsidian �
 - Read `docs/sa-factsheet-scraping-guide.md` §6–7, on reading tables by word position and the checks.
 
 ## 10. Learning log (newest first; add a line after every scan or change)
+
+- **2026-10-20, Fund Manager names set to the folder names:** the owner approved matching the 29 managers
+  that have a folder. 88 `fund_manager` values changed in 23 names (e.g. Coronation Asset Management →
+  Coronation, M&G Investments → M & G, Terebinth Capital → Terebinth (Amplify)); Allan Gray, Denker
+  Capital, Laurium Capital, Rezco Asset Management, Schroders and Steyn Capital Management already matched.
+  Variants with extra text (e.g. "Prescient Investment Management (via PPS Multi-Managers)", "Sesfikile
+  Capital (for Curate Investments)") were left for the owner's PPS and Curate decisions.
 
 - **2026-10-20, full run on the PC after the move:** started from Task Scheduler; the pull from JDKMiton
   worked ("Already up to date"). The first run stopped while writing the trackers: `!MDD Tracker 2026 -
