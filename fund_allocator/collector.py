@@ -18,6 +18,7 @@ from openpyxl import Workbook, load_workbook
 from openpyxl.styles import PatternFill
 
 from .config import DEFAULT_LAG_DAYS, FundSource
+from .facts import aum_amount, inception_date
 from .pdfinfo import analyse_with_timeout, sha256
 from .pdfinfo import shutdown as shutdown_pdf_reader
 from .report import PCT, _autosize, _header
@@ -653,6 +654,7 @@ def recent_months(n: int, today: date | None = None) -> list[str]:
 
 
 FACT_COLUMNS = ["Fund AUM", "Inception Date", "Benchmark"]
+CURRENCY_FORMAT = {"ZAR": '"R" #,##0', "USD": '"$" #,##0', "GBP": '"£" #,##0', "EUR": '"€" #,##0'}
 
 
 RUNS = "_runs.csv"     # one row per run: when it started and which funds it searched
@@ -809,7 +811,14 @@ def write_tracker(path: Path, month: str, funds: list[Fund], results: list[Colle
             why = "confirmed by the owner" if src and src.current_name else f"ISIN {isin} matches the MDD"
             note = "; ".join(filter(None, [f"renamed - previously '{fund.name}' ({why})", note]))
         manager = (src.fund_manager if src else None) or facts.get("Fund Manager")
-        row = [name, manager, fund.aum, isin, *(facts.get(c) for c in FACT_COLUMNS),
+        aum = aum_amount(facts.get("Fund AUM"))
+        if facts.get("Fund AUM") and not aum:
+            note = "; ".join(filter(None, [note, f"Fund AUM as printed: '{facts['Fund AUM']}' (amount or currency unclear)"]))
+        started = inception_date(facts.get("Inception Date"))
+        if started and not started[1]:
+            note = "; ".join(filter(None, [note, "inception day not printed (shown as the 1st)"]))
+        row = [name, manager, fund.aum, isin, aum[0] if aum else None, started[0] if started else None,
+               facts.get("Benchmark"),
                status, shown.month if this else None,
                history.collected_on(fund.name, month, shown.path) if this else None, _usually(learned), others,
                shown.path.name if this and shown.path else None,
@@ -817,7 +826,10 @@ def write_tracker(path: Path, month: str, funds: list[Fund], results: list[Colle
         for j, v in enumerate(row, start=1):
             ws.cell(row=i, column=j, value=v).fill = fill
         ws.cell(row=i, column=3).number_format = "#,##0"
-        ws.cell(row=i, column=10).number_format = "dd mmm yyyy"  # Collected on
+        if aum:  # a whole amount in the fund's own currency
+            ws.cell(row=i, column=5).number_format = CURRENCY_FORMAT[aum[1]]
+        ws.cell(row=i, column=6).number_format = "yyyy-mm-dd"  # Inception Date
+        ws.cell(row=i, column=10).number_format = "yyyy-mm-dd"  # Collected on
     ws.freeze_panes = "A2"
     ws.auto_filter.ref = ws.dimensions
     _autosize(ws)

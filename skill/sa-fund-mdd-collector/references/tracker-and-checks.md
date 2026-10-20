@@ -45,7 +45,9 @@
 | Fund Manager | `fund_manager`, else the investment manager named in the MDD (blank if none is found) |
 | AUM held | from the holdings workbook (label set by `--aum-label`) |
 | ISIN | `isin`, else the first ISIN printed in the MDD |
-| Fund AUM, Inception Date, Benchmark | read from the MDD by word position, with a text fallback; blank when unsure |
+| Fund AUM | the fund size as a whole amount in the fund's own currency (R, $, £, €), formatted as currency; blank (with the printed text in Notes) when the currency or amount is unclear or it is a unit price |
+| Inception Date | a date, YYYY-MM-DD; the 1st of the month when the MDD prints only a month (noted) |
+| Benchmark | read from the MDD by word position, with a text fallback; blank when unsure |
 | Status | see below |
 | MDD month | |
 | Collected on | the day the MDD was first collected (manifest; else the saved file's date) |

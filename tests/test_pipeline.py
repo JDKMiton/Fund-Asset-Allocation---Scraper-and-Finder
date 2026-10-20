@@ -211,7 +211,37 @@ class CollectorTest(unittest.TestCase):
             ws = load_workbook(path)["Tracker"]
             self.assertEqual([c.value for c in ws[1]][:8], ["Fund", "Fund Manager", "AUM held", "ISIN", "Fund AUM",
                                                            "Inception Date", "Benchmark", "Status"])
-            self.assertEqual([c.value for c in ws[2]][4:8], ["R1.2bn", "1 May 2001", "CPI + 3%", "Collected"])
+            row = ws[2]
+            self.assertEqual([row[4].value, row[5].value.date(), row[6].value, row[7].value],
+                             [1200000000, date(2001, 5, 1), "CPI + 3%", "Collected"])
+            self.assertEqual((row[4].number_format, row[5].number_format), ('"R" #,##0', "yyyy-mm-dd"))
+            # a foreign fund keeps its currency; a unit price read as the fund size is left out (with a note)
+            write_tracker(path, "2026 - 08", [Fund("A"), Fund("B")],
+                          [Collected("A", "2026 - 08", Path("A.pdf"), facts={"Fund AUM": "US$ 770.18 million",
+                                                                             "Inception Date": "January 2005"}),
+                           Collected("B", "2026 - 08", Path("B.pdf"), facts={"Fund AUM": "781.34 USD"})])
+            ws = load_workbook(path)["Tracker"]
+            self.assertEqual((ws["E2"].value, ws["E2"].number_format, ws["F2"].value.date()),
+                             (770180000, '"$" #,##0', date(2005, 1, 1)))
+            self.assertIn("inception day not printed", ws.cell(row=2, column=ws.max_column).value)
+            self.assertIsNone(ws["E3"].value)
+            self.assertIn("781.34 USD", ws.cell(row=3, column=ws.max_column).value)
+
+    def test_aum_and_inception_parsing(self):
+        from fund_allocator.facts import aum_amount, inception_date
+        self.assertEqual(aum_amount("R 9 865 453 307"), (9865453307, "ZAR"))
+        self.assertEqual(aum_amount("R361m"), (361000000, "ZAR"))
+        self.assertEqual(aum_amount("R 411,622,968.43"), (411622968, "ZAR"))
+        self.assertEqual(aum_amount("R 414,360,165 3"), (414360165, "ZAR"))  # footnote digit
+        self.assertEqual(aum_amount("GBP 774m"), (774000000, "GBP"))
+        self.assertEqual(aum_amount("$4,146.9m"), (4146900000, "USD"))
+        self.assertIsNone(aum_amount("8.11bn"))  # no currency
+        self.assertIsNone(aum_amount("$18.37"))  # a unit price
+        self.assertEqual(inception_date("23November2015"), (date(2015, 11, 23), True))
+        self.assertEqual(inception_date("03.04.2000"), (date(2000, 4, 3), True))  # day first
+        self.assertEqual(inception_date("2010/08/02"), (date(2010, 8, 2), True))
+        self.assertEqual(inception_date("March 15, 2019"), (date(2019, 3, 15), True))
+        self.assertEqual(inception_date("Aug 2011"), (date(2011, 8, 1), False))
 
     def test_expand_url_templates(self):
         from fund_allocator.collector import candidate_urls

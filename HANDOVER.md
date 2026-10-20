@@ -76,6 +76,10 @@ records what was actually seen for *these* funds and wins.
 - **Tracker**, funds A–Z, with columns: Fund | Fund Manager | MitonOptimal AUM | ISIN | Fund AUM | Inception Date |
   Benchmark | Status | MDD month | Collected on | Usually available | Other months collected | File | Fund folder
   copy | Source | Notes.
+  **Fund AUM** is a whole amount in the fund's own currency, formatted as currency (owner, 20 Oct 2026: foreign
+  funds stay in USD/GBP/EUR, not converted); unclear amounts and unit prices read as fund size are left blank
+  with the printed text in Notes. **Inception Date** and **Collected on** are dates shown YYYY-MM-DD; a month-only
+  inception date is the 1st, noted.
   **Collected on** is the day the MDD was first collected (the manifest's first "filed" row; for MDDs from
   before the manifest, the saved file's date). **Usually available** is the fund's average number of days
   after month-end, learned (owner, 20 Oct 2026): a month counts only if an earlier run searched for the fund
@@ -116,6 +120,7 @@ Name not checked (the PDF has no text layer), No source.
 | 20 Oct 2026 | Every run also saves each MDD in its fund folder: `MDDs\YYYY\YYYY-MM - <Fund>.pdf` (tracker name; all earlier months back-filled), and the tracker shows where. Month-folder copies and the trackers stay in `#Webscraper MDDs`. |
 | 20 Oct 2026 | Removed Sprott Silver Miners & Physical Silver ETF (fact sheet site behind Cloudflare) from the tracker and weekly grab. Don't add it back unless asked. |
 | 20 Oct 2026 | Keep a list of folder and name mismatches for the owner and Linka to fix, as a spreadsheet in `# TO DO LIST` in Linka's share (see §4). No "who" column. Rows marked Done are removed by the next weekly run (moved to its Done sheet); others stay. |
+| 20 Oct 2026 | Tracker Fund AUM as a whole currency amount in the fund's own currency (no conversion); Inception Date as YYYY-MM-DD (month-only: the 1st). |
 | 20 Oct 2026 | The tracker records when each MDD was collected, and learns per fund how long after month-end its MDD usually appears. |
 | 20 Oct 2026 | Removed Sanlam Multi-Strategy (no public fact sheet) from the tracker and weekly grab. Don't add it back unless asked. |
 | 20 Oct 2026 | Share classes for the funds added from Linka's folders: keep the A class for Fairtree FR Income Plus, Curate Global Quality and Global Value, Old Mutual Global Managed Alpha and RAFI (the rand feeders), and Nedgroup Rainmaker; Omba A USD Acc; Laurium Enhanced Growth the ZAR feeder; Peregrine Retail class A (buy list); Flagship FR Worldwide Flexible Feeder accepted as the IP Worldwide Flexible fund. From Linka's packs: Camissa SA Equity C class, Curate Global EM R Class USD (only the A sheets are published; same portfolio). |
@@ -417,6 +422,11 @@ through them one by one:
 - Read `docs/sa-factsheet-scraping-guide.md` §6–7, on reading tables by word position and the checks.
 
 ## 10. Learning log (newest first; add a line after every scan or change)
+
+- **2026-10-20, Fund AUM and Inception Date standardised** (owner): `facts.aum_amount` / `inception_date`
+  convert the MDD text when the tracker is written. On the August data: 181 amounts (161 R, 17 $, 3 £), 185
+  dates (11 month-only). Left blank, printed text in Notes: Artisan '$7,874' (ambiguous), Janus Henderson
+  '8.11bn' (no currency), and unit prices read as fund size for iShares World / EM and Schroders GSG.
 
 - **2026-10-20, first live run with fund folders** (started by hand at the owner's request, 19:51 to 20:04,
   exit 0): 41 MDDs filed, 74 unchanged, **350 copied to the fund folders** (no folder missing, no reissue).

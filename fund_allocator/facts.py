@@ -10,6 +10,7 @@ for the fund size, a date for the inception date, words for the benchmark.
 from __future__ import annotations
 
 import re
+from datetime import date
 from pathlib import Path
 
 import pdfplumber
@@ -257,3 +258,56 @@ def mdd_facts(pdf_path: str | Path, text: str | None = None) -> dict[str, str | 
             "Inception Date": first(words.get("Inception Date"), from_text.get("Inception Date")),
             "Benchmark": first(from_text.get("Benchmark"), words.get("Benchmark")),
             "Fund Manager": fund_manager(text) if text else None}
+
+
+# For the tracker: the fund size as a whole amount in its own currency, the inception date as a date.
+_CURRENCY = [(r"US\$|USD|\$", "USD"), (r"GBP|£", "GBP"), (r"EUR|€", "EUR"), (r"ZAR|\bR(?=\s?\d)", "ZAR")]
+_SCALE = [(r"(?<![a-z])(?:bn|billion|b)\b", 1e9), (r"(?<![a-z])(?:m|mn|million|mil)\b", 1e6)]  # "R361m"
+MIN_AUM = 1e6  # a smaller "fund size" is a unit price read by mistake ("$18.37", "781.34 USD")
+
+
+def aum_amount(value: str | None) -> tuple[int, str] | None:
+    """'R 2.93 billion' -> (2930000000, 'ZAR'); 'US$ 770.18 million' -> (770180000, 'USD'). None when the
+    currency or the number can't be read, or the amount is too small to be a fund size."""
+    if not value:
+        return None
+    v = value.replace(" ", " ")
+    currency = next((c for pat, c in _CURRENCY if re.search(pat, v, re.I)), None)
+    if currency is None:
+        return None
+    scale = next((s for pat, s in _SCALE if re.search(pat, v, re.I)), 1)
+    v = re.sub(r"(\d{1,3}(?:[ ,]\d{3})+)(?:\.\d+)?\s\d$", r"\1", v)  # a footnote digit after the amount
+    m = re.search(r"\d{1,3}(?:[ ,]\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?", v)
+    if not m:
+        return None
+    amount = float(re.sub(r"[ ,]", "", m.group(0))) * scale
+    return (round(amount), currency) if amount >= MIN_AUM else None
+
+
+_MONTHS = {m: i for i, m in enumerate(["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct",
+                                         "nov", "dec"], start=1)}
+
+
+def inception_date(value: str | None) -> tuple[date, bool] | None:
+    """'23November2015' -> (2015-11-23, True); 'January 2005' -> (2005-01-01, False): the bool says whether
+    the MDD printed the day. Numeric dates are day first (SA), except year-first ones."""
+    if not value:
+        return None
+    v = _two_digit_year(_norm(value)).lower()
+    found = None
+    if m := re.search(r"(\d{1,2})(?:st|nd|rd|th)?[\s-]*([a-z]{3})[a-z]*\.?[\s-]*,?\s*(\d{4})", v):
+        found = (int(m.group(3)), _MONTHS.get(m.group(2)), int(m.group(1)), True)
+    elif m := re.search(r"([a-z]{3})[a-z]*\.?\s*(\d{1,2}),?\s+(\d{4})", v):
+        found = (int(m.group(3)), _MONTHS.get(m.group(1)), int(m.group(2)), True)
+    elif m := re.search(r"(\d{4})[/.-](\d{1,2})[/.-](\d{1,2})", v):
+        found = (int(m.group(1)), int(m.group(2)), int(m.group(3)), True)
+    elif m := re.search(r"(\d{1,2})[/.-](\d{1,2})[/.-](\d{4})", v):
+        found = (int(m.group(3)), int(m.group(2)), int(m.group(1)), True)
+    elif m := re.search(r"([a-z]{3})[a-z]*\.?\s*(\d{4})", v):
+        found = (int(m.group(2)), _MONTHS.get(m.group(1)), 1, False)
+    if not found or not found[1]:
+        return None
+    try:
+        return date(found[0], found[1], found[2]), found[3]
+    except ValueError:
+        return None
