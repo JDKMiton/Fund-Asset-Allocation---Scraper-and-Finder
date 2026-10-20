@@ -46,7 +46,11 @@ records what was actually seen for *these* funds and wins.
 
 **What one run does** (`python -m fund_allocator collect`):
 1. Works out the last two completed months (in October: August and September).
-2. **Skips** a fund whose MDD is already saved in **both** month folders (owner's rule, 13 Oct 2026).
+2. **Skips** a fund whose MDD is already saved for **every month due** (owner's rule, 13 Oct 2026; widened
+   20 Oct 2026). An MDD already in the fund folder (`MDDs\YYYY\YYYY-MM - <Fund>.pdf`) counts: it is copied
+   back to the month folder and the fund isn't searched. A quarterly fund only needs its quarter-end month
+   (in an Aug/Sep run, September), so it isn't searched at all in a Jul/Aug run. The tracker is rebuilt
+   from these files every run, so this is the same as "Collected" in the tracker.
 3. For the others, tries each source in order (manager API or page, then URLs and backups) and checks every
    download:
    - it really is a PDF: at least 1 KB, with `%PDF-` in the first KB;
@@ -59,7 +63,7 @@ records what was actually seen for *these* funds and wins.
 5. Logs every download in `_manifest.csv`: time, fund, month, result, file, source, sha256, text hash and
    allocation stamp.
 6. **Copies every MDD to its fund folder** in Linka's share (owner, 20 Oct 2026):
-   `<share>\<fund_manager>\<fund_folder>\MDDs\YYYY\<Fund> - YYYY-MM.pdf`, where Fund is the tracker name
+   `<share>\<fund_manager>\<fund_folder>\MDDs\YYYY\YYYY-MM - <Fund>.pdf`, where Fund is the tracker name
    (`current_name`, else `name`). It goes over **all** month folders each run, so earlier months are
    back-filled. Never overwrites (a different file is kept beside it as `(reissued YYYY-MM-DD)`); never
    creates a fund folder (a missing one is the exception "Fund folder missing"; a failed copy is "Fund
@@ -102,9 +106,10 @@ Name not checked (the PDF has no text layer), No source.
 | 19 Oct 2026 | Asset allocation goes to a separate agent; this scraper doesn't extract it. |
 | 19 Oct 2026 | If the MDD's fund name is the correct one (the ISINs match), show that name in the tracker (§6). |
 | 19 Oct 2026 | Confirmed renames: Discovery Aggressive DAO FoF → Cogence Discovery Balanced Dynamic Asset Optimiser Fund of Funds; Mi-Plan IP Enhanced Income → Vunani FR Enhanced Income Fund. Shown in the tracker (`current_name`). |
-| 20 Oct 2026 | Every run also saves each MDD in its fund folder: `MDDs\YYYY\<Fund> - YYYY-MM.pdf` (tracker name; all earlier months back-filled), and the tracker shows where. Month-folder copies and the trackers stay in `#Webscraper MDDs`. |
+| 20 Oct 2026 | Fund-folder MDDs are named `YYYY-MM - <Fund>.pdf` (date first, so they sort). An MDD already in the fund folder means the fund isn't searched again for that month. |
+| 20 Oct 2026 | Every run also saves each MDD in its fund folder: `MDDs\YYYY\YYYY-MM - <Fund>.pdf` (tracker name; all earlier months back-filled), and the tracker shows where. Month-folder copies and the trackers stay in `#Webscraper MDDs`. |
 | 20 Oct 2026 | Removed Sprott Silver Miners & Physical Silver ETF (fact sheet site behind Cloudflare) from the tracker and weekly grab. Don't add it back unless asked. |
-| 20 Oct 2026 | Keep a list of folder and name mismatches for the owner and Linka to fix: [`docs/fix-list.md`](docs/fix-list.md). |
+| 20 Oct 2026 | Keep a list of folder and name mismatches for the owner and Linka to fix, as a spreadsheet in `# TO DO LIST` in Linka's share (see §4). |
 | 20 Oct 2026 | Removed Sanlam Multi-Strategy (no public fact sheet) from the tracker and weekly grab. Don't add it back unless asked. |
 | 20 Oct 2026 | Share classes for the funds added from Linka's folders: keep the A class for Fairtree FR Income Plus, Curate Global Quality and Global Value, Old Mutual Global Managed Alpha and RAFI (the rand feeders), and Nedgroup Rainmaker; Omba A USD Acc; Laurium Enhanced Growth the ZAR feeder; Peregrine Retail class A (buy list); Flagship FR Worldwide Flexible Feeder accepted as the IP Worldwide Flexible fund. From Linka's packs: Camissa SA Equity C class, Curate Global EM R Class USD (only the A sheets are published; same portfolio). |
 | 20 Oct 2026 | Removed Riscura BCI China Equity Feeder (wound up 4 Sep 2026) from the tracker and weekly grab. Don't add it back unless asked. |
@@ -123,9 +128,10 @@ Name not checked (the PDF has no text layer), No source.
 - `fund_allocator/collector.py`: the run, checks, filing, manifest, tracker. `facts.py`: Fund AUM, inception
   and benchmark. `pdfinfo.py`: PDF reading in a worker process with a 120 s limit. `scraper.py`: downloads,
   browser and site APIs.
-- `docs/fix-list.md`: mismatches between the tracker, Linka's folders and the buy list, for the owner and
-  Linka to fix. **Add to it** whenever a scan or change finds a new one (a duplicate folder, a typo, an
-  old fund name), and remove an item once the owner says it's done (changing the config to match).
+- **`# TO DO LIST\Folder and tracker fixes.xlsx`** in Linka's share: the mismatches between the folders,
+  the tracker and the MDDs (and the buy list) for the owner and Linka to fix. **Append a row** whenever a
+  scan or change finds a new one; never rewrite the workbook or their Status/Notes. When a row is Done, make
+  the config match. How: [`docs/fix-list.md`](docs/fix-list.md). The `# TO DO LIST` folder is not a manager.
 - `#Webscraper MDDs\_manifest.csv`, `#Webscraper MDDs\_rejected\`: evidence; never delete them during a run.
 
 ## 5. Manager and site notes (what was actually seen)
@@ -376,7 +382,7 @@ through them one by one:
   - Fund AUM, inception date and benchmark are read automatically and can be blank or imperfect;
   - Discovery benchmarks run together without spaces;
   - a few long composite benchmarks stop where the MDD mixes in text from another column.
-- **Folder and name mismatches** for the owner and Linka: [`docs/fix-list.md`](docs/fix-list.md).
+- **Folder and name mismatches** for the owner and Linka: `# TO DO LIST\Folder and tracker fixes.xlsx` (§4).
 - **Old files:** if `2026 - 09\Marriott Core Income.pdf` exists from an early run, it is the August sheet
   and should be moved.
 
@@ -402,6 +408,12 @@ through them one by one:
 - Read `docs/sa-factsheet-scraping-guide.md` §6–7, on reading tables by word position and the checks.
 
 ## 10. Learning log (newest first; add a line after every scan or change)
+
+- **2026-10-20, fund-folder names, skip rule, to-do spreadsheet** (owner): fund-folder MDDs renamed to
+  `YYYY-MM - <Fund>.pdf` (nothing had been written to the share yet, so nothing to rename). An MDD already
+  in the fund folder now counts as downloaded; quarterly funds are only searched for quarter-end months.
+  The fix list became `# TO DO LIST\Folder and tracker fixes.xlsx` (52 items, incl. 14 tracker names to
+  confirm, one a typo: "Baille Gifford"). Tests pass (39).
 
 - **2026-10-20, MDDs copied to the fund folders** (owner): new step 6 (§2), `--fund-share`, tracker column
   "Fund folder copy", config field `fund_path` (Curate Global Quality). Rehearsed on copies of `#Webscraper

@@ -71,7 +71,7 @@ quarterly MDD, not found, ...). Pointing `--out` at your OneDrive-synced folder 
 straight into OneDrive.
 
 With `--fund-share <folder>`, every MDD in the month folders is also copied to its fund's own folder,
-`<folder>\<fund_manager>\<fund_folder>\MDDs\YYYY\<Fund> - YYYY-MM.pdf`, and the tracker's **Fund folder
+`<folder>\<fund_manager>\<fund_folder>\MDDs\YYYY\YYYY-MM - <Fund>.pdf`, and the tracker's **Fund folder
 copy** column shows where. Earlier months are back-filled, nothing is overwritten, and fund folders are
 never created (a missing one is listed under Exceptions). The weekly script passes the Asset Management
 share by default.
@@ -121,7 +121,8 @@ your OneDrive-synced `#Webscraper MDDs` folder, so they appear in OneDrive autom
 **What each weekly run does**
 - Looks for the MDDs of the last two completed months (e.g. a run in mid-October collects
   August and September) and saves each one as `#Webscraper MDDs\YYYY - MM\<Fund>.pdf`.
-  A fund whose MDD is already saved in both month folders is not searched again (its Source
+  A fund whose MDD is already saved for every month due (in the month folder, or in its fund folder
+  with `--fund-share`; quarterly funds only need the quarter-end month) is not searched again (its Source
   column reads "already saved - not searched again"); add `--refetch` to the collect command
   to search for every fund anyway.
 - Checks every download before filing it: it must be a real PDF, name the fund (or a name listed in

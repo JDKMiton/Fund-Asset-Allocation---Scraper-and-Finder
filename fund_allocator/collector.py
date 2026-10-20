@@ -299,7 +299,8 @@ def collect(funds: list[Fund], sources: dict[str, FundSource], scraper: Scraper,
 
     A source may list several URLs and URL templates ({yyyy}, {mm}, {month}, ...), which are
     expanded for each month in ``months`` so earlier months can be back-filled. With ``skip_saved``,
-    a fund whose MDD is already in the folder for every month in ``months`` is not searched again.
+    a fund whose MDD is already in the folder for every month due in ``months`` (quarter-ends only for a
+    quarterly fund) is not searched again; with ``fund_share``, one already in the fund folder counts too.
     With ``fund_share``, every MDD in the month folders is also copied to its fund's folder there.
     """
     out_dir = Path(out_dir)
@@ -314,15 +315,20 @@ def collect(funds: list[Fund], sources: dict[str, FundSource], scraper: Scraper,
             results.append(Collected(fund.name, note=note, isin=src.isin if src else None))
             issues.append(Issue(fund.name, "No source", note))
             continue
-        saved = [out_dir / m / f"{_safe_name(fund.name)}.pdf" for m in months]
-        if skip_saved and saved and all(p.exists() for p in saved):
-            for month, path in zip(months, saved):
+        if fund_share:  # an MDD already in the fund folder counts as downloaded
+            _restore_from_fund_folder(fund, src, out_dir, Path(fund_share), months, manifest)
+        saved = {m: out_dir / m / f"{_safe_name(fund.name)}.pdf" for m in months}
+        due = [m for m in months if src.frequency != "quarterly" or int(m[-2:]) % 3 == 0]  # quarterly: Mar/Jun/...
+        if skip_saved and months and all(saved[m].exists() for m in due):
+            for month, path in saved.items():
+                if not path.exists():
+                    continue
                 info = _read_pdf(path)
                 isins = find_isins(info.get("text", ""))
                 results.append(Collected(fund.name, month, path, "already saved - not searched again",
                                          src.note or "", src.isin or (isins[0] if isins else None), info.get("facts"),
                                          confirmed_name(src, info.get("text", ""))))
-            log.info("%s: MDDs for %s already saved, not searched again", fund.name, ", ".join(months))
+            log.info("%s: MDDs for %s already saved, not searched again", fund.name, ", ".join(due) or "-")
             continue
         got: list[Collected] = []
         errors = []
@@ -556,10 +562,35 @@ def fund_folder(src: FundSource | None, share: Path) -> Path | None:
     return None
 
 
+def fund_mdd_name(shown: str, month: str) -> str:
+    """'2026-09 - Coronation Top 20 Fund.pdf': the date first, so a fund's MDDs sort by month."""
+    year, mm = month.split(" - ")
+    return f"{year}-{mm} - {shown}.pdf"
+
+
+def _restore_from_fund_folder(fund: Fund, src: FundSource, out_dir: Path, share: Path, months: list[str],
+                              manifest: Manifest) -> None:
+    """An MDD already in the fund folder counts as downloaded: put it back in the month folder (where the
+    skip rule, the tracker and the asset-allocation agent look) instead of searching for it again."""
+    home = fund_folder(src, share)
+    if home is None:
+        return
+    shown = _safe_name(src.current_name or fund.name)
+    for month in months:
+        filed = out_dir / month / f"{_safe_name(fund.name)}.pdf"
+        kept = home / FUND_MDDS / month[:4] / fund_mdd_name(shown, month)
+        if not filed.exists() and kept.is_file():
+            filed.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(kept, filed)
+            manifest.add(fund=fund.name, month=month, result="restored from fund folder", file=filed,
+                         source=str(kept), sha256=sha256(filed))
+            log.info("%s %s: already in the fund folder, copied back to %s", fund.name, month, filed)
+
+
 def file_in_fund_folders(funds: list[Fund], sources: dict[str, FundSource], out_dir: Path, share: str | Path,
                          months: list[str], issues: list[Issue], manifest: Manifest) -> dict[tuple[str, str], str]:
     """Copy every MDD in the month folders to its fund's folder in the share, as
-    <fund folder>\\MDDs\\YYYY\\<Fund> - YYYY-MM.pdf (the tracker name, so the files sort by month).
+    <fund folder>\\MDDs\\YYYY\\YYYY-MM - <Fund>.pdf (the tracker name; the date first so the files sort).
 
     Runs over all month folders, so MDDs filed before this existed are copied too. Never overwrites: a
     different file for the same month is kept beside it as a reissue, as in the month folders. Fund folders
@@ -580,8 +611,8 @@ def file_in_fund_folders(funds: list[Fund], sources: dict[str, FundSource], out_
                                     f"{home or 'no fund_manager / fund_folder in the config'}; MDD kept in the "
                                     f"month folder only", month))
                 continue
-            year, mm = month.split(" - ")
-            dest = home / FUND_MDDS / year / f"{shown} - {year}-{mm}.pdf"
+            year = month[:4]
+            dest = home / FUND_MDDS / year / fund_mdd_name(shown, month)
             copies = [(filed, dest)] + [  # reissued copies follow their original
                 (r, dest.with_name(f"{dest.stem}{r.stem[len(filed.stem):]}.pdf"))
                 for r in sorted(filed.parent.glob(f"{glob.escape(filed.stem)} (reissued *).pdf"))]

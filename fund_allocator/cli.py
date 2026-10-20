@@ -165,7 +165,7 @@ def main(argv: list[str] | None = None) -> int:
     col.add_argument("--ignore-robots", action="store_true")
     col.add_argument("--aum-label", default="AUM held", help="heading of the tracker's AUM column")
     col.add_argument("--fund-share", metavar="FOLDER",
-                     help="also copy each MDD to <FOLDER>\\<fund_manager>\\<fund_folder>\\MDDs\\YYYY\\<Fund> - YYYY-MM.pdf")
+                     help="also copy each MDD to <FOLDER>\\<fund_manager>\\<fund_folder>\\MDDs\\YYYY\\YYYY-MM - <Fund>.pdf")
     col.add_argument("--refetch", action="store_true",
                      help="search for every fund, even if its MDDs for all the months are already saved")
     col.set_defaults(func=cmd_collect)

@@ -1,6 +1,6 @@
 # Weekly MDD collection - run by the "Fund MDD weekly download" scheduled task.
 # Downloads the latest MDDs into <OutFolder>\YYYY - MM\ and refreshes each month's MDD Tracker.
-# With -FundShare, each MDD is also copied to its fund's folder there (<Fund> - YYYY-MM.pdf).
+# With -FundShare, each MDD is also copied to its fund's folder there (YYYY-MM - <Fund>.pdf).
 param(
     [Parameter(Mandatory = $true)][string]$OutFolder,
     [string]$FundsWorkbook = "",

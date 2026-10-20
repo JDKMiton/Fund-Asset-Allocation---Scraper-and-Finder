@@ -31,7 +31,7 @@
    (filed/unchanged/reissued/rejected), file, source, sha256, text_sha256, allocation_stamp, detail.
 7. **Trackers:** `!MDD Tracker YYYY - MM.xlsx` in every month folder. The "!" sorts it to the top.
 8. **Fund folders (optional, `--fund-share <folder>`):** every MDD in every month folder is also copied to
-   `<folder>\<fund_manager>\<fund_folder>\MDDs\YYYY\<Fund> - YYYY-MM.pdf` (Fund = `current_name`, else
+   `<folder>\<fund_manager>\<fund_folder>\MDDs\YYYY\YYYY-MM - <Fund>.pdf` (Fund = `current_name`, else
    `name`), so a fund's sheets sort by month. Earlier months are back-filled; nothing is overwritten (a
    different file is kept beside it as a reissue); a missing fund folder is reported, never created.
 

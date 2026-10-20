@@ -305,21 +305,47 @@ class CollectorTest(unittest.TestCase):
             issues = []
             collect(funds, sources, Scraper(Path(tmp) / "dl"), out, issues=issues, fund_share=share)
             mdds = share / "Mgr" / "Balanced Folder" / "MDDs"
-            self.assertTrue((mdds / "2026" / "Balanced Now - 2026-09.pdf").exists())
-            self.assertTrue((mdds / "2026" / "Balanced Now - 2026-07.pdf").exists())
-            self.assertTrue((share / "Other" / "Feeder Folder" / "MDDs" / "2026" / "Feeder - 2026-09.pdf").exists())
+            self.assertTrue((mdds / "2026" / "2026-09 - Balanced Now.pdf").exists())
+            self.assertTrue((mdds / "2026" / "2026-07 - Balanced Now.pdf").exists())
+            self.assertTrue((share / "Other" / "Feeder Folder" / "MDDs" / "2026" / "2026-09 - Feeder.pdf").exists())
             self.assertFalse((share / "Mgr" / "Nowhere").exists())  # fund folders are never created
             self.assertIn(("Lost", "Fund folder missing"), {(i.fund, i.kind) for i in issues})
             ws = load_workbook(out / "2026 - 09" / "!MDD Tracker 2026 - 09.xlsx")["Tracker"]
             col = [c.value for c in ws[1]].index("Fund folder copy") + 1
             copy = {ws.cell(row=i, column=1).value: ws.cell(row=i, column=col).value for i in range(2, 5)}
-            self.assertEqual(copy["Balanced Now"], str(Path("Mgr/Balanced Folder/MDDs/2026/Balanced Now - 2026-09.pdf")))
+            self.assertEqual(copy["Balanced Now"], str(Path("Mgr/Balanced Folder/MDDs/2026/2026-09 - Balanced Now.pdf")))
             self.assertEqual(copy["Lost"], "fund folder not found")
             # never overwrite: a different file already in the fund folder is kept, the new one saved beside it
-            (mdds / "2026" / "Balanced Now - 2026-07.pdf").write_bytes(balanced.read_bytes())
+            (mdds / "2026" / "2026-07 - Balanced Now.pdf").write_bytes(balanced.read_bytes())
             collect(funds, sources, Scraper(Path(tmp) / "dl"), out, fund_share=share)
-            self.assertEqual(len(list((mdds / "2026").glob("Balanced Now - 2026-07 (reissued *).pdf"))), 1)
-            self.assertEqual((mdds / "2026" / "Balanced Now - 2026-07.pdf").read_bytes(), balanced.read_bytes())
+            self.assertEqual(len(list((mdds / "2026").glob("2026-07 - Balanced Now (reissued *).pdf"))), 1)
+            self.assertEqual((mdds / "2026" / "2026-07 - Balanced Now.pdf").read_bytes(), balanced.read_bytes())
+
+    def test_mdd_in_fund_folder_is_not_searched_again(self):
+        from fund_allocator.collector import Fund, collect
+        from fund_allocator.config import FundSource
+        from fund_allocator.scraper import Scraper
+        with tempfile.TemporaryDirectory() as tmp:
+            balanced, _ = make_all(Path(tmp) / "pdfs")
+            share = Path(tmp) / "share"
+            kept = share / "Mgr" / "Folder" / "MDDs" / "2026"
+            kept.mkdir(parents=True)
+            for m in ("08", "09"):
+                (kept / f"2026-{m} - Balanced.pdf").write_bytes(balanced.read_bytes())
+            out = Path(tmp) / "MDDs"
+            gone = str(Path(tmp) / "gone.pdf")  # searching would fail: proves the fund isn't searched
+            src = {"Balanced": FundSource("Balanced", file=gone, fund_manager="Mgr", fund_folder="Folder"),
+                   "Quarterly": FundSource("Quarterly", file=gone, frequency="quarterly")}
+            issues = []
+            results = collect([Fund("Balanced")], src, Scraper(Path(tmp) / "dl"), out,
+                              months=["2026 - 08", "2026 - 09"], issues=issues, fund_share=share)
+            self.assertNotIn("Not found", {i.kind for i in issues})
+            self.assertTrue((out / "2026 - 08" / "Balanced.pdf").exists())  # copied back for the tracker
+            self.assertEqual(sorted(r.month for r in results), ["2026 - 08", "2026 - 09"])
+            # a quarterly fund has nothing due in July and August, so it isn't searched either
+            collect([Fund("Quarterly")], src, Scraper(Path(tmp) / "dl"), out,
+                    months=["2026 - 07", "2026 - 08"], issues=issues, fund_share=share)
+            self.assertNotIn("Not found", {i.kind for i in issues})
 
     def test_collect_tracks_sources_and_takes_aum_from_workbook(self):
         from openpyxl import Workbook
