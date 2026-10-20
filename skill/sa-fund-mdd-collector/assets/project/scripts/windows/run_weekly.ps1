@@ -50,7 +50,11 @@ if ($FundsWorkbook -and (Test-Path $FundsWorkbook)) {
 
 "=== $(Get-Date -Format s) collecting into $OutFolder" | Out-File -Append $log
 & $python @cmd *>> $log
-"=== finished with exit code $LASTEXITCODE" | Out-File -Append $log
+$code = $LASTEXITCODE  # 0 = fine, 2 = a tracker was open in Excel, other = the run failed
+"=== finished with exit code $code" | Out-File -Append $log
 
 # Keep the last 12 weekly logs.
 Get-ChildItem $logDir -Filter "weekly-*.log" | Sort-Object Name -Descending | Select-Object -Skip 12 | Remove-Item
+
+# Pass Python's exit code on, so Task Scheduler's "Last Run Result" shows a failed run (not 0).
+exit $code

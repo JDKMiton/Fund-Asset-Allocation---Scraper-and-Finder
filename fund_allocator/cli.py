@@ -13,7 +13,7 @@ import re
 import sys
 
 from .allocation import look_through
-from .collector import Fund, collect, load_fund_list, recent_months
+from .collector import TRACKER_LOCKED, Fund, collect, load_fund_list, recent_months
 from .config import FundSource, Template, load_sources, load_template
 from .extractor import Extraction, extract_from_pdf, match_category
 from .report import write_workbook
@@ -125,6 +125,11 @@ def cmd_collect(args: argparse.Namespace) -> int:
     for month in sorted({r.month for r in results if r.month} | set(months)):
         n = sum(1 for r in results if r.month == month)
         print(f"  {args.out}/{month}: {n} MDD(s) + tracker")
+    locked = [i.month for i in issues if i.kind == TRACKER_LOCKED]
+    if locked:  # a non-zero exit, so the scheduled task shows the run as failed
+        print("NOT UPDATED (open in Excel or locked): the tracker for " + ", ".join(locked)
+              + "; close it and run again, or wait for next week's run")
+        return 2
     return 0
 
 

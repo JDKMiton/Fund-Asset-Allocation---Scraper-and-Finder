@@ -381,14 +381,21 @@ def collect(funds: list[Fund], sources: dict[str, FundSource], scraper: Scraper,
     for issue in issues:
         log.warning("%s: %s - %s", issue.kind, issue.fund, issue.detail)
     for month in all_months:
-        write_tracker(out_dir / month / f"!MDD Tracker {month}.xlsx", month, funds, results,
-                      issues=issues, sources=sources, aum_label=aum_label, fund_copies=copies,
-                      history=history)
+        tracker = out_dir / month / f"!MDD Tracker {month}.xlsx"
+        try:
+            write_tracker(tracker, month, funds, results, issues=issues, sources=sources, aum_label=aum_label,
+                          fund_copies=copies, history=history)
+        except PermissionError:  # open in Excel: write the other trackers, report this one
+            issues.append(Issue("(all funds)", TRACKER_LOCKED, f"{tracker.name} is open in Excel or locked, so it "
+                                                               f"still shows the previous run", month))
+            log.error("could not replace %s: it is open in Excel or locked", tracker)
+            continue
         (out_dir / month / f"MDD Tracker {month}.xlsx").unlink(missing_ok=True)  # name used before the "!"
     return results
 
 
 MANIFEST = "_manifest.csv"
+TRACKER_LOCKED = "Tracker not updated"  # an Issue kind: the run finishes, but reports a failure
 REJECTED = "_rejected"
 STALE_MONTHS = 3  # an MDD this many months older than the oldest month collected is a stale copy
 

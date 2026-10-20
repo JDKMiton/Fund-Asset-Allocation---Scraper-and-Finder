@@ -352,6 +352,29 @@ class CollectorTest(unittest.TestCase):
             self.assertEqual(len(list((mdds / "2026").glob("2026-07 - Balanced Now (reissued *).pdf"))), 1)
             self.assertEqual((mdds / "2026" / "2026-07 - Balanced Now.pdf").read_bytes(), balanced.read_bytes())
 
+    def test_locked_tracker_does_not_stop_the_run_but_fails_it(self):
+        from unittest import mock
+        import fund_allocator.collector as collector
+        balanced, _ = make_all()
+        with tempfile.TemporaryDirectory() as tmp:
+            sources = Path(tmp) / "sources.yaml"
+            sources.write_text(f"funds:\n- name: Balanced\n  file: {balanced}\n")
+            out = Path(tmp) / "MDDs"
+            real = collector.write_tracker
+
+            def open_in_excel(path, month, *args, **kwargs):
+                if month == "2026 - 08":
+                    raise PermissionError(13, "Permission denied", str(path))
+                return real(path, month, *args, **kwargs)
+
+            with mock.patch.object(collector, "write_tracker", side_effect=open_in_excel):
+                code = main(["collect", "--sources", str(sources), "--out", str(out),
+                             "--download-dir", str(Path(tmp) / "dl"),
+                             "--month", "2026 - 08", "--month", "2026 - 09"])
+            self.assertEqual(code, 2)  # the scheduled task shows the run as failed
+            self.assertTrue((out / "2026 - 09" / "!MDD Tracker 2026 - 09.xlsx").exists())  # the others are written
+            self.assertFalse((out / "2026 - 08" / "!MDD Tracker 2026 - 08.xlsx").exists())
+
     def test_history_learns_when_an_mdd_appears(self):
         from datetime import date, datetime
         from fund_allocator.collector import History, due_date

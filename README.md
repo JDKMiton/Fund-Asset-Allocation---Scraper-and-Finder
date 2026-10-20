@@ -123,6 +123,8 @@ your OneDrive-synced `#Webscraper MDDs` folder, so they appear in OneDrive autom
    Every fund in `config/mdd_sources.yaml` is collected; `-FundsWorkbook` is optional and only
    fills in the AUM column (left blank without it).
 3. Test it straight away: `Start-ScheduledTask -TaskName "Fund MDD weekly download"`.
+   Task Scheduler's "Last Run Result" shows the run's exit code: 0 fine, 2 a tracker was open in Excel
+   (that month's tracker was not updated; the others were), anything else the run failed (see the log).
 
 **What each weekly run does**
 - Looks for the MDDs of the last two completed months (e.g. a run in mid-October collects

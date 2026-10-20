@@ -43,6 +43,7 @@ records what was actually seen for *these* funds and wins.
 | Branch | `claude/fund-location-scraper-kvsmox` on GitHub `JDKMiton/Fund-Asset-Allocation---Scraper-and-Finder` (moved from the personal account JacDK777 on 20 Oct 2026) |
 | Manual run | `Start-ScheduledTask -TaskName "Fund MDD weekly download"`, or `run_weekly.ps1 -OutFolder ... -FundsWorkbook ...` |
 | Logs | `C:\Tools\MDD-Scraper\logs\weekly-YYYY-MM-DD.log` (last 12 kept) |
+| Run result | Task Scheduler's **Last Run Result** is Python's exit code (since 20 Oct 2026): **0** fine; **2** the run finished but a tracker was open in Excel, so that month's tracker still shows the previous run (the others are written; the log names it); anything else (e.g. **1**) the run failed, see the log. |
 
 **What one run does** (`python -m fund_allocator collect`):
 1. Works out the last two completed months (in October: August and September).
@@ -423,6 +424,11 @@ through them one by one:
 
 ## 10. Learning log (newest first; add a line after every scan or change)
 
+- **2026-10-20, failed runs now show as failed** (owner): a tracker open in Excel no longer stops the run;
+  the others are written, the exception "Tracker not updated" is logged and the run exits 2.
+  `run_weekly.ps1` ends with `exit $code`, so Task Scheduler shows 2 or 1 instead of 0 (checked: a normal
+  run exits 0, a run with an unwritable output folder exits 1). Closes the open item from the first PC run.
+
 - **2026-10-20, Fund AUM and Inception Date standardised** (owner): `facts.aum_amount` / `inception_date`
   convert the MDD text when the tracker is written. On the August data: 181 amounts (161 R, 17 $, 3 £), 185
   dates (11 month-only). Left blank, printed text in Notes: Artisan '$7,874' (ambiguous), Janus Henderson
@@ -530,7 +536,7 @@ through them one by one:
   "finished with exit code 1" shows the failure. Rerun with the file closed: exit code 0, all four trackers
   rewritten. New: Fairtree Silver Oak and Momentum Capped SWIX for September. August 181 of 192 collected
   (Baillie Gifford Managed Late; 7 STANLIB/SIM/10X Pending; 3 Marriott Quarterly). September 117 collected,
-  75 Pending (still within the 30-day delay). Open: keep trackers closed at 07:00 on Mondays, or make the
+  75 Pending (still within the 30-day delay). Fixed 20 Oct 2026 (see the newer entry): keep trackers closed at 07:00 on Mondays, or make the
   tracker write survive a locked file and the task report failures (offered to the owner).
 - **2026-10-20, Fund Manager names vs. Linka Henning's "Asset Management (FRA-DD Documents)" folders:**
   the owner wants the tracker's Fund Manager column to match those folder names. 29 folders match a
