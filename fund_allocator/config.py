@@ -66,6 +66,8 @@ class FundSource:
     current_name: str | None = None  # owner-confirmed current name, shown in the tracker
     fund_manager: str | None = None  # who manages the money (a third party for Amplify, Nedgroup, ...)
     fund_folder: str | None = None   # the fund's folder inside its manager's folder in the Asset Management share
+    extra_urls: list[str] | None = None  # a second document kept beside the MDD (e.g. Coronation's comprehensive sheet)
+    extra_label: str = "comprehensive"   # its file name suffix: "<Fund> (comprehensive).pdf"
     fund_path: str | None = None     # the fund's folder relative to the share, when it isn't under fund_manager
 
 

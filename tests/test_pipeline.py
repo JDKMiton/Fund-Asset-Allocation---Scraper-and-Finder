@@ -352,6 +352,27 @@ class CollectorTest(unittest.TestCase):
             self.assertEqual(len(list((mdds / "2026").glob("2026-07 - Balanced Now (reissued *).pdf"))), 1)
             self.assertEqual((mdds / "2026" / "2026-07 - Balanced Now.pdf").read_bytes(), balanced.read_bytes())
 
+    def test_extra_document_follows_the_mdd_to_the_fund_folder(self):
+        from fund_allocator.collector import Fund, collect
+        from fund_allocator.config import FundSource
+        from fund_allocator.scraper import Scraper
+        with tempfile.TemporaryDirectory() as tmp:
+            balanced, feeder = make_all(Path(tmp) / "pdfs")
+            share = Path(tmp) / "share"
+            (share / "Mgr" / "Balanced Folder").mkdir(parents=True)
+            out = Path(tmp) / "MDDs"
+            (out / "2026 - 09").mkdir(parents=True)  # saved by an earlier run beside the MDD
+            (out / "2026 - 09" / "Balanced (comprehensive).pdf").write_bytes(feeder.read_bytes())
+            sources = {"Balanced": FundSource("Balanced", file=str(balanced), fund_manager="Mgr",
+                                              fund_folder="Balanced Folder",
+                                              extra_urls=["http://127.0.0.1:9/comprehensive.pdf"])}
+            issues = []
+            collect([Fund("Balanced")], sources, Scraper(Path(tmp) / "dl"), out, issues=issues, fund_share=share)
+            kept = share / "Mgr" / "Balanced Folder" / "MDDs" / "2026"
+            self.assertTrue((kept / "2026-09 - Balanced.pdf").exists())
+            self.assertEqual((kept / "2026-09 - Balanced (comprehensive).pdf").read_bytes(), feeder.read_bytes())
+            self.assertNotIn("Not found", {i.kind for i in issues})  # an unreachable extra isn't an exception
+
     def test_months_the_run_no_longer_searches_are_not_late(self):
         from fund_allocator.collector import Collected, Fund, Issue, write_tracker
         from fund_allocator.config import FundSource
@@ -584,7 +605,7 @@ class ChecksTest(unittest.TestCase):
         self.assertEqual(outstanding_status("2026 - 08", q, date(2026, 10, 19)), "Quarterly")
         self.assertEqual(outstanding_status("2026 - 09", None), "No source")
 
-    def _file(self, tmp, text, content=b"%PDF-1.4 one", name="Alpha Balanced Fund"):
+    def _file(self, tmp, text, content=b"%PDF-1.4 one", name="Alpha Balanced Fund", label=""):
         """Run _file_mdd on a fake PDF whose text is ``text`` (PDF reading is stubbed)."""
         from unittest import mock
         from fund_allocator import collector as C
@@ -596,7 +617,7 @@ class ChecksTest(unittest.TestCase):
         manifest = C.Manifest(Path(tmp) / "MDDs" / C.MANIFEST)
         with mock.patch.object(C, "_read_pdf", return_value=info):
             filed = C._file_mdd(C.Fund(name), FundSource(name, url="u"), pdf, "https://x/f.pdf",
-                                Path(tmp) / "MDDs", ["2026 - 08", "2026 - 09"], got, issues, manifest)
+                                Path(tmp) / "MDDs", ["2026 - 08", "2026 - 09"], got, issues, manifest, label=label)
         return filed, issues
 
     def test_wrong_document_is_rejected_and_reported(self):
@@ -623,6 +644,46 @@ class ChecksTest(unittest.TestCase):
             with open(Path(tmp) / "MDDs" / "_manifest.csv", newline="") as f:
                 results = [r["result"] for r in _csv.DictReader(f)]
             self.assertEqual(results, ["filed", "unchanged", "reissued"])
+
+    def test_reissue_is_not_saved_again_every_week(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            text = "Alpha Balanced Fund 31 August 2026 " + "words " * 60
+            self._file(tmp, text, b"%PDF-1.4 first")
+            _, issues = self._file(tmp, text.replace("words", "revised"), b"%PDF-1.4 corrected")
+            self.assertEqual([i.kind for i in issues], ["Reissued"])
+            month = Path(tmp) / "MDDs" / "2026 - 08"
+            next(month.glob("* (reissued *).pdf")).rename(month / "Alpha Balanced Fund (reissued 2026-10-01).pdf")
+            _, issues = self._file(tmp, text.replace("words", "revised"), b"%PDF-1.4 corrected")
+            self.assertEqual(issues, [])  # the same reissue downloaded again a week later
+            self.assertEqual(len(list(month.glob("Alpha Balanced Fund (reissued *).pdf"))), 1)
+
+    def test_extra_document_is_kept_beside_the_mdd(self):
+        import csv as _csv
+        with tempfile.TemporaryDirectory() as tmp:
+            short = "Alpha Balanced Fund Minimum disclosure document as at 30 September 2026 " + "words " * 60
+            full = "Alpha Balanced Fund Fund Information as at 30 September 2026 " + "detail " * 90
+            self._file(tmp, short, b"%PDF-1.4 short")
+            filed, issues = self._file(tmp, full, b"%PDF-1.4 comprehensive", label="comprehensive")
+            self.assertEqual(issues, [])  # not a reissue: it has its own name
+            month = Path(tmp) / "MDDs" / "2026 - 09"
+            self.assertEqual((month / "Alpha Balanced Fund.pdf").read_bytes(), b"%PDF-1.4 short")
+            self.assertEqual((month / "Alpha Balanced Fund (comprehensive).pdf").read_bytes(),
+                             b"%PDF-1.4 comprehensive")
+            again, issues = self._file(tmp, full, b"%PDF-1.4 comprehensive", label="comprehensive")
+            self.assertEqual(issues, [])
+            with open(Path(tmp) / "MDDs" / "_manifest.csv", newline="") as f:
+                results = [r["result"] for r in _csv.DictReader(f)]
+            self.assertEqual(results, ["filed", "filed extra", "unchanged"])
+
+    def test_extra_document_that_is_the_mdd_is_not_copied(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            text = "Alpha Balanced Fund Fund Information as at 31 August 2026 " + "detail " * 90
+            self._file(tmp, text, b"%PDF-1.4 august comprehensive")  # filed as the MDD before extra_urls
+            filed, issues = self._file(tmp, text, b"%PDF-1.4 august comprehensive", label="comprehensive")
+            self.assertIsNone(filed)
+            self.assertEqual(issues, [])
+            self.assertEqual([p.name for p in (Path(tmp) / "MDDs" / "2026 - 08").glob("*.pdf")],
+                             ["Alpha Balanced Fund.pdf"])
 
     def test_stale_copy_is_rejected(self):
         with tempfile.TemporaryDirectory() as tmp:

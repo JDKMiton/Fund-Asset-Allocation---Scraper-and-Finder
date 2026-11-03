@@ -128,6 +128,7 @@ Name not checked (the PDF has no text layer), No source.
 | 20 Oct 2026 | Share classes for the funds added from Linka's folders: keep the A class for Fairtree FR Income Plus, Curate Global Quality and Global Value, Old Mutual Global Managed Alpha and RAFI (the rand feeders), and Nedgroup Rainmaker; Omba A USD Acc; Laurium Enhanced Growth the ZAR feeder; Peregrine Retail class A (buy list); Flagship FR Worldwide Flexible Feeder accepted as the IP Worldwide Flexible fund. From Linka's packs: Camissa SA Equity C class, Curate Global EM R Class USD (only the A sheets are published; same portfolio). |
 | 20 Oct 2026 | Removed Riscura BCI China Equity Feeder (wound up 4 Sep 2026) from the tracker and weekly grab. Don't add it back unless asked. |
 | 20 Oct 2026 | Removed SIM Inflation Plus (SCI Ninety One Cautious Managed) from the tracker and weekly grab; use Ninety One Cautious Managed instead. Don't add it back unless asked. |
+| 3 Nov 2026 | Coronation: collect both the short fact sheet (the MDD, posted first) and the comprehensive sheet (kept beside it as `(comprehensive)`, fetched every week). The owner approved choosing South Africa, Personal Investor on Coronation's site. |
 | 19 Oct 2026 | Use Allan Gray's platform copies as a backup for M&G Balanced, Inflation Plus and Global Balanced, despite Allan Gray's robots.txt (`ignore_robots: true` on those three). |
 
 ## 4. Where things are
@@ -136,6 +137,9 @@ Name not checked (the PDF has no text layer), No source.
   - `url` / `urls` (with templates `{yyyy} {mm} {yyyymm} {month} {Month} {mon} {Mon} {MON} {dd} {bdd} {next_yyyy} {next_mm}`);
   - `page` + `link_match` (the regex may contain the same templates) + `render`;
   - `sanlam_fund`, `mandg_fund`, `browser`, `referer`, `ignore_robots`;
+  - `extra_urls` + `extra_label` (default "comprehensive"): a second document fetched **every run** (the
+    skip rule doesn't apply), checked like an MDD and saved as `<Fund> (<label>).pdf` beside the MDD and in
+    the fund folder; it never counts as the MDD, and isn't saved when it is the month's MDD itself;
   - `isin`, `note`, `doc_names`, `current_name`, `lag_days`, `frequency`, `keep_name`, `fund_manager`, `fund_folder`,
     `fund_path` (the fund folder relative to the share, only where it isn't under `fund_manager`: Curate
     Global Quality, under Lyrical).
@@ -166,8 +170,16 @@ Name not checked (the PDF has no text layer), No source.
 - **M&G:** the all-funds page embeds JSON (`"files":[{"fileType":"FactSheet","path":…}]`); `mandg_fund`
   reads it. PDFs are served from **mandg.co.za:8082**, which is blocked in the cloud environment but works on
   the owner's PC. The media key changes on every upload, and old keys keep serving old files.
-- **Coronation:** `…/comprehensive-fact-sheets/latest/<CODE>` always serves the current sheet (e.g. CNSB
-  Bond, CNTF Top 20).
+- **Coronation:** two documents per fund, both kept (owner, 3 Nov 2026):
+  - **MDD:** `coronation.com/FundFactSheet/DownloadFundFactSheet?fundCode=<CODE>`, the 2-page fact sheet
+    ("Minimum disclosure document as at …", fund size, SA/offshore asset split, ISIN, TER). It is what the
+    fund range page `/en-za/personal/fund-range/complete-fund-range/` links, and it is posted first: on
+    3 Nov 2026 it served **September** while the comprehensive link still served **August**.
+  - **Comprehensive:** `…/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/<CODE>` (4 pages,
+    adds the effective exposure table), weeks later. In `extra_urls`, saved as `<Fund> (comprehensive).pdf`.
+  - The site's region/investor gate (South Africa, Personal Investor; cookies `CoroDefaultLanding=206`,
+    `CoroTermsAccepted`, `CoroCookieConsentGiven`) only guards the web pages; both PDF links answer
+    without it. **robots.txt disallows `/globalassets/`**, so the dated archive in the guide is not used.
 - **Nedgroup:** dated folder `…/factsheets/{yyyymm}/Nedgroup%20Investments%20<Fund>%20Fund%20<Class>.pdf`.
   A folder for a month never published can serve a later month's sheet, so date by content.
 - **Ninety One:** bot-protected; needs the browser (`browser: true`). The main source is the H-class
@@ -424,6 +436,15 @@ through them one by one:
 - Read `docs/sa-factsheet-scraping-guide.md` §6–7, on reading tables by word position and the checks.
 
 ## 10. Learning log (newest first; add a line after every scan or change)
+
+- **2026-11-03, Coronation September** (owner): the 26 Oct and 2 Nov runs still got **August** from
+  `…/latest/<CODE>` for all 19 Coronation funds, while the owner could see September on the fund range page.
+  That page links `DownloadFundFactSheet?fundCode=<CODE>`, which served the September 2-page MDD. Owner's
+  choice: keep both. New `extra_urls` (§4): the comprehensive link moved there. Also fixed: a reissued copy
+  is now compared with earlier reissues too, so the same reissue isn't saved and flagged again each week.
+  Tested into a scratch folder with the real August files: 19 September MDDs filed, 0 issues, August not
+  duplicated; a second run changed nothing. Tests 49. (Mistake noted: dated `/globalassets/` URLs were
+  tried once before checking robots.txt, which disallows them; they only returned error pages.)
 
 - **2026-10-20, "Not collected" for months outside the window** (owner): a fund missing an MDD for a month the
   run no longer searches shows Not collected (grey, with a note), not Late, and is left off Exceptions. On

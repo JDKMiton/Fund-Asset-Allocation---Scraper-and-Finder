@@ -13,76 +13,110 @@ funds:
   fund_manager: "Coronation"
   fund_folder: "Coronation Balanced Defensive"
   isin: ZAE000170445
-  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/COBA
+  url: https://www.coronation.com/FundFactSheet/DownloadFundFactSheet?fundCode=COBA
+  extra_urls:
+  - https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/COBA
 - name: Coronation Balanced Plus Fund
   fund_manager: "Coronation"
   fund_folder: "Coronation Balanced Plus"
   isin: ZAE000165205
-  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CORB
+  url: https://www.coronation.com/FundFactSheet/DownloadFundFactSheet?fundCode=CORB
+  extra_urls:
+  - https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CORB
 - name: Coronation Strategic Income
   fund_manager: "Coronation"
   fund_folder: "Coronation Strategic Income"
   isin: ZAE000170403
-  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CSIF
+  url: https://www.coronation.com/FundFactSheet/DownloadFundFactSheet?fundCode=CSIF
+  extra_urls:
+  - https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CSIF
 - name: Coronation Global Optimum Growth Feeder Fund
   fund_manager: "Coronation"
   fund_folder: "Coronation Global Optimum Growth Feeder Fund"
-  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CNOG
+  url: https://www.coronation.com/FundFactSheet/DownloadFundFactSheet?fundCode=CNOG
+  extra_urls:
+  - https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CNOG
 - name: Coronation Capital Plus
   fund_manager: "Coronation"
   fund_folder: "Coronation Capital Plus"
-  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CCPF
+  url: https://www.coronation.com/FundFactSheet/DownloadFundFactSheet?fundCode=CCPF
+  extra_urls:
+  - https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CCPF
 - name: Coronation Property Equity Fund
   fund_manager: "Coronation"
   fund_folder: "Coronation Property Equity Fund"
-  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CPEF
+  url: https://www.coronation.com/FundFactSheet/DownloadFundFactSheet?fundCode=CPEF
+  extra_urls:
+  - https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CPEF
 - name: Coronation Top 20 Fund
   fund_manager: "Coronation"
   fund_folder: "Coronation Top 20"
   isin: ZAE000165213
-  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CNTF
+  url: https://www.coronation.com/FundFactSheet/DownloadFundFactSheet?fundCode=CNTF
+  extra_urls:
+  - https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CNTF
 - name: Coronation Global Managed Feeder Fund
   fund_manager: "Coronation"
   fund_folder: "Coronation Global Managed Feeder Fund"
   isin: ZAE000170411
-  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/COGM
+  url: https://www.coronation.com/FundFactSheet/DownloadFundFactSheet?fundCode=COGM
+  extra_urls:
+  - https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/COGM
 - name: Coronation Global Emerging Markets Flexible Feeder Fund
   fund_manager: "Coronation"
   fund_folder: "Coronation Global Emerging Markets Flexible Feeder Fund"
-  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CGEM
+  url: https://www.coronation.com/FundFactSheet/DownloadFundFactSheet?fundCode=CGEM
+  extra_urls:
+  - https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CGEM
 - name: Coronation Global Capital Plus Feeder Fund
   fund_manager: "Coronation"
   fund_folder: "Coronation Global Capital Plus Feeder Fund"
-  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/COLA
+  url: https://www.coronation.com/FundFactSheet/DownloadFundFactSheet?fundCode=COLA
+  extra_urls:
+  - https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/COLA
 - name: Coronation Global Opportunities Equity Fund
   fund_manager: "Coronation"
   fund_folder: "Coronation Global Opportunities Equity Fund"
-  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CUWEA
+  url: https://www.coronation.com/FundFactSheet/DownloadFundFactSheet?fundCode=CUWEA
+  extra_urls:
+  - https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CUWEA
 - name: Coronation Global Emerging Markets Fund
   fund_manager: "Coronation"
   fund_folder: "Coronation Global Emerging Markets Fund"
-  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CUGEB
+  url: https://www.coronation.com/FundFactSheet/DownloadFundFactSheet?fundCode=CUGEB
+  extra_urls:
+  - https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CUGEB
 - name: Coronation Global Strategic Income Fund
   fund_manager: "Coronation"
   fund_folder: "Coronation Global Strategic Income Fund"
-  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CUGSI
+  url: https://www.coronation.com/FundFactSheet/DownloadFundFactSheet?fundCode=CUGSI
+  extra_urls:
+  - https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CUGSI
 - name: Coronation Equity Fund
   fund_manager: "Coronation"
   fund_folder: "Coronation Equity Fund"
-  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CORA
+  url: https://www.coronation.com/FundFactSheet/DownloadFundFactSheet?fundCode=CORA
+  extra_urls:
+  - https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CORA
 - name: Coronation Market Plus
   fund_manager: "Coronation"
   fund_folder: "Coronation Market Plus"
-  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CMPF
+  url: https://www.coronation.com/FundFactSheet/DownloadFundFactSheet?fundCode=CMPF
+  extra_urls:
+  - https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CMPF
 - name: Coronation Global Strategic USD Income ZAR Feeder Fund
   fund_manager: "Coronation"
   fund_folder: "Coronation Global Strategic USD Income ZAR Feeder Fund"
   isin: ZAE000181038
-  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CGSUI
+  url: https://www.coronation.com/FundFactSheet/DownloadFundFactSheet?fundCode=CGSUI
+  extra_urls:
+  - https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CGSUI
 - name: Coronation Resources Fund
   fund_manager: "Coronation"
   fund_folder: "Coronation Resources Fund"
-  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CCGF
+  url: https://www.coronation.com/FundFactSheet/DownloadFundFactSheet?fundCode=CCGF
+  extra_urls:
+  - https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CCGF
 - name: Allan Gray Balanced
   fund_manager: "Allan Gray"
   fund_folder: "Allan Gray Balanced"
@@ -1031,7 +1065,9 @@ funds:
   fund_manager: "Coronation"
   fund_folder: "Coronation Bond Fund"
   isin: ZAE000202453
-  url: https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CNSB
+  url: https://www.coronation.com/FundFactSheet/DownloadFundFactSheet?fundCode=CNSB
+  extra_urls:
+  - https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CNSB
 - name: Curate Momentum Flexible Property Fund
   fund_manager: "Sesfikile"
   fund_folder: "Curate Momentum Flexible Property Fund"
@@ -1363,7 +1399,9 @@ funds:
   fund_manager: "Coronation"
   fund_folder: "Coronation Active Income Plus"
   isin: ZAE000327516
-  url: 'https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CAIPA'
+  url: https://www.coronation.com/FundFactSheet/DownloadFundFactSheet?fundCode=CAIPA
+  extra_urls:
+  - https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CAIPA
 - name: "Fairtree Flexible Income Fund"
   fund_manager: "Fairtree"
   fund_folder: "Fairtree Flexible Income"

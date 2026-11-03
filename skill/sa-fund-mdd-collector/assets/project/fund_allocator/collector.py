@@ -320,6 +320,8 @@ def collect(funds: list[Fund], sources: dict[str, FundSource], scraper: Scraper,
             continue
         if fund_share:  # an MDD already in the fund folder counts as downloaded
             _restore_from_fund_folder(fund, src, out_dir, Path(fund_share), months, manifest)
+        if src.extra_urls:
+            _collect_extra(fund, src, scraper, out_dir, months, issues, manifest)
         saved = {m: out_dir / m / f"{_safe_name(fund.name)}.pdf" for m in months}
         due = [m for m in months if src.frequency != "quarterly" or int(m[-2:]) % 3 == 0]  # quarterly: Mar/Jun/...
         if skip_saved and months and all(saved[m].exists() for m in due):
@@ -398,6 +400,7 @@ MANIFEST = "_manifest.csv"
 TRACKER_LOCKED = "Tracker not updated"  # an Issue kind: the run finishes, but reports a failure
 REJECTED = "_rejected"
 STALE_MONTHS = 3  # an MDD this many months older than the oldest month collected is a stale copy
+EXTRA_FILED = "filed extra"  # manifest result for a second document (extra_urls), kept beside the MDD
 
 
 def _read_pdf(path: Path) -> dict:
@@ -413,6 +416,9 @@ def _text_digest(text: str) -> str:
     return hashlib.sha256(re.sub(r"\s+", " ", text or "").strip().encode()).hexdigest()
 
 
+FINGERPRINTED = ("filed", "reissued", EXTRA_FILED)  # manifest results whose text fingerprint is kept
+
+
 class Manifest:
     """One row per MDD downloaded: when, from where, its fingerprint and what was done with it."""
     FIELDS = ["fetched_at", "fund", "month", "result", "file", "source", "sha256", "text_sha256",
@@ -424,7 +430,7 @@ class Manifest:
         if path.exists():
             with path.open(newline="", encoding="utf-8") as f:
                 for row in csv.DictReader(f):
-                    if row.get("result") in ("filed", "reissued") and row.get("file"):
+                    if row.get("result") in FINGERPRINTED and row.get("file"):
                         self._text_sha[row["file"]] = row.get("text_sha256", "")
 
     def text_sha(self, file: Path) -> str | None:
@@ -439,7 +445,7 @@ class Manifest:
     def add(self, **row) -> None:
         if row.get("file"):
             row["file"] = self._rel(row["file"])
-            if row.get("result") in ("filed", "reissued"):
+            if row.get("result") in FINGERPRINTED:
                 self._text_sha[row["file"]] = row.get("text_sha256", "")
         new = not self.path.exists()
         self.path.parent.mkdir(parents=True, exist_ok=True)
@@ -479,8 +485,9 @@ def _month_index(month: str) -> int:
 
 
 def _file_mdd(fund: Fund, src: FundSource, pdf: Path, where: str, out_dir: Path, months: list[str],
-              got: list[Collected], issues: list[Issue], manifest: Manifest) -> Collected | None:
-    """Check a downloaded MDD and file it under the month it reports on. Returns None if refused."""
+              got: list[Collected], issues: list[Issue], manifest: Manifest, label: str = "") -> Collected | None:
+    """Check a downloaded MDD and file it under the month it reports on. Returns None if refused.
+    With ``label``, the document is an extra one (``extra_urls``), filed as "<Fund> (<label>).pdf"."""
     info = _read_pdf(pdf)
     text = info.get("text", "")
     sha = sha256(pdf)
@@ -512,22 +519,23 @@ def _file_mdd(fund: Fund, src: FundSource, pdf: Path, where: str, out_dir: Path,
         return None  # another source already gave this month in this run
     if named is None:
         issues.append(Issue(fund.name, "Name not checked", "the PDF has no readable text", month))
-    dest = out_dir / month / f"{_safe_name(fund.name)}.pdf"
+    main = out_dir / month / f"{_safe_name(fund.name)}.pdf"
+    if label and main.exists() and _same_document(main, sha, base["text_sha256"], manifest):
+        return None  # the extra document is the month's MDD itself (e.g. an MDD filed before extra_urls)
+    dest = out_dir / month / f"{_safe_name(fund.name)}{f' ({label})' if label else ''}.pdf"
     dest.parent.mkdir(parents=True, exist_ok=True)
-    result, detail = "filed", ""
+    result, detail = (EXTRA_FILED, label) if label else ("filed", "")
     if dest.exists():
-        old_text_sha = manifest.text_sha(dest)
-        if old_text_sha is None:
-            old_text_sha = _text_digest(_read_pdf(dest).get("text", ""))
-        if sha == sha256(dest) or old_text_sha == base["text_sha256"]:
+        kept = [dest, *sorted(dest.parent.glob(f"{glob.escape(dest.stem)} (reissued *).pdf"))]
+        if any(_same_document(k, sha, base["text_sha256"], manifest) for k in kept):
             result = "unchanged"
         else:  # never overwrite a filed month: keep both and flag it
             copy = dest.with_name(f"{dest.stem} (reissued {date.today():%Y-%m-%d}).pdf")
             if not copy.exists():
                 shutil.copyfile(pdf, copy)
                 issues.append(Issue(fund.name, "Reissued",
-                                    f"a different {month} MDD was downloaded and saved as '{copy.name}'; "
-                                    f"the tracker still uses the first one", month))
+                                    f"a different {month} {label or 'MDD'} was downloaded and saved as "
+                                    f"'{copy.name}'; the tracker still uses the first one", month))
             result, detail = "reissued", copy.name
             manifest.add(**base, month=month, result=result, file=copy, detail="kept beside the filed MDD")
     else:
@@ -538,6 +546,32 @@ def _file_mdd(fund: Fund, src: FundSource, pdf: Path, where: str, out_dir: Path,
     isins = find_isins(text)
     return Collected(fund.name, month, dest, where, src.note or "", src.isin or (isins[0] if isins else None),
                      info.get("facts"), confirmed_name(src, text))
+
+
+def _same_document(path: Path, sha: str, text_sha: str, manifest: Manifest) -> bool:
+    """The file already saved at ``path`` is this download: the same bytes, or the same text regenerated."""
+    if sha == sha256(path):
+        return True
+    old = manifest.text_sha(path)
+    if old is None:
+        old = _text_digest(_read_pdf(path).get("text", ""))
+    return old == text_sha
+
+
+def _collect_extra(fund: Fund, src: FundSource, scraper: Scraper, out_dir: Path, months: list[str],
+                   issues: list[Issue], manifest: Manifest) -> None:
+    """Fetch the fund's extra document (``extra_urls``) every run, whatever the skip rule says (it often
+    appears after the MDD), and keep it beside the MDD. It never stands in for the MDD."""
+    got: list[Collected] = []
+    for url in candidate_urls(replace(src, url=None, urls=src.extra_urls), months):
+        try:
+            pdf = scraper.fetch(replace(src, url=url, urls=None, page=None, sanlam_fund=None, mandg_fund=None))
+            filed = _file_mdd(fund, src, Path(pdf), url, out_dir, months, got, issues, manifest,
+                              label=src.extra_label)
+            if filed:
+                got.append(filed)
+        except Exception as exc:  # the extra document is a bonus: report it, don't stop the run
+            log.warning("%s: %s not fetched: %s", fund.name, src.extra_label, exc)
 
 
 def _with_earlier_runs(funds: list[Fund], results: list[Collected], out_dir: Path,
@@ -628,9 +662,13 @@ def file_in_fund_folders(funds: list[Fund], sources: dict[str, FundSource], out_
                 continue
             year = month[:4]
             dest = home / FUND_MDDS / year / fund_mdd_name(shown, month)
-            copies = [(filed, dest)] + [  # reissued copies follow their original
+            extra = f"{filed.stem} ({src.extra_label})" if src and src.extra_urls else None
+            copies = [(filed, dest)] + [  # reissued copies and the extra document follow the MDD
                 (r, dest.with_name(f"{dest.stem}{r.stem[len(filed.stem):]}.pdf"))
-                for r in sorted(filed.parent.glob(f"{glob.escape(filed.stem)} (reissued *).pdf"))]
+                for pattern in [f"{glob.escape(filed.stem)} (reissued *).pdf",
+                                *([f"{glob.escape(extra)}.pdf", f"{glob.escape(extra)} (reissued *).pdf"]
+                                  if extra else [])]
+                for r in sorted(filed.parent.glob(pattern))]
             try:
                 for one, to in copies:
                     if to.exists() and sha256(to) == sha256(one):
