@@ -437,6 +437,11 @@ through them one by one:
 
 ## 10. Learning log (newest first; add a line after every scan or change)
 
+- **2026-11-03, tracker rerun** (11:48, exit 0): all five trackers rewritten. September: 220 of 233
+  Collected (all 19 Coronation), 9 Pending (7 STANLIB platform copies, 2 Omba quarterly), 4 Late (Baillie
+  Gifford LTGG, Old Mutual Global Equity, PPS Global Equity, Steyn Equity Prescient). Steyn Daily Liquidity
+  now copies to its renamed fund folder. Nothing else new.
+
 - **2026-11-03, run after the Coronation change** (started 11:15, exit 2): all 19 Coronation September MDDs
   filed and copied to their fund folders; Orbis (3) October and Old Mutual RAFI All World September also
   filed. `!MDD Tracker 2026 - 09.xlsx` was locked by another process (not the owner's open Excel window),
