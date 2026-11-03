@@ -778,7 +778,7 @@ funds:
   - Vunani FR Enhanced Income Fund
 - name: Steyn Capital SNN Daily Liquidity RIHF
   fund_manager: "Steyn Capital Management"
-  fund_folder: "Steyn Capital Daily Liquidity RIHF"
+  fund_folder: "Steyn Capital SNN Daily Liquidity RIHF"
   urls:
   - https://steyncapitalmanagement.com/wp-content/uploads/Steyn-Capital-Daily-Liquidity-FR-Retail-Hedge-Fund-{Mon}-{yyyy}-MDD.pdf
   ignore_robots: true

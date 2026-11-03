@@ -437,6 +437,13 @@ through them one by one:
 
 ## 10. Learning log (newest first; add a line after every scan or change)
 
+- **2026-11-03, run after the Coronation change** (started 11:15, exit 2): all 19 Coronation September MDDs
+  filed and copied to their fund folders; Orbis (3) October and Old Mutual RAFI All World September also
+  filed. `!MDD Tracker 2026 - 09.xlsx` was locked by another process (not the owner's open Excel window),
+  so it wasn't rewritten; the other trackers were. Linka's Steyn folder is now "Steyn Capital SNN Daily
+  Liquidity RIHF": `fund_folder` updated. Momentum served the wrong document for Curate Enhanced Yield
+  (rejected by the name check). 26 Not found are mostly October sheets not posted yet.
+
 - **2026-11-03, Coronation September** (owner): the 26 Oct and 2 Nov runs still got **August** from
   `…/latest/<CODE>` for all 19 Coronation funds, while the owner could see September on the fund range page.
   That page links `DownloadFundFactSheet?fundCode=<CODE>`, which served the September 2-page MDD. Owner's
