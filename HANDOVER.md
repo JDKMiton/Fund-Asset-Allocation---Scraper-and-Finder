@@ -465,6 +465,14 @@ through them one by one:
 
 ## 10. Learning log (newest first; add a line after every scan or change)
 
+- **2026-11-10, follow-up runs** (08:59 and 09:23, both exit 0): PMX Active Income filed September (browser
+  retry); STANLIB Global Balanced Cautious and the seven SA STANLIB funds filed September from the literature
+  hub. September tracker 260 of 273 Collected, 5 Pending, 8 Late. Late: 1NVEST (hub still serves April,
+  rejected as stale), Baillie Gifford WW EM Leading Companies, iShares Physical Gold, iShares Global Govt
+  Bond (sources already on October), and four still on August since 3 Nov: Baillie Gifford LTGG, Old Mutual
+  Global Equity, PPS Global Equity, Steyn Equity Prescient. Curate Enhanced Yield's Momentum link keeps
+  serving another fund (rejected each run). Tracker shows M&G Equity F and Curate Sustainable R USD ISINs.
+
 - **2026-11-10, first run with the 40 new funds** (08:31, exit 0): 39 filed, 187 unchanged. September
   tracker 251 of 273 Collected. New funds: 28 of 35 rows Collected in September. Late in September but fine
   for October: Baillie Gifford WW EM Leading Companies, iShares Physical Gold and iShares Global Govt Bond
