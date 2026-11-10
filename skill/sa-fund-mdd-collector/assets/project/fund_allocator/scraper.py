@@ -180,7 +180,7 @@ class Scraper:
         return url
 
 
-MANDG_FUNDS_PAGE = "https://www.mandg.co.za/all-funds?type=funds"
+MANDG_FUNDS_PAGE = "https://www.mandg.co.za/all-funds"  # robots.txt disallows "/*?", so no ?type=funds
 
 
 def mandg_fact_sheets(html: str) -> dict[str, str]:

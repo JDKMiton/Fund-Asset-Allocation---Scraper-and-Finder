@@ -128,6 +128,7 @@ Name not checked (the PDF has no text layer), No source.
 | 20 Oct 2026 | Share classes for the funds added from Linka's folders: keep the A class for Fairtree FR Income Plus, Curate Global Quality and Global Value, Old Mutual Global Managed Alpha and RAFI (the rand feeders), and Nedgroup Rainmaker; Omba A USD Acc; Laurium Enhanced Growth the ZAR feeder; Peregrine Retail class A (buy list); Flagship FR Worldwide Flexible Feeder accepted as the IP Worldwide Flexible fund. From Linka's packs: Camissa SA Equity C class, Curate Global EM R Class USD (only the A sheets are published; same portfolio). |
 | 20 Oct 2026 | Removed Riscura BCI China Equity Feeder (wound up 4 Sep 2026) from the tracker and weekly grab. Don't add it back unless asked. |
 | 20 Oct 2026 | Removed SIM Inflation Plus (SCI Ninety One Cautious Managed) from the tracker and weekly grab; use Ninety One Cautious Managed instead. Don't add it back unless asked. |
+| 9 Nov 2026 | Added 40 funds (SA unit trusts, ETFs, offshore funds; list in the §10 entry of 9 Nov). Re-added at the owner's request: Foord Flexible FoF, Baillie Gifford Worldwide EM Leading Companies, SCI Ninety One Cautious Managed (ex SIM Inflation Plus, now its own row beside Ninety One Cautious Managed). For ETFs and offshore funds without an SA MDD, the issuer's fact sheet is filed as the MDD. M&G Equity is one row (one sheet covers A, I, B, F); the B class ISIN is shown until the owner says F. Claude may create the missing manager and fund folders, empty. |
 | 3 Nov 2026 | Coronation: collect both the short fact sheet (the MDD, posted first) and the comprehensive sheet (kept beside it as `(comprehensive)`, fetched every week). The owner approved choosing South Africa, Personal Investor on Coronation's site. |
 | 19 Oct 2026 | Use Allan Gray's platform copies as a backup for M&G Balanced, Inflation Plus and Global Balanced, despite Allan Gray's robots.txt (`ignore_robots: true` on those three). |
 
@@ -167,7 +168,11 @@ Name not checked (the PDF has no text layer), No source.
   `STANLIB*`, `Prescient*`, `PSG*` and others). The owner approved them **only as the M&G backup** (19 Oct
   2026): M&G Balanced PRAB, Inflation Plus PRCB, Global Balanced USD PRGBFB (B class, dated). Folder names
   for any others are on allangray.co.za/what-we-offer/unit-trusts/; ask before using them.
-- **M&G:** the all-funds page embeds JSON (`"files":[{"fileType":"FactSheet","path":…}]`); `mandg_fund`
+- **M&G:** robots.txt has `Disallow: /*?` (seen 9 Nov 2026), so the old list `…/all-funds?type=funds`
+  was refused; since then only the Allan Gray backup worked. The list is now `…/all-funds` (no query),
+  which carries the same JSON. M&G Equity (one sheet for all classes) and M&G (Lux) Optimal Income (USD C-H
+  Acc sheet, about 2 months behind) come from it too.
+  The all-funds page embeds JSON (`"files":[{"fileType":"FactSheet","path":…}]`); `mandg_fund`
   reads it. PDFs are served from **mandg.co.za:8082**, which is blocked in the cloud environment but works on
   the owner's PC. The media key changes on every upload, and old keys keep serving old files.
 - **Coronation:** two documents per fund, both kept (owner, 3 Nov 2026):
@@ -228,6 +233,18 @@ Name not checked (the PDF has no text layer), No source.
 - **Vulcan Value Equity:** an Irish UCITS fund, fact sheet on Prescient's other-funds page.
 - **Foord:** `foord.co.za/sites/default/files/{next_yyyy}-{next_mm}/<Fund>%20Class%20A%20at%20{yyyy}-{mm}-{dd}.pdf`.
 - **Gryphon:** stable `gryphon.com/documents/<fund-slug>.pdf`.
+- **Sygnia:** fact sheets in fixed upload folders (`wp-content/uploads/2025/03/`) with the month in the name:
+  three letters (`{MON}`) except September, `SEPT` (`{MON}T`). Only the current month stays online. Fund
+  pages `/fund/<slug>/` (rendered; Incapsula sometimes walls them for a while). robots.txt: Crawl-delay 10.
+- **STANLIB / 1nvest literature hubs** (`stanlib.literaturehub.co.za`, `1nvest.literaturehub.co.za`):
+  robots.txt `Disallow: /`. They hold the only current sheets of STANLIB Global Balanced Cautious (STOUT,
+  Jersey) and 1NVEST Global Government Bond Index Feeder ETF, so both are No source until the owner decides.
+- **Schroders:** the LUEN edition of Global Energy has no text date (misdates as 2025-04); use HKEN.
+- **Ninety One offshore:** GSF sheets `91-gsf-<fund>-fund-a-usd-factsheet-en.pdf`; SA editions `91-sa-…`.
+  "Global Focused" is Ninety One Premier Funds PCC (Guernsey), not GSF.
+- **Fidelity ILF:** `fidelityinternational.com/FILPS/…` on the bare host (www.'s robots.txt answers 403).
+- **Baillie Gifford SA:** the quarterly SA MDD prints "Third Quarter 2026" and misdates; use the monthly
+  B class fact sheet.
 
 Sources found on 20 Oct 2026 for the 45 funds added from Linka's folders:
 
@@ -436,6 +453,23 @@ through them one by one:
 - Read `docs/sa-factsheet-scraping-guide.md` §6–7, on reading tables by word position and the checks.
 
 ## 10. Learning log (newest first; add a line after every scan or change)
+
+- **2026-11-09, 40 funds added** (owner's list; sources found by four research agents, each downloaded and
+  checked for PDF, name and month): Cartesian FR Money Market, Aluwani FR Money Market, BlueAlpha FR Global
+  Equity, FR Guinness Global Equity Income FF, RisCura FR EM Equity FF (B), Investec FR Dynamic Equity,
+  PortfolioMetrix FR Dynamic Income (a different fund from Portfoliometrix FR Income), Foord Flexible Income
+  (prints "Foord Flex Income"), Foord Flexible FoF, Nedgroup Money Market (R), Nedgroup Global Property FF
+  (B; Resolution Capital), Coronation Global Equity Select FF (CGEFA), M&G Equity, Sygnia Top 40 / All Bond
+  / Money Market / Listed Property, Satrix Top 40, STANLIB USD Currency FoF (Momentum copy), SCI Ninety One
+  Wealth Builder (ex SIM SCI Balanced), SCI Ninety One Cautious Managed, Satrix Divi Plus and Resi ETFs,
+  Sygnia Itrix MSCI EM 50 and Global Property ETFs, 1NVEST Global Govt Bond ETF (No source), PMX Active
+  Income Prescient AMETF, iShares Physical Gold, iShares Global Govt Bond (IGLO), Fidelity ILF USD, Orbis
+  SICAV Global Cautious, Dodge & Cox Global Stock and Global Bond, Baillie Gifford WW EM Leading Companies,
+  Curate Global Sustainable Equity (only the A AUD sheet), M&G (Lux) Optimal Income, Schroder ISF Global
+  Energy, Ninety One Global Focused, Ninety One GSF Asia Pacific Franchise, STANLIB Global Balanced Cautious
+  (No source). New manager folders: 1nvest, Aluwani Capital Partners, BlueAlpha Investment Management, Dodge
+  & Cox, Guinness Global Investors, Investec Investment Management, Resolution Capital; 40 fund folders with
+  `MDDs`. Fixed the M&G list URL (robots, §5). 273 funds in the config. Tests 49.
 
 - **2026-11-03, tracker rerun** (11:48, exit 0): all five trackers rewritten. September: 220 of 233
   Collected (all 19 Coronation), 9 Pending (7 STANLIB platform copies, 2 Omba quarterly), 4 Late (Baillie

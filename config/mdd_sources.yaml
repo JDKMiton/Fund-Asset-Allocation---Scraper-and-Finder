@@ -1462,3 +1462,296 @@ funds:
   note: 'Momentum platform copy of the rand feeder (B2), 2 to 3 months behind; STANLIB''s literature hub disallows bots.'
   doc_names:
   - STANLIB Global Select Feeder Fund
+- name: Cartesian FR Money Market
+  fund_manager: Cartesian
+  fund_folder: Cartesian FR Money Market
+  isin: ZAE000199840
+  url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Cartesian%20Capital/Cartesian%20FR%20Money%20Market%20Fund%20(A)%20CABFA.pdf
+  note: Added 9 Nov 2026 at the owner's request. A class.
+- name: Aluwani FR Money Market
+  fund_manager: Aluwani Capital Partners
+  fund_folder: Aluwani FR Money Market
+  isin: ZAE000126587
+  url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Aluwani%20Capital%20Partners/Aluwani%20FR%20Money%20Market%20Fund%20(A)%20MVMM.pdf
+  note: Added 9 Nov 2026 at the owner's request. A class.
+- name: BlueAlpha FR Global Equity
+  fund_manager: BlueAlpha Investment Management
+  fund_folder: BlueAlpha FR Global Equity
+  isin: ZAE000193272
+  url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Blue%20Alpha%20Investment%20Management/BlueAlpha%20FR%20Global%20Equity%20Fund%20(A)%20BGFFA.pdf
+  note: Added 9 Nov 2026 at the owner's request. A class.
+- name: FR Guinness Global Equity Income Feeder Fund
+  fund_manager: Guinness Global Investors
+  fund_folder: FR Guinness Global Equity Income Feeder Fund
+  isin: ZAE000342440
+  url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Guinness%20Investment%20Managers/FR%20Guinness%20Global%20Equity%20Income%20Feeder%20Fund%20(A)%20BGGEFA.pdf
+  note: Added 9 Nov 2026 at the owner's request. A class.
+- name: RisCura FR Emerging Markets Equity Feeder Fund
+  fund_manager: Riscura
+  fund_folder: RisCura FR Emerging Markets Equity Feeder Fund
+  isin: ZAE000327730
+  url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/RisCura/Riscura%20FR%20Emerging%20Markets%20Equity%20Feeder%20Fund%20(B)%20RBEMFB.pdf
+  note: Added 9 Nov 2026 at the owner's request. B class (the only class with a published MDD).
+- name: Investec FR Dynamic Equity
+  fund_manager: Investec Investment Management
+  fund_folder: Investec FR Dynamic Equity
+  isin: ZAE000209326
+  url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/Investec%20Investment%20Management/Investec%20FR%20Dynamic%20Equity%20Fund%20(A)%20IWIDEA.pdf
+  note: Added 9 Nov 2026 at the owner's request. A class.
+- name: PortfolioMetrix FR Dynamic Income
+  fund_manager: Portfoliometrix
+  fund_folder: PortfolioMetrix FR Dynamic Income
+  isin: ZAE000292520
+  url: https://www.bcis.co.za/upload/factsheet_categories_folders/funds/PortfolioMetrix%20Asset%20Management%20SA/PortfolioMetrix%20FR%20Dynamic%20Income%20Fund%20(A)%20PMBDIA.pdf
+  note: Added 9 Nov 2026 at the owner's request. A class. Not the same fund as Portfoliometrix FR Income Fund (PMIFA).
+- name: Foord Flexible Income Fund
+  fund_manager: Foord
+  fund_folder: Foord Flexible Income Fund
+  isin: ZAE000313524
+  doc_names:
+  - Foord Flex Income Fund
+  page: https://foord.co.za/investments/forms-and-documents
+  render: true
+  link_match: Foord(%20| )Flex(%20| )Income(%20| )Fund(%20| )Class(%20| )A(%20| )at
+  urls:
+  - https://foord.co.za/sites/default/files/{next_yyyy}-{next_mm}/Foord%20Flex%20Income%20Fund%20Class%20A%20at%20{yyyy}-{mm}-{dd}.pdf
+  note: Added 9 Nov 2026 at the owner's request. A class; the MDD prints 'Foord Flex Income Fund'.
+- name: Foord Flexible Fund of Funds
+  fund_manager: Foord
+  fund_folder: Foord Flexible Fund of Funds
+  isin: ZAE000116539
+  page: https://foord.co.za/investments/forms-and-documents
+  render: true
+  link_match: Foord(%20| )Flexible(%20| )Fund(%20| )of(%20| )Funds(%20| )Class(%20| )A(%20| )at
+  urls:
+  - https://foord.co.za/sites/default/files/{next_yyyy}-{next_mm}/Foord%20Flexible%20Fund%20of%20Funds%20Class%20A%20at%20{yyyy}-{mm}-{dd}.pdf
+  note: Added 9 Nov 2026 at the owner's request. A class. Re-added by the owner (removed Oct 2026).
+- name: Nedgroup Investments Money Market Fund
+  fund_manager: Nedgroup
+  fund_folder: Nedgroup Investments Money Market Fund
+  isin: ZAE000023792
+  urls:
+  - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Money%20Market%20Fund%20R.pdf
+  note: Added 9 Nov 2026 at the owner's request. Class R (retail; no A or B sheet). Managed by Taquanta.
+- name: Nedgroup Investments Global Property Feeder Fund
+  fund_manager: Resolution Capital
+  fund_folder: Nedgroup Investments Global Property Feeder Fund
+  isin: ZAE000218376
+  urls:
+  - https://www.nedgroupinvestments.com/content/dam/NGISingleSiteContent/south-africa/pdfs/factsheets/{yyyymm}/Nedgroup%20Investments%20Global%20Property%20Feeder%20Fund%20B.pdf
+  note: Added 9 Nov 2026 at the owner's request. Class B (the only class sheet). Managed by Resolution Capital.
+- name: Coronation Global Equity Select Feeder Fund
+  fund_manager: Coronation
+  fund_folder: Coronation Global Equity Select Feeder Fund
+  isin: ZAE000202115
+  url: https://www.coronation.com/FundFactSheet/DownloadFundFactSheet?fundCode=CGEFA
+  extra_urls:
+  - https://www.coronation.com/en/personal/funds/factsheet/comprehensive-fact-sheets/latest/CGEFA
+  note: Added 9 Nov 2026 at the owner's request. A class (CGEFA).
+- name: M&G Equity Fund
+  fund_manager: M & G
+  fund_folder: M&G Equity Fund
+  isin: ZAE000090924
+  mandg_fund: M&G Equity Fund
+  note: Added 9 Nov 2026 at the owner's request. One sheet covers the A, I, B and F classes; ISIN shown is B (F, for DFMs, is ZAE000218277).
+- name: Sygnia Top 40 Index Fund
+  fund_manager: Sygnia Asset Management
+  fund_folder: Sygnia Top 40 Index Fund
+  isin: ZAE000180006
+  page: https://www.sygnia.co.za/fund/sygnia-top-40-index-fund/
+  render: true
+  link_match: SYTIF.*FFS
+  note: Added 9 Nov 2026 at the owner's request. A class.
+- name: Sygnia All Bond Index Fund
+  fund_manager: Sygnia Asset Management
+  fund_folder: Sygnia All Bond Index Fund
+  isin: ZAE000201513
+  page: https://www.sygnia.co.za/fund/sygnia-all-bond-index-fund/
+  render: true
+  link_match: SYABA.*FFS
+  note: Added 9 Nov 2026 at the owner's request. A class.
+- name: Sygnia Money Market Fund
+  fund_manager: Sygnia Asset Management
+  fund_folder: Sygnia Money Market Fund
+  isin: ZAE000223103
+  page: https://www.sygnia.co.za/fund/sygnia-money-market-fund-class-a/
+  render: true
+  link_match: SYMCA.*Fact-Sheet
+  note: Added 9 Nov 2026 at the owner's request. A class.
+- name: Sygnia Listed Property Index Fund
+  fund_manager: Sygnia Asset Management
+  fund_folder: Sygnia Listed Property Index Fund
+  isin: ZAE000179917
+  page: https://www.sygnia.co.za/fund/sygnia-listed-property-index-fund/
+  render: true
+  link_match: SLPCA.*FFS
+  note: Added 9 Nov 2026 at the owner's request. A class.
+- name: Satrix Top 40 Index Fund
+  fund_manager: Satrix
+  fund_folder: Satrix Top 40 Index Fund
+  isin: ZAE000181905
+  url: https://satrix.co.za/fund/mdd/SATTI
+  note: Added 9 Nov 2026 at the owner's request. B1 ISIN (owner's Satrix rule); the MDD served is the A1 class.
+- name: STANLIB USD Currency Fund of Funds
+  fund_manager: Stanlib
+  fund_folder: STANLIB USD Currency Fund of Funds
+  isin: ZAE000033098
+  lag_days: 60
+  url: https://wealth.momentum.co.za/investments/factsheets/stanlib-us-dollar-currency-fund-of-funds-(b1).pdf
+  doc_names:
+  - STANLIB US Dollar Currency Fund of Funds
+  note: Added 9 Nov 2026 at the owner's request. Momentum platform copy (B1), about a month behind; STANLIB's literature hub disallows bots.
+- name: SCI Ninety One Wealth Builder Fund
+  fund_manager: Ninety One
+  fund_folder: SCI Ninety One Wealth Builder Fund
+  isin: ZAE000200002
+  sanlam_fund: SCI Ninety One Wealth Builder Fund A1
+  doc_names:
+  - Sanlam Investment Management SCI Balanced Fund
+  - SCI Balanced Fund
+  note: Added 9 Nov 2026 at the owner's request. A1 class. Formerly SIM SCI Balanced Fund (renamed 9 Oct 2026).
+- name: SCI Ninety One Cautious Managed Fund
+  fund_manager: Ninety One
+  fund_folder: SCI Ninety One Cautious Managed Fund
+  isin: ZAE000021283
+  lag_days: 60
+  url: https://wealth.momentum.co.za/investments/factsheets/sci-ninety-one-cautious-managed-fund-(b4).pdf
+  doc_names:
+  - Sanlam Investment Management SCI Inflation Plus Fund
+  - SCI Inflation Plus Fund
+  note: Added 9 Nov 2026 at the owner's request. Re-added by the owner (removed 20 Oct 2026 as SIM Inflation Plus). Not in Sanlam's API; Momentum copy (Retail Class), about a month behind.
+- name: Satrix Divi Plus ETF
+  fund_manager: Satrix
+  fund_folder: Satrix Divi Plus ETF
+  isin: ZAE000102018
+  url: https://satrix.co.za/fund/mdd/STXDIV
+  note: Added 9 Nov 2026 at the owner's request. ETF (STXDIV).
+- name: Satrix Resi ETF
+  fund_manager: Satrix
+  fund_folder: Satrix Resi ETF
+  isin: ZAE000078622
+  url: https://satrix.co.za/fund/mdd/STXRES
+  note: Added 9 Nov 2026 at the owner's request. ETF (STXRES).
+- name: Sygnia Itrix MSCI Emerging Markets 50 ETF
+  fund_manager: Sygnia Asset Management
+  fund_folder: Sygnia Itrix MSCI Emerging Markets 50 ETF
+  isin: ZAE000297792
+  page: https://www.sygnia.co.za/fund/sygnia-itrix-msci-emerging-markets-50-etf/
+  render: true
+  link_match: SYGEMF-Sygnia-Itrix-MSCI-Emerging-Markets-50-ETF-ETF-Fund-Fact-Sheet\.pdf
+  urls:
+  - https://www.sygnia.co.za/wp-content/uploads/2025/03/{yyyy}-{MON}-SYGEMF-Sygnia-Itrix-MSCI-Emerging-Markets-50-ETF-ETF-Fund-Fact-Sheet.pdf
+  - https://www.sygnia.co.za/wp-content/uploads/2025/03/{yyyy}-{MON}T-SYGEMF-Sygnia-Itrix-MSCI-Emerging-Markets-50-ETF-ETF-Fund-Fact-Sheet.pdf
+  note: Added 9 Nov 2026 at the owner's request. ETF fact sheet; only the current month stays online (September is spelled SEPT).
+- name: Sygnia Itrix Global Property ETF
+  fund_manager: Sygnia Asset Management
+  fund_folder: Sygnia Itrix Global Property ETF
+  isin: ZAE000251369
+  page: https://www.sygnia.co.za/fund/sygnia-itrix-global-property-etf/
+  render: true
+  link_match: SYGP-Sygnia-Itrix-Global-Property-ETF-ETF-Fund-Fact-Sheet\.pdf
+  urls:
+  - https://www.sygnia.co.za/wp-content/uploads/2025/03/{yyyy}-{MON}-SYGP-Sygnia-Itrix-Global-Property-ETF-ETF-Fund-Fact-Sheet.pdf
+  - https://www.sygnia.co.za/wp-content/uploads/2025/03/{yyyy}-{MON}T-SYGP-Sygnia-Itrix-Global-Property-ETF-ETF-Fund-Fact-Sheet.pdf
+  note: Added 9 Nov 2026 at the owner's request. ETF fact sheet; only the current month stays online.
+- name: 1NVEST Global Government Bond Index Feeder ETF
+  fund_manager: 1nvest
+  fund_folder: 1NVEST Global Government Bond Index Feeder ETF
+  isin: ZAE000255188
+  note: 'Added 9 Nov 2026 at the owner''s request. No source: the only current fact sheet is on 1nvest.literaturehub.co.za, whose robots.txt disallows all bots (owner to decide); other copies are stale (Dec 2025).'
+- name: PMX Active Income Prescient AMETF
+  fund_manager: Portfoliometrix
+  fund_folder: PMX Active Income Prescient AMETF
+  isin: ZAE000330551
+  page: https://www.prescient.co.za/funds/other-funds/
+  render: true
+  link_match: \d{8}_pmx-ametf-zar\.pdf
+  doc_names:
+  - PortfolioMetrix Active Income Prescient AMETF
+  note: Added 9 Nov 2026 at the owner's request. Actively managed ETF (PMXINC).
+- name: iShares Physical Gold ETC
+  fund_manager: BlackRock
+  fund_folder: iShares Physical Gold ETC
+  isin: IE00B4ND3602
+  url: https://www.ishares.com/gls-download/literature/fact-sheet/sgln-ishares-physical-gold-etc-fund-fact-sheet-en-gb.pdf
+  note: Added 9 Nov 2026 at the owner's request. SGLN USD; monthly fact sheet.
+- name: iShares Global Government Bond ETF
+  fund_manager: BlackRock
+  fund_folder: iShares Global Government Bond ETF
+  isin: IE00B3F81K65
+  url: https://www.ishares.com/gls-download/literature/fact-sheet/iglo-ishares-global-govt-bond-ucits-etf-fund-fact-sheet-en-gb.pdf
+  doc_names:
+  - iShares Global Govt Bond UCITS ETF
+  note: Added 9 Nov 2026 at the owner's request. IGLO USD (Dist), monthly; the fund the 1NVEST ETFGGB feeder holds.
+- name: Fidelity ILF United States Dollar Fund
+  fund_manager: Fidelity International
+  fund_folder: Fidelity ILF United States Dollar Fund
+  isin: IE0003323619
+  url: https://fidelityinternational.com/FILPS/Documents/en/current/pro.en.xx.IE0003323619.pdf
+  doc_names:
+  - Fidelity Institutional Liquidity Fund United States Dollar Fund
+  note: 'Added 9 Nov 2026 at the owner''s request. Class A Acc; monthly professional fact sheet (bare host: www.''s robots.txt answers 403).'
+- name: Orbis SICAV Global Cautious Fund
+  fund_manager: Orbis Investment Management
+  fund_folder: Orbis SICAV Global Cautious Fund
+  isin: LU2729849211
+  urls:
+  - https://www.allangray.co.za/globalassets/documents-repository/fund/factsheet/Orbis%20SICAV%20Global%20Cautious%20Fund%20%28USD%29%20%28Class%20RRFC%29/Files/GCSRC%20-%20{yyyy}-{mm}.pdf
+  note: Added 9 Nov 2026 at the owner's request. Shared Investor RRF Class (C), USD; dated Allan Gray copy.
+- name: Dodge & Cox Worldwide Funds - Global Stock Fund
+  fund_manager: Dodge & Cox
+  fund_folder: Dodge & Cox Worldwide Funds - Global Stock Fund
+  isin: IE00B54PRV58
+  url: https://www.dodgeandcox.com/content/dam/dc/ww/en/pdf/fact-sheets/Dodge_Cox_Worldwide_Funds-Global_Stock_Fund_Fact_Sheet.pdf
+  note: Added 9 Nov 2026 at the owner's request. USD Accumulating; monthly fact sheet (all classes).
+- name: Dodge & Cox Worldwide Funds - Global Bond Fund
+  fund_manager: Dodge & Cox
+  fund_folder: Dodge & Cox Worldwide Funds - Global Bond Fund
+  isin: IE00B5568D66
+  url: https://www.dodgeandcox.com/content/dam/dc/ww/en/pdf/fact-sheets/Dodge_Cox_Worldwide_Funds-Global_Bond_Fund_Fact_Sheet.pdf
+  note: Added 9 Nov 2026 at the owner's request. USD Accumulating; monthly fact sheet (all classes).
+- name: Baillie Gifford Worldwide Emerging Markets Leading Companies Fund
+  fund_manager: Baillie Gifford
+  fund_folder: Baillie Gifford Worldwide Emerging Markets Leading Companies Fund
+  isin: IE00BW0DJL69
+  url: https://www.bailliegifford.com/en/south-africa/professional-investor/literature-library/factsheets/baillie-gifford-worldwide-emerging-markets-leading-companies-fund-b-class-factsheet/
+  note: Added 9 Nov 2026 at the owner's request. B Class USD Acc monthly fact sheet. Re-added by the owner (removed 'for now' Oct 2026).
+- name: Curate Global Sustainable Equity Fund
+  fund_manager: Robeco (Curate)
+  fund_folder: Curate Global Sustainable Equity Fund
+  isin: LU2771660466
+  url: https://wealth.momentum.co.za/investments/factsheets/curate-global-sustainable-equity-fund.pdf
+  note: Added 9 Nov 2026 at the owner's request. Momentum hosts only the A Class AUD sheet (same portfolio); USD classes R LU2000525951, I LU2000525522.
+- name: M&G (Lux) Optimal Income Fund
+  fund_manager: M & G
+  fund_folder: M&G (Lux) Optimal Income Fund
+  isin: LU1670725776
+  mandg_fund: M&G (Lux) Optimal Income Fund
+  lag_days: 60
+  note: Added 9 Nov 2026 at the owner's request. USD C-H Acc sheet from mandg.co.za (A-H Acc is LU1670725347).
+- name: Schroder ISF Global Energy
+  fund_manager: Schroders
+  fund_folder: Schroder ISF Global Energy
+  isin: LU0256331488
+  url: https://api.schroders.com/document-store/SISF-Global-Energy-A-Acc-FMR-HKEN.pdf
+  note: Added 9 Nov 2026 at the owner's request. A Acc USD; Hong Kong edition (the LUEN edition has no text date and misdates).
+- name: Ninety One Global Focused Fund
+  fund_manager: Ninety One
+  fund_folder: Ninety One Global Focused Fund
+  isin: GG00BN4N0C79
+  browser: true
+  url: https://ninetyone.com/-/media/documents/minimum-disclosure-document/91-sa-gsy-global-focused-fund-a-usd-mdd.pdf
+  note: Added 9 Nov 2026 at the owner's request. Ninety One Premier Funds PCC (Guernsey), not GSF; 'A' shares USD, SA MDD.
+- name: Ninety One GSF Asia Pacific Franchise Fund
+  fund_manager: Ninety One
+  fund_folder: Ninety One GSF Asia Pacific Franchise Fund
+  isin: LU1734074674
+  browser: true
+  url: https://ninetyone.com/-/media/documents/factsheet/91-gsf-asia-pacific-franchise-fund-a-usd-factsheet-en.pdf
+  doc_names:
+  - Asia Pacific Franchise Fund
+  note: Added 9 Nov 2026 at the owner's request. 'A' Acc USD (an SA edition exists only for the I class).
+- name: STANLIB Global Balanced Cautious Fund
+  fund_manager: Stanlib
+  fund_folder: STANLIB Global Balanced Cautious Fund
+  note: 'Added 9 Nov 2026 at the owner''s request. No source: STANLIB Offshore (Jersey) STOUT class; its only fact sheet is on stanlib.literaturehub.co.za, whose robots.txt disallows all bots (owner to decide). ISIN not found.'
