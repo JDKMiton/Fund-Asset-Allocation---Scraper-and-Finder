@@ -474,6 +474,15 @@ through them one by one:
 
 ## 10. Learning log (newest first; add a line after every scan or change)
 
+- **2026-11-10, Prescient China Balanced: wrong fund collected since it was set up** (found by the
+  asset-allocation agent): `link_match` picked the Irish **Prescient China Balanced Fund (D)** sheet, but the
+  ISIN held (ZAE000176939) is the SA **feeder**. Now `prescient-china-balanced-feeder-fund-a2-{month}-{yyyy}-pcbfa2`
+  on Prescient's MDD page (class A2; the sheet prints no ISIN, so the class held isn't confirmed). The
+  August and September Irish sheets were moved (not deleted) from the month folders and the fund folder to
+  `_rejected6-11-10 Prescient China Balanced Fund - Irish fund not the feeder - …`. The same report said
+  Coronation Global Equity Select FF and M&G Equity had no MDD: both have had September since 9 Nov (the
+  report predates that run).
+
 - **2026-11-10, run after the five fixes** (10:28, exit 0; a 10:03 run had stopped after a minute when the
   Claude session ended, nothing lost): Old Mutual Global Equity, Steyn Equity and PPS Global Equity filed
   September; Baillie Gifford LTGG filed October. September 263 of 273 Collected, 5 Pending, 5 Late (1NVEST,

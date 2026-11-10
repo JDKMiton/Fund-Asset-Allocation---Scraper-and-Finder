@@ -600,8 +600,11 @@ funds:
   fund_folder: "Prescient China Balanced Fund"
   isin: ZAE000176939
   page: https://www.prescient.co.za/news-and-resources/minimum-disclosure-documents/
-  link_match: prescient-china-balanced-class-d-[a-z]+-\d{4}-pgcbfd
+  link_match: prescient-china-balanced-feeder-fund-a2-{month}-{yyyy}-pcbfa2
   render: true
+  doc_names:
+  - Prescient China Balanced Feeder Fund
+  note: The SA feeder's own MDD (class A2; the sheet prints no ISIN). Until 10 Nov 2026 this collected the Irish Prescient China Balanced Fund (class D) by mistake.
 - name: Prescient Global Income Provider Fund
   fund_manager: "Prescient"
   fund_folder: "Prescient Global Income Provider"
