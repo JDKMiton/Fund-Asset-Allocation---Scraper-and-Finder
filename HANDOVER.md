@@ -479,7 +479,7 @@ through them one by one:
   to Old Mutual's own MDD (September); PPS Global Equity's file was renamed `…-fund-a.pdf` (pattern now
   accepts both); Steyn Equity's September file was named `…-class-b1-quarterly-mdd-sep-26.pdf` (pattern
   accepts both forms); Curate Enhanced Yield has no current public source (§5). Tested into a scratch
-  folder. **Mistake caught:** a regex edit wrote `` as a backspace character into the config, which would
+  folder. **Mistake caught:** a regex edit wrote `\b` as a backspace character into the config, which would
   have stopped the run; fixed before committing, and a new test loads the real fund list. Tests 51.
 
 - **2026-11-10, follow-up runs** (08:59 and 09:23, both exit 0): PMX Active Income filed September (browser
