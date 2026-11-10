@@ -474,6 +474,12 @@ through them one by one:
 
 ## 10. Learning log (newest first; add a line after every scan or change)
 
+- **2026-11-10, run after the five fixes** (10:28, exit 0; a 10:03 run had stopped after a minute when the
+  Claude session ended, nothing lost): Old Mutual Global Equity, Steyn Equity and PPS Global Equity filed
+  September; Baillie Gifford LTGG filed October. September 263 of 273 Collected, 5 Pending, 5 Late (1NVEST,
+  Baillie Gifford LTGG and EM Leading Companies, iShares Gold and Global Govt Bond: September no longer
+  online for these). Curate Enhanced Yield and 1NVEST rejected as expected.
+
 - **2026-11-10, the five stuck funds** (owner asked, one by one): Baillie Gifford LTGG to Baillie Gifford's
   own B class sheet (October; September is no longer online, so it stays a gap); Old Mutual Global Equity
   to Old Mutual's own MDD (September); PPS Global Equity's file was renamed `…-fund-a.pdf` (pattern now
