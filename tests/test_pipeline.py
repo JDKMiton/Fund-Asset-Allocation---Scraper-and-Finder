@@ -110,6 +110,16 @@ class ScraperLinkTest(unittest.TestCase):
         self.assertEqual(find_matching_links(html, "https://example.com/fund", "abax-absolute-2026-09", fallback=False), [])
 
 
+class RegistryTest(unittest.TestCase):
+    def test_the_real_fund_list_loads(self):
+        """A stray character or bad entry in config/mdd_sources.yaml would stop the weekly run."""
+        from fund_allocator.config import load_sources
+        sources = load_sources(Path(__file__).resolve().parents[1] / "config" / "mdd_sources.yaml")
+        self.assertGreater(len(sources), 200)
+        self.assertEqual(len({s.name for s in sources}), len(sources))  # no fund listed twice
+        self.assertEqual([s.name for s in sources if not (s.fund_manager and s.fund_folder)], [])
+
+
 class DownloadFallbackTest(unittest.TestCase):
     def test_certificate_failure_retries_in_the_browser(self):
         from unittest import mock

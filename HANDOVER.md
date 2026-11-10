@@ -232,7 +232,12 @@ Name not checked (the PDF has no text layer), No source.
 - **BlackRock / iShares:** `…/gls-download/literature/fact-sheet/<name>-<isin>-gb-en-individual.pdf` is
   monthly; the SA MDD is quarterly only.
 - **Old Mutual:** `oldmutualinvest.com/om-docs/<asset uid>/<Name>.pdf` redirects to the latest version.
+  Old Mutual Global Equity [Jupiter Merlin] uses `blteb2a861c2e3b7b05` (its MDD; the other two links on the
+  global-funds page are the risk/return report and the quarterly holdings); the PPS copy is the backup.
   Each fund has three links (MDD, holdings, risk/return); RAFI 40 uses `blt534f03c64ce9c4b6`.
+- **Curate Enhanced Yield** (Nov 2026): Momentum's `…-(a)-zaf.pdf` serves the Curate Momentum Equity
+  Fund, `…-(a).pdf` May 2026 and `…-fund.pdf` August 2026. All three are listed; the checks reject the wrong
+  and stale ones. No other public copy (Momentum Wealth platform only). **Needs a person** if it stays stuck.
 - **Curate:** curateinvestments.com is behind Cloudflare; its MDD button points at Momentum's
   `curate-momentum-…-(a)-zaf.pdf`.
 - **Vulcan Value Equity:** an Irish UCITS fund, fact sheet on Prescient's other-funds page.
@@ -254,6 +259,10 @@ Name not checked (the PDF has no text layer), No source.
 - **Ninety One offshore:** GSF sheets `91-gsf-<fund>-fund-a-usd-factsheet-en.pdf`; SA editions `91-sa-…`.
   "Global Focused" is Ninety One Premier Funds PCC (Guernsey), not GSF.
 - **Fidelity ILF:** `fidelityinternational.com/FILPS/…` on the bare host (www.'s robots.txt answers 403).
+- **Baillie Gifford own SA literature library** (`bailliegifford.com/en/south-africa/professional-investor/
+  literature-library/factsheets/<fund>-<class>-class-factsheet/`) serves the current month only (October
+  already on 10 Nov). LTGG now uses the B class sheet (IE00BYQG5606); Discovery's copy, stuck at August,
+  is the backup.
 - **Baillie Gifford SA:** the quarterly SA MDD prints "Third Quarter 2026" and misdates; use the monthly
   B class fact sheet.
 
@@ -464,6 +473,14 @@ through them one by one:
 - Read `docs/sa-factsheet-scraping-guide.md` §6–7, on reading tables by word position and the checks.
 
 ## 10. Learning log (newest first; add a line after every scan or change)
+
+- **2026-11-10, the five stuck funds** (owner asked, one by one): Baillie Gifford LTGG to Baillie Gifford's
+  own B class sheet (October; September is no longer online, so it stays a gap); Old Mutual Global Equity
+  to Old Mutual's own MDD (September); PPS Global Equity's file was renamed `…-fund-a.pdf` (pattern now
+  accepts both); Steyn Equity's September file was named `…-class-b1-quarterly-mdd-sep-26.pdf` (pattern
+  accepts both forms); Curate Enhanced Yield has no current public source (§5). Tested into a scratch
+  folder. **Mistake caught:** a regex edit wrote `` as a backspace character into the config, which would
+  have stopped the run; fixed before committing, and a new test loads the real fund list. Tests 51.
 
 - **2026-11-10, follow-up runs** (08:59 and 09:23, both exit 0): PMX Active Income filed September (browser
   retry); STANLIB Global Balanced Cautious and the seven SA STANLIB funds filed September from the literature

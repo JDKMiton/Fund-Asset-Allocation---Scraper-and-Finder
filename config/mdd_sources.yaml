@@ -838,7 +838,12 @@ funds:
   fund_manager: "Jupiter Merian Fund Management"
   fund_folder: "Old Mutual Global Equity Fund (Jupiter Merlin)"
   isin: ZAE000171153
-  url: https://ppsisecure.co.za/SecureDocuments/FundFactSheets/Old%20Mutual%20Global%20Equity%20Fund%20-%20B1.pdf
+  url: https://www.oldmutualinvest.com/om-docs/blteb2a861c2e3b7b05/OldMutualGlobalEquityFund.pdf
+  urls:
+  - https://ppsisecure.co.za/SecureDocuments/FundFactSheets/Old%20Mutual%20Global%20Equity%20Fund%20-%20B1.pdf
+  doc_names:
+  - Old Mutual Global Equity Fund
+  note: Old Mutual's own MDD (the global-funds page lists three links per fund; this one is the MDD); the PPS copy, stuck at August 2026 in November, is the backup.
 - name: Momentum Capped SWIX Index Fund
   fund_manager: "Momentum"
   fund_folder: "Momentum Capped SWIX Index Fund"
@@ -861,9 +866,12 @@ funds:
 - name: Baille Gifford Worldwide Long Term Global Growth Fund
   fund_manager: "Baillie Gifford"
   fund_folder: "Baillie Gifford Worldwide Long Term Global Growth Fund"
-  url: https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/IE00BYQG5606
+  url: https://www.bailliegifford.com/en/south-africa/professional-investor/literature-library/factsheets/baillie-gifford-worldwide-long-term-global-growth-fund-b-class-factsheet/
+  urls:
+  - https://www.discovery.co.za/invest-public/ws/documvest-factsheet/download/IE00BYQG5606
   doc_names:
   - Baillie Gifford Worldwide Long Term Global Growth
+  note: B Class (IE00BYQG5606) monthly fact sheet from Baillie Gifford's SA literature library (current month only); Discovery's copy, stuck at August 2026 in November, is the backup.
 - name: Jupiter Merian World Equity Fund
   fund_manager: "Jupiter Merian Fund Management"
   fund_folder: "Jupiter Merian World Equity Fund"
@@ -1012,8 +1020,11 @@ funds:
   fund_manager: "Momentum"
   fund_folder: "Curate Momentum Enhanced Yield Fund"
   isin: ZAE000160479
-  note: A class MDD hosted by Momentum (linked from curateinvestments.com).
+  note: A class MDD hosted by Momentum (linked from curateinvestments.com). In November 2026 the (a)-zaf link served the Curate Momentum Equity Fund (rejected each run); the other two Momentum names served May and August 2026. No other public copy (the fund is only on the Momentum Wealth platform).
   url: https://wealth.momentum.co.za/investments/factsheets/curate-momentum-enhanced-yield-fund-(a)-zaf.pdf
+  urls:
+  - https://wealth.momentum.co.za/investments/factsheets/curate-momentum-enhanced-yield-fund.pdf
+  - https://wealth.momentum.co.za/investments/factsheets/curate-momentum-enhanced-yield-fund-(a).pdf
 - name: Sasfin BCI Flexible Income
   fund_manager: "Otto1890"
   fund_folder: "Otto1890 BCI Flexible Fund"
@@ -1121,8 +1132,9 @@ funds:
   fund_folder: "Steyn Capital Equity Prescient Fund"
   isin: ZAE000222352
   page: https://www.prescient.co.za/funds/other-funds/
-  link_match: 'steyn-capital-equity-prescient-fund-{mon}-{yyyy}-mdd'
+  link_match: 'steyn-capital-equity-prescient-fund-(?:class-\w+-quarterly-mdd-)?{mon}-(?:{yyyy}-mdd|\d\d\b)'
   render: true
+  note: Monthly MDD (class B1) on Prescient's other-funds page; September 2026 was named '...-class-b1-quarterly-mdd-sep-26.pdf' instead of '...-sep-2026-mdd'.
 - name: STANLIB Enhanced Multi Style Equity Fund
   fund_manager: Stanlib
   fund_folder: Stanlib Enhanced Multi Style Equity
@@ -1442,9 +1454,9 @@ funds:
   fund_folder: "PPS Global Equity Fund"
   isin: IE00BJXT2F50
   page: 'https://www.prescient.co.za/funds/other-funds/'
-  link_match: pps-global-equity-fund-a1\.pdf
+  link_match: pps-global-equity-fund-a1?\.pdf
   render: true
-  note: Irish UCITS (Prescient Global Funds ICAV), class A1; the PPS platform feeder copies are stale.
+  note: Irish UCITS (Prescient Global Funds ICAV), class A1 (same ISIN; the file was renamed '...-fund-a.pdf' for September 2026); the PPS platform feeder copies are stale.
 - name: "Portfoliometrix FR Income Fund"
   fund_manager: "Portfoliometrix"
   fund_folder: "Portfoliometrix FR Income Fund"
