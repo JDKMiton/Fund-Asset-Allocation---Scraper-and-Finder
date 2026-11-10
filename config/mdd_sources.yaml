@@ -818,17 +818,22 @@ funds:
   isin: ZAE000154688
   sanlam_fund: Denker SCI Global Financial Feeder Fund A1
 - name: Stanlib Absolute Plus
-  fund_manager: "Stanlib"
-  fund_folder: "Stanlib Absolute Plus"
+  fund_manager: Stanlib
+  fund_folder: Stanlib Absolute Plus
   isin: ZAE000082236
-  url: https://ppsisecure.co.za/SecureDocuments/FundFactSheets/STANLIB%20Absolute%20Plus%20Fund%20-%20B1.pdf
-  note: STANLIB's own site blocks automated access; the PPS platform copy is usually a month behind.
-  lag_days: 60
+  note: From 10 Nov 2026 the MDD comes from STANLIB's literature hub (current; downloaded despite its robots.txt, owner's decision); the platform copy is the backup.
+  url: https://stanlib.literaturehub.co.za/secure/?s=STANLIB_Absolute_Plus_Fund_Comp
+  urls:
+  - https://ppsisecure.co.za/SecureDocuments/FundFactSheets/STANLIB%20Absolute%20Plus%20Fund%20-%20B1.pdf
+  ignore_robots: true
 - name: STANLIB Income Fund
-  fund_manager: "Stanlib"
-  fund_folder: "STANLIB Income Fund"
-  url: https://ppsisecure.co.za/SecureDocuments/FundFactSheets/STANLIB%20Income%20Fund%20-%20B2.pdf
-  lag_days: 60
+  fund_manager: Stanlib
+  fund_folder: STANLIB Income Fund
+  url: https://stanlib.literaturehub.co.za/secure/?s=STANLIB_Income_Fund_Comp
+  urls:
+  - https://ppsisecure.co.za/SecureDocuments/FundFactSheets/STANLIB%20Income%20Fund%20-%20B2.pdf
+  ignore_robots: true
+  note: From 10 Nov 2026 the MDD comes from STANLIB's literature hub (current; downloaded despite its robots.txt, owner's decision); the platform copy is the backup.
 - name: Old Mutual Global Equity [Jupiter Merlin]
   fund_manager: "Jupiter Merian Fund Management"
   fund_folder: "Old Mutual Global Equity Fund (Jupiter Merlin)"
@@ -1119,12 +1124,14 @@ funds:
   link_match: 'steyn-capital-equity-prescient-fund-{mon}-{yyyy}-mdd'
   render: true
 - name: STANLIB Enhanced Multi Style Equity Fund
-  fund_manager: "Stanlib"
-  fund_folder: "Stanlib Enhanced Multi Style Equity"
+  fund_manager: Stanlib
+  fund_folder: Stanlib Enhanced Multi Style Equity
   isin: ZAE000214946
-  url: https://ppsisecure.co.za/SecureDocuments/FundFactSheets/STANLIB%20Enhanced%20Multi%20Style%20Equity%20Fund%20-%20B1.pdf
-  note: STANLIB's own site blocks automated access; the PPS platform copy is usually a month behind.
-  lag_days: 60
+  note: From 10 Nov 2026 the MDD comes from STANLIB's literature hub (current; downloaded despite its robots.txt, owner's decision); the platform copy is the backup.
+  url: https://stanlib.literaturehub.co.za/secure/?s=STANLIB_Enhanced_Multi_Style_Equity_Fund_Comp
+  urls:
+  - https://ppsisecure.co.za/SecureDocuments/FundFactSheets/STANLIB%20Enhanced%20Multi%20Style%20Equity%20Fund%20-%20B1.pdf
+  ignore_robots: true
 - name: STANLIB Global Balanced Feeder Fund
   fund_manager: "Stanlib"
   fund_folder: "Stanlib Global Balanced"
@@ -1133,19 +1140,23 @@ funds:
   note: STANLIB's own site blocks automated access; Momentum's copy is usually a month behind.
   lag_days: 60
 - name: STANLIB Multi-Asset Cautious Fund
-  fund_manager: "Stanlib"
-  fund_folder: "Stanlib Multi Asset Cautious"
+  fund_manager: Stanlib
+  fund_folder: Stanlib Multi Asset Cautious
   isin: ZAE000288486
-  url: https://wealth.momentum.co.za/investments/factsheets/stanlib-multi-asset-cautious-fund-(c3).pdf
-  note: STANLIB's own site blocks automated access; Momentum's copy is usually a month behind.
-  lag_days: 60
+  note: STANLIB's own site blocks automated access; Momentum's copy is usually a month behind. From 10 Nov 2026 the MDD comes from STANLIB's literature hub (current; downloaded despite its robots.txt, owner's decision); the platform copy is the backup.
+  url: https://stanlib.literaturehub.co.za/secure/?s=STANLIB_Multi-Asset_Cautious_Fund_Comp
+  urls:
+  - https://wealth.momentum.co.za/investments/factsheets/stanlib-multi-asset-cautious-fund-(c3).pdf
+  ignore_robots: true
 - name: STANLIB Multi-Asset Growth Fund
-  fund_manager: "Stanlib"
-  fund_folder: "Stanlib Multi Asset Growth"
+  fund_manager: Stanlib
+  fund_folder: Stanlib Multi Asset Growth
   isin: ZAE000314555
-  url: https://wealth.momentum.co.za/investments/factsheets/stanlib-multi-asset-growth-fund-(b1).pdf
-  note: B1 class MDD (Momentum's C3 copy is out of date); STANLIB's own site blocks automated access.
-  lag_days: 60
+  note: B1 class MDD (Momentum's C3 copy is out of date); STANLIB's own site blocks automated access. From 10 Nov 2026 the MDD comes from STANLIB's literature hub (current; downloaded despite its robots.txt, owner's decision); the platform copy is the backup.
+  url: https://stanlib.literaturehub.co.za/secure/?s=STANLIB_Multi-Asset_Growth_Fund_Comp
+  urls:
+  - https://wealth.momentum.co.za/investments/factsheets/stanlib-multi-asset-growth-fund-(b1).pdf
+  ignore_robots: true
 - name: "Templeton Emerging Markets Fund"
   fund_manager: "Franklin Templeton"
   fund_folder: "Templeton Emerging Markets Fund"
@@ -1453,15 +1464,17 @@ funds:
   url: 'https://www.novarecis.co.za/docs/mdd/SouthernCross-NCIS-Market-Neutral-RHF-MDD.pdf'
   lag_days: 50
   note: 'SouthernCross NCIS Market Neutral RHF A1 MDD from Novare CIS (stable link); the manager''s own site is stale.'
-- name: "STANLIB Global Select Fund"
-  fund_manager: "Stanlib"
-  fund_folder: "Stanlib Global Select"
+- name: STANLIB Global Select Fund
+  fund_manager: Stanlib
+  fund_folder: Stanlib Global Select
   isin: ZAE000327003
-  url: 'https://wealth.momentum.co.za/investments/factsheets/stanlib-global-select-feeder-fund-(b2).pdf'
-  lag_days: 90
-  note: 'Momentum platform copy of the rand feeder (B2), 2 to 3 months behind; STANLIB''s literature hub disallows bots.'
+  note: Momentum platform copy of the rand feeder (B2), 2 to 3 months behind; STANLIB's literature hub disallows bots. From 10 Nov 2026 the MDD comes from STANLIB's literature hub (current; downloaded despite its robots.txt, owner's decision); the platform copy is the backup.
   doc_names:
   - STANLIB Global Select Feeder Fund
+  url: https://stanlib.literaturehub.co.za/secure/?s=STANLIB_Global_Select_Feeder_Fund_Comp
+  urls:
+  - https://wealth.momentum.co.za/investments/factsheets/stanlib-global-select-feeder-fund-(b2).pdf
+  ignore_robots: true
 - name: Cartesian FR Money Market
   fund_manager: Cartesian
   fund_folder: Cartesian FR Money Market
@@ -1596,11 +1609,13 @@ funds:
   fund_manager: Stanlib
   fund_folder: STANLIB USD Currency Fund of Funds
   isin: ZAE000033098
-  lag_days: 60
-  url: https://wealth.momentum.co.za/investments/factsheets/stanlib-us-dollar-currency-fund-of-funds-(b1).pdf
   doc_names:
   - STANLIB US Dollar Currency Fund of Funds
-  note: Added 9 Nov 2026 at the owner's request. Momentum platform copy (B1), about a month behind; STANLIB's literature hub disallows bots.
+  note: Added 9 Nov 2026 at the owner's request. Momentum platform copy (B1), about a month behind; STANLIB's literature hub disallows bots. From 10 Nov 2026 the MDD comes from STANLIB's literature hub (current; downloaded despite its robots.txt, owner's decision); the platform copy is the backup.
+  url: https://stanlib.literaturehub.co.za/secure/?s=STANLIB_US_Dollar_Currency_Fund_of_Funds_Comp
+  urls:
+  - https://wealth.momentum.co.za/investments/factsheets/stanlib-us-dollar-currency-fund-of-funds-(b1).pdf
+  ignore_robots: true
 - name: SCI Ninety One Wealth Builder Fund
   fund_manager: Ninety One
   fund_folder: SCI Ninety One Wealth Builder Fund

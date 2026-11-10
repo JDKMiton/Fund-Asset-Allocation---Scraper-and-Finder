@@ -128,6 +128,7 @@ Name not checked (the PDF has no text layer), No source.
 | 20 Oct 2026 | Share classes for the funds added from Linka's folders: keep the A class for Fairtree FR Income Plus, Curate Global Quality and Global Value, Old Mutual Global Managed Alpha and RAFI (the rand feeders), and Nedgroup Rainmaker; Omba A USD Acc; Laurium Enhanced Growth the ZAR feeder; Peregrine Retail class A (buy list); Flagship FR Worldwide Flexible Feeder accepted as the IP Worldwide Flexible fund. From Linka's packs: Camissa SA Equity C class, Curate Global EM R Class USD (only the A sheets are published; same portfolio). |
 | 20 Oct 2026 | Removed Riscura BCI China Equity Feeder (wound up 4 Sep 2026) from the tracker and weekly grab. Don't add it back unless asked. |
 | 20 Oct 2026 | Removed SIM Inflation Plus (SCI Ninety One Cautious Managed) from the tracker and weekly grab; use Ninety One Cautious Managed instead. Don't add it back unless asked. |
+| 10 Nov 2026 | STANLIB: take the MDDs from STANLIB's literature hub despite its robots.txt (current, where the PPS/Momentum copies are a month behind) for Absolute Plus, Income, Enhanced Multi Style Equity, Multi-Asset Cautious, Multi-Asset Growth, Global Select and USD Currency FoF; the platform copy stays as the backup. |
 | 10 Nov 2026 | Decisions on the 9 Nov funds, one by one: download 1NVEST Global Govt Bond ETF and STANLIB Global Balanced Cautious from STANLIB's literature hubs despite their robots.txt (`ignore_robots: true`, like Marriott); M&G Equity shows the F class (DFM) ISIN; Nedgroup Money Market class R under Nedgroup; Nedgroup Global Property Feeder class B under Resolution Capital; RisCura EM Equity Feeder class B; Curate Global Sustainable Equity shows the R Class USD ISIN (sheet is A AUD); Ninety One Asia Pacific Franchise A Acc USD; Ninety One Global Focused is the Guernsey Premier Funds PCC fund. |
 | 9 Nov 2026 | Added 40 funds (SA unit trusts, ETFs, offshore funds; list in the §10 entry of 9 Nov). Re-added at the owner's request: Foord Flexible FoF, Baillie Gifford Worldwide EM Leading Companies, SCI Ninety One Cautious Managed (ex SIM Inflation Plus, now its own row beside Ninety One Cautious Managed). For ETFs and offshore funds without an SA MDD, the issuer's fact sheet is filed as the MDD. M&G Equity is one row (one sheet covers A, I, B, F); the B class ISIN is shown until the owner says F. Claude may create the missing manager and fund folders, empty. |
 | 3 Nov 2026 | Coronation: collect both the short fact sheet (the MDD, posted first) and the comprehensive sheet (kept beside it as `(comprehensive)`, fetched every week). The owner approved choosing South Africa, Personal Investor on Coronation's site. |
@@ -216,7 +217,7 @@ Name not checked (the PDF has no text layer), No source.
 - **PPS / ppsisecure:** PPS Balanced Passive's current sheet is still filed under its **old name** "PPS
   Balanced Index Tracker Fund". STANLIB Absolute Plus, STANLIB Income, STANLIB Enhanced Multi Style and SIM
   Inflation Plus come from ppsisecure copies about a month behind.
-- **STANLIB:** its own site blocks automated access; use the platform copies above.
+- **STANLIB:** see the literature hub note below; Global Balanced Feeder still uses Momentum's copy.
 - **Marriott:** robots.txt disallows bots (overridden by the owner). MDDs use cid-encoded fonts (the
   scraper decodes them). Core Income is **monthly**; Dividend Growth, Essential Income and Property Income
   are **quarterly**.
@@ -244,8 +245,11 @@ Name not checked (the PDF has no text layer), No source.
   robots.txt `Disallow: /`; the owner approved overriding it for STANLIB Global Balanced Cautious (STOUT,
   Jersey; `secure/?s=<Fund>_Comp` served the September MDD on 10 Nov) and 1NVEST Global Government Bond
   Index Feeder ETF (still April 2026 on 10 Nov, so it shows Late until 1nvest updates it). The hub is current
-  where the Momentum copies of the SA STANLIB funds run a month behind; using it for those needs the owner's
-  OK. www.1nvest.co.za's robots.txt also disallows bots (fetched once by mistake on 10 Nov).
+  where the Momentum copies of the SA STANLIB funds run a month behind; **since 10 Nov 2026 seven SA STANLIB
+  funds use it first** (owner): `secure/?s=STANLIB_<Fund_Name>_Comp`, codes listed on stanlib.com/our-funds
+  (stanlib.com's robots.txt allows bots; Python's parser misreads it). The hub sheet can be another class
+  than the ISIN held (e.g. Multi-Asset Cautious B1); the tracker shows the ISIN on file. **Global Balanced
+  Feeder has no hub document** and stays on Momentum's copy. www.1nvest.co.za's robots.txt also disallows bots (fetched once by mistake on 10 Nov).
 - **Schroders:** the LUEN edition of Global Energy has no text date (misdates as 2025-04); use HKEN.
 - **Ninety One offshore:** GSF sheets `91-gsf-<fund>-fund-a-usd-factsheet-en.pdf`; SA editions `91-sa-…`.
   "Global Focused" is Ninety One Premier Funds PCC (Guernsey), not GSF.
