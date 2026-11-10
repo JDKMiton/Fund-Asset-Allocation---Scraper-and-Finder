@@ -1790,3 +1790,10 @@ funds:
   url: https://stanlib.literaturehub.co.za/secure/?s=STANLIB_Global_Balanced_Cautious_Fund_Comp
   ignore_robots: true
   note: Added 9 Nov 2026 at the owner's request. STANLIB Offshore Unit Trusts (STOUT) class fund; MDD downloaded despite the literature hub's robots.txt (owner, 10 Nov 2026).
+- name: MitonOptimal International Managed Flexible Fund
+  fund_manager: MitonOptimal
+  fund_folder: MitonOptimal International Managed Flexible Fund
+  isin: GG00BMCSW986
+  page: https://www.fundrock.com/apex-fund-managers-guernsey-limited/forms-documents/
+  link_match: mitonoptimal-international-managed-flex-a-usd-[^/]*[.]pdf
+  note: Re-added by the owner on 10 Nov 2026 (removed Oct 2026 as 'sourced in-house'). MitonOptimal International Managed Flexible Fund IC Limited (Guernsey; Apex Fund Managers Guernsey, ex IP Fund Managers Guernsey), A USD. MDD linked from Fundrock's Apex Guernsey forms page; the file name changes month to month.

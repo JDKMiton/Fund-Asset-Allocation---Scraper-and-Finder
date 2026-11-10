@@ -110,7 +110,7 @@ Name not checked (the PDF has no text layer), No source.
 | Date | Decision |
 |---|---|
 | Oct 2026 | Skip the MitonOptimal FR funds (owner sources them). |
-| Oct 2026 | Removed from the tracker and weekly grab: MitonOptimal International Managed Flexible, Glacier Money Market, Discovery Life Property Escalator, Baillie Gifford Worldwide EM Leading Companies (for now), Aylett Equity Prescient, Foord Flexible FoF, PSG Wealth Global Moderate Feeder, PSG Wealth Moderate FoF. Don't add them back unless asked. |
+| Oct 2026 | Removed from the tracker and weekly grab: MitonOptimal International Managed Flexible (re-added by the owner 10 Nov 2026), Glacier Money Market, Discovery Life Property Escalator, Baillie Gifford Worldwide EM Leading Companies (for now), Aylett Equity Prescient, Foord Flexible FoF, PSG Wealth Global Moderate Feeder, PSG Wealth Moderate FoF. Don't add them back unless asked. |
 | Oct 2026 | Download Marriott (4 funds) and Steyn Capital despite their robots.txt ("Option A"; `ignore_robots: true`). The guide says to honour robots.txt, but this is the owner's decision. |
 | 13 Oct 2026 | Only search for a fund when its MDD is missing in either of the last two month folders. |
 | Oct 2026 | Tracker file name `!MDD Tracker YYYY - MM.xlsx` (the "!" sorts it to the top); funds A–Z; benchmark not cut off. |
@@ -473,6 +473,14 @@ through them one by one:
 - Read `docs/sa-factsheet-scraping-guide.md` §6–7, on reading tables by word position and the checks.
 
 ## 10. Learning log (newest first; add a line after every scan or change)
+
+- **2026-11-10, MitonOptimal International Managed Flexible Fund re-added** (owner; it is 50% of both Sir
+  Group Global models). It had never had a source (dropped on 13 Oct as "sourced in-house"). Its MDD is on
+  Fundrock's Apex Fund Managers Guernsey forms page (`fundrock.com/apex-fund-managers-guernsey-limited/forms-documents/`,
+  plain HTML); the file name changes (`…-a-usd-31-may-2026.pdf`, `…-a-usd-sep-2026.pdf`), so `page` +
+  `link_match`. September 2026 tested (A USD, GG00BMCSW986). Name matches the AUM workbook (R35.9m). Fund
+  folder `MitonOptimal\MitonOptimal International Managed Flexible Fund\MDDs` created. Not excluded: the
+  weekly run only skips `^MitonOptimal FR`.
 
 - **2026-11-10, Prescient China Balanced: wrong fund collected since it was set up** (found by the
   asset-allocation agent): `link_match` picked the Irish **Prescient China Balanced Fund (D)** sheet, but the
