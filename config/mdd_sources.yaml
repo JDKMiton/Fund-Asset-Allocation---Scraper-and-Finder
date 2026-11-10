@@ -1551,9 +1551,9 @@ funds:
 - name: M&G Equity Fund
   fund_manager: M & G
   fund_folder: M&G Equity Fund
-  isin: ZAE000090924
+  isin: ZAE000218277
   mandg_fund: M&G Equity Fund
-  note: Added 9 Nov 2026 at the owner's request. One sheet covers the A, I, B and F classes; ISIN shown is B (F, for DFMs, is ZAE000218277).
+  note: Added 9 Nov 2026 at the owner's request. F class (for DFMs; owner, 10 Nov 2026). One sheet covers the A, I, B and F classes (B is ZAE000090924).
 - name: Sygnia Top 40 Index Fund
   fund_manager: Sygnia Asset Management
   fund_folder: Sygnia Top 40 Index Fund
@@ -1658,7 +1658,9 @@ funds:
   fund_manager: 1nvest
   fund_folder: 1NVEST Global Government Bond Index Feeder ETF
   isin: ZAE000255188
-  note: 'Added 9 Nov 2026 at the owner''s request. No source: the only current fact sheet is on 1nvest.literaturehub.co.za, whose robots.txt disallows all bots (owner to decide); other copies are stale (Dec 2025).'
+  url: https://1nvest.literaturehub.co.za/secure/src/assets/fund-factsheets/1nvest_Global_Government_Bond_Index_Feeder_ETF_Comprehensive.pdf
+  ignore_robots: true
+  note: Added 9 Nov 2026 at the owner's request. Downloaded despite the literature hub's robots.txt (owner, 10 Nov 2026). On 10 Nov 1nvest still served the April 2026 sheet.
 - name: PMX Active Income Prescient AMETF
   fund_manager: Portfoliometrix
   fund_folder: PMX Active Income Prescient AMETF
@@ -1719,9 +1721,9 @@ funds:
 - name: Curate Global Sustainable Equity Fund
   fund_manager: Robeco (Curate)
   fund_folder: Curate Global Sustainable Equity Fund
-  isin: LU2771660466
+  isin: LU2000525951
   url: https://wealth.momentum.co.za/investments/factsheets/curate-global-sustainable-equity-fund.pdf
-  note: Added 9 Nov 2026 at the owner's request. Momentum hosts only the A Class AUD sheet (same portfolio); USD classes R LU2000525951, I LU2000525522.
+  note: Added 9 Nov 2026 at the owner's request. ISIN is the R Class USD held (owner, 10 Nov 2026); Momentum publishes only the A Class AUD sheet (LU2771660466), same portfolio.
 - name: M&G (Lux) Optimal Income Fund
   fund_manager: M & G
   fund_folder: M&G (Lux) Optimal Income Fund
@@ -1754,4 +1756,7 @@ funds:
 - name: STANLIB Global Balanced Cautious Fund
   fund_manager: Stanlib
   fund_folder: STANLIB Global Balanced Cautious Fund
-  note: 'Added 9 Nov 2026 at the owner''s request. No source: STANLIB Offshore (Jersey) STOUT class; its only fact sheet is on stanlib.literaturehub.co.za, whose robots.txt disallows all bots (owner to decide). ISIN not found.'
+  isin: GB00B0663468
+  url: https://stanlib.literaturehub.co.za/secure/?s=STANLIB_Global_Balanced_Cautious_Fund_Comp
+  ignore_robots: true
+  note: Added 9 Nov 2026 at the owner's request. STANLIB Offshore Unit Trusts (STOUT) class fund; MDD downloaded despite the literature hub's robots.txt (owner, 10 Nov 2026).
