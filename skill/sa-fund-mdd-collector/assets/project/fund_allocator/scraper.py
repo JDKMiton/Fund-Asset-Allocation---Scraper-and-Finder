@@ -92,7 +92,8 @@ class Scraper:
             try:
                 content = self._get(url, headers).content
             except ScrapeError as exc:
-                if "HTTP 403" not in str(exc) and "HTTP 401" not in str(exc):
+                # a browser also fetches a certificate chain the site sends incomplete (Prescient, Nov 2026)
+                if not any(s in str(exc) for s in ("HTTP 403", "HTTP 401", "CERTIFICATE_VERIFY_FAILED")):
                     raise
                 log.info("%s refused a plain request, retrying in a browser", url)
         if not as_pdf(content):

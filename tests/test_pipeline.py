@@ -110,6 +110,24 @@ class ScraperLinkTest(unittest.TestCase):
         self.assertEqual(find_matching_links(html, "https://example.com/fund", "abax-absolute-2026-09", fallback=False), [])
 
 
+class DownloadFallbackTest(unittest.TestCase):
+    def test_certificate_failure_retries_in_the_browser(self):
+        from unittest import mock
+        from fund_allocator.scraper import Scraper, ScrapeError
+        with tempfile.TemporaryDirectory() as tmp:
+            s = Scraper(Path(tmp))
+            err = ScrapeError("request failed for https://x/f.pdf: [SSL: CERTIFICATE_VERIFY_FAILED] unable to get "
+                              "local issuer certificate")
+            browser = mock.Mock()
+            browser.fetch.return_value = b"%PDF-1.4 " + b"x" * 2000
+            with mock.patch.object(s, "_get", side_effect=err), mock.patch.object(s, "_allowed", return_value=True),                     mock.patch.object(type(s), "browser", new_callable=mock.PropertyMock, return_value=browser):
+                path = s.download("https://x/f.pdf", "Fund")
+            self.assertTrue(path.read_bytes().startswith(b"%PDF"))
+            with mock.patch.object(s, "_get", side_effect=ScrapeError("HTTP 404 for https://x/f.pdf")):
+                with self.assertRaises(ScrapeError):  # other failures are not retried
+                    s.download("https://x/f.pdf", "Fund")
+
+
 class EndToEndTest(unittest.TestCase):
     def test_run_writes_workbook(self):
         make_all()

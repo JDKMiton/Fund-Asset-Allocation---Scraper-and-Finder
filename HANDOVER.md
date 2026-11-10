@@ -196,7 +196,10 @@ Name not checked (the PDF has no text layer), No source.
   - **Its link for Amplify SCI Diversified Income served the Active Equity sheet**, so that fund uses
     Amplify's own fund page.
   - Amplify Multi Strategy is now Amplify SCI Active Equity RHF (AG Capital replaced Obsidian).
-- **Prescient (Prescient funds, Abax, Fairtree, Steyn Equity, Vulcan, Bateleur, 36One, Laurium):** links are
+- **Prescient (Prescient funds, Abax, Fairtree, Steyn Equity, Vulcan, Bateleur, 36One, Laurium, PMX, Omba,
+  Artisan, PPS Global Equity):** from 10 Nov 2026 Python can't verify prescient.co.za's certificate chain
+  ("unable to get local issuer certificate"; the site sends it incomplete). A plain download that fails that
+  way is retried in the browser, which completes the chain; verification stays on. Links are
   on `prescient.co.za/funds/other-funds/` (rendered) and change monthly. `link_match` with month templates,
   e.g. `{yyyy}-{mm}-abax-absolute-fund-mdd`. Abax "Absolute"/"Balanced" are not the "SA Absolute"/"SA
   Balanced" funds. Fairtree's PDFs have no text layer, so the month comes from the file name and the name
@@ -457,6 +460,15 @@ through them one by one:
 - Read `docs/sa-factsheet-scraping-guide.md` §6–7, on reading tables by word position and the checks.
 
 ## 10. Learning log (newest first; add a line after every scan or change)
+
+- **2026-11-10, first run with the 40 new funds** (08:31, exit 0): 39 filed, 187 unchanged. September
+  tracker 251 of 273 Collected. New funds: 28 of 35 rows Collected in September. Late in September but fine
+  for October: Baillie Gifford WW EM Leading Companies, iShares Physical Gold and iShares Global Govt Bond
+  (their sources only serve the current month, already October). **PMX Active Income failed on a certificate
+  error at prescient.co.za** (§5); fixed with a browser retry, tested on PMX, Abax Absolute and Laurium Long
+  Short into a scratch folder (all filed September). Without it every Prescient fund's October MDD would
+  have failed. Also: Curate Enhanced Yield's Momentum link served another fund again (rejected); AIP RCIS
+  reissued its September MDD. Tests 50.
 
 - **2026-11-09, 40 funds added** (owner's list; sources found by four research agents, each downloaded and
   checked for PDF, name and month): Cartesian FR Money Market, Aluwani FR Money Market, BlueAlpha FR Global
