@@ -474,6 +474,10 @@ through them one by one:
 
 ## 10. Learning log (newest first; add a line after every scan or change)
 
+- **2026-11-10, runs at 11:49 and 12:14** (both exit 0): Prescient China Balanced filed the SA feeder's
+  September MDD; MitonOptimal International Managed Flexible filed September (MitonOptimal AUM R35.9m
+  shown). September 264 of 274 Collected, 5 Pending, 5 Late (unchanged list).
+
 - **2026-11-10, MitonOptimal International Managed Flexible Fund re-added** (owner; it is 50% of both Sir
   Group Global models). It had never had a source (dropped on 13 Oct as "sourced in-house"). Its MDD is on
   Fundrock's Apex Fund Managers Guernsey forms page (`fundrock.com/apex-fund-managers-guernsey-limited/forms-documents/`,
